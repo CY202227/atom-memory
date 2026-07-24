@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>atom-memory · 失忆调试</title>
+<style>
+  :root{
+    --bg:#12141a; --panel:#1a1d26; --line:#2c3140; --fg:#e6e8ef;
+    --dim:#8b91a3; --accent:#5ec8a5; --warn:#e0a35a; --user:#2a3344;
+    --ai:#1e2836; --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:"IBM Plex Sans","PingFang SC","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;height:100vh;display:grid;grid-template-rows:auto 1fr;
+    background:var(--bg);color:var(--fg);font:14px/1.5 var(--sans)}
+  header{display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+    padding:10px 14px;border-bottom:1px solid var(--line);background:var(--panel)}
+  .brand{font:600 13px var(--mono);color:var(--accent);margin-right:8px}
+  select,input,button{background:#222733;border:1px solid var(--line);color:var(--fg);
+    border-radius:6px;padding:6px 10px;font:13px var(--sans)}
+  button{cursor:pointer}
+  button:hover{border-color:var(--accent)}
+  button.danger{border-color:#6a4040;color:#f0b0b0}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  label.chk{display:flex;align-items:center;gap:6px;color:var(--dim);font-size:12px}
+  #meta{color:var(--dim);font:12px var(--mono);margin-left:auto}
+  #layout{display:grid;grid-template-columns:1.1fr 1fr;min-height:0}
+  @media(max-width:900px){#layout{grid-template-columns:1fr}}
+  #chat-pane,#log-pane{display:flex;flex-direction:column;min-height:0;
+    border-right:1px solid var(--line)}
+  #log-pane{border-right:none}
+  .pane-title{padding:8px 12px;font:12px var(--mono);color:var(--dim);
+    border-bottom:1px solid var(--line);background:#161922}
+  #msgs,#logs{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
+  .bubble{max-width:92%;padding:10px 12px;border-radius:10px;white-space:pre-wrap}
+  .bubble.user{align-self:flex-end;background:var(--user)}
+  .bubble.ai{align-self:flex-start;background:var(--ai)}
+  .bubble .who{font:11px var(--mono);color:var(--dim);margin-bottom:4px}
+  .bubble .phase{font:11px var(--mono);color:var(--warn);margin-bottom:4px}
+  #composer{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}
+  #composer textarea{flex:1;min-height:64px;resize:vertical;background:#222733;
+    border:1px solid var(--line);color:var(--fg);border-radius:8px;padding:8px;
+    font:14px var(--sans)}
+  .log{border:1px solid var(--line);border-radius:8px;background:#161922;overflow:hidden}
+  .log summary{cursor:pointer;padding:8px 10px;font:12px var(--mono);color:var(--accent);
+    list-style:none}
+  .log summary::-webkit-details-marker{display:none}
+  .log pre{margin:0;padding:0 10px 10px;font:11.5px/1.45 var(--mono);color:#c8ccd8;
+    white-space:pre-wrap;word-break:break-word;max-height:420px;overflow:auto}
+  .hint{color:var(--dim);font-size:12px;padding:8px 12px}
+  .pill{display:inline-block;padding:1px 7px;border-radius:999px;border:1px solid var(--line);
+    font:11px var(--mono);color:var(--dim);margin-right:4px}
+  .pill.ok{color:var(--accent);border-color:#2f5a4a}
+  .pill.warn{color:var(--warn);border-color:#5a4a2f}
+</style>
+</head>
+<body>
+<header>
+  <span class="brand">atom-memory /chat</span>
+  <select id="method">
+    <option value="bm25">bm25</option>
+    <option value="fuzzy">fuzzy</option>
+    <option value="llm">llm</option>
+  </select>
+  <label class="chk"><input type="checkbox" id="memWrite" checked> 允许写入记忆</label>
+  <label class="chk"><input type="checkbox" id="webSearch"> 允许联网（模型自决）</label>
+  <button id="btnStart">开始新会话</button>
+  <button id="btnClear" class="danger" disabled>清除上下文</button>
+  <button id="btnCon" disabled>手动固化</button>
+  <a id="uiLink" href="/ui" target="_blank" style="color:var(--dim);font-size:12px">原子预览 /ui</a>
+  <span id="meta">未开始</span>
+</header>
+<div id="layout">
+  <section id="chat-pane">
+    <div class="pane-title">对话（流式 · 短期上下文）</div>
+    <div id="msgs"><div class="hint">每轮自动轻量召回；主模型漏 save 时由 memory_judge 子调用决定是否入库。清上下文后应仍能想起。</div></div>
+    <div id="composer">
+      <textarea id="input" placeholder="说点什么…（Enter 发送，Shift+Enter 换行）" disabled></textarea>
+      <button id="btnSend" disabled>发送</button>
+    </div>
+  </section>
+  <section id="log-pane">
+    <div class="pane-title">Debug（自动召回 / 记忆工具 / 联网）</div>
+    <div id="logs"></div>
+  </section>
+</div>
+<script>
+const $ = s => document.querySelector(s);
+let sessionId = null;
+let spaceUid = localStorage.getItem('ATOMMEM_chat_space') || null;
+
+function markSessionGone(){
+  sessionId = null;
+  setBusy(false);
+}
+
+function sessionGoneMessage(status){
+  if(status === 404){
+    return '会话已失效（服务热重载会清空内存里的 session；logs/chat 只是磁盘归档）。请点「开始会话」——会复用上次 space，长期记忆还在。';
+  }
+  return null;
+}
+
+async function api(path, opts={}){
+  const r = await fetch(path, {
+    headers: {'Content-Type':'application/json', ...(opts.headers||{})},
+    ...opts,
+  });
+  if(!r.ok){
+    const gone = sessionGoneMessage(r.status);
+    if(gone){
+      markSessionGone();
+      throw new Error(gone);
+    }
+    const t = await r.text();
+    throw new Error(t || r.statusText);
+  }
+  return r.json();
+}
+
+function setBusy(b){
+  ['btnStart','btnClear','btnCon','btnSend','input','method','memWrite','webSearch'].forEach(id=>{
+    const el = $('#'+id);
+    if(!el) return;
+    if(id==='btnStart') el.disabled = b;
+    else if(id==='method') el.disabled = b || !!sessionId;
+    else if(id==='memWrite' || id==='webSearch') el.disabled = b;
+    else el.disabled = b || !sessionId;
+  });
+}
+
+function addBubble(role, text){
+  const d = document.createElement('div');
+  d.className = 'bubble ' + (role==='user'?'user':'ai');
+  d.innerHTML = `<div class="who">${role==='user'?'你':'助手'}</div>`;
+  const body = document.createElement('div');
+  body.className = 'body';
+  body.textContent = text;
+  d.appendChild(body);
+  $('#msgs').appendChild(d);
+  $('#msgs').scrollTop = $('#msgs').scrollHeight;
+  return {root:d, body};
+}
+
+function renderLogs(logs){
+  const box = $('#logs');
+  box.innerHTML = '';
+  [...logs].reverse().forEach((log, i) => {
+    const det = document.createElement('details');
+    det.className = 'log';
+    if(i===0) det.open = true;
+    const sum = document.createElement('summary');
+    const pills = [];
+    if(log.event==='turn'){
+      pills.push(`<span class="pill">turn</span>`);
+      pills.push(`<span class="pill">${log.recall_method||''}</span>`);
+      const autoN = (log.auto_hits||log.hits||[]).length;
+      pills.push(`<span class="pill ok">auto×${autoN}</span>`);
+      const mem = log.memory_calls || [];
+      if(mem.length){
+        const ok = mem.every(c => c.ok !== false);
+        const nSearch = mem.filter(c => c.tool==='memory_search').length;
+        const nExpand = mem.filter(c => c.tool==='memory_expand').length;
+        const nSave = mem.filter(c => c.tool==='memory_save').length;
+        const nDone = mem.filter(c => c.tool==='memory_save_done').length;
+        const nJudge = mem.filter(c => c.tool==='memory_judge').length;
+        const nJudgeSave = mem.filter(c => c.tool==='memory_save' && c.via==='memory_judge').length;
+        pills.push(`<span class="pill ${ok?'ok':'warn'}">mem×${mem.length}</span>`);
+        if(nSearch) pills.push(`<span class="pill">search×${nSearch}</span>`);
+        if(nExpand) pills.push(`<span class="pill">expand×${nExpand}</span>`);
+        if(nJudge){
+          const j = mem.find(c => c.tool==='memory_judge');
+          const jOk = j && j.save;
+          pills.push(`<span class="pill ${jOk?'ok':'warn'}">judge=${jOk?'save':'skip'}</span>`);
+        }
+        if(nSave) pills.push(`<span class="pill ok">save×${nSave}</span>`);
+        if(nJudgeSave) pills.push(`<span class="pill ok">judge_save×${nJudgeSave}</span>`);
+        if(nDone) pills.push(`<span class="pill ok">save_done×${nDone}</span>`);
+        else if(nSave) pills.push(`<span class="pill warn">save queued</span>`);
+      } else {
+        pills.push(`<span class="pill">mem未调用</span>`);
+      }
+      if((log.sticky_keys||log.core_keys||[]).length){
+        pills.push(`<span class="pill">self×${(log.sticky_keys||log.core_keys).length}</span>`);
+      }
+      if(log.web_search_calls && log.web_search_calls.length){
+        const ok = log.web_search_calls.every(c => c.ok);
+        pills.push(`<span class="pill ${ok?'ok':'warn'}">web×${log.web_search_calls.length}</span>`);
+      } else if(log.web_search_enabled){
+        pills.push(`<span class="pill">web未调用</span>`);
+      }
+      if(log.consolidate){
+        const ok = log.consolidate.status==='succeeded';
+        pills.push(`<span class="pill ${ok?'ok':'warn'}">固化 ${log.consolidate.status}</span>`);
+        pills.push(`<span class="pill">atoms ${(log.consolidate.atoms_touched||[]).length}</span>`);
+      }
+    } else if(log.event==='memory_save_done'){
+      pills.push(`<span class="pill ok">save_done</span>`);
+      const st = log.consolidate && log.consolidate.status;
+      if(st) pills.push(`<span class="pill">${st}</span>`);
+    } else if(log.event==='clear_context'){
+      pills.push(`<span class="pill warn">清除上下文</span>`);
+    } else if(log.event==='consolidate'){
+      pills.push(`<span class="pill">手动固化</span>`);
+      pills.push(`<span class="pill">${log.status}</span>`);
+    } else {
+      pills.push(`<span class="pill">${log.event||'log'}</span>`);
+    }
+    sum.innerHTML = pills.join(' ') + ` <span style="color:var(--dim)">${log.at||''}</span>`;
+    const pre = document.createElement('pre');
+    pre.textContent = JSON.stringify(log, null, 2);
+    det.append(sum, pre);
+    box.appendChild(det);
+  });
+}
+
+async function start(){
+  setBusy(true);
+  try{
+    const body = {
+      recall_method: $('#method').value,
+      allow_memory_write: $('#memWrite').checked,
+      web_search: $('#webSearch').checked,
+    };
+    // 热重载后复用上次 space，长期记忆不断档
+    if(spaceUid) body.space_uid = spaceUid;
+    const data = await api('/chat/api/sessions', {
+      method:'POST',
+      body: JSON.stringify(body),
+    });
+    sessionId = data.session_id;
+    spaceUid = data.space_uid;
+    localStorage.setItem('ATOMMEM_chat_space', spaceUid);
+    $('#msgs').innerHTML = '';
+    $('#logs').innerHTML = '';
+    const searchHint = data.web_search
+      ? (data.web_search_configured ? '联网=开' : '联网=开（未配置 key）')
+      : '联网=关';
+    addBubble('ai', `会话已开始（双通道：自动召回 + 工具加深）。\nspace=${data.space_uid}\nmodel=${data.llm_model}\n召回=${data.recall_method}\n写入=${data.allow_memory_write}（save 快写慢固）· ${searchHint}\nlog=logs/chat/${data.session_id}.jsonl`);
+    $('#meta').textContent = `session=${data.session_id} · space=${data.space_uid}`;
+    $('#uiLink').href = `/ui?uid=${encodeURIComponent(data.space_uid)}`;
+    $('#uiLink').textContent = `原子预览 · ${data.space_uid}`;
+    setBusy(false);
+    $('#input').focus();
+  }catch(e){
+    alert('启动失败: '+e.message);
+    sessionId = null;
+    setBusy(false);
+  }
+}
+
+async function readSSE(response, onEvent){
+  const reader = response.body.getReader();
+  const dec = new TextDecoder();
+  let buf = '';
+  while(true){
+    const {value, done} = await reader.read();
+    if(done) break;
+    buf += dec.decode(value, {stream:true});
+    let idx;
+    while((idx = buf.indexOf('\n\n')) >= 0){
+      const raw = buf.slice(0, idx);
+      buf = buf.slice(idx+2);
+      let event = 'message', data = '';
+      for(const line of raw.split('\n')){
+        if(line.startsWith('event:')) event = line.slice(6).trim();
+        else if(line.startsWith('data:')) data += line.slice(5).trim();
+      }
+      if(!data) continue;
+      let parsed;
+      try{ parsed = JSON.parse(data); }catch{ parsed = {raw:data}; }
+      onEvent(event, parsed);
+    }
+  }
+}
+
+async function send(){
+  const text = $('#input').value.trim();
+  if(!text || !sessionId) return;
+  $('#input').value = '';
+  addBubble('user', text);
+  const ai = addBubble('ai', '');
+  const phaseEl = document.createElement('div');
+  phaseEl.className = 'phase';
+  ai.root.insertBefore(phaseEl, ai.body);
+  setBusy(true);
+  try{
+    const r = await fetch(`/chat/api/sessions/${sessionId}/message/stream`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        text,
+        web_search: $('#webSearch').checked,
+        allow_memory_write: $('#memWrite').checked,
+      }),
+    });
+    if(!r.ok){
+      const gone = sessionGoneMessage(r.status);
+      if(gone){
+        markSessionGone();
+        throw new Error(gone);
+      }
+      throw new Error(await r.text());
+    }
+    let full = '';
+    await readSSE(r, (event, data)=>{
+      if(event==='phase'){
+        const map = {
+          recall:'自动召回…',
+          memory:'查阅/写入记忆…',
+          judge:'记忆裁判判断中…',
+          search:'联网搜索…',
+          generate:'生成中…',
+          persist:'写入记忆…',
+        };
+        phaseEl.textContent = map[data.phase] || data.phase;
+      } else if(event==='recall'){
+        phaseEl.textContent = `自动召回 → ${(data.auto_hits||[]).length} hits`;
+      } else if(event==='reset'){
+        full = '';
+        ai.body.textContent = '';
+      } else if(event==='memory'){
+        const t = data.tool || 'memory';
+        if(data.ok === false){
+          phaseEl.textContent = `${t} 失败，继续…`;
+        } else if(t === 'memory_search'){
+          phaseEl.textContent = `memory_search「${data.query||''}」→ ${(data.hits||[]).length} hits`;
+        } else if(t === 'memory_expand'){
+          phaseEl.textContent = `memory_expand → ${(data.hits||[]).length} 条`;
+        } else if(t === 'memory_judge'){
+          if(data.skipped){
+            phaseEl.textContent = `memory_judge skip（${data.reason||''}）`;
+          } else if(data.error){
+            phaseEl.textContent = `memory_judge 失败：${data.error}`;
+          } else {
+            phaseEl.textContent = data.save
+              ? `memory_judge → 应写入：${(data.note||'').slice(0,40)}`
+              : `memory_judge → 不写入（${data.reason||''}）`;
+          }
+        } else if(t === 'memory_save'){
+          const via = data.via === 'memory_judge' ? 'judge' : 'tool';
+          phaseEl.textContent = `memory_save (${via}) queued · source=${data.source_id||''}`;
+        } else if(t === 'memory_save_done'){
+          const n = (data.consolidate&&data.consolidate.atoms_touched||[]).length;
+          phaseEl.textContent = `固化完成 → atoms ${n}`;
+        }
+      } else if(event==='token'){
+        full += data.text || '';
+        ai.body.textContent = full;
+        $('#msgs').scrollTop = $('#msgs').scrollHeight;
+      } else if(event==='done'){
+        phaseEl.remove();
+        ai.body.textContent = data.reply || full;
+        renderLogs(data.logs||[]);
+        const autoN = (data.debug?.auto_hits||[]).length;
+        const memN = (data.debug?.memory_calls||[]).length;
+        $('#meta').textContent =
+          `session=${sessionId} · history=${data.history_len} · auto=${autoN} · mem=${memN}`;
+      } else if(event==='error'){
+        phaseEl.textContent = '错误';
+        ai.body.textContent = (full ? full+'\n\n' : '') + '错误: ' + (data.message||'unknown');
+      } else if(event==='search' && !data.ok){
+        phaseEl.textContent = '联网搜索失败，继续生成…';
+      }
+    });
+  }catch(e){
+    phaseEl.remove();
+    ai.body.textContent = '错误: '+e.message;
+  }
+  setBusy(false);
+  $('#input').focus();
+}
+
+async function clearCtx(){
+  if(!sessionId) return;
+  setBusy(true);
+  try{
+    const data = await api(`/chat/api/sessions/${sessionId}/clear-context`, {method:'POST'});
+    $('#msgs').innerHTML = '';
+    addBubble('ai', '短期上下文已清空。长期记忆仍在同一 space。再问刚才的偏好。');
+    renderLogs(data.logs);
+    $('#meta').textContent = `session=${sessionId} · history=0（已清） · space=${data.space_uid}`;
+  }catch(e){
+    alert(e.message);
+  }
+  setBusy(false);
+}
+
+async function consolidate(){
+  if(!sessionId) return;
+  setBusy(true);
+  try{
+    const entry = await api(`/chat/api/sessions/${sessionId}/consolidate`, {method:'POST'});
+    const st = await api(`/chat/api/sessions/${sessionId}`);
+    renderLogs(st.logs);
+    addBubble('ai', `手动固化完成：${entry.status}，atoms_touched=${JSON.stringify(entry.atoms_touched)}`);
+  }catch(e){
+    alert(e.message);
+  }
+  setBusy(false);
+}
+
+$('#btnStart').onclick = start;
+$('#btnSend').onclick = send;
+$('#btnClear').onclick = clearCtx;
+$('#btnCon').onclick = consolidate;
+$('#input').addEventListener('keydown', e=>{
+  if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); send(); }
+});
+</script>
+</body>
+</html>

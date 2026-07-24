@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>atom-memory · atoms</title>
+<style>
+  :root{
+    --bg:#14141b; --bg2:#1b1b24; --bg3:#232330; --line:#30303c;
+    --fg:#d9dae2; --dim:#8e8fa0; --accent:#7eb8da;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 var(--sans);
+    height:100vh;display:flex;flex-direction:column}
+  header{display:flex;gap:8px;align-items:center;padding:10px 14px;
+    background:var(--bg2);border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .brand{font-family:var(--mono);color:var(--accent);font-size:13px}
+  input{background:var(--bg3);border:1px solid var(--line);color:var(--fg);
+    border-radius:6px;padding:5px 10px;font:13px var(--mono)}
+  button{background:var(--bg3);border:1px solid var(--line);color:var(--fg);
+    border-radius:6px;padding:5px 12px;cursor:pointer}
+  button:hover{border-color:var(--accent)}
+  #layout{flex:1;display:flex;min-height:0}
+  #sidebar{width:300px;border-right:1px solid var(--line);background:var(--bg2);
+    overflow:auto;padding:10px}
+  #main{flex:1;overflow:auto;padding:24px 32px}
+  .item{display:block;width:100%;text-align:left;padding:8px 10px;margin:2px 0;
+    border:none;border-radius:6px;background:none;color:var(--fg);cursor:pointer}
+  .item:hover,.item.on{background:var(--bg3)}
+  .kind{font:11px var(--mono);color:var(--dim)}
+  .stmt{font-size:13px}
+  .empty{color:var(--dim);margin-top:40px}
+  .meta{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 16px}
+  .chip{font:11px var(--mono);padding:2px 8px;border:1px solid var(--line);border-radius:999px;color:var(--dim)}
+  h1{font-size:20px;margin:0}
+  pre{white-space:pre-wrap;background:var(--bg3);padding:12px;border-radius:8px;font:12.5px var(--mono)}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
+  th{color:var(--dim);font-weight:500}
+</style>
+</head>
+<body>
+<header>
+  <span class="brand">atom-memory · atoms</span>
+  <input id="uid" placeholder="space uid" size="36">
+  <button id="load">加载</button>
+  <span id="stat" class="kind"></span>
+</header>
+<div id="layout">
+  <aside id="sidebar"></aside>
+  <main id="main"><div class="empty">输入 space uid 加载原子列表</div></main>
+</div>
+<script>
+const $ = s => document.querySelector(s);
+let atoms = [], current = null;
+
+async function api(path){
+  const r = await fetch(path);
+  if(!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+
+async function load(){
+  const uid = $('#uid').value.trim();
+  if(!uid) return;
+  atoms = await api(`/spaces/${uid}/atoms`);
+  $('#stat').textContent = `${atoms.length} atoms`;
+  renderSidebar();
+  $('#main').innerHTML = '<div class="empty">选择左侧原子</div>';
+}
+
+function renderSidebar(){
+  const by = {};
+  for(const a of atoms){
+    (by[a.kind] ||= []).push(a);
+  }
+  $('#sidebar').innerHTML = Object.keys(by).sort().map(k => `
+    <div class="kind" style="margin:10px 0 4px">${k}</div>
+    ${by[k].map(a => `
+      <button class="item" data-key="${a.key}">
+        <div class="stmt">${esc(a.statement)}</div>
+        <div class="kind">${a.key}</div>
+      </button>`).join('')}
+  `).join('') || '<div class="empty">（空）</div>';
+  $('#sidebar').onclick = e => {
+    const btn = e.target.closest('[data-key]');
+    if(btn) openAtom(btn.dataset.key);
+  };
+}
+
+async function openAtom(key){
+  const uid = $('#uid').value.trim();
+  current = key;
+  [...document.querySelectorAll('.item')].forEach(el =>
+    el.classList.toggle('on', el.dataset.key === key));
+  const a = await api(`/spaces/${uid}/atoms/${encodeURIComponent(key)}`);
+  const revs = await api(`/spaces/${uid}/atoms/${encodeURIComponent(key)}/revisions`);
+  const ev = await api(`/spaces/${uid}/atoms/${encodeURIComponent(key)}/evidence`);
+  $('#main').innerHTML = `
+    <h1>${esc(a.statement)}</h1>
+    <div class="meta">
+      <span class="chip">${a.kind}</span>
+      <span class="chip">${a.key}</span>
+      <span class="chip">${a.status}</span>
+      ${a.happened_on ? `<span class="chip">${a.happened_on}</span>` : ''}
+      ${(a.evidence_dates||[]).map(d=>`<span class="chip">${d}</span>`).join('')}
+    </div>
+    <div class="kind">detail</div>
+    <pre>${esc(a.detail || '（空）')}</pre>
+    <div class="kind" style="margin-top:20px">revisions</div>
+    <table><tr><th>seq</th><th>reason</th><th>trigger</th><th>statement</th></tr>
+      ${revs.map(r=>`<tr><td>${r.seq}</td><td>${esc(r.change_reason)}</td>
+        <td>${r.trigger}</td><td>${esc(r.statement)}</td></tr>`).join('')}
+    </table>
+    <div class="kind" style="margin-top:20px">evidence</div>
+    <table><tr><th>rev</th><th>source</th><th>kind</th><th>at</th></tr>
+      ${ev.map(e=>`<tr><td>${e.revision_seq}</td><td>${e.source_id}</td>
+        <td>${e.source_kind}</td><td>${e.source_occurred_at}</td></tr>`).join('') ||
+        '<tr><td colspan=4>（无）</td></tr>'}
+    </table>`;
+}
+
+function esc(s){ return String(s??'').replace(/[&<>"']/g, c=>({
+  '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+$('#load').onclick = () => load().catch(e => alert(e.message));
+$('#uid').addEventListener('keydown', e => { if(e.key==='Enter') $('#load').click(); });
+const q = new URLSearchParams(location.search).get('uid');
+if(q){ $('#uid').value = q; load().catch(console.error); }
+</script>
+</body>
+</html>
