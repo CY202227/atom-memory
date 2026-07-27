@@ -161,6 +161,7 @@ class ConsolidationEngine:
                 consumed.update(source_ids)
                 working_atoms = atom_repo.list_active(session, space.id)
 
+        # 未 cite：低优 skip；correction/高 salience 保持 pending（见 mark_consumed）
         source_repo.mark_consumed(session, pending, consumed)
         session.commit()
         return touched

@@ -74,7 +74,7 @@
 <div id="layout">
   <section id="chat-pane">
     <div class="pane-title">对话（流式 · 短期上下文）</div>
-    <div id="msgs"><div class="hint">每轮自动轻量召回；主模型漏 save 时由 memory_judge 子调用决定是否入库。清上下文后应仍能想起。</div></div>
+    <div id="msgs"><div class="hint">每轮自动轻量召回；主模型漏 save 时由 memory_judge 每轮补判是否入库（纯问候除外）。清上下文后应仍能想起。</div></div>
     <div id="composer">
       <textarea id="input" placeholder="说点什么…（Enter 发送，Shift+Enter 换行）" disabled></textarea>
       <button id="btnSend" disabled>发送</button>

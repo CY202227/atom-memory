@@ -235,6 +235,21 @@ def test_consolidate_zero_ops_and_failure(client, fake_llm):
     assert r.json()["status"] == "succeeded"
     assert client.get(f"/spaces/{uid}/sources").json()[0]["status"] == "skipped"
 
+    # 高 salience + 空 ops：保持 pending，可重试
+    client.post(
+        f"/spaces/{uid}/sources",
+        json={
+            "kind": "correction",
+            "content": "请记住：发售日类事实须先联网搜索。",
+            "salience": 0.9,
+        },
+    )
+    fake_llm.responses = [json.dumps({"operations": []})]
+    assert client.post(f"/spaces/{uid}/consolidate", json={}).json()["status"] == "succeeded"
+    pending_hi = client.get(f"/spaces/{uid}/sources", params={"status": "pending"}).json()
+    assert len(pending_hi) == 1
+    assert pending_hi[0]["kind"] == "correction"
+
     client.post(
         f"/spaces/{uid}/sources",
         json={"kind": "manual", "content": "重要材料", "salience": 1.0},
@@ -244,7 +259,100 @@ def test_consolidate_zero_ops_and_failure(client, fake_llm):
     run = r.json()
     assert run["status"] == "failed" and run["error"]
     pending = client.get(f"/spaces/{uid}/sources", params={"status": "pending"}).json()
-    assert len(pending) == 1
+    # correction(0.9) + manual(1.0) 都仍 pending
+    assert len(pending) == 2
+
+
+def test_uncited_correction_stays_pending_and_priority(client, fake_llm):
+    """低优 turn 被 cite → consolidated；未 cite 的 correction 仍 pending 且优先入批。"""
+    uid = _create_space(client, owner_id="u-corr", subject_id="r-corr")
+    r = client.post(
+        f"/spaces/{uid}/sources",
+        json={"kind": "turn", "content": "用户：闲聊。AI：嗯。", "salience": 0.1},
+    )
+    turn_id = r.json()["id"]
+    r = client.post(
+        f"/spaces/{uid}/sources",
+        json={
+            "kind": "correction",
+            "content": "鸣潮不是新游戏，别再当成新发售。",
+            "salience": 0.9,
+        },
+    )
+    corr_id = r.json()["id"]
+
+    # 空索引：仅 write 一阶段；只 cite 低优 turn
+    fake_llm.responses = [
+        json.dumps(
+            {
+                "operations": [
+                    {
+                        "op": "upsert",
+                        "kind": "event",
+                        "key": "chitchat",
+                        "statement": "曾有一轮无实质闲聊",
+                        "detail": "",
+                        "change_reason": "仅处理 turn",
+                        "source_ids": [turn_id],
+                    }
+                ]
+            },
+            ensure_ascii=False,
+        )
+    ]
+    assert client.post(f"/spaces/{uid}/consolidate", json={}).json()["status"] == "succeeded"
+    by_id = {s["id"]: s for s in client.get(f"/spaces/{uid}/sources").json()}
+    assert by_id[turn_id]["status"] == "consolidated"
+    assert by_id[corr_id]["status"] == "pending"
+
+    # 有 atom 后：select + write；空 ops → correction 仍 pending
+    fake_llm.responses = [
+        json.dumps({"read": []}),
+        json.dumps({"operations": []}),
+    ]
+    assert client.post(f"/spaces/{uid}/consolidate", json={}).json()["status"] == "succeeded"
+    pending = client.get(f"/spaces/{uid}/sources", params={"status": "pending"}).json()
+    assert len(pending) == 1 and pending[0]["id"] == corr_id
+
+    r = client.post(
+        f"/spaces/{uid}/sources",
+        json={"kind": "turn", "content": "用户：又闲聊。AI：好。", "salience": 0.05},
+    )
+    turn2_id = r.json()["id"]
+
+    fake_llm.calls.clear()
+    fake_llm.responses = [
+        json.dumps({"read": []}),
+        json.dumps(
+            {
+                "operations": [
+                    {
+                        "op": "upsert",
+                        "kind": "lesson",
+                        "key": "no-old-as-new",
+                        "statement": "勿把已上线老游当成新发售",
+                        "detail": "",
+                        "change_reason": "用户纠正",
+                        "source_ids": [corr_id],
+                    }
+                ]
+            },
+            ensure_ascii=False,
+        ),
+    ]
+    run = client.post(f"/spaces/{uid}/consolidate", json={}).json()
+    assert run["status"] == "succeeded"
+    assert "no-old-as-new" in run["atoms_touched"]
+
+    # write 阶段 user payload：高 salience correction 应排在低优 turn 之前
+    write_user = fake_llm.calls[-1][1]
+    assert write_user.find(f"source_id={corr_id}") < write_user.find(
+        f"source_id={turn2_id}"
+    )
+
+    by_id = {s["id"]: s for s in client.get(f"/spaces/{uid}/sources").json()}
+    assert by_id[corr_id]["status"] == "consolidated"
+    assert by_id[turn2_id]["status"] == "skipped"
 
 
 def test_ui_served(client):

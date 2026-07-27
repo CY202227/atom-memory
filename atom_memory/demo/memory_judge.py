@@ -18,30 +18,22 @@ _JUDGE_SYSTEM = """\
 - 健康/身体状况、医疗相关自我披露（补牙、过敏、慢性病等）
 - 重要关系、职业/项目、稳定身份事实
 - 用户明确要求记住的内容
+- 用户纠正助手的错误事实（应记成教训，避免再犯）
+- 用户对助手行为的约束/期望（如「不确定先联网搜」「别瞎编发售日」）
 
 不应保存（save=false）：
-- 纯问候、一次性闲聊、新闻问答、抽象观点辩论
-- 已明显只在追问外部事实、无新的用户侧稳定线索
+- 纯问候、一次性闲聊、纯新闻/百科问答且无纠正与行为约束
+- 已明显只在追问外部事实、无新的用户侧或助手侧可复用认识
 - 助手单方面猜测、用户未确认的臆测
 
 只输出一个 JSON 对象：
 {"save": true|false, "note": "若 save 则为简洁第三人称认识陈述（可空）", "reason": "一句话理由"}
-note 要用认识断言口吻（如「老张补牙较多，担心很快需要根管」），不要写「用户说了…」。
+note 要用认识断言口吻（如「老张补牙较多，担心很快需要根管」；
+「时效事实须先联网搜索再答，勿凭印象把老游当新发售」），不要写「用户说了…」。
 """
 
 _SKIP_RE = re.compile(
     r"^(你好|您好|在吗|嗨|hi|hello|hey|早上好|晚安|谢谢|感谢)[\s!！.。?？]*$",
-    re.IGNORECASE,
-)
-
-# 轻门闩：无稳定自我披露线索则不调用 LLM（降本、降噪）
-_SIGNAL_RE = re.compile(
-    r"(叫我|称呼|记住|别忘|喜欢|讨厌|爱好|兴趣|习惯|偏好|"
-    r"口癖|人设|角色|你是|"
-    r"过敏|补牙|根管|牙疼|身体|慢性|吃药|医院|病|"
-    r"我的(猫|狗|孩子|儿子|女儿|老婆|老公|对象|公司|项目|工作)|"
-    r"我是|我叫|我在做|工作是|职业是|"
-    r"\bi like\b|\bi love\b|\bi hate\b|call me|remember (this|that|me))",
     re.IGNORECASE,
 )
 
@@ -64,24 +56,9 @@ def should_skip_judge(user_text: str) -> bool:
     return bool(_SKIP_RE.match(text))
 
 
-def has_memory_signal(user_text: str) -> bool:
-    """是否像含值得记的稳定线索（门闩，非最终裁判）。"""
-    text = (user_text or "").strip()
-    if not text:
-        return False
-    if _SIGNAL_RE.search(text):
-        return True
-    # 较长第一人称陈述也可能含事实
-    if "我" in text and len(text) >= 16:
-        return True
-    return False
-
-
 def should_run_judge(user_text: str) -> bool:
-    """是否值得花一次 LLM 裁判。"""
-    if should_skip_judge(user_text):
-        return False
-    return has_memory_signal(user_text)
+    """是否值得花一次 LLM 裁判（除纯问候外每轮都跑）。"""
+    return not should_skip_judge(user_text)
 
 
 def judge_memory_save(
@@ -96,13 +73,6 @@ def judge_memory_save(
             save=False,
             note="",
             reason="skip:greeting_or_too_short",
-            skipped=True,
-        )
-    if not has_memory_signal(user_text):
-        return JudgeDecision(
-            save=False,
-            note="",
-            reason="skip:no_memory_signal",
             skipped=True,
         )
 

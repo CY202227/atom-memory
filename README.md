@@ -100,7 +100,7 @@ ATOMMEM_LLM_MODEL=your-model
 
 1. 每轮自动轻量召回（称呼 sticky + BM25 / 语义）
 2. 模型可用 `memory_search` / `memory_expand` / `memory_save`
-3. 漏存时由 `memory_judge` 子调用补判（有门闩，避免新闻闲聊乱记）
+3. 漏存时由 `memory_judge` 子调用补判（除纯问候外每轮都跑；是否入库由裁判决定）
 4. 快写 Source → 后台固化；日志落在 `logs/chat/`
 
 浏览器打开 `/chat` 即可；勾选「允许写入记忆」后才会挂 save / judge。
