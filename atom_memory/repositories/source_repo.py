@@ -53,12 +53,24 @@ def list_by_space(
     return list(session.exec(stmt.order_by(Source.occurred_at)).all())
 
 
+# 未 cite 时仍保留为 pending，避免纠正/高显著性材料被静默丢弃
+_PROTECTED_SALIENCE = 0.8
+
+
+def is_protected_source(source: Source) -> bool:
+    """纠正或高显著性：固化未消费时不得标 skipped。"""
+    return (
+        source.kind == SourceKind.correction
+        or source.salience >= _PROTECTED_SALIENCE
+    )
+
+
 def list_pending(session: Session, space_id: int, limit: int) -> list[Source]:
     return list(
         session.exec(
             select(Source)
             .where(Source.space_id == space_id, Source.status == SourceStatus.pending)
-            .order_by(Source.occurred_at)
+            .order_by(Source.salience.desc(), Source.occurred_at.asc())
             .limit(limit)
         ).all()
     )
@@ -87,9 +99,16 @@ def list_recent_for_recall(
 
 
 def mark_consumed(session: Session, sources: Iterable[Source], consumed_ids: set[int]) -> None:
-    """固化收尾：被操作引用的标 consolidated，其余标 skipped（遗忘是功能）。"""
+    """固化收尾：被 ops cite 的标 consolidated。
+
+    未 cite：低优先级标 skipped（遗忘是功能）；correction / salience≥0.8
+    保持 pending，下次入批可重试。
+    """
     for s in sources:
-        s.status = (
-            SourceStatus.consolidated if s.id in consumed_ids else SourceStatus.skipped
-        )
+        if s.id in consumed_ids:
+            s.status = SourceStatus.consolidated
+        elif is_protected_source(s):
+            continue
+        else:
+            s.status = SourceStatus.skipped
         session.add(s)

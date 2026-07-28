@@ -1,5 +1,5 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
-
+import os
 
 class Settings(BaseSettings):
     """服务配置。全部可由环境变量 / .env 覆盖。"""
@@ -11,13 +11,13 @@ class Settings(BaseSettings):
     database_url: str = "sqlite:///./atom_memory.db"
 
     # 固化/召回所用 LLM（OpenAI 兼容端点，vLLM 等均可）
-    llm_base_url: str = "http://127.0.0.1:8000/v1"
-    llm_api_key: str = "EMPTY"
-    llm_model: str = ""
-    llm_timeout_seconds: float = 300.0
+    llm_base_url: str = os.getenv("ATOMMEM_LLM_BASE_URL")
+    llm_api_key: str = os.getenv("ATOMMEM_LLM_API_KEY")
+    llm_model: str = os.getenv("ATOMMEM_LLM_MODEL")
+    llm_timeout_seconds: float = os.getenv("ATOMMEM_LLM_TIMEOUT_SECONDS",300.0)
 
     # 设置后所有请求须带 X-API-Key 头；留空则不鉴权（内网/本机模式）
-    api_key: str = ""
+    api_key: str = os.getenv("API_KEY","")
 
     # 单次固化最多消费的 pending source 数
     consolidate_max_sources: int = 20

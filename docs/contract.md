@@ -63,6 +63,10 @@ atom-memory 不耦合任何上游产品。身份用 space uid 隔离。
 `POST /spaces/{uid}/consolidate`：`{"trigger":"manual"}` 或 `{}`  
 响应含 `atoms_touched`。
 
+pending 按 `salience` 降序、同 salience 按时间升序入批。  
+本批 ops 未 cite 的 source：低 salience 可标 `skipped`（遗忘是功能）；
+`kind=correction` 或 `salience≥0.8` 未消费则仍 `pending`，下次 consolidate 优先入批。
+
 ## 4. 典型循环
 
 ```python
