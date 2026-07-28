@@ -5,7 +5,7 @@
 
 | atom-memory | createrole |
 |---|---|
-| `/atoms…` + `key` | `get`/`list`/`archive`；`MemoryItem.id` |
+| `GET/POST /atoms…` + `key`；详情可用 `?include=revisions,evidence` | `get`/`list`/`archive`；`MemoryItem.id` |
 | `kind` / `statement` / `detail` | `memory_type` / `hook` / `content` |
 | `atoms_touched` / `atoms_to_*` | `pages_touched` / `pages_*`（对外 API 暂未改名） |
 | recall `detail: "statement"` | 注入 `<item key="…">`；工具参数 `key` |

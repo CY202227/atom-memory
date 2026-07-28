@@ -15,6 +15,12 @@
 
 核心信念：**遗忘是功能**——不值得长期保留时，固化可以零操作。
 
+## 相对 MemOS
+
+[MemOS](https://github.com/MemTensor/MemOS) 是完整的 Memory OS（多形态记忆、图+向量栈、调度与生态），部署与召回都更重。
+
+atom-memory 刻意不做那套：为 **有限上下文（如 30B）** 设计——默认只注入短 `statement`，细节走 `expand`；运维上单库 HTTP 即可。相对 MemOS 的「差距」多为有意取舍，不是待补齐的功能表。
+
 ## 数据流
 
 ```
@@ -96,11 +102,11 @@ ATOMMEM_LLM_MODEL=your-model
 
 ### 内置聊天调试（/chat）
 
-用于体感「记得 / 假失忆」，不是生产 SDK：
+用于体感「记得 / 假失忆」，**不是生产 SDK**（生产走 sources → consolidate → recall）：
 
-1. 每轮自动轻量召回（称呼 sticky + BM25 / 语义）
+1. 每轮自动轻量召回（称呼 sticky + BM25 / 语义 + 清单保底）
 2. 模型可用 `memory_search` / `memory_expand` / `memory_save`
-3. 漏存时由 `memory_judge` 子调用补判（除纯问候外每轮都跑；是否入库由裁判决定）
+3. 漏存时由 `memory_judge` 补判（demo 专用；偏好与可复用事实可记）
 4. 快写 Source → 后台固化；日志落在 `logs/chat/`
 
 浏览器打开 `/chat` 即可；勾选「允许写入记忆」后才会挂 save / judge。
@@ -113,31 +119,36 @@ ATOMMEM_LLM_MODEL=your-model
 
 ## API 速览
 
+核心（上游循环）：
+
 ```
 POST /spaces
 GET  /spaces?owner_id=
+DELETE /spaces/{uid}
 
 POST /spaces/{uid}/sources
-POST /spaces/{uid}/consolidate
-GET  /spaces/{uid}/runs
-
-GET  /spaces/{uid}/index
-GET  /spaces/{uid}/atoms
-GET  /spaces/{uid}/atoms/{key}          (+ /revisions /evidence)
-POST /spaces/{uid}/atoms/expand
-POST /spaces/{uid}/atoms/{key}/rollback
-POST /spaces/{uid}/atoms/{key}/archive
-
-POST /spaces/{uid}/recall
+GET  /spaces/{uid}/sources?status=
 POST /spaces/{uid}/sources/delete-by-ref
 POST /spaces/{uid}/sources/delete-by-ref/preview
 
-GET  /ui
-GET  /chat
-GET  /health
+POST /spaces/{uid}/consolidate
+POST /spaces/{uid}/recall
+
+GET  /spaces/{uid}/atoms                 # ?page=&page_size=&kind=&updated_after=
+GET  /spaces/{uid}/atoms/{key}            # ?include=revisions,evidence
+POST /spaces/{uid}/atoms/expand
+POST /spaces/{uid}/atoms/{key}/archive
 ```
 
+Admin（OpenAPI tag=`admin`）：`GET …/runs` · `POST …/atoms/{key}/rollback`  
+Demo（不进 OpenAPI）：`GET /ui` · `GET /chat` · `/chat/api/…`  
+健康检查：`GET /health`
+
+`GET …/atoms` 返回分页信封 `{count, page, page_size, results}`（默认 page_size=50），供 `/ui` 与管理浏览；**勿把 list 结果整页塞进 prompt**——对话注入走 `recall` / `expand`。
+
 召回常用参数：`method`（bm25 / fuzzy / llm）、`detail`（statement / full）、`max_atoms`、`budget_chars`。
+
+30B 级上下文建议：`detail=statement`（默认）、`budget_chars` 日常 **200–400**；不够再 `POST …/atoms/expand`。勿默认 `detail=full`。响应里的 `chars_used` / `atoms_clipped` 便于调预算。
 
 可选鉴权：设置 `ATOMMEM_API_KEY` 后请求带 `X-API-Key`。
 

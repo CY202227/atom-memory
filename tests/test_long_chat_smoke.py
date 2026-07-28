@@ -123,7 +123,7 @@ def test_long_chat_facts_survive_noise_rounds(client, fake_llm):
         # 噪声源应被跳过或消费但不动关键 atoms
         _ = sid
 
-    index = {e["key"]: e for e in client.get(f"/spaces/{uid}/index").json()}
+    index = {e["key"]: e for e in client.get(f"/spaces/{uid}/atoms").json()["results"]}
     assert CANONICAL_PERSONA in index or "persona-catgirl" in index
     # persona-catgirl 应被规范到 persona（首轮无已有时）
     assert CANONICAL_PERSONA in index
@@ -162,7 +162,7 @@ def test_long_chat_facts_survive_noise_rounds(client, fake_llm):
     assert run["status"] == "succeeded"
     assert "dental-health" in run["atoms_touched"]
     assert "teeth-worry-again" not in run["atoms_touched"]
-    index2 = {e["key"] for e in client.get(f"/spaces/{uid}/index").json()}
+    index2 = {e["key"] for e in client.get(f"/spaces/{uid}/atoms").json()["results"]}
     assert "teeth-worry-again" not in index2
     assert "dental-health" in index2
 

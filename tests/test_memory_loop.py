@@ -65,11 +65,15 @@ def test_full_loop(client, fake_llm):
     assert sources[src1]["status"] == "consolidated"
     assert sources[src2]["status"] == "skipped"
 
-    index = client.get(f"/spaces/{uid}/index").json()
+    index = client.get(f"/spaces/{uid}/atoms").json()["results"]
     assert {e["key"] for e in index} == {"lao-zhang", "report-format-mistake"}
     assert all("hook" not in e and "slug" not in e for e in index)
 
-    ev = client.get(f"/spaces/{uid}/atoms/report-format-mistake/evidence").json()
+    detail = client.get(
+        f"/spaces/{uid}/atoms/report-format-mistake",
+        params={"include": "evidence"},
+    ).json()
+    ev = detail["evidence"]
     assert ev[0]["source_id"] == src1 and ev[0]["revision_seq"] == 1
 
     r = client.post(
@@ -97,13 +101,17 @@ def test_full_loop(client, fake_llm):
         ),
     ]
     assert client.post(f"/spaces/{uid}/consolidate", json={}).json()["status"] == "succeeded"
-    revs = client.get(f"/spaces/{uid}/atoms/lao-zhang/revisions").json()
+    revs = client.get(
+        f"/spaces/{uid}/atoms/lao-zhang", params={"include": "revisions"}
+    ).json()["revisions"]
     assert [rv["seq"] for rv in revs] == [1, 2]
     assert "周总结" in client.get(f"/spaces/{uid}/atoms/lao-zhang").json()["statement"]
 
     r = client.post(f"/spaces/{uid}/atoms/lao-zhang/rollback", json={"seq": 1})
     assert "周总结" not in r.json()["statement"]
-    revs = client.get(f"/spaces/{uid}/atoms/lao-zhang/revisions").json()
+    revs = client.get(
+        f"/spaces/{uid}/atoms/lao-zhang", params={"include": "revisions"}
+    ).json()["revisions"]
     assert [rv["seq"] for rv in revs] == [1, 2, 3]
     assert revs[2]["trigger"] == "rollback"
 
@@ -130,7 +138,7 @@ def test_keyword_recall_and_budget(client, fake_llm):
                         "op": "upsert",
                         "kind": "lesson",
                         "key": "report-mistake",
-                        "statement": "日报误用周报格式，须先确认周期",
+                        "statement": "日报误用周报格式，须先确认周期再核对收件人",
                         "detail": "按天输出。",
                         "change_reason": "建",
                         "source_ids": [1],
@@ -139,7 +147,7 @@ def test_keyword_recall_and_budget(client, fake_llm):
                         "op": "upsert",
                         "kind": "belief",
                         "key": "coffee-preference",
-                        "statement": "用户喜欢冰美式咖啡",
+                        "statement": "用户喜欢冰美式咖啡且工作日几乎每天都要喝一杯",
                         "detail": "",
                         "change_reason": "建",
                         "source_ids": [1],
@@ -171,14 +179,50 @@ def test_keyword_recall_and_budget(client, fake_llm):
         },
     )
     assert r.status_code == 200
-    assert len(r.json()["hits"]) == 1
+    body = r.json()
+    assert len(body["hits"]) == 1
+    assert body["chars_used"] == len(body["hits"][0]["statement"])
+    assert isinstance(body["atoms_clipped"], int)
+
+    # fuzzy 命中多条时，预算装不下第二条应上报 atoms_clipped
+    r = client.post(
+        f"/spaces/{uid}/recall",
+        json={
+            "query": "用户 日报 咖啡",
+            "method": "fuzzy",
+            "max_atoms": 5,
+            "budget_chars": 40,
+            "include_recent_sources": False,
+        },
+    )
+    assert r.status_code == 200
+    clipped_body = r.json()
+    assert clipped_body["atoms_clipped"] >= 1
+    assert clipped_body["chars_used"] <= 40
+    assert len(clipped_body["hits"]) >= 1
 
     r = client.post(
         f"/spaces/{uid}/recall",
         json={"query": "量子力学", "method": "bm25", "include_recent_sources": False},
     )
-    assert r.json()["hits"] == [] and r.json()["context_block"] == ""
+    # BM25 无词面命中时仍可 inventory/空召回保底，返回最近原子
+    body = r.json()
+    assert body["hits"]
+    assert "recalled_memory" in body["context_block"]
     assert fake_llm.calls == []
+
+    inv = client.post(
+        f"/spaces/{uid}/recall",
+        json={
+            "query": "你记得什么",
+            "method": "bm25",
+            "include_recent_sources": False,
+            "max_atoms": 5,
+        },
+    ).json()
+    assert inv["hits"]
+    keys = {h["key"] for h in inv["hits"]}
+    assert "report-mistake" in keys or "coffee-preference" in keys
 
 
 def test_include_recent_sources_before_consolidate(client, fake_llm):
@@ -220,7 +264,7 @@ def test_space_uid_identity(client, fake_llm):
 
     client.post(f"/spaces/{a['uid']}/sources", json={"kind": "manual", "content": "A 的记忆材料"})
     assert client.get(f"/spaces/{c['uid']}/sources").json() == []
-    assert client.get("/spaces/no-such-uid/index").status_code == 404
+    assert client.get("/spaces/no-such-uid/atoms").status_code == 404
 
 
 def test_consolidate_zero_ops_and_failure(client, fake_llm):
@@ -386,7 +430,7 @@ def test_archive_and_delete_space(client, fake_llm):
 
     r = client.post(f"/spaces/{uid}/atoms/b1/archive")
     assert r.json()["status"] == "archived"
-    assert client.get(f"/spaces/{uid}/index").json() == []
+    assert client.get(f"/spaces/{uid}/atoms").json()["results"] == []
     r = client.post(
         f"/spaces/{uid}/recall",
         json={"query": "内容甲 认识", "method": "bm25", "include_recent_sources": False},
@@ -395,7 +439,7 @@ def test_archive_and_delete_space(client, fake_llm):
 
     counts = client.delete(f"/spaces/{uid}").json()
     assert counts["atoms"] == 1 and counts["sources"] >= 1
-    assert client.get(f"/spaces/{uid}/index").status_code == 404
+    assert client.get(f"/spaces/{uid}/atoms").status_code == 404
 
 
 def test_expand_atoms(client, fake_llm):

@@ -86,6 +86,57 @@ def _parse_happened_on(value) -> date | None:
         return None
 
 
+def resolve_happened_on(
+    value,
+    *,
+    source_texts: str,
+    existing: date | None,
+    today: date | None = None,
+) -> date | None:
+    """解析 happened_on：臆造年份丢弃；LLM 给 null 时保留已有日期。
+
+    年份须出现在引用材料中，或等于「当前时间」年份；否则视为幻觉。
+    若材料已支撑旧日期、却不支撑新日期，保留已有（防「今天」覆盖纠正）。
+    """
+    today = today or date.today()
+    texts = source_texts or ""
+    parsed = _parse_happened_on(value)
+    if parsed is None:
+        return existing
+    year_s = str(parsed.year)
+    if year_s not in texts and parsed.year != today.year:
+        return existing
+    if existing is not None and parsed != existing:
+        if _date_grounded(existing, texts, today) and not _date_grounded(
+            parsed, texts, today
+        ):
+            return existing
+    return parsed
+
+
+def _date_grounded(d: date, texts: str, today: date) -> bool:
+    """材料是否明确支撑该公历日（含「今天/昨天」相对表述）。"""
+    if d.isoformat() in texts:
+        return True
+    if f"{d.month}月{d.day}日" in texts or f"{d.month}月{d.day:02d}日" in texts:
+        return True
+    if f"{d.month:02d}-{d.day:02d}" in texts or f"{d.month}-{d.day}" in texts:
+        return True
+    if d == today and _mentions_relative_today(texts):
+        return True
+    if d.toordinal() == today.toordinal() - 1 and (
+        "昨天" in texts or "昨日" in texts
+    ):
+        return True
+    return False
+
+
+def _mentions_relative_today(texts: str) -> bool:
+    """「今天/今日」肯定提及；排除「不是今天」等否定。"""
+    cleaned = re.sub(r"不[是]?今天|并非今天|不是今日|并非今日", "", texts)
+    return "今天" in cleaned or "今日" in cleaned
+
+
 class ConsolidationEngine:
     def __init__(self, llm: ChatLLM):
         self._llm = llm
@@ -136,8 +187,10 @@ class ConsolidationEngine:
             by_key = {a.key: a for a in active_atoms}
             context_atoms = [by_key[k] for k in keys if k in by_key]
 
+        today = date.today()
         res = self._llm.complete(
             prompts.CONSOLIDATE_SYSTEM,
+            f"## 当前时间\n{today.isoformat()}\n\n"
             f"## atom 索引\n{index_text}\n\n"
             f"## 相关原子全文\n{prompts.render_atoms_full(context_atoms)}\n\n"
             f"## 最近经历\n{sources_text}",
@@ -148,6 +201,7 @@ class ConsolidationEngine:
         operations = parse_json_object(res.text).get("operations", [])
 
         valid_ids = {s.id for s in pending}
+        by_id = {s.id: s for s in pending}
         consumed: set[int] = set()
         touched: list[str] = []
         # 随本轮写入刷新，供后续 op 近重复合并
@@ -155,7 +209,12 @@ class ConsolidationEngine:
         for op in operations:
             op, _merge_note = apply_canonical_to_op(op, working_atoms)
             source_ids = [i for i in op.get("source_ids", []) if i in valid_ids]
-            key = self._apply_op(session, space, run, op, source_ids)
+            cited_text = "\n".join(
+                by_id[i].content for i in source_ids if i in by_id
+            )
+            key = self._apply_op(
+                session, space, run, op, source_ids, cited_text=cited_text, today=today
+            )
             if key:
                 touched.append(key)
                 consumed.update(source_ids)
@@ -173,6 +232,9 @@ class ConsolidationEngine:
         run: ConsolidationRun,
         op: dict,
         source_ids: list[int],
+        *,
+        cited_text: str = "",
+        today: date | None = None,
     ) -> str | None:
         kind = op.get("op")
         key = keyify(op.get("key") or "")
@@ -194,7 +256,13 @@ class ConsolidationEngine:
         detail = (op.get("detail") or "").strip()[:_DETAIL_MAX]
         if not statement:
             return None
-        happened_on = _parse_happened_on(op.get("happened_on"))
+        existing_on = atom.happened_on if atom is not None else None
+        happened_on = resolve_happened_on(
+            op.get("happened_on"),
+            source_texts=cited_text,
+            existing=existing_on,
+            today=today,
+        )
         confidence = op.get("confidence")
         atom_kind = AtomKind(op.get("kind") or AtomKind.belief.value)
 

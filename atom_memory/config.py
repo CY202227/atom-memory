@@ -26,6 +26,9 @@ class Settings(BaseSettings):
     # 0 表示不截断。长上下文变笨/费钱时可调低。
     chat_history_max_messages: int = 40
 
+    # /chat demo：等后台固化回显的最长秒数
+    chat_consolidate_wait_seconds: float = 8.0
+
     # /chat demo 联网搜索（DashScope WebSearch MCP SSE）
     dashscope_api_key: str = ""
     web_search_mcp_url: str = (
