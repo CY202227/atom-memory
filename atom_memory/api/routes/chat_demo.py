@@ -34,7 +34,7 @@ from ...llm.base import LLMError
 from ...llm.openai_compat import OpenAICompatLLM
 from ...locks import space_write_lock
 from ...models import AtomKind, AtomStatus, SourceKind, SourceStatus
-from ...recall import clip_by_budget, render_statement_block
+from ...recall import clip_by_budget, fallback_hits, is_inventory_query, render_statement_block
 from ...recall.base import RecallHit
 from ...recall.llm import RecallError
 from ...repositories import atom_repo, source_repo, space_repo
@@ -51,37 +51,28 @@ _CHAT_HTML = Path(__file__).resolve().parent.parent.parent / "web" / "chat.html"
 
 _CORE_KINDS = frozenset({AtomKind.self})
 _CORE_MAX = 2
-# 称呼偏好：BM25 对「我是谁」几乎必空，必须常驻，不能只靠词面检索
+# 称呼偏好：BM25 对「我是谁」几乎必空，必须常驻
 _STICKY_KEYS = frozenset({"user-preferred-name"})
+# 仅身份问句（清单式问句走 is_inventory_query，避免与 fallback 正则双份）
 _IDENTITY_QUERY_RE = re.compile(
     r"(我是谁|我叫什么|叫我什么|我的名字|你还记得我|记得我吗|"
     r"who am i|what('s| is) my name|do you remember me)",
     re.IGNORECASE,
 )
+# 与 API 默认对齐，不另起一套
 _RECALL_BUDGET = 400
 _RECALL_MAX = 5
 _EXPAND_BUDGET = 1200
 _EXPAND_MAX_KEYS = 10
-_CONSOLIDATE_WAIT_S = 8.0
 
 _SYSTEM = (
-    "你是一个有长期记忆的助手。"
-    "当前回合的 user 消息带 <context>：含 current_time、少量 self 底色，"
-    "以及本轮自动召回的 recalled_memory（短 statement）；"
-    "历史回合是纯对话文本。回答涉及「现在/今天」时以 current_time 为准。"
-    "读记忆：优先直接使用 context 里已有的 recalled_memory；"
-    "不够或关键词不对时再 memory_search；statement 不够再 memory_expand。"
-    "写记忆：下列情况必须先调 memory_save（入库后后台固化，不必等固化完再答），"
-    "再正常回答；宁多记稳事实、勿漏用户在乎的点："
-    "（1）人设/角色/口癖/自称；"
-    "（2）称呼偏好；"
-    "（3）兴趣爱好、喜欢/讨厌、长期偏好、习惯；"
-    "（4）重要关系、职业/项目、稳定身份事实；"
-    "（5）用户说「记住/别忘了」或明显希望你以后用到的信息。"
-    "一次性闲聊、纯问候、已在 recalled_memory 里的重复内容不要存。"
-    "搜空或不相关就正常闲聊，不要假装记得库里没有的内容。"
-    "若提供了 web_search：仅当需要实时/外部事实且自身知识不足时再调用。"
-    "不要声称自己没有记忆系统。"
+    "你是一个有长期记忆的助手（本页为调试 demo，非正式 SDK）。"
+    "当前回合 user 带 <context>：current_time 与自动召回的短 statement；"
+    "回答「现在/今天」以 current_time 为准。"
+    "读：优先用 recalled_memory；不够再 memory_search / memory_expand。"
+    "写：遇到可复用的用户事实或偏好可调 memory_save（入库后后台固化）；"
+    "漏存时由后台裁判补判。不要假装记得库里没有的内容。"
+    "若有 web_search：仅实时/外部事实且知识不足时再调。"
 )
 
 _MEMORY_SEARCH_TOOL = {
@@ -90,8 +81,7 @@ _MEMORY_SEARCH_TOOL = {
         "name": "memory_search",
         "description": (
             "换关键词再搜长期记忆（statement）。"
-            "仅当 context 里自动召回不够或答非所问时调用；"
-            "query 用具体词（称呼/偏好/人设等）。"
+            "仅当自动召回不够时调用。"
         ),
         "parameters": {
             "type": "object",
@@ -110,10 +100,7 @@ _MEMORY_EXPAND_TOOL = {
     "type": "function",
     "function": {
         "name": "memory_expand",
-        "description": (
-            "按 key 展开记忆详情（detail）。"
-            "仅在自动召回或 memory_search 的 statement 不够回答时调用。"
-        ),
+        "description": "按 key 展开 detail；statement 不够时再调。",
         "parameters": {
             "type": "object",
             "properties": {
@@ -133,22 +120,19 @@ _MEMORY_SAVE_TOOL = {
     "function": {
         "name": "memory_save",
         "description": (
-            "把值得长期保留的信息写入记忆库（先入库，后台固化）。"
-            "必须调用：人设/口癖、称呼、兴趣爱好、喜欢讨厌、习惯、"
-            "重要关系/职业项目、明确要求记住。"
-            "例如「你是猫娘」「叫我老张」「我喜欢摄影」「我在做 atom-memory」。"
-            "纯问候或一次性闲聊不要调用。"
+            "写入值得长期保留的用户事实或偏好（先入库，后台固化）。"
+            "问候、无新信息的闲聊不要调用。"
         ),
         "parameters": {
             "type": "object",
             "properties": {
                 "note": {
                     "type": "string",
-                    "description": "要记住的内容（简洁陈述，可含用户原话要点）",
+                    "description": "要记住的内容（简洁陈述）",
                 },
                 "reason": {
                     "type": "string",
-                    "description": "为何值得长期保留（可选）",
+                    "description": "为何值得保留（可选）",
                 },
             },
             "required": ["note"],
@@ -160,16 +144,13 @@ _WEB_SEARCH_TOOL = {
     "type": "function",
     "function": {
         "name": "web_search",
-        "description": (
-            "联网检索实时信息。仅当回答依赖最新事实、外部资料且自身知识不足时调用；"
-            "闲聊、确认已知用户偏好、一般性常识不要调用。"
-        ),
+        "description": "联网检索；仅实时/外部事实且知识不足时调用。",
         "parameters": {
             "type": "object",
             "properties": {
                 "query": {
                     "type": "string",
-                    "description": "简洁的搜索关键词或问句",
+                    "description": "搜索关键词或问句",
                 }
             },
             "required": ["query"],
@@ -262,6 +243,7 @@ def chat_page() -> str:
     "/chat/api/sessions",
     response_model=StartResponse,
     dependencies=[Depends(require_api_key)],
+    include_in_schema=False,
 )
 def start_session(
     payload: StartRequest,
@@ -292,6 +274,7 @@ def start_session(
     "/chat/api/sessions/{session_id}",
     response_model=SessionState,
     dependencies=[Depends(require_api_key)],
+    include_in_schema=False,
 )
 def get_session_state(
     session_id: str,
@@ -324,6 +307,7 @@ def get_session_state(
     "/chat/api/sessions/{session_id}/clear-context",
     response_model=SessionState,
     dependencies=[Depends(require_api_key)],
+    include_in_schema=False,
 )
 def clear_context(
     session_id: str,
@@ -338,6 +322,7 @@ def clear_context(
 @router.post(
     "/chat/api/sessions/{session_id}/consolidate",
     dependencies=[Depends(require_api_key)],
+    include_in_schema=False,
 )
 def consolidate_now(
     session_id: str,
@@ -374,6 +359,7 @@ def consolidate_now(
 @router.post(
     "/chat/api/sessions/{session_id}/message/stream",
     dependencies=[Depends(require_api_key)],
+    include_in_schema=False,
 )
 async def send_message_stream(
     session_id: str,
@@ -552,7 +538,9 @@ async def send_message_stream(
             # 快写慢固：流式结束后短暂等待已排队的固化，便于本轮 debug
             for waiter in save_waiters:
                 done_ev: threading.Event = waiter["event"]
-                finished = await asyncio.to_thread(done_ev.wait, _CONSOLIDATE_WAIT_S)
+                finished = await asyncio.to_thread(
+                    done_ev.wait, settings.chat_consolidate_wait_seconds
+                )
                 if finished:
                     done_entry = waiter.get("done")
                     if done_entry:
@@ -715,6 +703,7 @@ def _light_auto_recall(
         have = set(core_keys)
 
         force_semantic = bool(_IDENTITY_QUERY_RE.search(query or ""))
+        inventory = is_inventory_query(query) or force_semantic
         # 身份问句且称呼未在 sticky（尚未固化）时也走语义
         hits_raw, semantic_fallback, recall_error = _retrieve_hits(
             atoms,
@@ -723,6 +712,14 @@ def _light_auto_recall(
             llm,
             force_semantic=force_semantic,
         )
+        if (inventory or not hits_raw) and atoms:
+            exclude = have | {h.atom.key for h in hits_raw}
+            fill_n = max(0, _RECALL_MAX - len(have) - len(hits_raw))
+            if inventory and not hits_raw:
+                fill_n = max(fill_n, _RECALL_MAX - len(have))
+            hits_raw = list(hits_raw) + fallback_hits(
+                atoms, exclude_keys=exclude, limit=fill_n
+            )
         extra = [h for h in hits_raw if h.atom.key not in have]
         merged = _dedupe_hits(core + extra)
         merged = clip_by_budget(merged, budget_chars=_RECALL_BUDGET)[:_RECALL_MAX]
@@ -757,6 +754,12 @@ def _memory_search(
         hits_raw, semantic_fallback, recall_error = _retrieve_hits(
             atoms, method, query, llm
         )
+        if (is_inventory_query(query) or not hits_raw) and atoms:
+            exclude = {h.atom.key for h in hits_raw}
+            fill_n = max(0, _RECALL_MAX - len(hits_raw))
+            hits_raw = list(hits_raw) + fallback_hits(
+                atoms, exclude_keys=exclude, limit=fill_n
+            )
         hits_raw = _dedupe_hits(hits_raw)
         hits_raw = clip_by_budget(hits_raw, budget_chars=_RECALL_BUDGET)[
             :_RECALL_MAX

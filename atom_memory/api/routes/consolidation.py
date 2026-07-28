@@ -36,6 +36,10 @@ def consolidate(
         )
 
 
-@router.get("/spaces/{space_uid}/runs", response_model=list[ConsolidationRun])
+@router.get(
+    "/spaces/{space_uid}/runs",
+    response_model=list[ConsolidationRun],
+    tags=["admin"],
+)
 def list_runs(space: Space = Depends(get_space), session: Session = Depends(get_session)):
     return run_repo.list_by_space(session, space.id)

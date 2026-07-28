@@ -92,15 +92,3 @@ def delete_by_ref(
         raise HTTPException(
             status_code=502, detail=f"重固化失败，未执行任何删除，可重试：{e}"
         )
-
-
-@router.get("/spaces/{space_uid}/sources/{source_id}", response_model=Source)
-def read_source(
-    source_id: int,
-    space: Space = Depends(get_space),
-    session: Session = Depends(get_session),
-):
-    source = source_repo.get(session, space.id, source_id)
-    if source is None:
-        raise HTTPException(status_code=404, detail="source not found")
-    return source

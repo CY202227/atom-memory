@@ -22,9 +22,11 @@
   button{background:var(--bg3);border:1px solid var(--line);color:var(--fg);
     border-radius:6px;padding:5px 12px;cursor:pointer}
   button:hover{border-color:var(--accent)}
+  button:disabled{opacity:.45;cursor:default;border-color:var(--line)}
   #layout{flex:1;display:flex;min-height:0}
   #sidebar{width:300px;border-right:1px solid var(--line);background:var(--bg2);
-    overflow:auto;padding:10px}
+    overflow:auto;padding:10px;display:flex;flex-direction:column}
+  #sidebar-list{flex:1}
   #main{flex:1;overflow:auto;padding:24px 32px}
   .item{display:block;width:100%;text-align:left;padding:8px 10px;margin:2px 0;
     border:none;border-radius:6px;background:none;color:var(--fg);cursor:pointer}
@@ -39,6 +41,7 @@
   table{width:100%;border-collapse:collapse;font-size:12.5px}
   td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
   th{color:var(--dim);font-weight:500}
+  #more{width:100%;margin-top:8px}
 </style>
 </head>
 <body>
@@ -49,12 +52,16 @@
   <span id="stat" class="kind"></span>
 </header>
 <div id="layout">
-  <aside id="sidebar"></aside>
+  <aside id="sidebar">
+    <div id="sidebar-list"></div>
+    <button id="more" hidden>加载更多</button>
+  </aside>
   <main id="main"><div class="empty">输入 space uid 加载原子列表</div></main>
 </div>
 <script>
 const $ = s => document.querySelector(s);
-let atoms = [], current = null;
+const PAGE_SIZE = 50;
+let atoms = [], current = null, page = 1, total = 0, uid = '';
 
 async function api(path){
   const r = await fetch(path);
@@ -62,13 +69,41 @@ async function api(path){
   return r.json();
 }
 
-async function load(){
-  const uid = $('#uid').value.trim();
-  if(!uid) return;
-  atoms = await api(`/spaces/${uid}/atoms`);
-  $('#stat').textContent = `${atoms.length} atoms`;
+async function fetchPage(p, {append=false} = {}){
+  const data = await api(
+    `/spaces/${uid}/atoms?page=${p}&page_size=${PAGE_SIZE}`);
+  const batch = data.results || [];
+  total = data.count || 0;
+  page = data.page || p;
+  atoms = append ? atoms.concat(batch) : batch;
+  $('#stat').textContent = `${atoms.length} / ${total} atoms`;
+  const more = $('#more');
+  more.hidden = atoms.length >= total;
+  more.disabled = false;
+  more.textContent = '加载更多';
   renderSidebar();
+}
+
+async function load(){
+  uid = $('#uid').value.trim();
+  if(!uid) return;
+  page = 1;
+  atoms = [];
+  await fetchPage(1);
   $('#main').innerHTML = '<div class="empty">选择左侧原子</div>';
+}
+
+async function loadMore(){
+  const more = $('#more');
+  more.disabled = true;
+  more.textContent = '加载中…';
+  try{
+    await fetchPage(page + 1, {append: true});
+  }catch(e){
+    more.disabled = false;
+    more.textContent = '加载更多';
+    alert(e.message);
+  }
 }
 
 function renderSidebar(){
@@ -76,7 +111,7 @@ function renderSidebar(){
   for(const a of atoms){
     (by[a.kind] ||= []).push(a);
   }
-  $('#sidebar').innerHTML = Object.keys(by).sort().map(k => `
+  $('#sidebar-list').innerHTML = Object.keys(by).sort().map(k => `
     <div class="kind" style="margin:10px 0 4px">${k}</div>
     ${by[k].map(a => `
       <button class="item" data-key="${a.key}">
@@ -84,20 +119,20 @@ function renderSidebar(){
         <div class="kind">${a.key}</div>
       </button>`).join('')}
   `).join('') || '<div class="empty">（空）</div>';
-  $('#sidebar').onclick = e => {
+  $('#sidebar-list').onclick = e => {
     const btn = e.target.closest('[data-key]');
     if(btn) openAtom(btn.dataset.key);
   };
 }
 
 async function openAtom(key){
-  const uid = $('#uid').value.trim();
   current = key;
   [...document.querySelectorAll('.item')].forEach(el =>
     el.classList.toggle('on', el.dataset.key === key));
-  const a = await api(`/spaces/${uid}/atoms/${encodeURIComponent(key)}`);
-  const revs = await api(`/spaces/${uid}/atoms/${encodeURIComponent(key)}/revisions`);
-  const ev = await api(`/spaces/${uid}/atoms/${encodeURIComponent(key)}/evidence`);
+  const a = await api(
+    `/spaces/${uid}/atoms/${encodeURIComponent(key)}?include=revisions,evidence`);
+  const revs = a.revisions || [];
+  const ev = a.evidence || [];
   $('#main').innerHTML = `
     <h1>${esc(a.statement)}</h1>
     <div class="meta">
@@ -126,6 +161,7 @@ function esc(s){ return String(s??'').replace(/[&<>"']/g, c=>({
   '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
 $('#load').onclick = () => load().catch(e => alert(e.message));
+$('#more').onclick = () => loadMore();
 $('#uid').addEventListener('keydown', e => { if(e.key==='Enter') $('#load').click(); });
 const q = new URLSearchParams(location.search).get('uid');
 if(q){ $('#uid').value = q; load().catch(console.error); }

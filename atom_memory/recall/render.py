@@ -1,5 +1,7 @@
 """召回结果渲染与预算裁剪。"""
 
+from datetime import date
+
 from ..models import Atom, Source
 from .base import RecallHit
 
@@ -7,14 +9,46 @@ _EVIDENCE_EXCERPT_MAX = 200
 _EXPAND_BUDGET_DEFAULT = 1200
 
 
-def render_statement_block(hits: list[RecallHit]) -> str:
+def should_prefix_happened_on(
+    happened_on: date | None,
+    statement: str,
+    *,
+    today: date | None = None,
+) -> bool:
+    """是否在注入前缀 happened_on：跳过写入日噪声与正文已含日期。"""
+    if happened_on is None:
+        return False
+    today = today or date.today()
+    if happened_on == today:
+        return False
+    text = statement or ""
+    iso = happened_on.isoformat()
+    if iso in text:
+        return False
+    md = f"{happened_on.month}月{happened_on.day}日"
+    md_pad = f"{happened_on.month}月{happened_on.day:02d}日"
+    if md in text or md_pad in text:
+        return False
+    return True
+
+
+def render_statement_block(
+    hits: list[RecallHit],
+    *,
+    today: date | None = None,
+) -> str:
     if not hits:
         return ""
+    today = today or date.today()
     parts = ["<recalled_memory>"]
     for h in hits:
         a = h.atom
-        when = f" {a.happened_on:%Y-%m-%d}" if a.happened_on else ""
-        parts.append(f'<item key="{a.key}" kind="{a.kind.value}">{when} {a.statement}</item>')
+        when = ""
+        if should_prefix_happened_on(a.happened_on, a.statement, today=today):
+            when = f" {a.happened_on:%Y-%m-%d}"
+        parts.append(
+            f'<item key="{a.key}" kind="{a.kind.value}">{when} {a.statement}</item>'
+        )
     parts.append("</recalled_memory>")
     return "\n".join(parts)
 

@@ -1,12 +1,13 @@
-"""atom 路由：索引 / 列表 / 详情 / 展开 / 修订 / 出处 / 回滚 / 归档。"""
+"""atom 路由：列表 / 详情（?include=revisions,evidence）/ 展开 / 回滚 / 归档。"""
 
+from datetime import datetime
 from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlmodel import Session
 
 from ...db import get_session
-from ...models import Atom, AtomKind, AtomRevision, AtomStatus, RevisionTrigger, Space, utcnow
+from ...models import Atom, AtomKind, AtomStatus, RevisionTrigger, Space, utcnow
 from ...recall import render_detail_block, truncate_source
 from ...repositories import atom_repo, evidence_repo, revision_repo
 from .. import schemas
@@ -15,6 +16,8 @@ from ..deps import get_space, require_api_key
 router = APIRouter(dependencies=[Depends(require_api_key)])
 
 _EXPAND_EVIDENCE_MAX = 200
+_INCLUDE_REVISIONS = "revisions"
+_INCLUDE_EVIDENCE = "evidence"
 
 
 def _get_atom_or_404(session: Session, space: Space, key: str) -> Atom:
@@ -24,13 +27,51 @@ def _get_atom_or_404(session: Session, space: Space, key: str) -> Atom:
     return atom
 
 
-def _atom_detail(session: Session, atom: Atom) -> schemas.AtomDetail:
+def _parse_include(include: Optional[str]) -> set[str]:
+    if not include or not include.strip():
+        return set()
+    return {part.strip().lower() for part in include.split(",") if part.strip()}
+
+
+def _atom_detail(
+    session: Session,
+    atom: Atom,
+    *,
+    with_revisions: bool = False,
+    with_evidence: bool = False,
+) -> schemas.AtomDetail:
     dates = sorted(
         {
             f"{e['source_occurred_at']:%Y-%m-%d}"
             for e in evidence_repo.list_for_atom(session, atom.id)
         }
     )
+    revisions = None
+    if with_revisions:
+        revisions = [
+            r.model_dump(mode="json")
+            for r in revision_repo.list_for_atom(session, atom.id)
+        ]
+    evidence = None
+    if with_evidence:
+        evidence = []
+        for e in evidence_repo.list_for_atom(session, atom.id):
+            kind = e["source_kind"]
+            occurred = e["source_occurred_at"]
+            evidence.append(
+                {
+                    "revision_seq": e["revision_seq"],
+                    "change_reason": e["change_reason"],
+                    "source_id": e["source_id"],
+                    "source_kind": (
+                        kind.value if hasattr(kind, "value") else kind
+                    ),
+                    "source_occurred_at": (
+                        occurred.isoformat() if hasattr(occurred, "isoformat") else occurred
+                    ),
+                    "note": e["note"],
+                }
+            )
     return schemas.AtomDetail(
         id=atom.id,
         space_id=atom.space_id,
@@ -45,30 +86,39 @@ def _atom_detail(session: Session, atom: Atom) -> schemas.AtomDetail:
         created_at=atom.created_at,
         updated_at=atom.updated_at,
         evidence_dates=dates,
+        revisions=revisions,
+        evidence=evidence,
     )
 
 
-@router.get("/spaces/{space_uid}/index", response_model=list[schemas.IndexEntry])
-def read_index(space: Space = Depends(get_space), session: Session = Depends(get_session)):
-    return [
-        schemas.IndexEntry(
-            kind=a.kind,
-            key=a.key,
-            statement=a.statement,
-            updated_at=a.updated_at,
-        )
-        for a in atom_repo.list_active(session, space.id)
-    ]
-
-
-@router.get("/spaces/{space_uid}/atoms", response_model=list[Atom])
+@router.get("/spaces/{space_uid}/atoms", response_model=schemas.AtomListResponse)
 def list_atoms(
     kind: Optional[AtomKind] = None,
     status: AtomStatus = AtomStatus.active,
+    page: int = Query(1, ge=1),
+    page_size: int = Query(50, ge=1, le=200),
+    updated_after: Optional[datetime] = None,
+    updated_before: Optional[datetime] = None,
     space: Space = Depends(get_space),
     session: Session = Depends(get_session),
 ):
-    return atom_repo.list_atoms(session, space.id, kind=kind, status=status)
+    offset = (page - 1) * page_size
+    items, total = atom_repo.list_atoms(
+        session,
+        space.id,
+        kind=kind,
+        status=status,
+        updated_after=updated_after,
+        updated_before=updated_before,
+        limit=page_size,
+        offset=offset,
+    )
+    return schemas.AtomListResponse(
+        count=total,
+        page=page,
+        page_size=page_size,
+        results=[a.model_dump(mode="json") for a in items],
+    )
 
 
 @router.post(
@@ -132,31 +182,28 @@ def expand_atoms(
 
 @router.get("/spaces/{space_uid}/atoms/{key}", response_model=schemas.AtomDetail)
 def read_atom(
-    key: str, space: Space = Depends(get_space), session: Session = Depends(get_session)
+    key: str,
+    include: Optional[str] = Query(
+        default=None,
+        description="逗号分隔：revisions,evidence",
+    ),
+    space: Space = Depends(get_space),
+    session: Session = Depends(get_session),
 ):
-    return _atom_detail(session, _get_atom_or_404(session, space, key))
+    parts = _parse_include(include)
+    return _atom_detail(
+        session,
+        _get_atom_or_404(session, space, key),
+        with_revisions=_INCLUDE_REVISIONS in parts,
+        with_evidence=_INCLUDE_EVIDENCE in parts,
+    )
 
 
-@router.get(
-    "/spaces/{space_uid}/atoms/{key}/revisions",
-    response_model=list[AtomRevision],
+@router.post(
+    "/spaces/{space_uid}/atoms/{key}/rollback",
+    response_model=Atom,
+    tags=["admin"],
 )
-def list_revisions(
-    key: str, space: Space = Depends(get_space), session: Session = Depends(get_session)
-):
-    atom = _get_atom_or_404(session, space, key)
-    return revision_repo.list_for_atom(session, atom.id)
-
-
-@router.get("/spaces/{space_uid}/atoms/{key}/evidence")
-def list_evidence(
-    key: str, space: Space = Depends(get_space), session: Session = Depends(get_session)
-):
-    atom = _get_atom_or_404(session, space, key)
-    return evidence_repo.list_for_atom(session, atom.id)
-
-
-@router.post("/spaces/{space_uid}/atoms/{key}/rollback", response_model=Atom)
 def rollback_atom(
     key: str,
     payload: schemas.RollbackRequest,

@@ -47,13 +47,6 @@ class DeleteBySourceResult(BaseModel):
     run_id: Optional[int] = None
 
 
-class IndexEntry(BaseModel):
-    kind: AtomKind
-    key: str
-    statement: str
-    updated_at: datetime
-
-
 class AtomDetail(BaseModel):
     id: int
     space_id: int
@@ -68,6 +61,15 @@ class AtomDetail(BaseModel):
     created_at: datetime
     updated_at: datetime
     evidence_dates: list[str]
+    revisions: Optional[list[dict]] = None
+    evidence: Optional[list[dict]] = None
+
+
+class AtomListResponse(BaseModel):
+    count: int
+    page: int
+    page_size: int
+    results: list[dict]
 
 
 class RollbackRequest(BaseModel):
@@ -102,6 +104,8 @@ class RecallResponse(BaseModel):
     method: str
     hits: list[RecallHitOut]
     context_block: str
+    chars_used: int = 0
+    atoms_clipped: int = 0
     prompt_tokens: int = 0
     completion_tokens: int = 0
 

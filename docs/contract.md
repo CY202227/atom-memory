@@ -42,6 +42,20 @@ atom-memory 不耦合任何上游产品。身份用 space uid 隔离。
 | `statement`（默认） | 只注入 statement |
 | `full` | statement + detail，仍受 `budget_chars` |
 
+30B 级上下文建议：`detail=statement`，`budget_chars` 日常 **200–400**；不够再
+`POST …/atoms/expand`。勿默认 `detail=full`。
+
+响应另含：`chars_used`（计入预算的 statement/detail 字符）、`atoms_clipped`
+（因预算裁掉的 hit 数），便于上游调参。
+
+空检索或清单式问句（如「你记得什么」）会按 `updated_at` 补最近的
+person/event/lesson/self，仍受 `max_atoms` / `budget_chars` 约束。
+注入 `context_block` 时：若 `happened_on` 等于当天，或 statement 已含该日，
+则不再前缀日期（避免写入日噪声）。
+
+写入口径：偏好与可复用用户侧事实（含一次性披露）可记；对已有事实的纯机制追问、
+助手未确认臆测可不记。
+
 `include_recent_sources`（默认 true）：pending 且 salience≥0.5 的近期 source 拼进
 `<recent_sources>`。
 
@@ -53,9 +67,18 @@ atom-memory 不耦合任何上游产品。身份用 space uid 隔离。
 </recalled_memory>
 ```
 
-## 2.1 展开
+## 2.1 展开与详情
 
-`GET /spaces/{uid}/atoms/{key}`  
+`GET /spaces/{uid}/atoms`：管理向列表，分页信封（**勿整页注入 prompt**）：
+
+```json
+{"count": 123, "page": 1, "page_size": 50, "results": [/* atom 行 */]}
+```
+
+查询参数：`page`（默认 1）、`page_size`（默认 50，最大 200）、`kind`、`status`、
+`updated_after` / `updated_before`（ISO datetime）。对话注入仍用 `recall` / `expand`。
+
+`GET /spaces/{uid}/atoms/{key}`：默认轻量详情；`?include=revisions,evidence` 附加修订与出处。  
 `POST /spaces/{uid}/atoms/expand`：`{"keys":["…"], "with_evidence": false}`
 
 ## 3. 固化

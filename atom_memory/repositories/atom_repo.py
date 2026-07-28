@@ -1,8 +1,9 @@
 """atom 仓储：原子认识的查找与列举。"""
 
+from datetime import datetime
 from typing import Optional
 
-from sqlmodel import Session, select
+from sqlmodel import Session, col, func, select
 
 from ..models import Atom, AtomKind, AtomStatus
 
@@ -28,8 +29,33 @@ def list_atoms(
     space_id: int,
     kind: Optional[AtomKind] = None,
     status: AtomStatus = AtomStatus.active,
-) -> list[Atom]:
-    stmt = select(Atom).where(Atom.space_id == space_id, Atom.status == status)
+    *,
+    updated_after: datetime | None = None,
+    updated_before: datetime | None = None,
+    limit: int | None = None,
+    offset: int = 0,
+) -> tuple[list[Atom], int]:
+    """按更新时间倒序列举；返回 (本页 items, 匹配总数)。"""
+    filters = [Atom.space_id == space_id, Atom.status == status]
     if kind:
-        stmt = stmt.where(Atom.kind == kind)
-    return list(session.exec(stmt.order_by(Atom.updated_at.desc())).all())
+        filters.append(Atom.kind == kind)
+    if updated_after is not None:
+        filters.append(Atom.updated_at >= updated_after)
+    if updated_before is not None:
+        filters.append(Atom.updated_at <= updated_before)
+
+    total = session.exec(
+        select(func.count()).select_from(Atom).where(*filters)
+    ).one()
+
+    stmt = (
+        select(Atom)
+        .where(*filters)
+        .order_by(col(Atom.updated_at).desc())
+    )
+    if offset:
+        stmt = stmt.offset(offset)
+    if limit is not None:
+        stmt = stmt.limit(limit)
+    items = list(session.exec(stmt).all())
+    return items, int(total)

@@ -119,5 +119,5 @@ def test_consolidate_forces_canonical_name(client, fake_llm):
     run = client.post(f"/spaces/{uid}/consolidate", json={}).json()
     assert run["status"] == "succeeded"
     assert run["atoms_touched"] == [CANONICAL_PREFERRED_NAME]
-    index = client.get(f"/spaces/{uid}/index").json()
+    index = client.get(f"/spaces/{uid}/atoms").json()["results"]
     assert {e["key"] for e in index} == {CANONICAL_PREFERRED_NAME}
