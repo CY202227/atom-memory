@@ -146,6 +146,9 @@ def resolve_relative(expr: str, anchor: date) -> date | None:
     return None
 
 
+_LAST_YEAR = re.compile(r"\blast\s+year\b|去年", re.IGNORECASE)
+
+
 def derive_time_facts(
     happened_on: date | None,
     text: str = "",
@@ -166,6 +169,10 @@ def derive_time_facts(
             facts.append(
                 f"{resolved.isoformat()}（{weekday_name(resolved, lang='zh')}）"
             )
+        # 「去年 / last year」→ 锚定年的上一年（LoCoMo 时序金标常为年份）
+        if _LAST_YEAR.search(text):
+            facts.append(str(anchor.year - 1))
+            facts.append(f"year={anchor.year - 1} (last year)")
 
     # 去重保序
     seen: set[str] = set()

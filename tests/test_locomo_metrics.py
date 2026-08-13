@@ -50,10 +50,13 @@ def test_parse_session_date_and_oracle_enrich():
     assert ops[0]["key"] == "locomo-d1-3"
     assert ops[1]["key"] == "locomo-d11-1"
     assert ops[0]["happened_on"] == "2023-05-08"
-    assert ops[0]["statement"].startswith("2023-05-08|")
+    # 日期走 happened_on；statement 留给 speaker+正文，避免挤掉 BM25 内容词
+    assert ops[0]["statement"].startswith("Caroline:")
+    assert "2023-05-08" not in ops[0]["statement"]
     assert "weekday=Monday" in ops[0]["detail"]
     assert "session_time=" in ops[0]["detail"]
     assert "speaker=Caroline" in ops[0]["detail"]
+    assert "time_facts=" in ops[0]["detail"]
 
 
 def test_score_answer_coverage_soft_vs_hard():

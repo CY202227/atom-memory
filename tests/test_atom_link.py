@@ -292,6 +292,9 @@ def test_temporal_pure_functions():
     assert "time_facts=" in detail
     # 幂等
     assert append_time_facts_to_detail(detail, d) == detail
+    last = derive_time_facts(date(2023, 7, 12), "This book I read last year")
+    assert "2022" in last
+    assert any("last year" in f for f in last)
 
 
 def test_reverse_derived_closure_two_levels(client, fake_llm):

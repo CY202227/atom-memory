@@ -17,7 +17,7 @@ from typing import Any, Protocol
 
 from atom_memory.linking import keyify
 from atom_memory.llm.base import LLMError
-from atom_memory.temporal import weekday_name
+from atom_memory.temporal import append_time_facts_to_detail, weekday_name
 
 _CATEGORY_NAMES = {
     1: "single_hop",
@@ -229,6 +229,21 @@ def iter_sessions(
     return out
 
 
+def _turn_body(turn: dict[str, Any]) -> str:
+    """对话正文 + 多模态旁注（blip_caption / query），供入库与 oracle。"""
+    parts: list[str] = []
+    text = str(turn.get("text") or "").strip()
+    if text:
+        parts.append(text)
+    caption = str(turn.get("blip_caption") or "").strip()
+    if caption:
+        parts.append(f"image: {caption}")
+    topic = str(turn.get("query") or "").strip()
+    if topic:
+        parts.append(f"topic: {topic}")
+    return " ".join(parts).strip()
+
+
 def format_session_content(
     turns: list[dict[str, Any]],
     *,
@@ -240,13 +255,13 @@ def format_session_content(
         lines.append(f"[session_time] {date_time}")
     for turn in turns:
         speaker = str(turn.get("speaker") or "?")
-        text = str(turn.get("text") or "").strip()
+        body = _turn_body(turn)
         dia = turn.get("dia_id")
         prefix = f"{speaker}"
         if dia:
             prefix = f"{speaker}({dia})"
-        if text:
-            lines.append(f"{prefix}：{text}")
+        if body:
+            lines.append(f"{prefix}：{body}")
     return "\n".join(lines)
 
 
@@ -323,23 +338,23 @@ def oracle_write_plan(
     *,
     date_time: str | None = None,
 ) -> dict[str, Any]:
-    """无 LLM 时的固化计划：每条 turn → 一个 atom（测召回/预算用）。"""
+    """无 LLM 时的固化计划：每条 turn → 一个 atom（测召回/预算用）。
+
+    statement 优先放 speaker+正文（日期走 happened_on，由 inject 前缀），
+    避免日期前缀挤掉内容词、拖累 BM25。
+    """
     operations: list[dict[str, Any]] = []
     happened = parse_session_date(date_time)
     weekday = weekday_name(happened, lang="en") if happened else None
-    date_prefix = f"{happened.isoformat()}|" if happened else ""
 
     for turn in turns:
         dia = str(turn.get("dia_id") or "").strip() or "turn"
-        text = str(turn.get("text") or "").strip()
-        if not text:
+        body = _turn_body(turn)
+        if not body:
             continue
         speaker = str(turn.get("speaker") or "")
-        if date_prefix:
-            room = max(0, 80 - len(date_prefix))
-            statement = (date_prefix + text[:room])[:80]
-        else:
-            statement = text[:80]
+        core = f"{speaker}: {body}" if speaker else body
+        statement = core[:80]
 
         meta_parts: list[str] = []
         if date_time:
@@ -351,9 +366,13 @@ def oracle_write_plan(
         meta = " | ".join(meta_parts)
         if meta:
             room = max(0, 300 - len(meta) - 3)
-            detail = f"{text[:room]} | {meta}"[:300]
+            detail = f"{body[:room]} | {meta}"[:300]
         else:
-            detail = text[:300]
+            detail = body[:300]
+        # 引擎还会再 append time_facts；此处保证 oracle 直测也含「去年」年份
+        detail = append_time_facts_to_detail(
+            detail, happened, text=body, max_chars=300
+        )
 
         key = locomo_dia_key(dia) or keyify(f"turn-{source_id}") or f"turn-{source_id}"
         op: dict[str, Any] = {
