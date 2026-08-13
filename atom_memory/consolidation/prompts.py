@@ -43,9 +43,17 @@ CONSOLIDATE_SYSTEM = """\
 
 1. 宁缺毋滥：不值得长期保留时返回空操作列表。
 2. 改写优先：同主题永远用同一个 key（kebab-case，可含中文）。
-3. 矛盾显式：冲突时在 statement/detail 写明变化，不静默覆盖。
+3. 矛盾显式：冲突时在 statement/detail 写明变化，不静默覆盖；若与索引中另一 atom 明确冲突，可在 links 里加 contradicts。
 4. 每个操作必须带 source_ids。
 5. statement 超 80 字、detail 超 300 字会被服务端截断——你自己先写短。
+
+## 链接（links，可选）
+
+有向边，宁少勿多（每个 op 通常 0~2 条）。`to` 必须是索引里**已存在**的 key。
+
+- about：弱关联（导航用）；同主题近重复不要连 about，应 upsert 同 key
+- contradicts：与另一 atom 显式冲突
+- derived_from：本条由另一 atom 推出（罕见；综合层专用时更常见）
 
 ## 时间（happened_on）
 
@@ -68,10 +76,49 @@ CONSOLIDATE_SYSTEM = """\
    "happened_on": "YYYY-MM-DD" 或 null,
    "confidence": 0.0~1.0 或 null,
    "change_reason": "...",
-   "source_ids": [1, 2]}
+   "source_ids": [1, 2],
+   "links": [{"to": "existing-key", "kind": "about|contradicts|derived_from"}]}
 ]}
 
 archive 只需 op、key、change_reason、source_ids。没有值得记的就 {"operations": []}。
+"""
+
+SYNTHESIZE_SYSTEM = """\
+你是一个数字人的记忆综合器。你只阅读已有原子（atoms），产出更高层的认识断言。
+
+## 硬规则
+
+1. 每条综合 atom 必须由至少 2 个已有 atom 推出（derived_from）。
+2. **禁止引入 derived_from 内容之外的新事实**；只能重组、归纳已有断言。
+3. kind 一般为 belief；statement≤80 字，detail≤300 字。
+4. confidence 必填，且应 ≤0.8（低于直接证据）。
+5. 宁缺毋滥：推不出可靠结论时返回空列表。
+
+## 输出格式
+
+只输出一个 JSON 对象：
+
+{"operations": [
+  {"op": "upsert",
+   "kind": "belief",
+   "key": "...",
+   "statement": "≤80 字",
+   "detail": "≤300 字",
+   "confidence": 0.0~0.8,
+   "change_reason": "...",
+   "derived_from": ["key-a", "key-b"]}
+]}
+
+没有值得综合的就 {"operations": []}。
+"""
+
+SYNTHESIZE_SELECT_SYSTEM = """\
+你是一个数字人的记忆综合器。先决定要读哪些已有原子的 detail 以便综合。
+
+给你：atom 索引（每行 kind/key/statement）。
+选出可能可综合的 key（宁少勿多，通常 2~8 个）。
+
+只输出：{"read": ["key-1", "key-2"]}。没有就 {"read": []}。
 """
 
 CONSOLIDATE_SELECT_SYSTEM = """\

@@ -2,9 +2,12 @@
 
 依赖关系：
 space → source → consolidationrun → atom → atomrevision ← evidence ← source
+atom ↔ atom_link（类型化边）
 """
 
 from .atom import Atom, AtomKind, AtomStatus
+from .atom_embedding import AtomEmbedding
+from .atom_link import AtomLink, AtomLinkKind
 from .atom_revision import AtomRevision, RevisionTrigger
 from .base import SCHEMA_VERSION, utcnow
 from .consolidation_run import ConsolidationRun, RunStatus
@@ -23,6 +26,9 @@ __all__ = [
     "Atom",
     "AtomKind",
     "AtomStatus",
+    "AtomEmbedding",
+    "AtomLink",
+    "AtomLinkKind",
     "AtomRevision",
     "RevisionTrigger",
     "Evidence",

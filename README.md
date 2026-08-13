@@ -15,11 +15,7 @@
 
 核心信念：**遗忘是功能**——不值得长期保留时，固化可以零操作。
 
-## 相对 MemOS
-
-[MemOS](https://github.com/MemTensor/MemOS) 是完整的 Memory OS（多形态记忆、图+向量栈、调度与生态），部署与召回都更重。
-
-atom-memory 刻意不做那套：为 **有限上下文（如 30B）** 设计——默认只注入短 `statement`，细节走 `expand`；运维上单库 HTTP 即可。相对 MemOS 的「差距」多为有意取舍，不是待补齐的功能表。
+atom-memory 刻意不做那套：为 **有限上下文（如 30B）** 设计——默认只注入短 `statement`，细节走 `expand`；运维上单库 HTTP 即可。
 
 ## 数据流
 

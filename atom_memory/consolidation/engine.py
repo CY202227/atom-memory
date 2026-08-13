@@ -24,13 +24,17 @@ from ..models import (
     Space,
     utcnow,
 )
+from ..models import AtomLinkKind
 from ..repositories import (
+    atom_link_repo,
     atom_repo,
+    embedding_repo,
     evidence_repo,
     revision_repo,
     run_repo,
     source_repo,
 )
+from ..temporal import append_time_facts_to_detail
 from . import prompts
 from .canonical import apply_canonical_to_op
 
@@ -50,6 +54,11 @@ def parse_json_object(text: str) -> dict:
         raise
 
 
+class AtomLinkOp(BaseModel):
+    to: str
+    kind: Literal["about", "contradicts", "derived_from"] = "about"
+
+
 class AtomOp(BaseModel):
     op: Literal["upsert", "archive"]
     kind: AtomKind = AtomKind.belief
@@ -60,6 +69,7 @@ class AtomOp(BaseModel):
     confidence: Optional[float] = None
     change_reason: str = ""
     source_ids: list[int] = []
+    links: list[AtomLinkOp] = []
 
 
 class WritePlan(BaseModel):
@@ -250,6 +260,9 @@ class ConsolidationEngine:
             atom.status = AtomStatus.archived
             atom.updated_at = utcnow()
             self._record(session, atom, run, reason or "归档", source_ids)
+            if atom.id is not None:
+                embedding_repo.invalidate_for_atom(session, atom.id)
+                self._invalidate_derived_downstream(session, atom.id)
             return key
 
         statement = (op.get("statement") or "").strip()[:_STATEMENT_MAX]
@@ -263,8 +276,16 @@ class ConsolidationEngine:
             existing=existing_on,
             today=today,
         )
+        detail = append_time_facts_to_detail(
+            detail,
+            happened_on,
+            text=f"{statement}\n{cited_text}",
+            today=today,
+            max_chars=_DETAIL_MAX,
+        )
         confidence = op.get("confidence")
         atom_kind = AtomKind(op.get("kind") or AtomKind.belief.value)
+        was_update = atom is not None
 
         if atom is None:
             atom = Atom(
@@ -291,7 +312,66 @@ class ConsolidationEngine:
             reason = reason or "更新"
 
         self._record(session, atom, run, reason, source_ids)
+        if atom.id is not None:
+            embedding_repo.invalidate_for_atom(session, atom.id)
+            if was_update:
+                self._invalidate_derived_downstream(session, atom.id)
+            # 仅当 op 显式带 links 时替换出边；缺省字段不改动已有边
+            if "links" in op:
+                self._apply_links(session, space.id, atom, op.get("links") or [])
         return key
+
+    def _invalidate_derived_downstream(
+        self, session: Session, atom_id: int
+    ) -> None:
+        """upsert/archive 后：沿 derived_from 反向闭包降置信度并清向量。"""
+        downstream = atom_link_repo.reverse_derived_closure(session, {atom_id})
+        for did in downstream:
+            child = session.get(Atom, did)
+            if child is None:
+                continue
+            if child.confidence is not None:
+                child.confidence = min(float(child.confidence), 0.3) * 0.5
+            else:
+                child.confidence = 0.2
+            child.updated_at = utcnow()
+            session.add(child)
+            embedding_repo.invalidate_for_atom(session, did)
+
+    def _apply_links(
+        self,
+        session: Session,
+        space_id: int,
+        atom: Atom,
+        links: list,
+    ) -> None:
+        """解析 op.links；非法 kind / 不存在的 to key 静默丢弃。"""
+        if atom.id is None:
+            return
+        resolved: list[tuple[int, AtomLinkKind, str | None]] = []
+        for raw in links:
+            if not isinstance(raw, dict):
+                continue
+            to_key = keyify(str(raw.get("to") or ""))
+            kind_s = str(raw.get("kind") or "about")
+            try:
+                kind_e = AtomLinkKind(kind_s)
+            except ValueError:
+                continue
+            if not to_key:
+                continue
+            peer = atom_repo.get_by_key(session, space_id, to_key)
+            if peer is None or peer.id is None or peer.id == atom.id:
+                continue
+            note = raw.get("note")
+            note_s = str(note) if note is not None else None
+            resolved.append((peer.id, kind_e, note_s))
+        atom_link_repo.replace_out_links(
+            session,
+            space_id=space_id,
+            src_atom_id=atom.id,
+            links=resolved,
+        )
 
     def _record(
         self,

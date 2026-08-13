@@ -33,7 +33,8 @@ atom-memory 不耦合任何上游产品。身份用 space uid 隔离。
   "max_atoms": 5,
   "budget_chars": 400,
   "include_recent_sources": true,
-  "detail": "statement"
+  "detail": "statement",
+  "neighbor_hops": 0
 }
 ```
 
@@ -41,6 +42,13 @@ atom-memory 不耦合任何上游产品。身份用 space uid 隔离。
 |---|---|
 | `statement`（默认） | 只注入 statement |
 | `full` | statement + detail，仍受 `budget_chars` |
+
+| `neighbor_hops` | 行为 |
+|---|---|
+| `0`（默认） | 不扩展邻居（Velora 默认不变） |
+| `1` | 主命中后沿 `about` / `derived_from` 补一跳邻居（score×0.5），仍受 `max_atoms` / 预算约束 |
+
+派生 atom（有 `derived_from` 出边）召回时 score 再乘以其 `confidence`，同等相关度下事实优先于推论。
 
 30B 级上下文建议：`detail=statement`，`budget_chars` 日常 **200–400**；不够再
 `POST …/atoms/expand`。勿默认 `detail=full`。
@@ -79,9 +87,23 @@ person/event/lesson/self，仍受 `max_atoms` / `budget_chars` 约束。
 `updated_after` / `updated_before`（ISO datetime）。对话注入仍用 `recall` / `expand`。
 
 `GET /spaces/{uid}/atoms/{key}`：默认轻量详情；`?include=revisions,evidence` 附加修订与出处。  
+`GET /spaces/{uid}/atoms/{key}/neighbors`：出边 / 入边（`about` / `derived_from` / `contradicts`）。  
 `POST /spaces/{uid}/atoms/expand`：`{"keys":["…"], "with_evidence": false}`
 
-## 3. 固化
+## 2.2 类型化链接（atom_link）
+
+有向边，闭集三种：
+
+| kind | 语义 | 失效传播 |
+|---|---|---|
+| `derived_from` | A 由 B 推出 | 是：B 删/改 → A 降置信度并清向量 |
+| `about` | 弱关联（导航） | 否 |
+| `contradicts` | 显式冲突 | 否 |
+
+固化 op 可带可选 `links: [{"to":"existing-key","kind":"about"}]`；`to` 必须已存在，非法 key 静默丢弃。  
+派生 atom 的 evidence 仍写底层 source 并集；`derived_from` 补「为何会变」与递归传播。
+
+## 3. 固化与综合
 
 `POST /spaces/{uid}/consolidate`：`{"trigger":"manual"}` 或 `{}`  
 响应含 `atoms_touched`。
@@ -89,6 +111,9 @@ person/event/lesson/self，仍受 `max_atoms` / `budget_chars` 约束。
 pending 按 `salience` 降序、同 salience 按时间升序入批。  
 本批 ops 未 cite 的 source：低 salience 可标 `skipped`（遗忘是功能）；
 `kind=correction` 或 `salience≥0.8` 未消费则仍 `pending`，下次 consolidate 优先入批。
+
+`POST /spaces/{uid}/synthesize`：从已有 atom 归纳更高层认识（独立触发，宜 cron）。  
+每条综合须 `derived_from` ≥2、`confidence` 必填且服务端压到 ≤0.8；禁止引入父 atom 之外的新事实。
 
 ## 4. 典型循环
 
@@ -100,12 +125,14 @@ post(f"/spaces/{uid}/sources", json={"kind": "turn", "content": "...", "salience
 # 纠正后：
 post(.../sources, json={"kind": "correction", "content": "...", "salience": 0.9})
 post(.../consolidate, json={"trigger": "correction"})
+# 定时综合（可选）：
+post(.../synthesize, json={})
 ```
 
 ## 5. 按来源删除
 
 `.../sources/delete-by-ref[/preview]` → `atoms_to_*` / `deleted_atoms` /
-`reconsolidated_atoms`。
+`reconsolidated_atoms` / `derived_affected_atoms`（沿 `derived_from` 反向闭包降置信度）。
 
 ## 6. 上游迁移要点
 

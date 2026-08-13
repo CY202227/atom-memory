@@ -19,7 +19,13 @@ from .models import (
     Space,
     utcnow,
 )
-from .repositories import evidence_repo, revision_repo, run_repo
+from .repositories import (
+    atom_link_repo,
+    evidence_repo,
+    embedding_repo,
+    revision_repo,
+    run_repo,
+)
 
 
 class RedactionError(Exception):
@@ -31,6 +37,7 @@ class DeletionImpact:
     sources: list[Source]
     atoms_to_delete: list[Atom]
     atoms_to_reconsolidate: list[Atom]
+    atoms_derived_affected: list[Atom] = field(default_factory=list)
     remaining_by_atom: dict[int, set[int]] = field(default_factory=dict)
 
     @property
@@ -77,6 +84,19 @@ def assess(session: Session, space_id: int, ref: dict) -> DeletionImpact:
             impact.remaining_by_atom[atom_id] = remaining
         else:
             impact.atoms_to_delete.append(atom_by_id[atom_id])
+
+    seed_ids = {
+        a.id for a in impact.atoms_to_delete + impact.atoms_to_reconsolidate
+        if a.id is not None
+    }
+    derived_ids = atom_link_repo.reverse_derived_closure(session, seed_ids)
+    # 已在 delete/recon 集合中的不算「仅派生受影响」
+    direct_ids = seed_ids
+    for did in sorted(derived_ids - direct_ids):
+        atom = atom_by_id.get(did) or session.get(Atom, did)
+        if atom is not None:
+            atom_by_id[atom.id] = atom
+            impact.atoms_derived_affected.append(atom)
     return impact
 
 
@@ -87,6 +107,7 @@ def execute(session: Session, space: Space, ref: dict, llm: ChatLLM) -> dict:
             "deleted_sources": 0,
             "deleted_atoms": [],
             "reconsolidated_atoms": [],
+            "derived_affected_atoms": [],
             "run_id": None,
         }
 
@@ -102,13 +123,18 @@ def execute(session: Session, space: Space, ref: dict, llm: ChatLLM) -> dict:
     _apply(session, run, impact, rewrites)
     deleted = [a.key for a in impact.atoms_to_delete]
     recon = [a.key for a in impact.atoms_to_reconsolidate]
+    derived = [a.key for a in impact.atoms_derived_affected]
     run_repo.finish(
-        session, run, RunStatus.succeeded, atoms_touched=deleted + recon
+        session,
+        run,
+        RunStatus.succeeded,
+        atoms_touched=deleted + recon + derived,
     )
     return {
         "deleted_sources": len(impact.sources),
         "deleted_atoms": deleted,
         "reconsolidated_atoms": recon,
+        "derived_affected_atoms": derived,
         "run_id": run.id,
     }
 
@@ -137,6 +163,18 @@ def _redact_all(
     return rewrites
 
 
+def _stale_derived(session: Session, atom: Atom) -> None:
+    """派生 atom 失效：降置信度 + 清向量。"""
+    if atom.confidence is not None:
+        atom.confidence = min(float(atom.confidence), 0.3) * 0.5
+    else:
+        atom.confidence = 0.2
+    atom.updated_at = utcnow()
+    if atom.id is not None:
+        embedding_repo.invalidate_for_atom(session, atom.id)
+        session.add(atom)
+
+
 def _apply(
     session: Session,
     run: ConsolidationRun,
@@ -149,6 +187,9 @@ def _apply(
         session.delete(ev)
 
     for atom in impact.atoms_to_delete:
+        if atom.id is not None:
+            atom_link_repo.delete_for_atom(session, atom.id)
+            embedding_repo.invalidate_for_atom(session, atom.id)
         for rev in session.exec(
             select(AtomRevision).where(AtomRevision.atom_id == atom.id)
         ).all():
@@ -162,6 +203,8 @@ def _apply(
         if rewrite.get("confidence") is not None:
             atom.confidence = rewrite["confidence"]
         atom.updated_at = utcnow()
+        if atom.id is not None:
+            embedding_repo.invalidate_for_atom(session, atom.id)
         rev = revision_repo.add(
             session,
             atom,
@@ -172,6 +215,9 @@ def _apply(
         evidence_repo.add_many(
             session, rev.id, sorted(impact.remaining_by_atom[atom.id])
         )
+
+    for atom in impact.atoms_derived_affected:
+        _stale_derived(session, atom)
 
     for source in impact.sources:
         session.delete(source)

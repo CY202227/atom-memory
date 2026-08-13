@@ -38,12 +38,14 @@ class DeleteBySourcePreview(BaseModel):
     matched_source_ids: list[int]
     atoms_to_delete: list[str]
     atoms_to_reconsolidate: list[str]
+    atoms_derived_affected: list[str] = []
 
 
 class DeleteBySourceResult(BaseModel):
     deleted_sources: int
     deleted_atoms: list[str]
     reconsolidated_atoms: list[str]
+    derived_affected_atoms: list[str] = []
     run_id: Optional[int] = None
 
 
@@ -81,14 +83,27 @@ class ConsolidateRequest(BaseModel):
     max_sources: Optional[int] = Field(default=None, ge=1, le=200)
 
 
+class SynthesizeRequest(BaseModel):
+    trigger: str = "synthesize"
+    max_read: int = Field(default=8, ge=2, le=20)
+
+
 class RecallRequest(BaseModel):
     query: str = Field(min_length=1)
-    method: Literal["fuzzy", "bm25", "llm"] = "bm25"
-    max_atoms: int = Field(default=5, ge=1, le=20)
-    budget_chars: int = Field(default=400, ge=40, le=4000)
+    method: Literal["fuzzy", "bm25", "llm", "all", "embedding", "hybrid"] = "bm25"
+    max_atoms: int = Field(default=5, ge=1, le=2000)
+    budget_chars: int = Field(default=400, ge=40, le=200000)
     include_recent_sources: bool = True
     # statement=仅断言（默认）；full=含 detail，仍受 budget
     detail: Literal["statement", "full"] = "statement"
+    # 0=不扩展（默认）；1=沿 about/derived_from 补一跳邻居
+    neighbor_hops: int = Field(default=0, ge=0, le=1)
+
+
+class AtomNeighborsResponse(BaseModel):
+    key: str
+    out: list[dict]
+    incoming: list[dict]
 
 
 class RecallHitOut(BaseModel):

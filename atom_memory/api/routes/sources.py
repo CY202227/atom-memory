@@ -61,11 +61,13 @@ def preview_delete_by_ref(
     impact = deletion.assess(session, space.id, payload.external_ref)
     keys_del = [a.key for a in impact.atoms_to_delete]
     keys_recon = [a.key for a in impact.atoms_to_reconsolidate]
+    keys_derived = [a.key for a in impact.atoms_derived_affected]
     return schemas.DeleteBySourcePreview(
         matched_sources=len(impact.sources),
         matched_source_ids=sorted(impact.source_ids),
         atoms_to_delete=keys_del,
         atoms_to_reconsolidate=keys_recon,
+        atoms_derived_affected=keys_derived,
     )
 
 
