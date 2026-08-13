@@ -25,5 +25,11 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.packages.find]
 include = ["atom_memory*"]
 
+[project.scripts]
+atommem-locomo = "atom_memory.eval.run_locomo:main"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+markers = [
+    "locomo: optional LoCoMo benchmark (set ATOMMEM_LOCOMO_PATH)",
+]

@@ -9,7 +9,7 @@ from sqlmodel import Session
 from ...db import get_session
 from ...models import Atom, AtomKind, AtomStatus, RevisionTrigger, Space, utcnow
 from ...recall import render_detail_block, truncate_source
-from ...repositories import atom_repo, evidence_repo, revision_repo
+from ...repositories import atom_link_repo, atom_repo, evidence_repo, revision_repo
 from .. import schemas
 from ..deps import get_space, require_api_key
 
@@ -118,6 +118,25 @@ def list_atoms(
         page=page,
         page_size=page_size,
         results=[a.model_dump(mode="json") for a in items],
+    )
+
+
+@router.get(
+    "/spaces/{space_uid}/atoms/{key}/neighbors",
+    response_model=schemas.AtomNeighborsResponse,
+)
+def atom_neighbors(
+    key: str,
+    space: Space = Depends(get_space),
+    session: Session = Depends(get_session),
+):
+    """出边/入边（about / derived_from / contradicts），供调试与导航。"""
+    atom = _get_atom_or_404(session, space, key)
+    grouped = atom_link_repo.neighbors(session, atom.id)
+    return schemas.AtomNeighborsResponse(
+        key=atom.key,
+        out=grouped.get("out") or [],
+        incoming=grouped.get("in") or [],
     )
 
 

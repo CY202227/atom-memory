@@ -10,6 +10,7 @@ from sqlmodel import Session
 from ..config import settings
 from ..consolidation.engine import ConsolidationEngine
 from ..db import get_session
+from ..embedding import OpenAICompatEmbedder
 from ..llm import ChatLLM, OpenAICompatLLM
 from ..models import Space
 from ..recall import Bm25Recall, FuzzyRecall, LlmRecall, RecallStrategy
@@ -27,6 +28,22 @@ def get_llm() -> ChatLLM:
         api_key=settings.llm_api_key,
         model=settings.llm_model,
         timeout=settings.llm_timeout_seconds,
+        trust_env=settings.llm_trust_env,
+        extra_body=settings.llm_extra_body,
+    )
+
+
+def get_embedder() -> OpenAICompatEmbedder | None:
+    base = (settings.embedder_api_base or "").strip()
+    model = (settings.embedder_model or "").strip()
+    if not base or not model:
+        return None
+    return OpenAICompatEmbedder(
+        api_base=base,
+        api_key=settings.embedder_api_key or "EMPTY",
+        model=model,
+        timeout=settings.embedder_timeout_seconds,
+        trust_env=settings.embedder_trust_env,
     )
 
 
@@ -41,11 +58,49 @@ def get_space(space_uid: str, session: Session = Depends(get_session)) -> Space:
     return space
 
 
-def build_recall_strategy(method: str, llm: ChatLLM) -> RecallStrategy:
+def build_recall_strategy(
+    method: str,
+    llm: ChatLLM,
+    *,
+    session: Session | None = None,
+    embedder: OpenAICompatEmbedder | None = None,
+) -> RecallStrategy:
     if method == "fuzzy":
         return FuzzyRecall()
     if method == "bm25":
         return Bm25Recall()
     if method == "llm":
         return LlmRecall(llm)
+    if method == "all":
+        from ..recall.all import AllRecall
+
+        return AllRecall()
+    if method in ("embedding", "hybrid"):
+        if embedder is None:
+            raise HTTPException(
+                status_code=422,
+                detail=(
+                    "embedding/hybrid requires ATOMMEM_EMBEDDER_API_BASE "
+                    "and ATOMMEM_EMBEDDER_MODEL"
+                ),
+            )
+        if session is None:
+            raise HTTPException(
+                status_code=500,
+                detail="embedding/hybrid requires a DB session",
+            )
+        from ..recall.embedding import EmbeddingRecall
+        from ..recall.hybrid import HybridRRF
+
+        if method == "embedding":
+            return EmbeddingRecall(
+                session,
+                embedder,
+                embed_detail_chars=settings.embed_detail_chars,
+            )
+        return HybridRRF(
+            session,
+            embedder,
+            embed_detail_chars=settings.embed_detail_chars,
+        )
     raise HTTPException(status_code=422, detail=f"unknown recall method: {method}")

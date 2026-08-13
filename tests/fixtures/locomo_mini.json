@@ -1,0 +1,85 @@
+[
+  {
+    "sample_id": "mini-001",
+    "conversation": {
+      "speaker_a": "Caroline",
+      "speaker_b": "Melanie",
+      "session_1_date_time": "1:56 pm on 8 May, 2023",
+      "session_1": [
+        {
+          "speaker": "Caroline",
+          "dia_id": "D1:1",
+          "text": "Hey Mel! Good to see you! How have you been?"
+        },
+        {
+          "speaker": "Melanie",
+          "dia_id": "D1:2",
+          "text": "I am good! Just finished painting a sunrise last weekend."
+        },
+        {
+          "speaker": "Caroline",
+          "dia_id": "D1:3",
+          "text": "I went to a LGBTQ support group yesterday and it was so powerful. The date was 7 May 2023."
+        },
+        {
+          "speaker": "Melanie",
+          "dia_id": "D1:4",
+          "text": "That sounds meaningful. Are you still studying counseling?"
+        },
+        {
+          "speaker": "Caroline",
+          "dia_id": "D1:5",
+          "text": "Yes — I plan to pursue psychology and a counseling certification."
+        }
+      ],
+      "session_2_date_time": "3:10 pm on 20 May, 2023",
+      "session_2": [
+        {
+          "speaker": "Melanie",
+          "dia_id": "D2:1",
+          "text": "I adopted a tabby cat named Nori this week."
+        },
+        {
+          "speaker": "Caroline",
+          "dia_id": "D2:2",
+          "text": "Cute! My favorite cafe is still Bean Theory on 5th Avenue."
+        }
+      ]
+    },
+    "qa": [
+      {
+        "question": "When did Caroline go to the LGBTQ support group?",
+        "answer": "7 May 2023",
+        "evidence": ["D1:3"],
+        "category": 2
+      },
+      {
+        "question": "What did Melanie paint?",
+        "answer": "sunrise",
+        "evidence": ["D1:2"],
+        "category": 1
+      },
+      {
+        "question": "What fields would Caroline be likely to pursue in her education?",
+        "answer": "Psychology, counseling certification",
+        "evidence": ["D1:5"],
+        "category": 3
+      },
+      {
+        "question": "What is the name of Melanie's cat?",
+        "answer": "Nori",
+        "evidence": ["D2:1"],
+        "category": 1
+      },
+      {
+        "question": "What is Caroline's favorite cafe?",
+        "answer": "Bean Theory",
+        "evidence": ["D2:2"],
+        "category": 1
+      }
+    ],
+    "event_summary": {},
+    "observation": {},
+    "session_summary": {}
+  }
+]

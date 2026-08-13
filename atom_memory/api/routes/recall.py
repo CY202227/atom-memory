@@ -4,8 +4,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session
 
 from ...db import get_session
+from ...embedding import EmbedderError, OpenAICompatEmbedder
 from ...llm import ChatLLM
-from ...models import Space
+from ...models import AtomLinkKind, Space
 from ...recall import (
     clip_by_budget,
     fallback_hits,
@@ -17,11 +18,19 @@ from ...recall import (
 )
 from ...recall.base import RecallHit
 from ...recall.llm import RecallError
-from ...repositories import atom_repo, source_repo
+from ...repositories import atom_link_repo, atom_repo, source_repo
 from .. import schemas
-from ..deps import build_recall_strategy, get_llm, get_space, require_api_key
+from ..deps import (
+    build_recall_strategy,
+    get_embedder,
+    get_llm,
+    get_space,
+    require_api_key,
+)
 
 router = APIRouter(dependencies=[Depends(require_api_key)])
+
+_NEIGHBOR_SCORE_FACTOR = 0.5
 
 
 def _hit_cost(h: RecallHit, detail: str) -> int:
@@ -30,19 +39,78 @@ def _hit_cost(h: RecallHit, detail: str) -> int:
     return len(h.atom.statement)
 
 
+def _apply_derived_confidence_penalty(
+    session: Session, space_id: int, hits: list[RecallHit]
+) -> list[RecallHit]:
+    """派生 atom 的 score × confidence，同等相关度下事实优先。"""
+    derived_ids = atom_link_repo.derived_atom_ids(session, space_id)
+    if not derived_ids:
+        return hits
+    out: list[RecallHit] = []
+    for h in hits:
+        if h.atom.id in derived_ids and h.score is not None:
+            conf = h.atom.confidence if h.atom.confidence is not None else 0.5
+            out.append(
+                RecallHit(atom=h.atom, score=round(float(h.score) * float(conf), 6))
+            )
+        else:
+            out.append(h)
+    out.sort(key=lambda x: x.score or 0.0, reverse=True)
+    return out
+
+
+def _expand_neighbors(
+    session: Session,
+    hits: list[RecallHit],
+    *,
+    max_atoms: int,
+) -> list[RecallHit]:
+    """主命中后沿 about/derived_from 补一跳邻居（score×0.5）。"""
+    if not hits or len(hits) >= max_atoms:
+        return hits[:max_atoms]
+    seed_ids = [h.atom.id for h in hits if h.atom.id is not None]
+    peers = atom_link_repo.neighbor_atoms(
+        session,
+        seed_ids,
+        kinds=[AtomLinkKind.about, AtomLinkKind.derived_from],
+    )
+    have = {h.atom.key for h in hits}
+    extras: list[RecallHit] = []
+    for atom in peers:
+        if atom.key in have:
+            continue
+        # 邻居 score：取主命中最低分 × factor（无分则 0.5）
+        base = min((h.score for h in hits if h.score is not None), default=1.0)
+        extras.append(
+            RecallHit(
+                atom=atom,
+                score=round(float(base) * _NEIGHBOR_SCORE_FACTOR, 6),
+            )
+        )
+        have.add(atom.key)
+        if len(hits) + len(extras) >= max_atoms:
+            break
+    return (hits + extras)[:max_atoms]
+
+
 @router.post("/spaces/{space_uid}/recall", response_model=schemas.RecallResponse)
 def recall(
     payload: schemas.RecallRequest,
     space: Space = Depends(get_space),
     session: Session = Depends(get_session),
     llm: ChatLLM = Depends(get_llm),
+    embedder: OpenAICompatEmbedder | None = Depends(get_embedder),
 ):
     atoms = atom_repo.list_active(session, space.id)
-    strategy = build_recall_strategy(payload.method, llm)
+    strategy = build_recall_strategy(
+        payload.method, llm, session=session, embedder=embedder
+    )
     try:
         outcome = strategy.retrieve(atoms, payload.query, payload.max_atoms)
     except RecallError as e:
         raise HTTPException(status_code=502, detail=f"recall LLM failed: {e}")
+    except EmbedderError as e:
+        raise HTTPException(status_code=502, detail=f"recall embedder failed: {e}")
 
     hits_raw = list(outcome.hits)
     need_fallback = (not hits_raw or is_inventory_query(payload.query)) and atoms
@@ -58,6 +126,13 @@ def recall(
         else:
             hits_raw.extend(fill)
         hits_raw = hits_raw[: payload.max_atoms]
+
+    hits_raw = _apply_derived_confidence_penalty(session, space.id, hits_raw)
+
+    if payload.neighbor_hops >= 1:
+        hits_raw = _expand_neighbors(
+            session, hits_raw, max_atoms=payload.max_atoms
+        )
 
     pre_budget = list(hits_raw)
     hits = clip_by_budget(hits_raw, payload.budget_chars)

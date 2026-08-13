@@ -220,3 +220,6 @@ __marimo__/
 # Project specific
 *.db
 logs/
+
+# Local reference clones (not part of the product)
+reference/

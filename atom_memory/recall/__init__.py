@@ -1,9 +1,12 @@
 """召回策略包。"""
 
 from .base import RecallHit, RecallOutcome, RecallStrategy
+from .all import AllRecall
 from .bm25 import Bm25Recall
+from .embedding import EmbeddingRecall
 from .fallback import fallback_hits, is_inventory_query
 from .fuzzy import FuzzyRecall
+from .hybrid import HybridRRF
 from .llm import LlmRecall
 from .render import (
     clip_by_budget,
@@ -15,7 +18,7 @@ from .render import (
     truncate_source,
 )
 
-METHODS = ("fuzzy", "bm25", "llm")
+METHODS = ("fuzzy", "bm25", "llm", "all", "embedding", "hybrid")
 
 __all__ = [
     "RecallHit",
@@ -23,7 +26,10 @@ __all__ = [
     "RecallStrategy",
     "FuzzyRecall",
     "Bm25Recall",
+    "EmbeddingRecall",
+    "HybridRRF",
     "LlmRecall",
+    "AllRecall",
     "is_inventory_query",
     "fallback_hits",
     "render_statement_block",

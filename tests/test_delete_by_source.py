@@ -169,5 +169,6 @@ def test_execute_no_match_is_noop(client, fake_llm):
         "deleted_sources": 0,
         "deleted_atoms": [],
         "reconsolidated_atoms": [],
+        "derived_affected_atoms": [],
         "run_id": None,
     }
