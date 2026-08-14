@@ -33,11 +33,19 @@ from ...llm import ChatLLM
 from ...llm.base import LLMError
 from ...llm.openai_compat import OpenAICompatLLM
 from ...locks import space_write_lock
+from ...memory_layers import sticky_l3_atoms
 from ...models import AtomKind, AtomStatus, SourceKind, SourceStatus
-from ...recall import clip_by_budget, fallback_hits, is_inventory_query, render_statement_block
-from ...recall.base import RecallHit
+from ...recall import (
+    clip_by_budget,
+    fallback_hits,
+    is_inventory_query,
+    layered_retrieve,
+    partition_by_layer,
+    render_statement_block,
+)
+from ...recall.base import RecallHit, RecallOutcome
 from ...recall.llm import RecallError
-from ...repositories import atom_repo, source_repo, space_repo
+from ...repositories import atom_link_repo, atom_repo, source_repo, space_repo
 from ..deps import (
     build_recall_strategy,
     get_engine,
@@ -49,17 +57,13 @@ router = APIRouter(tags=["chat-demo"])
 
 _CHAT_HTML = Path(__file__).resolve().parent.parent.parent / "web" / "chat.html"
 
-_CORE_KINDS = frozenset({AtomKind.self})
-_CORE_MAX = 2
-# 称呼偏好：BM25 对「我是谁」几乎必空，必须常驻
-_STICKY_KEYS = frozenset({"user-preferred-name"})
 # 仅身份问句（清单式问句走 is_inventory_query，避免与 fallback 正则双份）
 _IDENTITY_QUERY_RE = re.compile(
     r"(我是谁|我叫什么|叫我什么|我的名字|你还记得我|记得我吗|"
     r"who am i|what('s| is) my name|do you remember me)",
     re.IGNORECASE,
 )
-# 与 API 默认对齐，不另起一套
+# 与 API 默认对齐，不另起一套（分层 sticky 由 recall.layered 负责）
 _RECALL_BUDGET = 400
 _RECALL_MAX = 5
 _EXPAND_BUDGET = 1200
@@ -680,56 +684,55 @@ def _retrieve_hits(
 def _light_auto_recall(
     space_uid: str, method: str, query: str, llm: ChatLLM
 ) -> dict[str, Any]:
-    """self + 称呼 sticky；BM25/语义检索补其余；身份问句强制语义。"""
+    """走核心 layered 召回（L3 sticky + L2 + L1）；身份问句强制语义补洞。"""
     with Session(db_engine) as session:
         space = space_repo.get_by_uid(session, space_uid)
         if space is None:
             raise HTTPException(404, "space not found")
         atoms = atom_repo.list_active(session, space.id)
-        by_key = {a.key: a for a in atoms}
-
-        core: list[RecallHit] = []
-        for key in _STICKY_KEYS:
-            atom = by_key.get(key)
-            if atom is not None:
-                core.append(RecallHit(atom=atom, score=None))
-        self_core = [
-            RecallHit(atom=a, score=None)
-            for a in atoms
-            if a.kind in _CORE_KINDS and a.key not in _STICKY_KEYS
-        ][:_CORE_MAX]
-        core.extend(self_core)
-        core_keys = [h.atom.key for h in core]
-        have = set(core_keys)
+        derived_ids = atom_link_repo.derived_atom_ids(session, space.id)
+        l1_atoms, _l2, _l3 = partition_by_layer(
+            atoms, derived_ids=derived_ids
+        )
+        core_keys = [a.key for a in sticky_l3_atoms(atoms, limit=2)]
 
         force_semantic = bool(_IDENTITY_QUERY_RE.search(query or ""))
         inventory = is_inventory_query(query) or force_semantic
-        # 身份问句且称呼未在 sticky（尚未固化）时也走语义
+        pool = l1_atoms if l1_atoms else atoms
         hits_raw, semantic_fallback, recall_error = _retrieve_hits(
-            atoms,
+            pool,
             method,
             query,
             llm,
             force_semantic=force_semantic,
         )
         if (inventory or not hits_raw) and atoms:
-            exclude = have | {h.atom.key for h in hits_raw}
-            fill_n = max(0, _RECALL_MAX - len(have) - len(hits_raw))
-            if inventory and not hits_raw:
-                fill_n = max(fill_n, _RECALL_MAX - len(have))
+            exclude = {h.atom.key for h in hits_raw}
+            fill_n = max(0, _RECALL_MAX - len(hits_raw))
             hits_raw = list(hits_raw) + fallback_hits(
                 atoms, exclude_keys=exclude, limit=fill_n
             )
-        extra = [h for h in hits_raw if h.atom.key not in have]
-        merged = _dedupe_hits(core + extra)
-        merged = clip_by_budget(merged, budget_chars=_RECALL_BUDGET)[:_RECALL_MAX]
+        outcome = RecallOutcome(hits=hits_raw)
+        merged = layered_retrieve(
+            atoms,
+            query,
+            strategy_outcome=outcome,
+            max_atoms=_RECALL_MAX,
+            derived_ids=derived_ids,
+        )
+        merged = _dedupe_hits(merged)
+        merged = clip_by_budget(merged, budget_chars=_RECALL_BUDGET)[
+            :_RECALL_MAX
+        ]
+        core_set = set(core_keys)
         auto_hits = [
             {
                 "key": h.atom.key,
                 "kind": h.atom.kind.value,
                 "statement": h.atom.statement,
                 "score": h.score,
-                "core": h.atom.key in have,
+                "core": h.atom.key in core_set,
+                "memory_layer": int(h.atom.memory_layer or 1),
             }
             for h in merged
         ]

@@ -5,6 +5,22 @@ atom-memory 不耦合任何上游产品。身份用 space uid 隔离。
 **Atom-first：** 固化产物是短 `statement` 原子。分类字段只用 **`kind`**（不用 type）。
 标识只用 **`key`**（不用 slug）。断言只用 **`statement`**（不用 hook）。
 
+## 0. 记忆分层（L0–L3）
+
+Chat Memory 采用与业界分层叙事对齐的四层结构（设计参考
+[TencentDB Agent Memory](https://github.com/TencentCloud/TencentDB-Agent-Memory/blob/feat/server_team/README_CN.md)
+的 L0→L3；**实现独立，不含 Skill/Wiki/CodeGraph/Hub**）。
+
+| 层 | 业界说法 | atom-memory 落点 | 写入 | 召回角色 |
+|---|---|---|---|---|
+| L0 | Conversation | `source`（不可变原料） | ingest | 默认不注入；`expand` / evidence 下钻 |
+| L1 | Atom | `atom.memory_layer=1` | `POST /consolidate` | 精确事实补洞（BM25/hybrid） |
+| L2 | Scenario | `atom.memory_layer=2` | `POST /synthesize` | 场景综合块（少而稠） |
+| L3 | Persona | `atom.memory_layer=3` | `POST /persona` | sticky 优先占预算 |
+
+回填/读时推断：`derived_from` 出边 → L2；`kind=self` 或 key ∈
+`{persona, user-preferred-name}` → L3；其余 → L1。
+
 ## 1. 输入规范（ingest source）
 
 `POST /spaces/{uid}/sources`：
@@ -34,7 +50,8 @@ atom-memory 不耦合任何上游产品。身份用 space uid 隔离。
   "budget_chars": 400,
   "include_recent_sources": true,
   "detail": "statement",
-  "neighbor_hops": 0
+  "neighbor_hops": 0,
+  "policy": "layered"
 }
 ```
 
@@ -43,12 +60,18 @@ atom-memory 不耦合任何上游产品。身份用 space uid 隔离。
 | `statement`（默认） | 只注入 statement |
 | `full` | statement + detail，仍受 `budget_chars` |
 
+| `policy` | 行为 |
+|---|---|
+| `layered`（默认） | L3 sticky（≤2）→ L2 相关（≤2）→ L1 检索填满；仍受 `max_atoms` / 预算 |
+| `flat` | 旧平铺检索（对照/评测） |
+
 | `neighbor_hops` | 行为 |
 |---|---|
-| `0`（默认） | 不扩展邻居（Velora 默认不变） |
+| `0`（默认） | 不扩展邻居 |
 | `1` | 主命中后沿 `about` / `derived_from` 补一跳邻居（score×0.5），仍受 `max_atoms` / 预算约束 |
 
 派生 atom（有 `derived_from` 出边）召回时 score 再乘以其 `confidence`，同等相关度下事实优先于推论。
+命中可含 `memory_layer`。
 
 30B 级上下文建议：`detail=statement`，`budget_chars` 日常 **200–400**；不够再
 `POST …/atoms/expand`。勿默认 `detail=full`。
@@ -67,7 +90,8 @@ person/event/lesson/self，仍受 `max_atoms` / `budget_chars` 约束。
 `include_recent_sources`（默认 true）：pending 且 salience≥0.5 的近期 source 拼进
 `<recent_sources>`。
 
-命中字段：`key` / `kind` / `statement` / `score` / `happened_on`；（`full` 时另有 `detail`）
+命中字段：`key` / `kind` / `statement` / `score` / `happened_on` / `memory_layer`；
+（`full` 时另有 `detail`）
 
 ```xml
 <recalled_memory>
@@ -103,30 +127,38 @@ person/event/lesson/self，仍受 `max_atoms` / `budget_chars` 约束。
 固化 op 可带可选 `links: [{"to":"existing-key","kind":"about"}]`；`to` 必须已存在，非法 key 静默丢弃。  
 派生 atom 的 evidence 仍写底层 source 并集；`derived_from` 补「为何会变」与递归传播。
 
-## 3. 固化与综合
+## 3. 固化 / 综合 / 画像
 
 `POST /spaces/{uid}/consolidate`：`{"trigger":"manual"}` 或 `{}`  
+产物默认 `memory_layer=1`（L1）；canonical `persona` / `user-preferred-name` 为 L3。  
 响应含 `atoms_touched`。
 
 pending 按 `salience` 降序、同 salience 按时间升序入批。  
 本批 ops 未 cite 的 source：低 salience 可标 `skipped`（遗忘是功能）；
 `kind=correction` 或 `salience≥0.8` 未消费则仍 `pending`，下次 consolidate 优先入批。
 
-`POST /spaces/{uid}/synthesize`：从已有 atom 归纳更高层认识（独立触发，宜 cron）。  
-每条综合须 `derived_from` ≥2、`confidence` 必填且服务端压到 ≤0.8；禁止引入父 atom 之外的新事实。
+`POST /spaces/{uid}/synthesize`：从已有 atom 归纳场景认识（**L2**，独立触发，宜 cron）。  
+每条综合须 `derived_from` ≥2、`confidence` 必填且服务端压到 ≤0.8；禁止引入父 atom 之外的新事实；
+写入 `memory_layer=2`。
+
+`POST /spaces/{uid}/persona`：收敛稳定画像（**L3**，独立触发，宜 cron）。  
+key 收敛到 `persona` / `user-preferred-name`；LLM 失败时仅把已有 canonical / self 标为 L3。
 
 ## 4. 典型循环
 
 ```python
-r = post(f"/spaces/{uid}/recall", json={"query": user_input, "method": "bm25"})
+r = post(f"/spaces/{uid}/recall", json={
+    "query": user_input, "method": "bm25", "policy": "layered",
+})
 if r["context_block"]:
     prompt = r["context_block"] + "\n\n" + user_input
 post(f"/spaces/{uid}/sources", json={"kind": "turn", "content": "...", "salience": 0.2})
 # 纠正后：
 post(.../sources, json={"kind": "correction", "content": "...", "salience": 0.9})
 post(.../consolidate, json={"trigger": "correction"})
-# 定时综合（可选）：
+# 定时：L2 场景综合 + L3 画像收敛
 post(.../synthesize, json={})
+post(.../persona, json={})
 ```
 
 ## 5. 按来源删除

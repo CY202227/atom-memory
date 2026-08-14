@@ -34,6 +34,7 @@ from ..repositories import (
     run_repo,
     source_repo,
 )
+from ..memory_layers import default_layer_for_write
 from ..temporal import append_time_facts_to_detail
 from . import prompts
 from .canonical import apply_canonical_to_op
@@ -286,6 +287,12 @@ class ConsolidationEngine:
         confidence = op.get("confidence")
         atom_kind = AtomKind(op.get("kind") or AtomKind.belief.value)
         was_update = atom is not None
+        # consolidate → L1；persona/self canonical → L3；op 可显式指定
+        layer = default_layer_for_write(
+            key=key,
+            kind=atom_kind,
+            explicit=op.get("memory_layer"),
+        )
 
         if atom is None:
             atom = Atom(
@@ -296,6 +303,7 @@ class ConsolidationEngine:
                 detail=detail,
                 happened_on=happened_on,
                 confidence=confidence,
+                memory_layer=layer,
             )
             session.add(atom)
             session.flush()
@@ -307,6 +315,9 @@ class ConsolidationEngine:
             atom.happened_on = happened_on
             if confidence is not None:
                 atom.confidence = confidence
+            # 不把已有 L2/L3 降回 L1（综合/画像产物）
+            if atom.memory_layer not in (2, 3) or layer == 3:
+                atom.memory_layer = layer
             atom.status = AtomStatus.active
             atom.updated_at = utcnow()
             reason = reason or "更新"

@@ -81,6 +81,7 @@ def _atom_detail(
         detail=atom.detail,
         happened_on=atom.happened_on,
         confidence=atom.confidence,
+        memory_layer=int(atom.memory_layer or 1),
         status=atom.status,
         schema_version=atom.schema_version,
         created_at=atom.created_at,

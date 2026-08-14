@@ -121,6 +121,34 @@ SYNTHESIZE_SELECT_SYSTEM = """\
 只输出：{"read": ["key-1", "key-2"]}。没有就 {"read": []}。
 """
 
+PERSONA_SYSTEM = """\
+你是一个数字人的画像收敛器（L3 Persona）。你只阅读已有原子，产出稳定长期画像。
+
+## 硬规则
+
+1. 最多 2 条 upsert：key 只能是 `persona`（kind=self）或 `user-preferred-name`（kind=person）。
+2. **禁止引入 derived_from / 已有 atom 之外的新事实**；只收敛、改写稳定表述。
+3. statement≤80 字，detail≤300 字；confidence 0.7~1.0。
+4. 若有依据，derived_from 填父 atom key；没有可推的稳定画像则返回空列表。
+
+## 输出格式
+
+只输出一个 JSON 对象：
+
+{"operations": [
+  {"op": "upsert",
+   "kind": "self|person",
+   "key": "persona|user-preferred-name",
+   "statement": "≤80 字",
+   "detail": "≤300 字",
+   "confidence": 0.7~1.0,
+   "change_reason": "...",
+   "derived_from": ["key-a", "key-b"]}
+]}
+
+没有值得收敛的就 {"operations": []}。
+"""
+
 CONSOLIDATE_SELECT_SYSTEM = """\
 你是一个数字人的记忆固化器。改写前先决定要读哪些已有原子的 detail。
 

@@ -7,6 +7,7 @@ from .embedding import EmbeddingRecall
 from .fallback import fallback_hits, is_inventory_query
 from .fuzzy import FuzzyRecall
 from .hybrid import HybridRRF
+from .layered import compose_layered, layered_retrieve, partition_by_layer
 from .llm import LlmRecall
 from .render import (
     clip_by_budget,
@@ -30,6 +31,9 @@ __all__ = [
     "HybridRRF",
     "LlmRecall",
     "AllRecall",
+    "compose_layered",
+    "layered_retrieve",
+    "partition_by_layer",
     "is_inventory_query",
     "fallback_hits",
     "render_statement_block",

@@ -1,4 +1,4 @@
-from sqlalchemy import event
+from sqlalchemy import event, text
 from sqlmodel import Session, SQLModel, create_engine
 
 from .config import settings
@@ -17,8 +17,27 @@ if _is_sqlite:
         cursor.close()
 
 
+def _ensure_atom_memory_layer_column() -> None:
+    """存量 SQLite：create_all 不 ALTER，补 memory_layer 列。"""
+    if not _is_sqlite:
+        return
+    with engine.begin() as conn:
+        rows = conn.execute(text("PRAGMA table_info(atom)")).fetchall()
+        if not rows:
+            return
+        names = {r[1] for r in rows}
+        if "memory_layer" not in names:
+            conn.execute(
+                text(
+                    "ALTER TABLE atom ADD COLUMN memory_layer "
+                    "INTEGER NOT NULL DEFAULT 1"
+                )
+            )
+
+
 def init_db() -> None:
     SQLModel.metadata.create_all(engine)
+    _ensure_atom_memory_layer_column()
 
 
 def get_session():

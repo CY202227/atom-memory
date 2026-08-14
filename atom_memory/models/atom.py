@@ -39,6 +39,8 @@ class Atom(SQLModel, table=True):
     detail: str = Field(default="", sa_column=Column(Text, nullable=False))
     happened_on: Optional[date] = None
     confidence: Optional[float] = Field(default=None)
+    # L1=事实原子 L2=场景综合 L3=稳定画像；L0 是 source，不在本表
+    memory_layer: int = Field(default=1, index=True)
     status: AtomStatus = Field(default=AtomStatus.active, index=True)
     schema_version: int = Field(default=SCHEMA_VERSION)
     created_at: datetime = Field(default_factory=utcnow)
