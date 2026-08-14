@@ -1,0 +1,119 @@
+[
+  {
+    "sample_id": "persona-001",
+    "persona_id": "p01",
+    "conversation": {
+      "session_1": [
+        {
+          "speaker": "User",
+          "text": "I always drink dark roast coffee without sugar every morning."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Got it — dark roast, no sugar for mornings."
+        },
+        {
+          "speaker": "User",
+          "text": "Also please never call me by my full name; use Alex."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Sure, I'll call you Alex."
+        }
+      ],
+      "session_2": [
+        {
+          "speaker": "User",
+          "text": "I prefer hiking national parks over theme parks on weekends."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Noted — outdoors and national parks."
+        }
+      ]
+    },
+    "qa": [
+      {
+        "question": "Which coffee option best matches the user's preference?",
+        "answer": "Dark roast without sugar",
+        "options": [
+          "A) Light roast with cream",
+          "B) Dark roast without sugar",
+          "C) Iced latte with syrup"
+        ],
+        "correct_option": "B",
+        "category": "preference"
+      },
+      {
+        "question": "What name should the assistant use for the user?",
+        "answer": "Alex",
+        "options": [
+          "A) Alexander",
+          "B) Alex",
+          "C) Mr. Smith"
+        ],
+        "correct_option": "B",
+        "category": "persona"
+      },
+      {
+        "question": "Does the user prefer national parks or theme parks?",
+        "answer": "national parks",
+        "options": [
+          "A) Theme parks",
+          "B) National parks",
+          "C) Shopping malls"
+        ],
+        "correct_option": "B",
+        "category": "preference"
+      }
+    ]
+  },
+  {
+    "sample_id": "persona-002",
+    "persona_id": "p02",
+    "conversation": {
+      "session_1": [
+        {
+          "speaker": "User",
+          "text": "I'm vegetarian and avoid dairy when possible."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "I'll keep meal suggestions vegetarian and low-dairy."
+        },
+        {
+          "speaker": "User",
+          "text": "For coding help, I want concise answers with Python examples."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Concise Python examples it is."
+        }
+      ]
+    },
+    "qa": [
+      {
+        "question": "Which restaurant suggestion fits the user best?",
+        "answer": "A vegan cafe with oat milk options",
+        "options": [
+          "A) Steakhouse tasting menu",
+          "B) A vegan cafe with oat milk options",
+          "C) Seafood buffet"
+        ],
+        "correct_option": "B",
+        "category": "preference"
+      },
+      {
+        "question": "What language examples does the user prefer for coding help?",
+        "answer": "Python",
+        "options": [
+          "A) Java",
+          "B) Python",
+          "C) Ruby"
+        ],
+        "correct_option": "B",
+        "category": "preference"
+      }
+    ]
+  }
+]

@@ -17,6 +17,7 @@ from ...recall import (
     render_statement_block,
 )
 from ...recall.base import RecallHit
+from ...recall.layered import layered_retrieve, partition_by_layer
 from ...recall.llm import RecallError
 from ...repositories import atom_link_repo, atom_repo, source_repo
 from .. import schemas
@@ -79,7 +80,6 @@ def _expand_neighbors(
     for atom in peers:
         if atom.key in have:
             continue
-        # 邻居 score：取主命中最低分 × factor（无分则 0.5）
         base = min((h.score for h in hits if h.score is not None), default=1.0)
         extras.append(
             RecallHit(
@@ -93,6 +93,18 @@ def _expand_neighbors(
     return (hits + extras)[:max_atoms]
 
 
+def _hit_out(h: RecallHit, *, detail: str) -> schemas.RecallHitOut:
+    return schemas.RecallHitOut(
+        key=h.atom.key,
+        kind=h.atom.kind,
+        statement=h.atom.statement,
+        score=h.score,
+        happened_on=h.atom.happened_on,
+        detail=h.atom.detail if detail == "full" else None,
+        memory_layer=int(h.atom.memory_layer or 1),
+    )
+
+
 @router.post("/spaces/{space_uid}/recall", response_model=schemas.RecallResponse)
 def recall(
     payload: schemas.RecallRequest,
@@ -102,11 +114,24 @@ def recall(
     embedder: OpenAICompatEmbedder | None = Depends(get_embedder),
 ):
     atoms = atom_repo.list_active(session, space.id)
+    derived_ids = atom_link_repo.derived_atom_ids(session, space.id)
     strategy = build_recall_strategy(
         payload.method, llm, session=session, embedder=embedder
     )
+
+    # layered：主检索在 L1 子集上；flat：全量
+    if payload.policy == "layered":
+        l1_atoms, _l2, _l3 = partition_by_layer(
+            atoms, derived_ids=derived_ids
+        )
+        retrieve_pool = l1_atoms if l1_atoms else atoms
+    else:
+        retrieve_pool = atoms
+
     try:
-        outcome = strategy.retrieve(atoms, payload.query, payload.max_atoms)
+        outcome = strategy.retrieve(
+            retrieve_pool, payload.query, payload.max_atoms
+        )
     except RecallError as e:
         raise HTTPException(status_code=502, detail=f"recall LLM failed: {e}")
     except EmbedderError as e:
@@ -126,6 +151,18 @@ def recall(
         else:
             hits_raw.extend(fill)
         hits_raw = hits_raw[: payload.max_atoms]
+        outcome.hits = hits_raw
+
+    if payload.policy == "layered":
+        hits_raw = layered_retrieve(
+            atoms,
+            payload.query,
+            strategy_outcome=outcome,
+            max_atoms=payload.max_atoms,
+            derived_ids=derived_ids,
+        )
+    else:
+        hits_raw = list(outcome.hits)
 
     hits_raw = _apply_derived_confidence_penalty(session, space.id, hits_raw)
 
@@ -154,31 +191,11 @@ def recall(
         hits = kept
         chars_used = used
         block = render_detail_block([h.atom for h in hits])
-        hit_out = [
-            schemas.RecallHitOut(
-                key=h.atom.key,
-                kind=h.atom.kind,
-                statement=h.atom.statement,
-                score=h.score,
-                happened_on=h.atom.happened_on,
-                detail=h.atom.detail,
-            )
-            for h in hits
-        ]
     else:
         chars_used = sum(_hit_cost(h, "statement") for h in hits)
         block = render_statement_block(hits)
-        hit_out = [
-            schemas.RecallHitOut(
-                key=h.atom.key,
-                kind=h.atom.kind,
-                statement=h.atom.statement,
-                score=h.score,
-                happened_on=h.atom.happened_on,
-            )
-            for h in hits
-        ]
 
+    hit_out = [_hit_out(h, detail=payload.detail) for h in hits]
     atoms_clipped = max(0, len(pre_budget) - len(hits))
 
     return schemas.RecallResponse(

@@ -8,7 +8,8 @@ from datetime import datetime, timezone
 
 # v2: page 长文 → atom（statement/detail）；去掉 page_link
 # v3: 重新引入类型化 atom_link（derived_from / about / contradicts）
-SCHEMA_VERSION = 3
+# v4: atom.memory_layer（L1/L2/L3；L0 仍为 source）
+SCHEMA_VERSION = 4
 
 
 def utcnow() -> datetime:

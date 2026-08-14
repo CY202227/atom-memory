@@ -58,6 +58,7 @@ class AtomDetail(BaseModel):
     detail: str
     happened_on: Optional[date] = None
     confidence: Optional[float] = None
+    memory_layer: int = 1
     status: AtomStatus
     schema_version: int
     created_at: datetime
@@ -88,6 +89,11 @@ class SynthesizeRequest(BaseModel):
     max_read: int = Field(default=8, ge=2, le=20)
 
 
+class PersonaRequest(BaseModel):
+    trigger: str = "persona"
+    max_read: int = Field(default=12, ge=1, le=30)
+
+
 class RecallRequest(BaseModel):
     query: str = Field(min_length=1)
     method: Literal["fuzzy", "bm25", "llm", "all", "embedding", "hybrid"] = "bm25"
@@ -98,6 +104,8 @@ class RecallRequest(BaseModel):
     detail: Literal["statement", "full"] = "statement"
     # 0=不扩展（默认）；1=沿 about/derived_from 补一跳邻居
     neighbor_hops: int = Field(default=0, ge=0, le=1)
+    # layered=L3 sticky + L2 + L1（默认）；flat=旧平铺检索
+    policy: Literal["layered", "flat"] = "layered"
 
 
 class AtomNeighborsResponse(BaseModel):
@@ -113,6 +121,7 @@ class RecallHitOut(BaseModel):
     score: Optional[float] = None
     happened_on: Optional[date] = None
     detail: Optional[str] = None  # 仅 detail=full 时填充
+    memory_layer: Optional[int] = None
 
 
 class RecallResponse(BaseModel):

@@ -9,6 +9,7 @@ from sqlmodel import Session
 
 from ...config import settings
 from ...consolidation.engine import ConsolidationEngine
+from ...consolidation.persona import PersonaEngine
 from ...consolidation.synthesis import SynthesisEngine
 from ...db import get_session
 from ...llm import ChatLLM
@@ -45,8 +46,26 @@ def synthesize(
     session: Session = Depends(get_session),
     llm: ChatLLM = Depends(get_llm),
 ):
-    """从已有 atom 归纳更高层认识；独立于 consolidate，宜定时触发。"""
+    """从已有 atom 归纳更高层认识（L2）；独立于 consolidate，宜定时触发。"""
     engine = SynthesisEngine(llm)
+    with space_write_lock(space.id):
+        return engine.run(
+            session,
+            space,
+            trigger=payload.trigger,
+            max_read=payload.max_read,
+        )
+
+
+@router.post("/spaces/{space_uid}/persona", response_model=ConsolidationRun)
+def persona(
+    payload: schemas.PersonaRequest,
+    space: Space = Depends(get_space),
+    session: Session = Depends(get_session),
+    llm: ChatLLM = Depends(get_llm),
+):
+    """收敛稳定画像（L3）；独立触发，宜 cron。LLM 失败时仅标注已有 canonical。"""
+    engine = PersonaEngine(llm)
     with space_write_lock(space.id):
         return engine.run(
             session,

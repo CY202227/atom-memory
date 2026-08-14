@@ -26,6 +26,7 @@ from ..repositories import (
     revision_repo,
     run_repo,
 )
+from ..memory_layers import LAYER_L2
 from . import prompts
 from .engine import (
     _DETAIL_MAX,
@@ -178,6 +179,7 @@ class SynthesisEngine:
                 statement=statement,
                 detail=detail,
                 confidence=confidence,
+                memory_layer=LAYER_L2,
             )
             session.add(atom)
             session.flush()
@@ -186,6 +188,9 @@ class SynthesisEngine:
             atom.statement = statement
             atom.detail = detail
             atom.confidence = confidence
+            # 综合层产物标 L2；不覆盖已有 L3 画像
+            if atom.memory_layer != 3:
+                atom.memory_layer = LAYER_L2
             atom.status = AtomStatus.active
             atom.updated_at = utcnow()
             session.add(atom)
