@@ -6,6 +6,8 @@
 - contradicts：显式冲突，可查询
 """
 
+from sqlalchemy import DateTime
+
 from datetime import datetime
 from enum import Enum
 from typing import Optional
@@ -32,4 +34,4 @@ class AtomLink(SQLModel, table=True):
     dst_atom_id: int = Field(foreign_key="atom.id", index=True)
     kind: AtomLinkKind = Field(index=True)
     note: Optional[str] = Field(default=None)
-    created_at: datetime = Field(default_factory=utcnow)
+    created_at: datetime = Field(default_factory=utcnow, sa_type=DateTime(timezone=False))

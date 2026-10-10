@@ -10,6 +10,8 @@ salience 是写入方给的显著性信号（用户纠正 / 任务失败 / 被�
 pending（待固化）→ consolidated（已产生页面变更）/ skipped（判定不值得长期保留）。
 """
 
+from sqlalchemy import DateTime
+
 from datetime import datetime
 from enum import Enum
 from typing import Optional
@@ -47,6 +49,6 @@ class Source(SQLModel, table=True):
     external_ref: Optional[dict] = Field(default=None, sa_column=Column(JSON))
     salience: float = Field(default=0.0)
     status: SourceStatus = Field(default=SourceStatus.pending, index=True)
-    occurred_at: datetime = Field(default_factory=utcnow)
-    ingested_at: datetime = Field(default_factory=utcnow)
+    occurred_at: datetime = Field(default_factory=utcnow, sa_type=DateTime(timezone=False))
+    ingested_at: datetime = Field(default_factory=utcnow, sa_type=DateTime(timezone=False))
     schema_version: int = Field(default=SCHEMA_VERSION)

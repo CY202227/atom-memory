@@ -6,6 +6,8 @@ owner_id / subject_id 是可选的业务标签，仅用于按用户分组列举�
 不参与身份判定。
 """
 
+from sqlalchemy import DateTime
+
 import uuid
 from datetime import datetime
 from typing import Optional
@@ -25,4 +27,4 @@ class Space(SQLModel, table=True):
     owner_id: Optional[str] = Field(default=None, index=True)
     subject_id: Optional[str] = Field(default=None, index=True)
     schema_version: int = Field(default=SCHEMA_VERSION)
-    created_at: datetime = Field(default_factory=utcnow)
+    created_at: datetime = Field(default_factory=utcnow, sa_type=DateTime(timezone=False))

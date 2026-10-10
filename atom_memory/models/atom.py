@@ -4,6 +4,8 @@ statement（≤80 字）是默认召回注入单元；detail（≤300 字）供�
 六型 kind 分类。(space_id, key) 唯一。只能经固化引擎或回滚改写。
 """
 
+from sqlalchemy import DateTime
+
 from datetime import date, datetime
 from enum import Enum
 from typing import Optional
@@ -43,5 +45,5 @@ class Atom(SQLModel, table=True):
     memory_layer: int = Field(default=1, index=True)
     status: AtomStatus = Field(default=AtomStatus.active, index=True)
     schema_version: int = Field(default=SCHEMA_VERSION)
-    created_at: datetime = Field(default_factory=utcnow)
-    updated_at: datetime = Field(default_factory=utcnow)
+    created_at: datetime = Field(default_factory=utcnow, sa_type=DateTime(timezone=False))
+    updated_at: datetime = Field(default_factory=utcnow, sa_type=DateTime(timezone=False))
