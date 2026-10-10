@@ -14,7 +14,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Optional
 
-from sqlalchemy import JSON, Column, Text
+from sqlalchemy import JSON, Column, Text, UniqueConstraint
 from sqlmodel import Field, SQLModel
 
 from .base import SCHEMA_VERSION, utcnow
@@ -36,6 +36,9 @@ class SourceStatus(str, Enum):
 
 
 class Source(SQLModel, table=True):
+    __table_args__ = (UniqueConstraint("space_id", "idempotency_key", name="uq_source_idempotency"),)
+
+    idempotency_key: Optional[str] = Field(default=None, max_length=128)
     id: Optional[int] = Field(default=None, primary_key=True)
     space_id: int = Field(foreign_key="space.id", index=True)
     kind: SourceKind

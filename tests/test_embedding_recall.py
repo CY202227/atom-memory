@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 from datetime import datetime, timezone
 
 import pytest
@@ -24,7 +25,7 @@ from tests.conftest import FakeLLM
 class FakeEmbedder:
     """确定性伪向量：按词袋哈希到固定维，便于测近邻与缓存。"""
 
-    def __init__(self, dim: int = 8, model_tag: str = "fake-emd"):
+    def __init__(self, dim: int = 256, model_tag: str = "fake-emd"):
         self.model_tag = model_tag
         self.dim = dim
         self.calls: list[list[str]] = []
@@ -36,7 +37,7 @@ class FakeEmbedder:
     def _vec(self, text: str) -> list[float]:
         v = [0.0] * self.dim
         for tok in text.lower().replace("\n", " ").split():
-            v[hash(tok) % self.dim] += 1.0
+            v[int.from_bytes(hashlib.sha256(tok.encode()).digest()[:8], "big") % self.dim] += 1.0
         n = sum(x * x for x in v) ** 0.5
         if n > 0:
             v = [x / n for x in v]

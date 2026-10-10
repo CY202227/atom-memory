@@ -22,14 +22,14 @@ def _ok_response(url):
 def test_response_format_passthrough_and_fallback(monkeypatch):
     calls = []
 
-    def post(url, **kw):
+    def post(self, url, **kw):
         payload = kw.get("json") or {}
         calls.append(payload)
         if "response_format" in payload:
             raise LLMError("no schema")
         return _ok_response(url)
 
-    monkeypatch.setattr("atom_memory.llm.openai_compat.httpx.post", post)
+    monkeypatch.setattr("atom_memory.llm.openai_compat.httpx.Client.post", post)
     llm = OpenAICompatLLM("http://x/v1", "k", "m")
     res = llm.complete(
         "sys",
@@ -45,21 +45,21 @@ def test_response_format_passthrough_and_fallback(monkeypatch):
 def test_response_format_supported_single_request(monkeypatch):
     calls = []
 
-    def post(url, **kw):
+    def post(self, url, **kw):
         calls.append(kw.get("json") or {})
         return _ok_response(url)
 
-    monkeypatch.setattr("atom_memory.llm.openai_compat.httpx.post", post)
+    monkeypatch.setattr("atom_memory.llm.openai_compat.httpx.Client.post", post)
     llm = OpenAICompatLLM("http://x/v1", "k", "m")
     llm.complete("s", "u", response_format={"type": "json_object"})
     assert len(calls) == 1
 
 
 def test_response_format_both_attempts_fail(monkeypatch):
-    def post(url, **kw):
+    def post(self, url, **kw):
         raise LLMError("down")
 
-    monkeypatch.setattr("atom_memory.llm.openai_compat.httpx.post", post)
+    monkeypatch.setattr("atom_memory.llm.openai_compat.httpx.Client.post", post)
     llm = OpenAICompatLLM("http://x/v1", "k", "m")
     with pytest.raises(LLMError):
         llm.complete("s", "u", response_format={"type": "json_object"})
