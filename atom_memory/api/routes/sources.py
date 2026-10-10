@@ -28,15 +28,19 @@ def ingest_source(
     space: Space = Depends(get_space),
     session: Session = Depends(get_session),
 ):
-    return source_repo.add(
-        session,
-        space_id=space.id,
-        kind=payload.kind,
-        content=payload.content,
-        external_ref=payload.external_ref,
-        salience=payload.salience,
-        occurred_at=payload.occurred_at,
-    )
+    try:
+        return source_repo.add(
+            session,
+            space_id=space.id,
+            kind=payload.kind,
+            content=payload.content,
+            external_ref=payload.external_ref,
+            salience=payload.salience,
+            occurred_at=payload.occurred_at,
+            idempotency_key=payload.idempotency_key,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
 
 
 @router.get("/spaces/{space_uid}/sources", response_model=list[Source])
@@ -94,3 +98,11 @@ def delete_by_ref(
         raise HTTPException(
             status_code=502, detail=f"重固化失败，未执行任何删除，可重试：{e}"
         )
+
+
+@router.get("/spaces/{space_uid}/sources/{source_id}", response_model=Source)
+def get_source(source_id: int, space: Space = Depends(get_space), session: Session = Depends(get_session)):
+    source = source_repo.get(session, space.id, source_id)
+    if source is None:
+        raise HTTPException(status_code=404, detail="source not found")
+    return source

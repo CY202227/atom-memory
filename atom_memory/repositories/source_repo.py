@@ -6,10 +6,11 @@
 """
 
 import hashlib
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Iterable, Optional
 
 from sqlmodel import Session, select
+from sqlalchemy.exc import IntegrityError
 
 from ..models import Source, SourceKind, SourceStatus, utcnow
 
@@ -22,9 +23,42 @@ def add(
     external_ref: Optional[dict] = None,
     salience: float = 0.0,
     occurred_at: Optional[datetime] = None,
+    idempotency_key: Optional[str] = None,
 ) -> Source:
+    def normalize_time(value: datetime) -> datetime:
+        if value.tzinfo is None:
+            return value.replace(tzinfo=timezone.utc)
+        return value.astimezone(timezone.utc)
+
+    if occurred_at is not None:
+        occurred_at = normalize_time(occurred_at)
+
+    def existing() -> Optional[Source]:
+        return session.exec(
+            select(Source).where(
+                Source.space_id == space_id,
+                Source.idempotency_key == idempotency_key,
+            )
+        ).first()
+
+    def check(source: Source) -> Source:
+        if (
+            source.kind != kind
+            or source.content != content
+            or source.external_ref != external_ref
+            or source.salience != salience
+            or (occurred_at is not None and normalize_time(source.occurred_at) != occurred_at)
+        ):
+            raise ValueError("idempotency_key already used with a different payload")
+        return source
+
+    if idempotency_key is not None:
+        previous = existing()
+        if previous is not None:
+            return check(previous)
     source = Source(
         space_id=space_id,
+        idempotency_key=idempotency_key,
         kind=kind,
         content=content,
         content_hash=hashlib.sha256(content.encode()).hexdigest(),
@@ -33,7 +67,14 @@ def add(
         occurred_at=occurred_at or utcnow(),
     )
     session.add(source)
-    session.commit()
+    try:
+        session.commit()
+    except IntegrityError:
+        session.rollback()
+        previous = existing() if idempotency_key is not None else None
+        if previous is None:
+            raise
+        return check(previous)
     session.refresh(source)
     return source
 

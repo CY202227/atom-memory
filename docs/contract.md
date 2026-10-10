@@ -170,3 +170,22 @@ post(.../persona, json={})
 
 - 路径 `/pages` → `/atoms`；字段 `body` → `detail`；`type`/`slug`/`hook` 不再返回
 - 纠正：高 salience + 即时 consolidate
+
+
+## 可靠投递与纠正确认
+
+`POST /spaces/{uid}/sources` 支持可选 `idempotency_key`（1–128 字符）。
+上游必须先持久化 payload 与该键，再发送请求；超时、断线或重启后使用同一个键重试。
+同一 space 内，同键同 payload 返回原 source（包括最新 status），不创建重复证据；
+同键不同 payload 返回 409。未提供键时保留原行为，相同内容也允许成为不同经历。
+键不跨 space 去重；按来源隐私删除时键随 source 删除，上游必须同步取消对应待投递记录，避免重新写入已删除经历。
+
+`GET /spaces/{uid}/sources/{source_id}` 返回该 space 内的 source；不存在返回 404。
+HTTP 200 或 consolidation run 的 `succeeded` 只说明运行结束，不能证明某次纠正已生效。
+上游还须确认对应 source 的 status 为 `consolidated`；`pending` 应显示待固化并允许补偿重试。
+普通 source 的 `skipped` 表示按策略遗忘，也是已处理状态。
+
+本次升级启动时自动给已有 SQLite / Postgres source 表添加 nullable idempotency_key
+与 (space_id, idempotency_key) 唯一索引；旧行无需回填，旧请求仍兼容。
+升级前停止服务并备份数据库，先在副本启动新版、验证 sources / recall 后再切换。
+这是一项兼容性迁移，不替代后续完整的版本化数据库迁移体系。

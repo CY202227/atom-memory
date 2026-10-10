@@ -15,6 +15,7 @@ class SpaceCreate(BaseModel):
 
 
 class SourceIngest(BaseModel):
+    idempotency_key: Optional[str] = Field(default=None, min_length=1, max_length=128)
     kind: SourceKind
     content: str = Field(min_length=1)
     occurred_at: Optional[datetime] = None
