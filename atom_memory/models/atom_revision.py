@@ -1,5 +1,7 @@
 """atom_revision 表：原子认识的修订历史（可解释、可回滚、可审计）。"""
 
+from sqlalchemy import DateTime
+
 from datetime import date, datetime
 from enum import Enum
 from typing import Optional
@@ -28,4 +30,4 @@ class AtomRevision(SQLModel, table=True):
     change_reason: str
     trigger: RevisionTrigger
     run_id: Optional[int] = Field(default=None, foreign_key="consolidationrun.id")
-    created_at: datetime = Field(default_factory=utcnow)
+    created_at: datetime = Field(default_factory=utcnow, sa_type=DateTime(timezone=False))

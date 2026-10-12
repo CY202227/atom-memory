@@ -1,5 +1,7 @@
 """consolidationrun 表："睡眠"固化的运行日志。"""
 
+from sqlalchemy import DateTime
+
 from datetime import datetime
 from enum import Enum
 from typing import Optional
@@ -26,5 +28,5 @@ class ConsolidationRun(SQLModel, table=True):
     prompt_tokens: int = Field(default=0)
     completion_tokens: int = Field(default=0)
     error: Optional[str] = Field(default=None, sa_column=Column(Text))
-    started_at: datetime = Field(default_factory=utcnow)
-    finished_at: Optional[datetime] = Field(default=None)
+    started_at: datetime = Field(default_factory=utcnow, sa_type=DateTime(timezone=False))
+    finished_at: Optional[datetime] = Field(default=None, sa_type=DateTime(timezone=False))

@@ -51,6 +51,7 @@ def find_active(
     if run is None:
         return None
     if run.started_at < utcnow() - timedelta(seconds=stale_seconds):
+        finish(session, run, RunStatus.failed, error="interrupted run expired; pending sources may be retried")
         return None
     return run
 

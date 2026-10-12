@@ -188,4 +188,4 @@ HTTP 200 或 consolidation run 的 `succeeded` 只说明运行结束，不能证
 本次升级启动时自动给已有 SQLite / Postgres source 表添加 nullable idempotency_key
 与 (space_id, idempotency_key) 唯一索引；旧行无需回填，旧请求仍兼容。
 升级前停止服务并备份数据库，先在副本启动新版、验证 sources / recall 后再切换。
-这是一项兼容性迁移，不替代后续完整的版本化数据库迁移体系。
+迁移由 `atom_memory_schema` 记录已执行版本，启动时按序执行；新于当前程序的数据库会拒绝启动。详见 [升级与联动恢复](upgrade-and-delivery.md)。

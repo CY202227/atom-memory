@@ -4,6 +4,8 @@
 固化/删除只做失效（删行）；召回时惰性补算。
 """
 
+from sqlalchemy import DateTime
+
 from datetime import datetime
 from typing import Optional
 
@@ -22,4 +24,4 @@ class AtomEmbedding(SQLModel, table=True):
     model_tag: str
     dim: int
     vector: list[float] = Field(sa_column=Column(JSON, nullable=False))
-    updated_at: datetime = Field(default_factory=utcnow)
+    updated_at: datetime = Field(default_factory=utcnow, sa_type=DateTime(timezone=False))

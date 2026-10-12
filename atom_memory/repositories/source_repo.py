@@ -64,7 +64,7 @@ def add(
         content_hash=hashlib.sha256(content.encode()).hexdigest(),
         external_ref=external_ref,
         salience=salience,
-        occurred_at=occurred_at or utcnow(),
+        occurred_at=occurred_at.replace(tzinfo=None) if occurred_at is not None else utcnow(),
     )
     session.add(source)
     try:

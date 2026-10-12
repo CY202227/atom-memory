@@ -1,4 +1,4 @@
-from sqlalchemy import event, text, inspect
+from sqlalchemy import event
 from sqlmodel import Session, SQLModel, create_engine
 
 from .config import settings
@@ -17,28 +17,11 @@ if _is_sqlite:
         cursor.close()
 
 
-def _ensure_atom_memory_layer_column() -> None:
-    """存量 SQLite：create_all 不 ALTER，补 memory_layer 列。"""
-    if not _is_sqlite:
-        return
-    with engine.begin() as conn:
-        rows = conn.execute(text("PRAGMA table_info(atom)")).fetchall()
-        if not rows:
-            return
-        names = {r[1] for r in rows}
-        if "memory_layer" not in names:
-            conn.execute(
-                text(
-                    "ALTER TABLE atom ADD COLUMN memory_layer "
-                    "INTEGER NOT NULL DEFAULT 1"
-                )
-            )
-
-
 def init_db() -> None:
+    from .migrations import migrate
+    # Existing tables are upgraded before ORM queries; fresh tables use current models.
+    migrate(engine)
     SQLModel.metadata.create_all(engine)
-    _ensure_atom_memory_layer_column()
-    _ensure_source_idempotency()
 
 
 def get_session():
@@ -47,9 +30,7 @@ def get_session():
 
 
 def _ensure_source_idempotency() -> None:
-    """Add nullable retry keys to existing SQLite/Postgres databases."""
+    """Compatibility helper for migration tests and older callers."""
+    from .migrations import upgrade_source
     with engine.begin() as conn:
-        columns = {c["name"] for c in inspect(conn).get_columns("source")}
-        if "idempotency_key" not in columns:
-            conn.execute(text("ALTER TABLE source ADD COLUMN idempotency_key VARCHAR(128)"))
-        conn.execute(text("CREATE UNIQUE INDEX IF NOT EXISTS uq_source_retry_key ON source (space_id, idempotency_key)"))
+        upgrade_source(conn)
