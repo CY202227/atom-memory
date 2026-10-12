@@ -1,0 +1,10 @@
+{
+  "status": "failed",
+  "error_type": "RuntimeError",
+  "failure_reason": "consolidation_failed",
+  "nested_error_type": "JSONDecodeError",
+  "http_status": null,
+  "model_alias": "odb",
+  "sessions": 3,
+  "questions": 12
+}

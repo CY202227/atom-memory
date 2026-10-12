@@ -19,6 +19,8 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
+import platform
 import json
 import sys
 import tempfile
@@ -140,6 +142,7 @@ def _parse_args(argv: list[str] | None) -> argparse.Namespace:
         default="statement",
         choices=("statement", "full"),
     )
+    p.add_argument("--diagnostics", action="store_true", help="record atom snapshots and source statuses from public benchmark data")
     p.add_argument("--max-samples", type=int, default=None)
     p.add_argument("--max-sessions", type=int, default=None)
     p.add_argument("--max-questions", type=int, default=None)
@@ -193,6 +196,7 @@ def main(argv: list[str] | None = None) -> int:
     wire_llm = answer_llm if args.consolidate == "llm" else queue_llm
     client = _build_client(wire_llm)
     try:
+        snapshots = []
         samples = load_locomo(data_path)
         if args.max_samples is not None:
             samples = samples[: args.max_samples]
@@ -226,7 +230,7 @@ def main(argv: list[str] | None = None) -> int:
                 uid,
                 sample,
                 max_sessions=args.max_sessions,
-                salience=0.8,
+                salience=0.8 if args.consolidate == "oracle" else 0.2,
             )
             if args.consolidate == "oracle":
                 consolidate_sessions_oracle(
@@ -240,7 +244,12 @@ def main(argv: list[str] | None = None) -> int:
             else:
                 # 真实固化：按批消费 pending
                 pending = len(source_ids)
+                seen_pending = set()
                 while pending > 0:
+                    pending_ids = tuple(row["id"] for row in client.get(f"/spaces/{uid}/sources", params={"status": "pending"}).json())
+                    if pending_ids in seen_pending:
+                        raise RuntimeError("consolidation made no progress; protected sources remain pending")
+                    seen_pending.add(pending_ids)
                     r = client.post(
                         f"/spaces/{uid}/consolidate",
                         json={
@@ -277,6 +286,18 @@ def main(argv: list[str] | None = None) -> int:
                 retrieval_coverage=args.retrieval_coverage,
             )
             reports.append(report)
+            if args.diagnostics:
+                atoms = []
+                page = 1
+                while True:
+                    body = client.get(f"/spaces/{uid}/atoms", params={"page": page, "page_size": 200}).json()
+                    atoms += [{key: atom.get(key) for key in ("key", "statement", "detail", "happened_on", "memory_layer")} for atom in body["results"]]
+                    if len(atoms) >= body["count"]:
+                        break
+                    page += 1
+                sources = client.get(f"/spaces/{uid}/sources").json()
+                snapshots.append({"sample": sample.sample_id, "atoms": atoms,
+                    "source_statuses": [{"id": source["id"], "status": source["status"]} for source in sources]})
             extra = ""
             if args.score == "evidence":
                 extra = f" any={report.any_accuracy:.4f}"
@@ -300,6 +321,18 @@ def main(argv: list[str] | None = None) -> int:
             )
             out_path = Path(tmp.name)
             payload = bench.to_dict()
+            if args.diagnostics:
+                payload["diagnostics"] = snapshots
+            payload["configuration"] = {
+                "dataset_sha256": hashlib.sha256(data_path.read_bytes()).hexdigest(),
+                "python": platform.python_version(), "method": args.method,
+                "budget_chars": args.budget_chars, "max_atoms": args.max_atoms,
+                "detail": args.detail, "max_samples": args.max_samples,
+                "max_sessions": args.max_sessions, "max_questions": args.max_questions,
+                "consolidate": args.consolidate, "score": args.score,
+                "model": settings.llm_model if need_real_llm else None,
+                "limitation": "Oracle consolidation evaluates retrieval over scripted atoms, not real LLM consolidation or answer quality" if args.consolidate == "oracle" else "LLM run; inspect individual failures and data subset before comparing scores",
+            }
             # 附带每题明细（便于排查）
             payload["questions"] = [
                 {
@@ -322,6 +355,18 @@ def main(argv: list[str] | None = None) -> int:
             tmp.close()
         else:
             payload = bench.to_dict()
+            if args.diagnostics:
+                payload["diagnostics"] = snapshots
+            payload["configuration"] = {
+                "dataset_sha256": hashlib.sha256(data_path.read_bytes()).hexdigest(),
+                "python": platform.python_version(), "method": args.method,
+                "budget_chars": args.budget_chars, "max_atoms": args.max_atoms,
+                "detail": args.detail, "max_samples": args.max_samples,
+                "max_sessions": args.max_sessions, "max_questions": args.max_questions,
+                "consolidate": args.consolidate, "score": args.score,
+                "model": settings.llm_model if need_real_llm else None,
+                "limitation": "Oracle consolidation evaluates retrieval over scripted atoms, not real LLM consolidation or answer quality" if args.consolidate == "oracle" else "LLM run; inspect individual failures and data subset before comparing scores",
+            }
             payload["questions"] = [
                 {
                     "sample_id": r.sample_id,

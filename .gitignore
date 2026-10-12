@@ -223,3 +223,6 @@ logs/
 
 # Local reference clones (not part of the product)
 reference/
+
+# Downloaded public evaluation corpora
+data/public-eval/

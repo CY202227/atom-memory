@@ -578,7 +578,7 @@ def evaluate_locomo_sample(
                 prediction = answer_from_context(llm, item.question, context)
             except LLMError as e:
                 # 单题超时/失败不中断整场；计入未命中
-                prediction = f"error: {e}"
+                prediction = f"error: {type(e).__name__}"
             f1 = token_f1(prediction, item.answer)
             ok = f1 >= hit_f1_threshold or score_answer_in_text(
                 prediction, item.answer, coverage=retrieval_coverage

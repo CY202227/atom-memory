@@ -1,0 +1,1980 @@
+{
+  "sample": "conv-26",
+  "atoms_after_consolidation": 416,
+  "scored": 98,
+  "scope": "first 100 questions, 1 conversation, oracle, default layered recall; diagnostic rank from flat BM25",
+  "failure_counts": {
+    "passed": 42,
+    "gold_outside_top100_or_no_lexical_match": 40,
+    "gold_below_top5_cutoff": 16,
+    "unscored_no_evidence": 2
+  },
+  "questions": [
+    {
+      "question": "When did Caroline go to the LGBTQ support group?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d1-3"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d1-3": 1
+      },
+      "recalled_keys": [
+        "locomo-d1-3",
+        "locomo-d1-7",
+        "locomo-d10-3",
+        "locomo-d10-5",
+        "locomo-d2-12"
+      ]
+    },
+    {
+      "question": "When did Melanie paint a sunrise?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d1-12"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d1-12": 2
+      },
+      "recalled_keys": [
+        "locomo-d1-12",
+        "locomo-d1-14",
+        "locomo-d13-10",
+        "locomo-d14-6",
+        "locomo-d8-18"
+      ]
+    },
+    {
+      "question": "What fields would Caroline be likely to pursue in her educaton?",
+      "category": 3,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d1-11",
+        "locomo-d1-9"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d1-11": 56,
+        "locomo-d1-9": 126
+      },
+      "recalled_keys": [
+        "locomo-d13-7",
+        "locomo-d15-27",
+        "locomo-d19-13",
+        "locomo-d4-14",
+        "locomo-d7-8"
+      ]
+    },
+    {
+      "question": "What did Caroline research?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d2-8"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d2-8": 161
+      },
+      "recalled_keys": [
+        "locomo-d1-17",
+        "locomo-d10-15",
+        "locomo-d15-13",
+        "locomo-d17-7",
+        "locomo-d17-8"
+      ]
+    },
+    {
+      "question": "What is Caroline's identity?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d1-5"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d1-5": 311
+      },
+      "recalled_keys": [
+        "locomo-d11-12",
+        "locomo-d13-13",
+        "locomo-d15-15",
+        "locomo-d16-12",
+        "locomo-d16-9"
+      ]
+    },
+    {
+      "question": "When did Melanie run a charity race?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d2-1"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d2-1": 1
+      },
+      "recalled_keys": [
+        "locomo-d14-22",
+        "locomo-d14-28",
+        "locomo-d2-1",
+        "locomo-d2-2",
+        "locomo-d8-18"
+      ]
+    },
+    {
+      "question": "When is Melanie planning on going camping?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d2-7"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d2-7": 1
+      },
+      "recalled_keys": [
+        "locomo-d10-12",
+        "locomo-d10-14",
+        "locomo-d14-32",
+        "locomo-d18-19",
+        "locomo-d2-7"
+      ]
+    },
+    {
+      "question": "What is Caroline's relationship status?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d2-14",
+        "locomo-d3-13"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d3-13": 324,
+        "locomo-d2-14": 302
+      },
+      "recalled_keys": [
+        "locomo-d12-5",
+        "locomo-d15-15",
+        "locomo-d16-12",
+        "locomo-d19-13",
+        "locomo-d7-15"
+      ]
+    },
+    {
+      "question": "When did Caroline give a speech at a school?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d3-1"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d3-1": 1
+      },
+      "recalled_keys": [
+        "locomo-d13-1",
+        "locomo-d18-10",
+        "locomo-d2-10",
+        "locomo-d3-1",
+        "locomo-d3-11"
+      ]
+    },
+    {
+      "question": "When did Caroline meet up with her friends, family, and mentors?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d3-11"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d3-11": 1
+      },
+      "recalled_keys": [
+        "locomo-d16-5",
+        "locomo-d19-9",
+        "locomo-d2-10",
+        "locomo-d3-11",
+        "locomo-d6-11"
+      ]
+    },
+    {
+      "question": "How long has Caroline had her current group of friends for?",
+      "category": 2,
+      "reason": "gold_below_top5_cutoff",
+      "gold_keys": [
+        "locomo-d3-13"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d3-13": 23
+      },
+      "recalled_keys": [
+        "locomo-d1-7",
+        "locomo-d12-15",
+        "locomo-d3-11",
+        "locomo-d3-15",
+        "locomo-d4-1"
+      ]
+    },
+    {
+      "question": "Where did Caroline move from 4 years ago?",
+      "category": 1,
+      "reason": "gold_below_top5_cutoff",
+      "gold_keys": [
+        "locomo-d3-13",
+        "locomo-d4-3"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d4-3": 89,
+        "locomo-d3-13": 4
+      },
+      "recalled_keys": [
+        "locomo-d15-21",
+        "locomo-d16-2",
+        "locomo-d3-13",
+        "locomo-d3-16",
+        "locomo-d4-5"
+      ]
+    },
+    {
+      "question": "How long ago was Caroline's 18th birthday?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d4-5"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d4-5": 1
+      },
+      "recalled_keys": [
+        "locomo-d15-21",
+        "locomo-d19-7",
+        "locomo-d3-15",
+        "locomo-d4-5",
+        "locomo-d8-27"
+      ]
+    },
+    {
+      "question": "What career path has Caroline decided to persue?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d1-11",
+        "locomo-d4-13"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d1-11": 151,
+        "locomo-d4-13": 302
+      },
+      "recalled_keys": [
+        "locomo-d1-9",
+        "locomo-d16-13",
+        "locomo-d4-11",
+        "locomo-d7-11",
+        "locomo-d7-7"
+      ]
+    },
+    {
+      "question": "Would Caroline still want to pursue counseling as a career if she hadn't received support growing up?",
+      "category": 3,
+      "reason": "gold_below_top5_cutoff",
+      "gold_keys": [
+        "locomo-d3-5",
+        "locomo-d4-15"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d4-15": 3,
+        "locomo-d3-5": 19
+      },
+      "recalled_keys": [
+        "locomo-d1-11",
+        "locomo-d4-11",
+        "locomo-d4-15",
+        "locomo-d7-5",
+        "locomo-d7-7"
+      ]
+    },
+    {
+      "question": "What activities does Melanie partake in?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d1-12",
+        "locomo-d1-18",
+        "locomo-d5-4",
+        "locomo-d9-1"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d9-1": 179,
+        "locomo-d1-12": 240,
+        "locomo-d1-18": 162,
+        "locomo-d5-4": 2
+      },
+      "recalled_keys": [
+        "locomo-d14-18",
+        "locomo-d15-10",
+        "locomo-d15-18",
+        "locomo-d5-4",
+        "locomo-d8-18"
+      ]
+    },
+    {
+      "question": "When did Melanie sign up for a pottery class?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d5-4"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d5-4": 1
+      },
+      "recalled_keys": [
+        "locomo-d11-5",
+        "locomo-d14-4",
+        "locomo-d16-18",
+        "locomo-d5-4",
+        "locomo-d5-8"
+      ]
+    },
+    {
+      "question": "When is Caroline going to the transgender conference?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d5-13"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d5-13": 1
+      },
+      "recalled_keys": [
+        "locomo-d1-5",
+        "locomo-d17-19",
+        "locomo-d3-1",
+        "locomo-d5-13",
+        "locomo-d9-4"
+      ]
+    },
+    {
+      "question": "Where has Melanie camped?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d4-6",
+        "locomo-d6-16",
+        "locomo-d8-32"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d4-6": 210,
+        "locomo-d8-32": 216,
+        "locomo-d6-16": 214
+      },
+      "recalled_keys": [
+        "locomo-d10-1",
+        "locomo-d14-22",
+        "locomo-d5-12",
+        "locomo-d7-27",
+        "locomo-d8-18"
+      ]
+    },
+    {
+      "question": "What do Melanie's kids like?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d4-8",
+        "locomo-d6-6"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d6-6": 227,
+        "locomo-d4-8": 55
+      },
+      "recalled_keys": [
+        "locomo-d1-2",
+        "locomo-d11-7",
+        "locomo-d13-10",
+        "locomo-d8-3",
+        "locomo-d9-17"
+      ]
+    },
+    {
+      "question": "When did Melanie go to the museum?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d6-4"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d6-4": 1
+      },
+      "recalled_keys": [
+        "locomo-d1-18",
+        "locomo-d10-1",
+        "locomo-d10-10",
+        "locomo-d6-4",
+        "locomo-d7-27"
+      ]
+    },
+    {
+      "question": "When did Caroline have a picnic?",
+      "category": 2,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d6-11"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d6-11": 152
+      },
+      "recalled_keys": [
+        "locomo-d10-15",
+        "locomo-d15-13",
+        "locomo-d16-17",
+        "locomo-d3-18",
+        "locomo-d6-7"
+      ]
+    },
+    {
+      "question": "Would Caroline likely have Dr. Seuss books on her bookshelf?",
+      "category": 3,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d6-9"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d6-9": 3
+      },
+      "recalled_keys": [
+        "locomo-d4-11",
+        "locomo-d4-18",
+        "locomo-d6-7",
+        "locomo-d6-9",
+        "locomo-d7-10"
+      ]
+    },
+    {
+      "question": "What books has Melanie read?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d6-10",
+        "locomo-d7-8"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d6-10": 262,
+        "locomo-d7-8": 4
+      },
+      "recalled_keys": [
+        "locomo-d4-18",
+        "locomo-d6-8",
+        "locomo-d6-9",
+        "locomo-d7-10",
+        "locomo-d7-8"
+      ]
+    },
+    {
+      "question": "What does Melanie do to destress?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d5-4",
+        "locomo-d7-22"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d7-22": 97,
+        "locomo-d5-4": 255
+      },
+      "recalled_keys": [
+        "locomo-d13-15",
+        "locomo-d15-18",
+        "locomo-d17-22",
+        "locomo-d7-20",
+        "locomo-d7-27"
+      ]
+    },
+    {
+      "question": "When did Caroline go to the LGBTQ conference?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d7-1"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d7-1": 1
+      },
+      "recalled_keys": [
+        "locomo-d1-3",
+        "locomo-d16-5",
+        "locomo-d5-13",
+        "locomo-d7-1",
+        "locomo-d9-13"
+      ]
+    },
+    {
+      "question": "When did Melanie read the book \"nothing is impossible\"?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d7-8"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d7-8": 1
+      },
+      "recalled_keys": [
+        "locomo-d17-10",
+        "locomo-d4-18",
+        "locomo-d6-10",
+        "locomo-d7-8",
+        "locomo-d8-18"
+      ]
+    },
+    {
+      "question": "Would Caroline pursue writing as a career option?",
+      "category": 3,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d7-5",
+        "locomo-d7-9"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d7-5": 296,
+        "locomo-d7-9": 310
+      },
+      "recalled_keys": [
+        "locomo-d1-9",
+        "locomo-d19-13",
+        "locomo-d4-11",
+        "locomo-d7-7",
+        "locomo-d8-37"
+      ]
+    },
+    {
+      "question": "When did Caroline go to the adoption meeting?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d8-9"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d8-9": 1
+      },
+      "recalled_keys": [
+        "locomo-d13-1",
+        "locomo-d17-7",
+        "locomo-d19-1",
+        "locomo-d2-12",
+        "locomo-d8-9"
+      ]
+    },
+    {
+      "question": "When did Melanie go to the pottery workshop?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d8-2"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d8-2": 1
+      },
+      "recalled_keys": [
+        "locomo-d12-2",
+        "locomo-d12-3",
+        "locomo-d5-12",
+        "locomo-d5-6",
+        "locomo-d8-2"
+      ]
+    },
+    {
+      "question": "When did Melanie go camping in June?",
+      "category": 2,
+      "reason": "gold_below_top5_cutoff",
+      "gold_keys": [
+        "locomo-d4-8"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d4-8": 30
+      },
+      "recalled_keys": [
+        "locomo-d10-12",
+        "locomo-d10-14",
+        "locomo-d18-19",
+        "locomo-d3-22",
+        "locomo-d4-6"
+      ]
+    },
+    {
+      "question": "What LGBTQ+ events has Caroline participated in?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d1-3",
+        "locomo-d3-1",
+        "locomo-d5-1",
+        "locomo-d8-17"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d3-1": 18,
+        "locomo-d1-3": 2,
+        "locomo-d5-1": 14,
+        "locomo-d8-17": 310
+      },
+      "recalled_keys": [
+        "locomo-d1-3",
+        "locomo-d10-6",
+        "locomo-d14-35",
+        "locomo-d2-12",
+        "locomo-d5-2"
+      ]
+    },
+    {
+      "question": "When did Caroline go to a pride parade during the summer?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d5-1"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d5-1": 4
+      },
+      "recalled_keys": [
+        "locomo-d10-7",
+        "locomo-d11-4",
+        "locomo-d5-1",
+        "locomo-d5-2",
+        "locomo-d8-17"
+      ]
+    },
+    {
+      "question": "What events has Caroline participated in to help children?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d3-3",
+        "locomo-d9-2"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d9-2": 16,
+        "locomo-d3-3": 312
+      },
+      "recalled_keys": [
+        "locomo-d14-12",
+        "locomo-d2-12",
+        "locomo-d6-4",
+        "locomo-d7-4",
+        "locomo-d7-6"
+      ]
+    },
+    {
+      "question": "When did Melanie go camping in July?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d9-1"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d9-1": 4
+      },
+      "recalled_keys": [
+        "locomo-d10-12",
+        "locomo-d10-14",
+        "locomo-d6-16",
+        "locomo-d8-32",
+        "locomo-d9-1"
+      ]
+    },
+    {
+      "question": "When did Caroline join a mentorship program?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d9-2"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d9-2": 1
+      },
+      "recalled_keys": [
+        "locomo-d10-15",
+        "locomo-d14-12",
+        "locomo-d3-8",
+        "locomo-d8-18",
+        "locomo-d9-2"
+      ]
+    },
+    {
+      "question": "What did Melanie paint recently?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d8-6",
+        "locomo-d9-17"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d9-17": 118,
+        "locomo-d8-6": 210
+      },
+      "recalled_keys": [
+        "locomo-d13-10",
+        "locomo-d13-8",
+        "locomo-d14-30",
+        "locomo-d14-6",
+        "locomo-d17-13"
+      ]
+    },
+    {
+      "question": "What activities has Melanie done with her family?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d1-18",
+        "locomo-d3-14",
+        "locomo-d6-4",
+        "locomo-d8-4",
+        "locomo-d8-6",
+        "locomo-d9-1"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d9-1": 111,
+        "locomo-d8-6": 182,
+        "locomo-d1-18": 141,
+        "locomo-d8-4": 183,
+        "locomo-d3-14": 253,
+        "locomo-d6-4": 189
+      },
+      "recalled_keys": [
+        "locomo-d1-6",
+        "locomo-d17-14",
+        "locomo-d3-22",
+        "locomo-d4-10",
+        "locomo-d6-13"
+      ]
+    },
+    {
+      "question": "In what ways is Caroline participating in the LGBTQ community?",
+      "category": 1,
+      "reason": "gold_below_top5_cutoff",
+      "gold_keys": [
+        "locomo-d10-3",
+        "locomo-d5-1",
+        "locomo-d9-12",
+        "locomo-d9-2"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d9-2": 8,
+        "locomo-d9-12": 14,
+        "locomo-d5-1": 16,
+        "locomo-d10-3": 17
+      },
+      "recalled_keys": [
+        "locomo-d11-8",
+        "locomo-d14-35",
+        "locomo-d16-5",
+        "locomo-d3-2",
+        "locomo-d9-13"
+      ]
+    },
+    {
+      "question": "How many times has Melanie gone to the beach in 2023?",
+      "category": 1,
+      "reason": "gold_below_top5_cutoff",
+      "gold_keys": [
+        "locomo-d10-8",
+        "locomo-d6-16"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d6-16": 8,
+        "locomo-d10-8": 4
+      },
+      "recalled_keys": [
+        "locomo-d10-10",
+        "locomo-d10-8",
+        "locomo-d14-7",
+        "locomo-d14-8",
+        "locomo-d18-15"
+      ]
+    },
+    {
+      "question": "When did Caroline join a new activist group?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d10-3"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d10-3": 1
+      },
+      "recalled_keys": [
+        "locomo-d1-3",
+        "locomo-d10-3",
+        "locomo-d10-4",
+        "locomo-d3-8",
+        "locomo-d6-2"
+      ]
+    },
+    {
+      "question": "Would Melanie be more interested in going to a national park or a theme park?",
+      "category": 3,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d10-12",
+        "locomo-d10-14"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d10-12": 195,
+        "locomo-d10-14": 273
+      },
+      "recalled_keys": [
+        "locomo-d15-12",
+        "locomo-d15-2",
+        "locomo-d15-3",
+        "locomo-d16-19",
+        "locomo-d3-18"
+      ]
+    },
+    {
+      "question": "What kind of art does Caroline make?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d11-12",
+        "locomo-d11-8",
+        "locomo-d9-14"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d9-14": 11,
+        "locomo-d11-8": 22,
+        "locomo-d11-12": 262
+      },
+      "recalled_keys": [
+        "locomo-d14-9",
+        "locomo-d17-21",
+        "locomo-d2-16",
+        "locomo-d3-18",
+        "locomo-d5-10"
+      ]
+    },
+    {
+      "question": "When is Melanie's daughter's birthday?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d11-1"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d11-1": 1
+      },
+      "recalled_keys": [
+        "locomo-d11-1",
+        "locomo-d12-10",
+        "locomo-d3-22",
+        "locomo-d4-5",
+        "locomo-d7-27"
+      ]
+    },
+    {
+      "question": "When did Caroline attend a pride parade in August?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d11-4"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d11-4": 1
+      },
+      "recalled_keys": [
+        "locomo-d10-7",
+        "locomo-d11-4",
+        "locomo-d14-23",
+        "locomo-d5-1",
+        "locomo-d8-17"
+      ]
+    },
+    {
+      "question": "Who supports Caroline when she has a negative experience?",
+      "category": 1,
+      "reason": "gold_below_top5_cutoff",
+      "gold_keys": [
+        "locomo-d12-1",
+        "locomo-d3-11"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d12-1": 2,
+        "locomo-d3-11": 87
+      },
+      "recalled_keys": [
+        "locomo-d11-10",
+        "locomo-d12-1",
+        "locomo-d4-16",
+        "locomo-d5-2",
+        "locomo-d7-8"
+      ]
+    },
+    {
+      "question": "What types of pottery have Melanie and her kids made?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d12-14",
+        "locomo-d5-6",
+        "locomo-d8-4"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d12-14": 181,
+        "locomo-d8-4": 4,
+        "locomo-d5-6": 6
+      },
+      "recalled_keys": [
+        "locomo-d14-4",
+        "locomo-d16-11",
+        "locomo-d5-5",
+        "locomo-d8-2",
+        "locomo-d8-4"
+      ]
+    },
+    {
+      "question": "When did Caroline and Melanie go to a pride fesetival together?",
+      "category": 2,
+      "reason": "gold_below_top5_cutoff",
+      "gold_keys": [
+        "locomo-d12-15"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d12-15": 12
+      },
+      "recalled_keys": [
+        "locomo-d10-7",
+        "locomo-d18-21",
+        "locomo-d8-16",
+        "locomo-d8-36",
+        "locomo-d9-8"
+      ]
+    },
+    {
+      "question": "What would Caroline's political leaning likely be?",
+      "category": 3,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d12-1"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d12-1": 331
+      },
+      "recalled_keys": [
+        "locomo-d15-15",
+        "locomo-d15-27",
+        "locomo-d17-1",
+        "locomo-d19-13",
+        "locomo-d7-15"
+      ]
+    },
+    {
+      "question": "What has Melanie painted?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d1-12",
+        "locomo-d13-8",
+        "locomo-d8-6"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d1-12": 230,
+        "locomo-d8-6": 208,
+        "locomo-d13-8": 6
+      },
+      "recalled_keys": [
+        "locomo-d1-14",
+        "locomo-d14-7",
+        "locomo-d17-14",
+        "locomo-d4-5",
+        "locomo-d9-16"
+      ]
+    },
+    {
+      "question": "What are Melanie's pets' names?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d13-4",
+        "locomo-d7-18"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d13-4": 223,
+        "locomo-d7-18": 72
+      },
+      "recalled_keys": [
+        "locomo-d1-8",
+        "locomo-d13-2",
+        "locomo-d13-3",
+        "locomo-d7-14",
+        "locomo-d7-17"
+      ]
+    },
+    {
+      "question": "When did Caroline apply to adoption agencies?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d13-1"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d13-1": 2
+      },
+      "recalled_keys": [
+        "locomo-d13-1",
+        "locomo-d17-7",
+        "locomo-d2-10",
+        "locomo-d2-12",
+        "locomo-d2-8"
+      ]
+    },
+    {
+      "question": "When did Caroline draw a self-portrait?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d13-11"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d13-11": 1
+      },
+      "recalled_keys": [
+        "locomo-d11-13",
+        "locomo-d13-11",
+        "locomo-d19-7",
+        "locomo-d2-3",
+        "locomo-d7-14"
+      ]
+    },
+    {
+      "question": "What subject have Caroline and Melanie both painted?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d14-5",
+        "locomo-d8-6"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d8-6": 330,
+        "locomo-d14-5": 403
+      },
+      "recalled_keys": [
+        "locomo-d1-14",
+        "locomo-d14-7",
+        "locomo-d17-14",
+        "locomo-d4-5",
+        "locomo-d9-16"
+      ]
+    },
+    {
+      "question": "What symbols are important to Caroline?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d14-15",
+        "locomo-d4-1"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d4-1": 135,
+        "locomo-d14-15": 6
+      },
+      "recalled_keys": [
+        "locomo-d18-5",
+        "locomo-d2-4",
+        "locomo-d2-6",
+        "locomo-d6-11",
+        "locomo-d7-26"
+      ]
+    },
+    {
+      "question": "When did Caroline encounter people on a hike and have a negative experience?",
+      "category": 2,
+      "reason": "gold_below_top5_cutoff",
+      "gold_keys": [
+        "locomo-d14-1"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d14-1": 42
+      },
+      "recalled_keys": [
+        "locomo-d11-10",
+        "locomo-d12-1",
+        "locomo-d12-2",
+        "locomo-d15-4",
+        "locomo-d4-16"
+      ]
+    },
+    {
+      "question": "When did Melanie make a plate in pottery class?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d14-4"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d14-4": 3
+      },
+      "recalled_keys": [
+        "locomo-d14-28",
+        "locomo-d14-3",
+        "locomo-d14-4",
+        "locomo-d5-4",
+        "locomo-d5-8"
+      ]
+    },
+    {
+      "question": "Would Caroline be considered religious?",
+      "category": 3,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d12-1",
+        "locomo-d14-19"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d14-19": 311,
+        "locomo-d12-1": 1
+      },
+      "recalled_keys": [
+        "locomo-d12-1",
+        "locomo-d14-24",
+        "locomo-d15-27",
+        "locomo-d17-26",
+        "locomo-d19-13"
+      ]
+    },
+    {
+      "question": "What instruments does Melanie play?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d15-26",
+        "locomo-d2-5"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d15-26": 3,
+        "locomo-d2-5": 195
+      },
+      "recalled_keys": [
+        "locomo-d1-8",
+        "locomo-d14-18",
+        "locomo-d15-18",
+        "locomo-d15-25",
+        "locomo-d15-26"
+      ]
+    },
+    {
+      "question": "What musical artists/bands has Melanie seen?",
+      "category": 1,
+      "reason": "gold_below_top5_cutoff",
+      "gold_keys": [
+        "locomo-d11-3",
+        "locomo-d15-16"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d15-16": 91,
+        "locomo-d11-3": 87
+      },
+      "recalled_keys": [
+        "locomo-d1-8",
+        "locomo-d14-18",
+        "locomo-d14-35",
+        "locomo-d15-18",
+        "locomo-d15-20"
+      ]
+    },
+    {
+      "question": "When did Melanie go to the park?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d15-2"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d15-2": 1
+      },
+      "recalled_keys": [
+        "locomo-d15-12",
+        "locomo-d15-2",
+        "locomo-d15-3",
+        "locomo-d16-19",
+        "locomo-d3-18"
+      ]
+    },
+    {
+      "question": "When is Caroline's youth center putting on a talent show?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d15-11"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d15-11": 1
+      },
+      "recalled_keys": [
+        "locomo-d14-33",
+        "locomo-d15-11",
+        "locomo-d15-12",
+        "locomo-d15-3",
+        "locomo-d15-9"
+      ]
+    },
+    {
+      "question": "Would Melanie likely enjoy the song \"The Four Seasons\" by Vivaldi?",
+      "category": 3,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d15-28"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d15-28": 239
+      },
+      "recalled_keys": [
+        "locomo-d10-12",
+        "locomo-d15-16",
+        "locomo-d15-24",
+        "locomo-d18-5",
+        "locomo-d8-34"
+      ]
+    },
+    {
+      "question": "What are some changes Caroline has faced during her transition journey?",
+      "category": 1,
+      "reason": "gold_below_top5_cutoff",
+      "gold_keys": [
+        "locomo-d11-14",
+        "locomo-d16-15"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d16-15": 89,
+        "locomo-d11-14": 4
+      },
+      "recalled_keys": [
+        "locomo-d11-14",
+        "locomo-d14-12",
+        "locomo-d16-16",
+        "locomo-d17-2",
+        "locomo-d19-11"
+      ]
+    },
+    {
+      "question": "What does Melanie do with her family on hikes?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d10-12",
+        "locomo-d16-4"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d16-4": 258,
+        "locomo-d10-12": 7
+      },
+      "recalled_keys": [
+        "locomo-d12-16",
+        "locomo-d3-22",
+        "locomo-d4-10",
+        "locomo-d4-9",
+        "locomo-d8-29"
+      ]
+    },
+    {
+      "question": "When did Caroline go biking with friends?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d16-1"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d16-1": 3
+      },
+      "recalled_keys": [
+        "locomo-d16-1",
+        "locomo-d16-15",
+        "locomo-d16-2",
+        "locomo-d3-11",
+        "locomo-d6-12"
+      ]
+    },
+    {
+      "question": "How long has Melanie been practicing art?",
+      "category": 2,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d16-8"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d16-8": 269
+      },
+      "recalled_keys": [
+        "locomo-d15-20",
+        "locomo-d16-6",
+        "locomo-d16-7",
+        "locomo-d3-12",
+        "locomo-d8-27"
+      ]
+    },
+    {
+      "question": "What personality traits might Melanie say Caroline has?",
+      "category": 3,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d13-16",
+        "locomo-d16-18",
+        "locomo-d7-4"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d7-4": 81,
+        "locomo-d16-18": 259,
+        "locomo-d13-16": 84
+      },
+      "recalled_keys": [
+        "locomo-d1-10",
+        "locomo-d10-1",
+        "locomo-d12-20",
+        "locomo-d14-18",
+        "locomo-d7-27"
+      ]
+    },
+    {
+      "question": "What transgender-specific events has Caroline attended?",
+      "category": 1,
+      "reason": "gold_below_top5_cutoff",
+      "gold_keys": [
+        "locomo-d15-13",
+        "locomo-d17-19"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d17-19": 1,
+        "locomo-d15-13": 28
+      },
+      "recalled_keys": [
+        "locomo-d1-5",
+        "locomo-d14-12",
+        "locomo-d17-19",
+        "locomo-d5-13",
+        "locomo-d9-6"
+      ]
+    },
+    {
+      "question": "What book did Melanie read from Caroline's suggestion?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d17-10",
+        "locomo-d7-11"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d17-10": 3,
+        "locomo-d7-11": 323
+      },
+      "recalled_keys": [
+        "locomo-d17-10",
+        "locomo-d4-18",
+        "locomo-d6-10",
+        "locomo-d6-9",
+        "locomo-d7-8"
+      ]
+    },
+    {
+      "question": "When did Melanie's friend adopt a child?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d17-3"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d17-3": 3
+      },
+      "recalled_keys": [
+        "locomo-d13-1",
+        "locomo-d17-3",
+        "locomo-d18-15",
+        "locomo-d4-5",
+        "locomo-d8-37"
+      ]
+    },
+    {
+      "question": "When did Melanie get hurt?",
+      "category": 2,
+      "reason": "gold_below_top5_cutoff",
+      "gold_keys": [
+        "locomo-d17-8"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d17-8": 6
+      },
+      "recalled_keys": [
+        "locomo-d1-16",
+        "locomo-d16-4",
+        "locomo-d2-17",
+        "locomo-d8-10",
+        "locomo-d8-4"
+      ]
+    },
+    {
+      "question": "When did Melanie's family go on a roadtrip?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d18-1"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d18-1": 1
+      },
+      "recalled_keys": [
+        "locomo-d18-1",
+        "locomo-d18-12",
+        "locomo-d3-22",
+        "locomo-d4-10",
+        "locomo-d8-29"
+      ]
+    },
+    {
+      "question": "How many children does Melanie have?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d18-1",
+        "locomo-d18-7"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d18-7": 100,
+        "locomo-d18-1": 240
+      },
+      "recalled_keys": [
+        "locomo-d10-22",
+        "locomo-d10-8",
+        "locomo-d6-4",
+        "locomo-d8-2",
+        "locomo-d8-32"
+      ]
+    },
+    {
+      "question": "When did Melanie go on a hike after the roadtrip?",
+      "category": 1,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d18-17"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d18-17": 10
+      },
+      "recalled_keys": [
+        "locomo-d12-1",
+        "locomo-d12-2",
+        "locomo-d18-1",
+        "locomo-d18-17",
+        "locomo-d4-8"
+      ]
+    },
+    {
+      "question": "Would Melanie go on another roadtrip soon?",
+      "category": 3,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d18-1",
+        "locomo-d18-3"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d18-3": 254,
+        "locomo-d18-1": 2
+      },
+      "recalled_keys": [
+        "locomo-d1-18",
+        "locomo-d12-2",
+        "locomo-d18-1",
+        "locomo-d8-32",
+        "locomo-d9-17"
+      ]
+    },
+    {
+      "question": "What items has Melanie bought?",
+      "category": 1,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d19-2",
+        "locomo-d7-18"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d19-2": 2,
+        "locomo-d7-18": 232
+      },
+      "recalled_keys": [
+        "locomo-d1-8",
+        "locomo-d14-18",
+        "locomo-d15-18",
+        "locomo-d19-2",
+        "locomo-d4-4"
+      ]
+    },
+    {
+      "question": "When did Caroline pass the adoption interview?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d19-1"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d19-1": 1
+      },
+      "recalled_keys": [
+        "locomo-d13-1",
+        "locomo-d17-7",
+        "locomo-d19-1",
+        "locomo-d19-2",
+        "locomo-d2-12"
+      ]
+    },
+    {
+      "question": "When did Melanie buy the figurines?",
+      "category": 2,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d19-2"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d19-2": 1
+      },
+      "recalled_keys": [
+        "locomo-d14-22",
+        "locomo-d14-28",
+        "locomo-d14-3",
+        "locomo-d19-2",
+        "locomo-d8-18"
+      ]
+    },
+    {
+      "question": "Would Caroline want to move back to her home country soon?",
+      "category": 3,
+      "reason": "gold_below_top5_cutoff",
+      "gold_keys": [
+        "locomo-d19-1",
+        "locomo-d19-3"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d19-3": 10,
+        "locomo-d19-1": 16
+      },
+      "recalled_keys": [
+        "locomo-d19-4",
+        "locomo-d19-5",
+        "locomo-d3-13",
+        "locomo-d4-3",
+        "locomo-d7-3"
+      ]
+    },
+    {
+      "question": "What did the charity race raise awareness for?",
+      "category": 4,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d2-2"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d2-2": 1
+      },
+      "recalled_keys": [
+        "locomo-d10-15",
+        "locomo-d2-1",
+        "locomo-d2-2",
+        "locomo-d3-2",
+        "locomo-d8-20"
+      ]
+    },
+    {
+      "question": "What did Melanie realize after the charity race?",
+      "category": 4,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d2-3"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d2-3": 3
+      },
+      "recalled_keys": [
+        "locomo-d14-22",
+        "locomo-d2-1",
+        "locomo-d2-2",
+        "locomo-d2-3",
+        "locomo-d8-18"
+      ]
+    },
+    {
+      "question": "How does Melanie prioritize self-care?",
+      "category": 4,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d2-5"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d2-5": 207
+      },
+      "recalled_keys": [
+        "locomo-d11-13",
+        "locomo-d13-16",
+        "locomo-d13-18",
+        "locomo-d2-3",
+        "locomo-d2-4"
+      ]
+    },
+    {
+      "question": "What are Caroline's plans for the summer?",
+      "category": 4,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d2-8"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d2-8": 209
+      },
+      "recalled_keys": [
+        "locomo-d10-11",
+        "locomo-d11-1",
+        "locomo-d12-17",
+        "locomo-d15-16",
+        "locomo-d2-7"
+      ]
+    },
+    {
+      "question": "What type of individuals does the adoption agency Caroline is considering support?",
+      "category": 4,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d2-12"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d2-12": 3
+      },
+      "recalled_keys": [
+        "locomo-d17-7",
+        "locomo-d19-1",
+        "locomo-d2-10",
+        "locomo-d2-12",
+        "locomo-d2-13"
+      ]
+    },
+    {
+      "question": "Why did Caroline choose the adoption agency?",
+      "category": 4,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d2-12"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d2-12": 4
+      },
+      "recalled_keys": [
+        "locomo-d13-1",
+        "locomo-d17-7",
+        "locomo-d19-1",
+        "locomo-d19-2",
+        "locomo-d2-12"
+      ]
+    },
+    {
+      "question": "What is Caroline excited about in the adoption process?",
+      "category": 4,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d2-14"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d2-14": 276
+      },
+      "recalled_keys": [
+        "locomo-d16-4",
+        "locomo-d17-7",
+        "locomo-d19-1",
+        "locomo-d19-7",
+        "locomo-d2-13"
+      ]
+    },
+    {
+      "question": "What does Melanie think about Caroline's decision to adopt?",
+      "category": 4,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d2-15"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d2-15": 304
+      },
+      "recalled_keys": [
+        "locomo-d13-1",
+        "locomo-d14-2",
+        "locomo-d17-3",
+        "locomo-d2-1",
+        "locomo-d8-10"
+      ]
+    },
+    {
+      "question": "How long have Mel and her husband been married?",
+      "category": 4,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d3-16"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d3-16": null
+      },
+      "recalled_keys": [
+        "locomo-d16-1",
+        "locomo-d17-1",
+        "locomo-d19-7",
+        "locomo-d3-15",
+        "locomo-d4-1"
+      ]
+    },
+    {
+      "question": "What does Caroline's necklace symbolize?",
+      "category": 4,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d4-3"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d4-3": 2
+      },
+      "recalled_keys": [
+        "locomo-d15-15",
+        "locomo-d17-22",
+        "locomo-d4-2",
+        "locomo-d4-3",
+        "locomo-d4-4"
+      ]
+    },
+    {
+      "question": "What country is Caroline's grandma from?",
+      "category": 4,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d4-3"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d4-3": 1
+      },
+      "recalled_keys": [
+        "locomo-d15-1",
+        "locomo-d16-2",
+        "locomo-d19-13",
+        "locomo-d3-13",
+        "locomo-d4-3"
+      ]
+    },
+    {
+      "question": "What was grandma's gift to Caroline?",
+      "category": 4,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d4-3"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d4-3": 1
+      },
+      "recalled_keys": [
+        "locomo-d1-4",
+        "locomo-d15-15",
+        "locomo-d19-11",
+        "locomo-d19-13",
+        "locomo-d4-3"
+      ]
+    },
+    {
+      "question": "What is Melanie's hand-painted bowl a reminder of?",
+      "category": 4,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d4-5"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d4-5": 1
+      },
+      "recalled_keys": [
+        "locomo-d11-11",
+        "locomo-d4-5",
+        "locomo-d5-6",
+        "locomo-d5-8",
+        "locomo-d9-16"
+      ]
+    },
+    {
+      "question": "What did Melanie and her family do while camping?",
+      "category": 4,
+      "reason": "gold_outside_top100_or_no_lexical_match",
+      "gold_keys": [
+        "locomo-d4-8"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d4-8": 251
+      },
+      "recalled_keys": [
+        "locomo-d10-12",
+        "locomo-d18-19",
+        "locomo-d6-16",
+        "locomo-d8-11",
+        "locomo-d8-32"
+      ]
+    },
+    {
+      "question": "What kind of counseling and mental health services is Caroline interested in pursuing?",
+      "category": 4,
+      "reason": "gold_below_top5_cutoff",
+      "gold_keys": [
+        "locomo-d4-13"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d4-13": 8
+      },
+      "recalled_keys": [
+        "locomo-d1-11",
+        "locomo-d4-11",
+        "locomo-d4-12",
+        "locomo-d7-5",
+        "locomo-d7-7"
+      ]
+    },
+    {
+      "question": "What workshop did Caroline attend recently?",
+      "category": 4,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d4-13"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d4-13": 3
+      },
+      "recalled_keys": [
+        "locomo-d10-8",
+        "locomo-d12-1",
+        "locomo-d17-13",
+        "locomo-d4-13",
+        "locomo-d8-2"
+      ]
+    },
+    {
+      "question": "What was discussed in the LGBTQ+ counseling workshop?",
+      "category": 4,
+      "reason": "passed",
+      "gold_keys": [
+        "locomo-d4-13"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d4-13": 1
+      },
+      "recalled_keys": [
+        "locomo-d1-11",
+        "locomo-d1-3",
+        "locomo-d4-11",
+        "locomo-d4-12",
+        "locomo-d4-13"
+      ]
+    },
+    {
+      "question": "What motivated Caroline to pursue counseling?",
+      "category": 4,
+      "reason": "gold_below_top5_cutoff",
+      "gold_keys": [
+        "locomo-d4-15"
+      ],
+      "absent_gold_keys": [],
+      "gold_ranks": {
+        "locomo-d4-15": 8
+      },
+      "recalled_keys": [
+        "locomo-d1-11",
+        "locomo-d4-14",
+        "locomo-d5-3",
+        "locomo-d6-3",
+        "locomo-d7-5"
+      ]
+    }
+  ]
+}

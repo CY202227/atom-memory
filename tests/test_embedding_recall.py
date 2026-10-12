@@ -333,3 +333,28 @@ def test_embedding_recall_direct_lazy():
         calls_before = len(embedder.calls)
         strat.retrieve([atom], "sunny", 5)
         assert len(embedder.calls) == calls_before + 2
+
+
+@pytest.mark.parametrize("action", ["rollback", "archive"])
+def test_manual_update_invalidates_root_and_derived(emb_env, fake_llm, action):
+    from atom_memory.models import AtomLink, AtomLinkKind
+    client, embedder, engine = emb_env
+    uid = _space_and_atoms(client, fake_llm)
+    assert client.post(f"/spaces/{uid}/recall", json={"query": "hiking", "method": "embedding", "max_atoms": 2}).status_code == 200
+    with Session(engine) as session:
+        root = session.exec(select(Atom).where(Atom.key == "hobby-hike")).one()
+        child = session.exec(select(Atom).where(Atom.key == "hobby-bake")).one()
+        root_id, child_id = root.id, child.id
+        child.confidence = 0.9
+        session.add(child)
+        session.add(AtomLink(space_id=root.space_id, src_atom_id=child.id, dst_atom_id=root.id, kind=AtomLinkKind.derived_from))
+        session.commit()
+        assert session.exec(select(AtomEmbedding).where(AtomEmbedding.atom_id == root_id)).first() is not None
+    body = {"seq": 1} if action == "rollback" else None
+    assert client.post(f"/spaces/{uid}/atoms/hobby-hike/{action}", json=body).status_code == 200
+    with Session(engine) as session:
+        assert session.exec(select(AtomEmbedding).where(AtomEmbedding.atom_id.in_([root_id, child_id]))).all() == []
+        assert session.get(Atom, child_id).confidence <= 0.15
+    before = len(embedder.calls)
+    client.post(f"/spaces/{uid}/recall", json={"query": "hiking", "method": "embedding", "max_atoms": 2})
+    assert len(embedder.calls) > before
