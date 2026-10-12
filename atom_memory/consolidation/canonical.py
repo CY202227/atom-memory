@@ -124,6 +124,10 @@ def _find_near_duplicate(
         hay = _norm_text(a.statement)
         if not hay:
             continue
+        # Similar wording is not evidence that two dated experiences are identical.
+        # Explicit same-key updates remain available for genuine corrections.
+        if (prefer_kind == AtomKind.event.value or a.kind == AtomKind.event) and needle != hay:
+            continue
         if needle == hay or needle in hay or hay in needle:
             score = 1.0
         else:

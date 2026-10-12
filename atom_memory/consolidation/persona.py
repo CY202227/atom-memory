@@ -30,7 +30,8 @@ from ..repositories import (
 )
 from . import prompts
 from .canonical import CANONICAL_PERSONA, CANONICAL_PREFERRED_NAME
-from .engine import _DETAIL_MAX, _STATEMENT_MAX, parse_json_object
+from .engine import _DETAIL_MAX, _STATEMENT_MAX, parse_json_object, _json_schema_format
+from .synthesis import DerivedPlan
 
 _MAX_PERSONA_OPS = 4
 
@@ -133,10 +134,11 @@ class PersonaEngine:
             f"## 当前时间\n{date.today().isoformat()}\n\n"
             f"## atom 索引\n{index_text}\n\n"
             f"## 相关原子全文\n{prompts.render_atoms_full(context)}",
+            response_format=_json_schema_format("persona_write", DerivedPlan),
         )
         run.prompt_tokens += res.prompt_tokens
         run.completion_tokens += res.completion_tokens
-        operations = parse_json_object(res.text).get("operations") or []
+        operations = [op.model_dump(mode="json") for op in DerivedPlan.model_validate(parse_json_object(res.text)).operations]
 
         by_key = {a.key: a for a in atoms}
         touched: list[str] = []

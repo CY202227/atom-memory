@@ -4,11 +4,12 @@
 """
 
 import json
+import copy
 import re
 from datetime import date
 from typing import Literal, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from sqlmodel import Session
 
 from ..linking import keyify
@@ -35,7 +36,7 @@ from ..repositories import (
     source_repo,
 )
 from ..memory_layers import default_layer_for_write
-from ..temporal import append_time_facts_to_detail
+from ..temporal import append_time_facts_to_detail, source_time_anchor
 from . import prompts
 from .canonical import apply_canonical_to_op
 
@@ -47,12 +48,16 @@ def parse_json_object(text: str) -> dict:
     text = text.strip()
     text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text)
     try:
-        return json.loads(text)
+        value = json.loads(text)
     except json.JSONDecodeError:
         start, end = text.find("{"), text.rfind("}")
         if start != -1 and end > start:
-            return json.loads(text[start : end + 1])
-        raise
+            value = json.loads(text[start : end + 1])
+        else:
+            raise
+    if not isinstance(value, dict):
+        raise ValueError("Expected a JSON object")
+    return value
 
 
 class AtomLinkOp(BaseModel):
@@ -67,10 +72,11 @@ class AtomOp(BaseModel):
     statement: str = ""
     detail: str = ""
     happened_on: Optional[str] = None
-    confidence: Optional[float] = None
+    confidence: Optional[float] = Field(default=None, ge=0, le=1)
     change_reason: str = ""
     source_ids: list[int] = []
     links: list[AtomLinkOp] = []
+    memory_layer: Literal[1, 2, 3] | None = None
 
 
 class WritePlan(BaseModel):
@@ -82,10 +88,40 @@ class SelectPlan(BaseModel):
 
 
 def _json_schema_format(name: str, model: type[BaseModel]) -> dict:
+    schema = copy.deepcopy(model.model_json_schema())
+    def strict(node):
+        if isinstance(node, dict):
+            node.pop("default", None)
+            if node.get("type") == "object":
+                node["additionalProperties"] = False
+                node["required"] = list(node.get("properties", {}))
+            for value in node.values():
+                strict(value)
+        elif isinstance(node, list):
+            for value in node:
+                strict(value)
+    strict(schema)
     return {
         "type": "json_schema",
-        "json_schema": {"name": name, "schema": model.model_json_schema()},
+        "json_schema": {"name": name, "schema": schema, "strict": True},
     }
+
+
+def request_plan(llm: ChatLLM, system: str, user: str, model: type[BaseModel], name: str,
+                 run: ConsolidationRun | None = None) -> BaseModel:
+    """Parse and validate before any write; retry schema violations once without raw output."""
+    for attempt in range(2):
+        result = llm.complete(system, user, response_format=_json_schema_format(name, model))
+        if run is not None:
+            run.prompt_tokens += result.prompt_tokens
+            run.completion_tokens += result.completion_tokens
+        try:
+            return model.model_validate(parse_json_object(result.text))
+        except ValueError as exc:
+            if attempt:
+                raise LLMError("Structured output failed schema validation after 2 attempts", code="invalid_schema") from exc
+            user += "\nReturn a complete JSON object matching every field and type in the schema. The previous output failed schema validation; do not omit the required top-level fields."
+    raise AssertionError("unreachable")
 
 
 def _parse_happened_on(value) -> date | None:
@@ -174,8 +210,9 @@ class ConsolidationEngine:
             return run_repo.finish(session, run, RunStatus.succeeded, atoms_touched=touched)
         except (LLMError, json.JSONDecodeError, KeyError, ValueError) as e:
             session.rollback()
+            reason = f"LLMError[{e.code}]: {e}" if isinstance(e, LLMError) else f"{type(e).__name__}: {e}"
             return run_repo.finish(
-                session, run, RunStatus.failed, error=f"{type(e).__name__}: {e}"
+                session, run, RunStatus.failed, error=reason
             )
 
     def _consolidate(
@@ -187,29 +224,25 @@ class ConsolidationEngine:
 
         context_atoms: list[Atom] = []
         if active_atoms:
-            res = self._llm.complete(
+            plan = request_plan(self._llm,
                 prompts.CONSOLIDATE_SELECT_SYSTEM,
                 f"## atom 索引\n{index_text}\n\n## 最近经历\n{sources_text}",
-                response_format=_json_schema_format("select_plan", SelectPlan),
+                SelectPlan, "select_plan", run,
             )
-            run.prompt_tokens += res.prompt_tokens
-            run.completion_tokens += res.completion_tokens
-            keys = parse_json_object(res.text).get("read", [])
+            keys = plan.read
             by_key = {a.key: a for a in active_atoms}
             context_atoms = [by_key[k] for k in keys if k in by_key]
 
         today = date.today()
-        res = self._llm.complete(
+        plan = request_plan(self._llm,
             prompts.CONSOLIDATE_SYSTEM,
             f"## 当前时间\n{today.isoformat()}\n\n"
             f"## atom 索引\n{index_text}\n\n"
             f"## 相关原子全文\n{prompts.render_atoms_full(context_atoms)}\n\n"
             f"## 最近经历\n{sources_text}",
-            response_format=_json_schema_format("write_plan", WritePlan),
+            WritePlan, "write_plan", run,
         )
-        run.prompt_tokens += res.prompt_tokens
-        run.completion_tokens += res.completion_tokens
-        operations = parse_json_object(res.text).get("operations", [])
+        operations = [op.model_dump(mode="json", exclude_unset=True) for op in plan.operations]
 
         valid_ids = {s.id for s in pending}
         by_id = {s.id: s for s in pending}
@@ -280,8 +313,10 @@ class ConsolidationEngine:
         detail = append_time_facts_to_detail(
             detail,
             happened_on,
-            text=f"{statement}\n{cited_text}",
+            # A source can contain several unrelated events; derive time only from this fact.
+            text=f"{statement}\n{detail}",
             today=today,
+            source_anchor=source_time_anchor(cited_text),
             max_chars=_DETAIL_MAX,
         )
         confidence = op.get("confidence")
@@ -335,19 +370,8 @@ class ConsolidationEngine:
     def _invalidate_derived_downstream(
         self, session: Session, atom_id: int
     ) -> None:
-        """upsert/archive 后：沿 derived_from 反向闭包降置信度并清向量。"""
-        downstream = atom_link_repo.reverse_derived_closure(session, {atom_id})
-        for did in downstream:
-            child = session.get(Atom, did)
-            if child is None:
-                continue
-            if child.confidence is not None:
-                child.confidence = min(float(child.confidence), 0.3) * 0.5
-            else:
-                child.confidence = 0.2
-            child.updated_at = utcnow()
-            session.add(child)
-            embedding_repo.invalidate_for_atom(session, did)
+        from ..invalidation import invalidate_dependents
+        invalidate_dependents(session, atom_id)
 
     def _apply_links(
         self,

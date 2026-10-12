@@ -75,6 +75,22 @@ _MONTH_ABBR = {
 }
 
 
+def source_time_anchor(text: str) -> date | None:
+    """Use an explicit source/session header; ambiguous multiple anchors are not collapsed."""
+    anchors = set()
+    for header in re.findall(r"^\[session_time\]\s*(.+)$", text or "", re.MULTILINE):
+        iso = re.search(r"\b(\d{4}-\d{2}-\d{2})\b", header)
+        english = re.search(r"\b(\d{1,2})\s+([A-Za-z]+),?\s+(\d{4})\b", header)
+        try:
+            if iso:
+                anchors.add(date.fromisoformat(iso.group(1)))
+            elif english and english.group(2)[:3].lower() in _MONTH_ABBR:
+                anchors.add(date(int(english.group(3)), _MONTH_ABBR[english.group(2)[:3].lower()], int(english.group(1))))
+        except ValueError:
+            continue
+    return next(iter(anchors)) if len(anchors) == 1 else None
+
+
 def weekday_name(d: date, *, lang: str = "zh") -> str:
     """Return weekday label for a date (zh: 星期一 / en: Monday)."""
     i = d.weekday()  # Mon=0
@@ -96,6 +112,15 @@ def resolve_relative(expr: str, anchor: date) -> date | None:
     text = (expr or "").strip()
     if not text:
         return None
+    last_weekday = re.search(r"\blast\s+(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\b", text, re.IGNORECASE)
+    if last_weekday:
+        return _prev_weekday(anchor, _WEEKDAY_EN_TO_I[last_weekday.group(1).lower()])
+    if re.search(r"\byesterday\b", text, re.IGNORECASE):
+        return anchor - timedelta(days=1)
+    if re.search(r"\btoday\b", text, re.IGNORECASE):
+        return anchor
+    if re.search(r"\btomorrow\b", text, re.IGNORECASE):
+        return anchor + timedelta(days=1)
 
     m = _REL_BEFORE_DATE.search(text)
     if m:
@@ -149,11 +174,17 @@ def resolve_relative(expr: str, anchor: date) -> date | None:
 _LAST_YEAR = re.compile(r"\blast\s+year\b|去年", re.IGNORECASE)
 
 
+def _positive_time_text(text: str) -> str:
+    text = re.sub(r"(?:不是|并非|不在)(?:今天|昨天|明天|去年|下个月)", "", text)
+    return re.sub(r"\b(?:not|never)\s+(?:yesterday|today|tomorrow|last\s+(?:year|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)|next\s+month)\b", "", text, flags=re.IGNORECASE)
+
+
 def derive_time_facts(
     happened_on: date | None,
     text: str = "",
     *,
     today: date | None = None,
+    source_anchor: date | None = None,
 ) -> list[str]:
     """产出可追加到 detail 的时间派生表述（短句列表）。"""
     facts: list[str] = []
@@ -162,7 +193,8 @@ def derive_time_facts(
         facts.append(weekday_name(happened_on, lang="en"))
         facts.append(happened_on.isoformat())
 
-    anchor = happened_on or today
+    text = _positive_time_text(text)
+    anchor = source_anchor or happened_on or today
     if anchor is not None and text:
         resolved = resolve_relative(text, anchor)
         if resolved is not None and resolved != happened_on:
@@ -173,6 +205,9 @@ def derive_time_facts(
         if _LAST_YEAR.search(text):
             facts.append(str(anchor.year - 1))
             facts.append(f"year={anchor.year - 1} (last year)")
+        if re.search(r"\bnext\s+month\b|下个?月", text, re.IGNORECASE):
+            year, month = (anchor.year + 1, 1) if anchor.month == 12 else (anchor.year, anchor.month + 1)
+            facts.append(f"{year:04d}-{month:02d} (next month)")
 
     # 去重保序
     seen: set[str] = set()
@@ -190,10 +225,11 @@ def append_time_facts_to_detail(
     *,
     text: str = "",
     today: date | None = None,
+    source_anchor: date | None = None,
     max_chars: int = 300,
 ) -> str:
     """把时间派生表述追加到 detail 尾部（不超 max_chars）。"""
-    facts = derive_time_facts(happened_on, text, today=today)
+    facts = derive_time_facts(happened_on, text, today=today, source_anchor=source_anchor)
     if not facts:
         return (detail or "")[:max_chars]
     marker = "time_facts="

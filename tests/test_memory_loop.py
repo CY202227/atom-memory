@@ -298,7 +298,7 @@ def test_consolidate_zero_ops_and_failure(client, fake_llm):
         f"/spaces/{uid}/sources",
         json={"kind": "manual", "content": "重要材料", "salience": 1.0},
     )
-    fake_llm.responses = ["我不会输出 JSON。"]
+    fake_llm.responses = ["我不会输出 JSON。", "我不会输出 JSON。"]
     r = client.post(f"/spaces/{uid}/consolidate", json={})
     run = r.json()
     assert run["status"] == "failed" and run["error"]

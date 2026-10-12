@@ -1,0 +1,2190 @@
+{
+  "mode": "consolidate=oracle;score=evidence",
+  "samples": 1,
+  "total": 98,
+  "hits": 45,
+  "accuracy": 0.4592,
+  "mean_f1": 0.4592,
+  "avg_chars_used": 386.1,
+  "avg_atoms_clipped": 0.0,
+  "skipped_no_evidence": 2,
+  "any_hits": 58,
+  "any_accuracy": 0.5918,
+  "retrieval_coverage": 1.0,
+  "by_category": {
+    "multi_hop": {
+      "total": 11,
+      "hits": 1,
+      "accuracy": 0.0909,
+      "mean_f1": 0.0909,
+      "any_hits": 4,
+      "any_accuracy": 0.3636
+    },
+    "open_domain": {
+      "total": 18,
+      "hits": 8,
+      "accuracy": 0.4444,
+      "mean_f1": 0.4444,
+      "any_hits": 8,
+      "any_accuracy": 0.4444
+    },
+    "single_hop": {
+      "total": 32,
+      "hits": 4,
+      "accuracy": 0.125,
+      "mean_f1": 0.125,
+      "any_hits": 14,
+      "any_accuracy": 0.4375
+    },
+    "temporal": {
+      "total": 37,
+      "hits": 32,
+      "accuracy": 0.8649,
+      "mean_f1": 0.8649,
+      "any_hits": 32,
+      "any_accuracy": 0.8649
+    }
+  },
+  "samples_detail": [
+    {
+      "sample_id": "conv-26",
+      "total": 98,
+      "hits": 45,
+      "accuracy": 0.4592,
+      "mean_f1": 0.4592,
+      "avg_chars_used": 386.1,
+      "skipped_no_evidence": 2,
+      "any_hits": 58,
+      "any_accuracy": 0.5918
+    }
+  ],
+  "llm_diagnostics": [],
+  "configuration": {
+    "dataset_sha256": "79fa87e90f04081343b8c8debecb80a9a6842b76a7aa537dc9fdf651ea698ff4",
+    "python": "3.14.6",
+    "method": "bm25",
+    "budget_chars": 400,
+    "max_atoms": 5,
+    "detail": "statement",
+    "source_turns": null,
+    "max_samples": 1,
+    "max_sessions": null,
+    "max_questions": 100,
+    "consolidate": "oracle",
+    "score": "evidence",
+    "model": null,
+    "limitation": "Oracle consolidation evaluates retrieval over scripted atoms, not real LLM consolidation or answer quality"
+  },
+  "questions": [
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline go to the LGBTQ support group?",
+      "answer": "7 may 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 394,
+      "gold_keys": [
+        "locomo-d1-3"
+      ],
+      "recalled_keys": [
+        "locomo-d1-3",
+        "locomo-d10-5",
+        "locomo-d10-3",
+        "locomo-d8-19",
+        "locomo-d11-6"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Melanie paint a sunrise?",
+      "answer": "2022",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 392,
+      "gold_keys": [
+        "locomo-d1-12"
+      ],
+      "recalled_keys": [
+        "locomo-d1-14",
+        "locomo-d1-12",
+        "locomo-d14-30",
+        "locomo-d13-8",
+        "locomo-d17-12"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What fields would Caroline be likely to pursue in her educaton?",
+      "answer": "psychology, counseling certification",
+      "prediction": "(evidence all=False any=False gold=2 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 3,
+      "chars_used": 398,
+      "gold_keys": [
+        "locomo-d1-11",
+        "locomo-d1-9"
+      ],
+      "recalled_keys": [
+        "locomo-d4-14",
+        "locomo-d7-8",
+        "locomo-d8-8",
+        "locomo-d13-7",
+        "locomo-d14-30"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What did Caroline research?",
+      "answer": "adoption agencies",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 1,
+      "chars_used": 358,
+      "gold_keys": [
+        "locomo-d2-8"
+      ],
+      "recalled_keys": [
+        "locomo-d2-8",
+        "locomo-d17-8",
+        "locomo-d17-7",
+        "locomo-d1-17",
+        "locomo-d10-15"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What is Caroline's identity?",
+      "answer": "transgender woman",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 369,
+      "gold_keys": [
+        "locomo-d1-5"
+      ],
+      "recalled_keys": [
+        "locomo-d11-12",
+        "locomo-d13-13",
+        "locomo-d16-9",
+        "locomo-d15-15",
+        "locomo-d16-12"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Melanie run a charity race?",
+      "answer": "the sunday before 25 may 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 391,
+      "gold_keys": [
+        "locomo-d2-1"
+      ],
+      "recalled_keys": [
+        "locomo-d2-1",
+        "locomo-d2-2",
+        "locomo-d7-20",
+        "locomo-d7-23",
+        "locomo-d7-22"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When is Melanie planning on going camping?",
+      "answer": "june 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 381,
+      "gold_keys": [
+        "locomo-d2-7"
+      ],
+      "recalled_keys": [
+        "locomo-d2-7",
+        "locomo-d12-18",
+        "locomo-d14-32",
+        "locomo-d12-17",
+        "locomo-d10-14"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What is Caroline's relationship status?",
+      "answer": "single",
+      "prediction": "(evidence all=False any=False gold=2 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 369,
+      "gold_keys": [
+        "locomo-d2-14",
+        "locomo-d3-13"
+      ],
+      "recalled_keys": [
+        "locomo-d16-14",
+        "locomo-d15-15",
+        "locomo-d16-12",
+        "locomo-d19-13",
+        "locomo-d12-5"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline give a speech at a school?",
+      "answer": "the week before 9 june 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d3-1"
+      ],
+      "recalled_keys": [
+        "locomo-d3-1",
+        "locomo-d19-4",
+        "locomo-d13-15",
+        "locomo-d14-27",
+        "locomo-d2-10"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline meet up with her friends, family, and mentors?",
+      "answer": "the week before 9 june 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d3-11"
+      ],
+      "recalled_keys": [
+        "locomo-d3-11",
+        "locomo-d16-5",
+        "locomo-d2-10",
+        "locomo-d17-1",
+        "locomo-d17-5"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "How long has Caroline had her current group of friends for?",
+      "answer": "4 years",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 2,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d3-13"
+      ],
+      "recalled_keys": [
+        "locomo-d12-15",
+        "locomo-d3-11",
+        "locomo-d8-37",
+        "locomo-d16-15",
+        "locomo-d6-11"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "Where did Caroline move from 4 years ago?",
+      "answer": "sweden",
+      "prediction": "(evidence all=False any=True gold=2 hit=1)",
+      "hit": false,
+      "hit_any": true,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d3-13",
+        "locomo-d4-3"
+      ],
+      "recalled_keys": [
+        "locomo-d3-13",
+        "locomo-d15-21",
+        "locomo-d4-5",
+        "locomo-d8-29",
+        "locomo-d19-1"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "How long ago was Caroline's 18th birthday?",
+      "answer": "10 years ago",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 399,
+      "gold_keys": [
+        "locomo-d4-5"
+      ],
+      "recalled_keys": [
+        "locomo-d4-5",
+        "locomo-d11-1",
+        "locomo-d15-21",
+        "locomo-d8-17",
+        "locomo-d17-10"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What career path has Caroline decided to persue?",
+      "answer": "counseling or mental health for transgender people",
+      "prediction": "(evidence all=False any=False gold=2 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 399,
+      "gold_keys": [
+        "locomo-d1-11",
+        "locomo-d4-13"
+      ],
+      "recalled_keys": [
+        "locomo-d14-12",
+        "locomo-d4-12",
+        "locomo-d1-9",
+        "locomo-d7-7",
+        "locomo-d4-11"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "Would Caroline still want to pursue counseling as a career if she hadn't received support growing up?",
+      "answer": "likely no",
+      "prediction": "(evidence all=False any=True gold=2 hit=1)",
+      "hit": false,
+      "hit_any": true,
+      "f1": 0.0,
+      "category": 3,
+      "chars_used": 397,
+      "gold_keys": [
+        "locomo-d3-5",
+        "locomo-d4-15"
+      ],
+      "recalled_keys": [
+        "locomo-d4-11",
+        "locomo-d7-7",
+        "locomo-d4-15",
+        "locomo-d4-14",
+        "locomo-d7-8"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What activities does Melanie partake in?",
+      "answer": "pottery, camping, painting, swimming",
+      "prediction": "(evidence all=False any=True gold=4 hit=1)",
+      "hit": false,
+      "hit_any": true,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 312,
+      "gold_keys": [
+        "locomo-d1-12",
+        "locomo-d1-18",
+        "locomo-d5-4",
+        "locomo-d9-1"
+      ],
+      "recalled_keys": [
+        "locomo-d15-10",
+        "locomo-d5-4",
+        "locomo-d8-18",
+        "locomo-d14-18",
+        "locomo-d15-18"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Melanie sign up for a pottery class?",
+      "answer": "2 july 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d5-4"
+      ],
+      "recalled_keys": [
+        "locomo-d5-4",
+        "locomo-d14-4",
+        "locomo-d5-8",
+        "locomo-d16-18",
+        "locomo-d11-5"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When is Caroline going to the transgender conference?",
+      "answer": "july 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d5-13"
+      ],
+      "recalled_keys": [
+        "locomo-d5-13",
+        "locomo-d3-1",
+        "locomo-d4-1",
+        "locomo-d1-5",
+        "locomo-d17-19"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "Where has Melanie camped?",
+      "answer": "beach, mountains, forest",
+      "prediction": "(evidence all=False any=True gold=3 hit=1)",
+      "hit": false,
+      "hit_any": true,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d4-6",
+        "locomo-d6-16",
+        "locomo-d8-32"
+      ],
+      "recalled_keys": [
+        "locomo-d18-19",
+        "locomo-d10-12",
+        "locomo-d10-14",
+        "locomo-d9-1",
+        "locomo-d4-6"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What do Melanie's kids like?",
+      "answer": "dinosaurs, nature",
+      "prediction": "(evidence all=False any=False gold=2 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 398,
+      "gold_keys": [
+        "locomo-d4-8",
+        "locomo-d6-6"
+      ],
+      "recalled_keys": [
+        "locomo-d11-7",
+        "locomo-d9-17",
+        "locomo-d8-3",
+        "locomo-d2-15",
+        "locomo-d1-2"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Melanie go to the museum?",
+      "answer": "5 july 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 320,
+      "gold_keys": [
+        "locomo-d6-4"
+      ],
+      "recalled_keys": [
+        "locomo-d6-4",
+        "locomo-d12-2",
+        "locomo-d7-27",
+        "locomo-d18-17",
+        "locomo-d10-1"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline have a picnic?",
+      "answer": "the week before 6 july 2023",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 2,
+      "chars_used": 301,
+      "gold_keys": [
+        "locomo-d6-11"
+      ],
+      "recalled_keys": [
+        "locomo-d3-18",
+        "locomo-d10-15",
+        "locomo-d15-13",
+        "locomo-d16-17",
+        "locomo-d6-7"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "Would Caroline likely have Dr. Seuss books on her bookshelf?",
+      "answer": "yes, since she collects classic children's books",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 3,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d6-9"
+      ],
+      "recalled_keys": [
+        "locomo-d6-7",
+        "locomo-d7-8",
+        "locomo-d7-10",
+        "locomo-d6-9",
+        "locomo-d4-11"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What books has Melanie read?",
+      "answer": "\"nothing is impossible\", \"charlotte's web\"",
+      "prediction": "(evidence all=True any=True gold=2 hit=2)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 1,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d6-10",
+        "locomo-d7-8"
+      ],
+      "recalled_keys": [
+        "locomo-d6-10",
+        "locomo-d17-10",
+        "locomo-d7-8",
+        "locomo-d7-9",
+        "locomo-d6-7"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What does Melanie do to destress?",
+      "answer": "running, pottery",
+      "prediction": "(evidence all=False any=False gold=2 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 315,
+      "gold_keys": [
+        "locomo-d5-4",
+        "locomo-d7-22"
+      ],
+      "recalled_keys": [
+        "locomo-d7-20",
+        "locomo-d15-18",
+        "locomo-d17-22",
+        "locomo-d13-15",
+        "locomo-d7-27"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline go to the LGBTQ conference?",
+      "answer": "10 july 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 399,
+      "gold_keys": [
+        "locomo-d7-1"
+      ],
+      "recalled_keys": [
+        "locomo-d7-1",
+        "locomo-d5-13",
+        "locomo-d14-34",
+        "locomo-d16-5",
+        "locomo-d3-1"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Melanie read the book \"nothing is impossible\"?",
+      "answer": "2022",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d7-8"
+      ],
+      "recalled_keys": [
+        "locomo-d6-10",
+        "locomo-d17-10",
+        "locomo-d7-8",
+        "locomo-d6-7",
+        "locomo-d7-9"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "Would Caroline pursue writing as a career option?",
+      "answer": "likely no; though she likes reading, she wants to be a counselor",
+      "prediction": "(evidence all=False any=False gold=2 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 3,
+      "chars_used": 398,
+      "gold_keys": [
+        "locomo-d7-5",
+        "locomo-d7-9"
+      ],
+      "recalled_keys": [
+        "locomo-d1-9",
+        "locomo-d7-7",
+        "locomo-d7-8",
+        "locomo-d4-14",
+        "locomo-d4-11"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline go to the adoption meeting?",
+      "answer": "the friday before 15 july 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 399,
+      "gold_keys": [
+        "locomo-d8-9"
+      ],
+      "recalled_keys": [
+        "locomo-d8-9",
+        "locomo-d15-4",
+        "locomo-d5-13",
+        "locomo-d7-1",
+        "locomo-d10-3"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Melanie go to the pottery workshop?",
+      "answer": "the friday before 15 july 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 399,
+      "gold_keys": [
+        "locomo-d8-2"
+      ],
+      "recalled_keys": [
+        "locomo-d8-2",
+        "locomo-d4-13",
+        "locomo-d12-3",
+        "locomo-d5-12",
+        "locomo-d5-6"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Melanie go camping in June?",
+      "answer": "the week before 27 june 2023",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 2,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d4-8"
+      ],
+      "recalled_keys": [
+        "locomo-d4-6",
+        "locomo-d10-14",
+        "locomo-d18-19",
+        "locomo-d10-12",
+        "locomo-d2-7"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What LGBTQ+ events has Caroline participated in?",
+      "answer": "pride parade, school speech, support group",
+      "prediction": "(evidence all=False any=True gold=4 hit=1)",
+      "hit": false,
+      "hit_any": true,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 399,
+      "gold_keys": [
+        "locomo-d1-3",
+        "locomo-d3-1",
+        "locomo-d5-1",
+        "locomo-d8-17"
+      ],
+      "recalled_keys": [
+        "locomo-d3-2",
+        "locomo-d3-1",
+        "locomo-d9-8",
+        "locomo-d2-3",
+        "locomo-d11-2"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline go to a pride parade during the summer?",
+      "answer": "the week before 3 july 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 398,
+      "gold_keys": [
+        "locomo-d5-1"
+      ],
+      "recalled_keys": [
+        "locomo-d10-7",
+        "locomo-d8-17",
+        "locomo-d11-4",
+        "locomo-d5-1",
+        "locomo-d5-2"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What events has Caroline participated in to help children?",
+      "answer": "mentoring program, school speech",
+      "prediction": "(evidence all=False any=False gold=2 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 397,
+      "gold_keys": [
+        "locomo-d3-3",
+        "locomo-d9-2"
+      ],
+      "recalled_keys": [
+        "locomo-d8-32",
+        "locomo-d6-4",
+        "locomo-d8-9",
+        "locomo-d10-8",
+        "locomo-d8-2"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Melanie go camping in July?",
+      "answer": "two weekends before 17 july 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 387,
+      "gold_keys": [
+        "locomo-d9-1"
+      ],
+      "recalled_keys": [
+        "locomo-d10-12",
+        "locomo-d9-1",
+        "locomo-d8-32",
+        "locomo-d6-16",
+        "locomo-d10-13"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline join a mentorship program?",
+      "answer": "the weekend before 17 july 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 363,
+      "gold_keys": [
+        "locomo-d9-2"
+      ],
+      "recalled_keys": [
+        "locomo-d9-2",
+        "locomo-d10-3",
+        "locomo-d3-8",
+        "locomo-d14-12",
+        "locomo-d8-18"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What did Melanie paint recently?",
+      "answer": "sunset",
+      "prediction": "(evidence all=False any=False gold=2 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 398,
+      "gold_keys": [
+        "locomo-d8-6",
+        "locomo-d9-17"
+      ],
+      "recalled_keys": [
+        "locomo-d14-30",
+        "locomo-d13-8",
+        "locomo-d13-11",
+        "locomo-d17-13",
+        "locomo-d11-8"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What activities has Melanie done with her family?",
+      "answer": "pottery, painting, camping, museum, swimming, hiking",
+      "prediction": "(evidence all=False any=False gold=6 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d1-18",
+        "locomo-d3-14",
+        "locomo-d6-4",
+        "locomo-d8-4",
+        "locomo-d8-6",
+        "locomo-d9-1"
+      ],
+      "recalled_keys": [
+        "locomo-d15-10",
+        "locomo-d5-4",
+        "locomo-d17-14",
+        "locomo-d6-13",
+        "locomo-d1-6"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "In what ways is Caroline participating in the LGBTQ community?",
+      "answer": "joining activist group, going to pride parades, participating in an art show, mentoring program",
+      "prediction": "(evidence all=False any=False gold=4 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 399,
+      "gold_keys": [
+        "locomo-d10-3",
+        "locomo-d5-1",
+        "locomo-d9-12",
+        "locomo-d9-2"
+      ],
+      "recalled_keys": [
+        "locomo-d3-2",
+        "locomo-d16-5",
+        "locomo-d11-10",
+        "locomo-d15-4",
+        "locomo-d14-34"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "How many times has Melanie gone to the beach in 2023?",
+      "answer": "2",
+      "prediction": "(evidence all=False any=False gold=2 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d10-8",
+        "locomo-d6-16"
+      ],
+      "recalled_keys": [
+        "locomo-d10-10",
+        "locomo-d7-1",
+        "locomo-d4-11",
+        "locomo-d14-7",
+        "locomo-d14-8"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline join a new activist group?",
+      "answer": "the tuesday before 20 july 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 363,
+      "gold_keys": [
+        "locomo-d10-3"
+      ],
+      "recalled_keys": [
+        "locomo-d10-3",
+        "locomo-d10-5",
+        "locomo-d9-2",
+        "locomo-d3-8",
+        "locomo-d8-18"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "Would Melanie be more interested in going to a national park or a theme park?",
+      "answer": "national park; she likes the outdoors",
+      "prediction": "(evidence all=False any=False gold=2 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 3,
+      "chars_used": 399,
+      "gold_keys": [
+        "locomo-d10-12",
+        "locomo-d10-14"
+      ],
+      "recalled_keys": [
+        "locomo-d11-3",
+        "locomo-d11-13",
+        "locomo-d15-2",
+        "locomo-d3-18",
+        "locomo-d15-12"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What kind of art does Caroline make?",
+      "answer": "abstract art",
+      "prediction": "(evidence all=False any=False gold=3 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 374,
+      "gold_keys": [
+        "locomo-d11-12",
+        "locomo-d11-8",
+        "locomo-d9-14"
+      ],
+      "recalled_keys": [
+        "locomo-d14-9",
+        "locomo-d3-18",
+        "locomo-d2-16",
+        "locomo-d11-13",
+        "locomo-d4-17"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When is Melanie's daughter's birthday?",
+      "answer": "13 august",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 356,
+      "gold_keys": [
+        "locomo-d11-1"
+      ],
+      "recalled_keys": [
+        "locomo-d11-1",
+        "locomo-d4-5",
+        "locomo-d18-3",
+        "locomo-d7-27",
+        "locomo-d12-10"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline attend a pride parade in August?",
+      "answer": "the friday before 14 august 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 398,
+      "gold_keys": [
+        "locomo-d11-4"
+      ],
+      "recalled_keys": [
+        "locomo-d11-4",
+        "locomo-d10-7",
+        "locomo-d8-17",
+        "locomo-d5-1",
+        "locomo-d14-23"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "Who supports Caroline when she has a negative experience?",
+      "answer": "her mentors, family, and friends",
+      "prediction": "(evidence all=False any=True gold=2 hit=1)",
+      "hit": false,
+      "hit_any": true,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 399,
+      "gold_keys": [
+        "locomo-d12-1",
+        "locomo-d3-11"
+      ],
+      "recalled_keys": [
+        "locomo-d5-2",
+        "locomo-d7-8",
+        "locomo-d3-5",
+        "locomo-d11-2",
+        "locomo-d12-1"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What types of pottery have Melanie and her kids made?",
+      "answer": "bowls, cup",
+      "prediction": "(evidence all=False any=False gold=3 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 398,
+      "gold_keys": [
+        "locomo-d12-14",
+        "locomo-d5-6",
+        "locomo-d8-4"
+      ],
+      "recalled_keys": [
+        "locomo-d8-2",
+        "locomo-d14-4",
+        "locomo-d5-5",
+        "locomo-d16-11",
+        "locomo-d8-5"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline and Melanie go to a pride fesetival together?",
+      "answer": "2022",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d12-15"
+      ],
+      "recalled_keys": [
+        "locomo-d9-8",
+        "locomo-d10-7",
+        "locomo-d14-23",
+        "locomo-d12-15",
+        "locomo-d16-6"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What would Caroline's political leaning likely be?",
+      "answer": "liberal",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 3,
+      "chars_used": 357,
+      "gold_keys": [
+        "locomo-d12-1"
+      ],
+      "recalled_keys": [
+        "locomo-d18-14",
+        "locomo-d10-15",
+        "locomo-d14-21",
+        "locomo-d8-33",
+        "locomo-d9-7"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What has Melanie painted?",
+      "answer": "horse, sunset, sunrise",
+      "prediction": "(evidence all=False any=True gold=3 hit=1)",
+      "hit": false,
+      "hit_any": true,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 399,
+      "gold_keys": [
+        "locomo-d1-12",
+        "locomo-d13-8",
+        "locomo-d8-6"
+      ],
+      "recalled_keys": [
+        "locomo-d16-12",
+        "locomo-d16-14",
+        "locomo-d1-6",
+        "locomo-d14-30",
+        "locomo-d8-6"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What are Melanie's pets' names?",
+      "answer": "oliver, luna, bailey",
+      "prediction": "(evidence all=False any=True gold=2 hit=1)",
+      "hit": false,
+      "hit_any": true,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 367,
+      "gold_keys": [
+        "locomo-d13-4",
+        "locomo-d7-18"
+      ],
+      "recalled_keys": [
+        "locomo-d7-17",
+        "locomo-d13-4",
+        "locomo-d7-14",
+        "locomo-d13-2",
+        "locomo-d7-15"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline apply to adoption agencies?",
+      "answer": "the week of 23 august 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d13-1"
+      ],
+      "recalled_keys": [
+        "locomo-d13-1",
+        "locomo-d2-8",
+        "locomo-d19-1",
+        "locomo-d17-7",
+        "locomo-d2-10"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline draw a self-portrait?",
+      "answer": "the week before 23 august 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 398,
+      "gold_keys": [
+        "locomo-d13-11"
+      ],
+      "recalled_keys": [
+        "locomo-d13-11",
+        "locomo-d14-29",
+        "locomo-d14-25",
+        "locomo-d17-21",
+        "locomo-d16-9"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What subject have Caroline and Melanie both painted?",
+      "answer": "sunsets",
+      "prediction": "(evidence all=False any=False gold=2 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 393,
+      "gold_keys": [
+        "locomo-d14-5",
+        "locomo-d8-6"
+      ],
+      "recalled_keys": [
+        "locomo-d16-12",
+        "locomo-d8-8",
+        "locomo-d9-15",
+        "locomo-d1-13",
+        "locomo-d1-15"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What symbols are important to Caroline?",
+      "answer": "rainbow flag, transgender symbol",
+      "prediction": "(evidence all=True any=True gold=2 hit=2)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 1,
+      "chars_used": 399,
+      "gold_keys": [
+        "locomo-d14-15",
+        "locomo-d4-1"
+      ],
+      "recalled_keys": [
+        "locomo-d14-15",
+        "locomo-d14-21",
+        "locomo-d4-1",
+        "locomo-d6-11",
+        "locomo-d7-26"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline encounter people on a hike and have a negative experience?",
+      "answer": "the week before 25 august 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d14-1"
+      ],
+      "recalled_keys": [
+        "locomo-d12-1",
+        "locomo-d12-2",
+        "locomo-d14-1",
+        "locomo-d11-10",
+        "locomo-d8-34"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Melanie make a plate in pottery class?",
+      "answer": "24 august 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 386,
+      "gold_keys": [
+        "locomo-d14-4"
+      ],
+      "recalled_keys": [
+        "locomo-d5-4",
+        "locomo-d14-4",
+        "locomo-d14-3",
+        "locomo-d12-3",
+        "locomo-d5-6"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "Would Caroline be considered religious?",
+      "answer": "somewhat, but not extremely religious",
+      "prediction": "(evidence all=False any=True gold=2 hit=1)",
+      "hit": false,
+      "hit_any": true,
+      "f1": 0.0,
+      "category": 3,
+      "chars_used": 353,
+      "gold_keys": [
+        "locomo-d12-1",
+        "locomo-d14-19"
+      ],
+      "recalled_keys": [
+        "locomo-d12-1",
+        "locomo-d19-13",
+        "locomo-d15-3",
+        "locomo-d15-27",
+        "locomo-d14-24"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What instruments does Melanie play?",
+      "answer": "clarinet and violin",
+      "prediction": "(evidence all=False any=False gold=2 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 337,
+      "gold_keys": [
+        "locomo-d15-26",
+        "locomo-d2-5"
+      ],
+      "recalled_keys": [
+        "locomo-d15-25",
+        "locomo-d6-15",
+        "locomo-d15-18",
+        "locomo-d15-20",
+        "locomo-d15-16"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What musical artists/bands has Melanie seen?",
+      "answer": "summer sounds, matt patterson",
+      "prediction": "(evidence all=False any=False gold=2 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 370,
+      "gold_keys": [
+        "locomo-d11-3",
+        "locomo-d15-16"
+      ],
+      "recalled_keys": [
+        "locomo-d15-12",
+        "locomo-d17-12",
+        "locomo-d14-35",
+        "locomo-d11-5",
+        "locomo-d15-15"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Melanie go to the park?",
+      "answer": "27 august 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 394,
+      "gold_keys": [
+        "locomo-d15-2"
+      ],
+      "recalled_keys": [
+        "locomo-d15-2",
+        "locomo-d3-18",
+        "locomo-d15-12",
+        "locomo-d15-3",
+        "locomo-d16-19"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When is Caroline's youth center putting on a talent show?",
+      "answer": "september 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d15-11"
+      ],
+      "recalled_keys": [
+        "locomo-d15-11",
+        "locomo-d15-9",
+        "locomo-d15-3",
+        "locomo-d15-12",
+        "locomo-d14-33"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "Would Melanie likely enjoy the song \"The Four Seasons\" by Vivaldi?",
+      "answer": "yes; it's classical music",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 3,
+      "chars_used": 396,
+      "gold_keys": [
+        "locomo-d15-28"
+      ],
+      "recalled_keys": [
+        "locomo-d15-16",
+        "locomo-d15-22",
+        "locomo-d15-24",
+        "locomo-d11-3",
+        "locomo-d8-34"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What are some changes Caroline has faced during her transition journey?",
+      "answer": "changes to her body, losing unsupportive friends",
+      "prediction": "(evidence all=True any=True gold=2 hit=2)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 1,
+      "chars_used": 399,
+      "gold_keys": [
+        "locomo-d11-14",
+        "locomo-d16-15"
+      ],
+      "recalled_keys": [
+        "locomo-d11-14",
+        "locomo-d14-19",
+        "locomo-d16-15",
+        "locomo-d9-10",
+        "locomo-d16-16"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What does Melanie do with her family on hikes?",
+      "answer": "roast marshmallows, tell stories",
+      "prediction": "(evidence all=False any=False gold=2 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d10-12",
+        "locomo-d16-4"
+      ],
+      "recalled_keys": [
+        "locomo-d18-15",
+        "locomo-d8-34",
+        "locomo-d12-2",
+        "locomo-d4-10",
+        "locomo-d12-16"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline go biking with friends?",
+      "answer": "the weekend before 13 september 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 398,
+      "gold_keys": [
+        "locomo-d16-1"
+      ],
+      "recalled_keys": [
+        "locomo-d16-1",
+        "locomo-d16-2",
+        "locomo-d3-11",
+        "locomo-d8-37",
+        "locomo-d16-15"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "How long has Melanie been practicing art?",
+      "answer": "since 2016",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 2,
+      "chars_used": 384,
+      "gold_keys": [
+        "locomo-d16-8"
+      ],
+      "recalled_keys": [
+        "locomo-d16-6",
+        "locomo-d16-7",
+        "locomo-d8-27",
+        "locomo-d15-20",
+        "locomo-d3-12"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What personality traits might Melanie say Caroline has?",
+      "answer": "thoughtful, authentic, driven",
+      "prediction": "(evidence all=False any=False gold=3 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 3,
+      "chars_used": 364,
+      "gold_keys": [
+        "locomo-d13-16",
+        "locomo-d16-18",
+        "locomo-d7-4"
+      ],
+      "recalled_keys": [
+        "locomo-d10-1",
+        "locomo-d11-5",
+        "locomo-d14-24",
+        "locomo-d4-1",
+        "locomo-d11-11"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What transgender-specific events has Caroline attended?",
+      "answer": "poetry reading, conference",
+      "prediction": "(evidence all=False any=True gold=2 hit=1)",
+      "hit": false,
+      "hit_any": true,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d15-13",
+        "locomo-d17-19"
+      ],
+      "recalled_keys": [
+        "locomo-d9-6",
+        "locomo-d3-1",
+        "locomo-d15-10",
+        "locomo-d17-19",
+        "locomo-d9-8"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What book did Melanie read from Caroline's suggestion?",
+      "answer": "\"becoming nicole\"",
+      "prediction": "(evidence all=False any=True gold=2 hit=1)",
+      "hit": false,
+      "hit_any": true,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d17-10",
+        "locomo-d7-11"
+      ],
+      "recalled_keys": [
+        "locomo-d17-10",
+        "locomo-d7-8",
+        "locomo-d6-10",
+        "locomo-d7-9",
+        "locomo-d6-7"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Melanie's friend adopt a child?",
+      "answer": "2022",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 2,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d17-3"
+      ],
+      "recalled_keys": [
+        "locomo-d13-1",
+        "locomo-d2-10",
+        "locomo-d16-15",
+        "locomo-d8-24",
+        "locomo-d8-37"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Melanie get hurt?",
+      "answer": "september 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 399,
+      "gold_keys": [
+        "locomo-d17-8"
+      ],
+      "recalled_keys": [
+        "locomo-d17-8",
+        "locomo-d17-6",
+        "locomo-d5-5",
+        "locomo-d9-7",
+        "locomo-d2-17"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Melanie's family go on a roadtrip?",
+      "answer": "the weekend before 20 october 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 399,
+      "gold_keys": [
+        "locomo-d18-1"
+      ],
+      "recalled_keys": [
+        "locomo-d18-1",
+        "locomo-d3-22",
+        "locomo-d8-29",
+        "locomo-d4-10",
+        "locomo-d18-3"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "How many children does Melanie have?",
+      "answer": "3",
+      "prediction": "(evidence all=False any=False gold=2 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 397,
+      "gold_keys": [
+        "locomo-d18-1",
+        "locomo-d18-7"
+      ],
+      "recalled_keys": [
+        "locomo-d10-22",
+        "locomo-d6-4",
+        "locomo-d10-8",
+        "locomo-d8-32",
+        "locomo-d8-2"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Melanie go on a hike after the roadtrip?",
+      "answer": "19 october 2023",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d18-17"
+      ],
+      "recalled_keys": [
+        "locomo-d18-1",
+        "locomo-d12-2",
+        "locomo-d8-34",
+        "locomo-d4-8",
+        "locomo-d18-15"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "Would Melanie go on another roadtrip soon?",
+      "answer": "likely no; since this one went badly",
+      "prediction": "(evidence all=False any=True gold=2 hit=1)",
+      "hit": false,
+      "hit_any": true,
+      "f1": 0.0,
+      "category": 3,
+      "chars_used": 399,
+      "gold_keys": [
+        "locomo-d18-1",
+        "locomo-d18-3"
+      ],
+      "recalled_keys": [
+        "locomo-d1-18",
+        "locomo-d18-1",
+        "locomo-d9-17",
+        "locomo-d12-2",
+        "locomo-d8-32"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What items has Melanie bought?",
+      "answer": "figurines, shoes",
+      "prediction": "(evidence all=False any=True gold=2 hit=1)",
+      "hit": false,
+      "hit_any": true,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 321,
+      "gold_keys": [
+        "locomo-d19-2",
+        "locomo-d7-18"
+      ],
+      "recalled_keys": [
+        "locomo-d4-4",
+        "locomo-d19-2",
+        "locomo-d14-18",
+        "locomo-d15-18",
+        "locomo-d1-8"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline pass the adoption interview?",
+      "answer": "the friday before 22 october 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d19-1"
+      ],
+      "recalled_keys": [
+        "locomo-d19-1",
+        "locomo-d17-7",
+        "locomo-d19-2",
+        "locomo-d13-1",
+        "locomo-d2-12"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Melanie buy the figurines?",
+      "answer": "21 october 2023",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 294,
+      "gold_keys": [
+        "locomo-d19-2"
+      ],
+      "recalled_keys": [
+        "locomo-d19-2",
+        "locomo-d8-18",
+        "locomo-d14-22",
+        "locomo-d14-28",
+        "locomo-d14-3"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "Would Caroline want to move back to her home country soon?",
+      "answer": "no; she's in the process of adopting children.",
+      "prediction": "(evidence all=False any=False gold=2 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 3,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d19-1",
+        "locomo-d19-3"
+      ],
+      "recalled_keys": [
+        "locomo-d3-13",
+        "locomo-d4-3",
+        "locomo-d5-3",
+        "locomo-d19-5",
+        "locomo-d8-9"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What did the charity race raise awareness for?",
+      "answer": "mental health",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 4,
+      "chars_used": 337,
+      "gold_keys": [
+        "locomo-d2-2"
+      ],
+      "recalled_keys": [
+        "locomo-d2-2",
+        "locomo-d2-1",
+        "locomo-d3-2",
+        "locomo-d10-15",
+        "locomo-d8-20"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What did Melanie realize after the charity race?",
+      "answer": "self-care is important",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 4,
+      "chars_used": 398,
+      "gold_keys": [
+        "locomo-d2-3"
+      ],
+      "recalled_keys": [
+        "locomo-d2-1",
+        "locomo-d2-2",
+        "locomo-d2-3",
+        "locomo-d8-25",
+        "locomo-d7-7"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "How does Melanie prioritize self-care?",
+      "answer": "by carving out some me-time each day for activities like running, reading, or playing the violin",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 4,
+      "chars_used": 382,
+      "gold_keys": [
+        "locomo-d2-5"
+      ],
+      "recalled_keys": [
+        "locomo-d2-4",
+        "locomo-d2-3",
+        "locomo-d13-18",
+        "locomo-d13-16",
+        "locomo-d1-18"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What are Caroline's plans for the summer?",
+      "answer": "researching adoption agencies",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 4,
+      "chars_used": 381,
+      "gold_keys": [
+        "locomo-d2-8"
+      ],
+      "recalled_keys": [
+        "locomo-d2-7",
+        "locomo-d12-17",
+        "locomo-d12-18",
+        "locomo-d7-4",
+        "locomo-d14-32"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What type of individuals does the adoption agency Caroline is considering support?",
+      "answer": "lgbtq+ individuals",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 4,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d2-12"
+      ],
+      "recalled_keys": [
+        "locomo-d2-10",
+        "locomo-d19-1",
+        "locomo-d17-7",
+        "locomo-d2-8",
+        "locomo-d13-1"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "Why did Caroline choose the adoption agency?",
+      "answer": "because of their inclusivity and support for lgbtq+ individuals",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 4,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d2-12"
+      ],
+      "recalled_keys": [
+        "locomo-d19-1",
+        "locomo-d17-7",
+        "locomo-d2-8",
+        "locomo-d13-1",
+        "locomo-d2-10"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What is Caroline excited about in the adoption process?",
+      "answer": "creating a family for kids who need one",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 4,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d2-14"
+      ],
+      "recalled_keys": [
+        "locomo-d2-13",
+        "locomo-d17-7",
+        "locomo-d17-4",
+        "locomo-d19-1",
+        "locomo-d17-1"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What does Melanie think about Caroline's decision to adopt?",
+      "answer": "she thinks caroline is doing something amazing and will be an awesome mom",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 4,
+      "chars_used": 386,
+      "gold_keys": [
+        "locomo-d2-15"
+      ],
+      "recalled_keys": [
+        "locomo-d13-1",
+        "locomo-d13-4",
+        "locomo-d12-20",
+        "locomo-d19-2",
+        "locomo-d13-16"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "How long have Mel and her husband been married?",
+      "answer": "mel and her husband have been married for 5 years.",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 4,
+      "chars_used": 386,
+      "gold_keys": [
+        "locomo-d3-16"
+      ],
+      "recalled_keys": [
+        "locomo-d3-15",
+        "locomo-d3-14",
+        "locomo-d6-1",
+        "locomo-d19-7",
+        "locomo-d17-1"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What does Caroline's necklace symbolize?",
+      "answer": "love, faith, and strength",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 4,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d4-3"
+      ],
+      "recalled_keys": [
+        "locomo-d4-1",
+        "locomo-d14-21",
+        "locomo-d14-15",
+        "locomo-d4-2",
+        "locomo-d4-3"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What country is Caroline's grandma from?",
+      "answer": "sweden",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 4,
+      "chars_used": 397,
+      "gold_keys": [
+        "locomo-d4-3"
+      ],
+      "recalled_keys": [
+        "locomo-d4-3",
+        "locomo-d3-13",
+        "locomo-d15-1",
+        "locomo-d19-13",
+        "locomo-d16-2"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What was grandma's gift to Caroline?",
+      "answer": "necklace",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 4,
+      "chars_used": 369,
+      "gold_keys": [
+        "locomo-d4-3"
+      ],
+      "recalled_keys": [
+        "locomo-d4-3",
+        "locomo-d19-11",
+        "locomo-d15-15",
+        "locomo-d1-4",
+        "locomo-d19-13"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What is Melanie's hand-painted bowl a reminder of?",
+      "answer": "art and self-expression",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 4,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d4-5"
+      ],
+      "recalled_keys": [
+        "locomo-d4-5",
+        "locomo-d11-11",
+        "locomo-d15-14",
+        "locomo-d5-6",
+        "locomo-d16-8"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What did Melanie and her family do while camping?",
+      "answer": "explored nature, roasted marshmallows, and went on a hike",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 4,
+      "chars_used": 399,
+      "gold_keys": [
+        "locomo-d4-8"
+      ],
+      "recalled_keys": [
+        "locomo-d10-12",
+        "locomo-d8-32",
+        "locomo-d6-16",
+        "locomo-d17-10",
+        "locomo-d8-11"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What kind of counseling and mental health services is Caroline interested in pursuing?",
+      "answer": "working with trans people, helping them accept themselves and supporting their mental health",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 4,
+      "chars_used": 399,
+      "gold_keys": [
+        "locomo-d4-13"
+      ],
+      "recalled_keys": [
+        "locomo-d4-12",
+        "locomo-d1-11",
+        "locomo-d4-11",
+        "locomo-d7-5",
+        "locomo-d7-7"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What workshop did Caroline attend recently?",
+      "answer": "lgbtq+ counseling workshop",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 4,
+      "chars_used": 388,
+      "gold_keys": [
+        "locomo-d4-13"
+      ],
+      "recalled_keys": [
+        "locomo-d4-13",
+        "locomo-d8-2",
+        "locomo-d18-16",
+        "locomo-d12-1",
+        "locomo-d10-8"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What was discussed in the LGBTQ+ counseling workshop?",
+      "answer": "therapeutic methods and how to best work with trans people",
+      "prediction": "(evidence all=True any=True gold=1 hit=1)",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 4,
+      "chars_used": 400,
+      "gold_keys": [
+        "locomo-d4-13"
+      ],
+      "recalled_keys": [
+        "locomo-d4-13",
+        "locomo-d4-12",
+        "locomo-d1-11",
+        "locomo-d4-11",
+        "locomo-d7-5"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What motivated Caroline to pursue counseling?",
+      "answer": "her own journey and the support she received, and how counseling improved her life",
+      "prediction": "(evidence all=False any=False gold=1 hit=0)",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 4,
+      "chars_used": 399,
+      "gold_keys": [
+        "locomo-d4-15"
+      ],
+      "recalled_keys": [
+        "locomo-d4-14",
+        "locomo-d5-3",
+        "locomo-d7-8",
+        "locomo-d14-12",
+        "locomo-d18-11"
+      ]
+    }
+  ]
+}

@@ -12,7 +12,10 @@ class ChatResult:
 
 
 class LLMError(Exception):
-    pass
+    def __init__(self, message: str, *, status_code: int | None = None, code: str = "request_failed"):
+        super().__init__(message)
+        self.status_code = status_code
+        self.code = code
 
 
 class ChatLLM(Protocol):

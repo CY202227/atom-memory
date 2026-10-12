@@ -8,6 +8,9 @@ from __future__ import annotations
 
 import math
 from collections import Counter
+from functools import lru_cache
+from threading import local
+import snowballstemmer
 
 from ..models import Atom
 from .base import RecallHit, RecallOutcome
@@ -17,6 +20,20 @@ _K1 = 1.5
 _B = 0.75
 _RRF_K = 60
 _OVERFETCH = 4
+_STEMMERS = local()
+
+
+@lru_cache(maxsize=32768)
+def _stem(term: str) -> str:
+    if not term.isascii() or not term.isalpha():
+        return term
+    if not hasattr(_STEMMERS, "english"):
+        _STEMMERS.english = snowballstemmer.stemmer("english")
+    return _STEMMERS.english.stemWord(term)
+
+
+def _search_tokens(text: str) -> list[str]:
+    return [_stem(term) for term in tokenize(text)]
 
 # 疑问/虚词：保留在原问一路，改写路丢掉以突出实体与事件词
 _QUERY_STOP = frozenset(
@@ -125,12 +142,6 @@ _QUERY_STOP = frozenset(
         "here",
         "there",
         "now",
-        "want",
-        "pursue",
-        "likely",
-        "considered",
-        "member",
-        "community",
         "什么",
         "怎么",
         "怎样",
@@ -169,7 +180,7 @@ _QUERY_STOP = frozenset(
 
 
 def _doc_tokens(atom: Atom) -> list[str]:
-    return tokenize(atom.statement) * 3 + tokenize(atom.detail or "")
+    return _search_tokens(atom.statement) * 3 + _search_tokens(atom.detail or "")
 
 
 def content_query(query: str) -> str:
@@ -205,12 +216,6 @@ def _rrf_fuse(
     return out
 
 
-def _term_coverage(atom: Atom, terms: list[str]) -> int:
-    if not terms:
-        return 0
-    blob_terms = set(_doc_tokens(atom))
-    return sum(1 for t in terms if t in blob_terms)
-
 
 class Bm25Recall:
     def retrieve(self, atoms: list[Atom], query: str, max_atoms: int) -> RecallOutcome:
@@ -232,12 +237,24 @@ class Bm25Recall:
                     [primary, secondary], limit=overfetch
                 )
 
-        focus = tokenize(rewritten)
+        focus = _search_tokens(rewritten)
         if focus:
+            # A rare topic/entity is more informative than several common words.
+            # Count each query term once and use corpus IDF instead of raw overlap.
+            terms = set(focus)
+            document_terms = [set(_doc_tokens(atom)) for atom in atoms]
+            weights = {
+                term: math.log(1 + (len(atoms) - sum(term in doc for doc in document_terms) + 0.5)
+                    / (sum(term in doc for doc in document_terms) + 0.5))
+                for term in terms
+            }
+            def coverage(hit):
+                tokens = set(_doc_tokens(hit.atom))
+                return sum(weight for term, weight in weights.items() if term in tokens)
             candidates = sorted(
                 candidates,
                 key=lambda h: (
-                    _term_coverage(h.atom, focus),
+                    coverage(h),
                     h.score or 0.0,
                 ),
                 reverse=True,
@@ -247,7 +264,7 @@ class Bm25Recall:
     def _score(
         self, atoms: list[Atom], query: str, limit: int
     ) -> list[RecallHit]:
-        terms = tokenize(query)
+        terms = list(dict.fromkeys(_search_tokens(query)))
         if not terms:
             return []
 

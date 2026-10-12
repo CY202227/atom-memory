@@ -7,6 +7,8 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlmodel import Session
 
 from ...db import get_session
+from ...locks import space_write_lock
+from ...invalidation import invalidate_atom
 from ...models import Atom, AtomKind, AtomStatus, RevisionTrigger, Space, utcnow
 from ...recall import render_detail_block, truncate_source
 from ...repositories import atom_link_repo, atom_repo, evidence_repo, revision_repo
@@ -230,21 +232,24 @@ def rollback_atom(
     space: Space = Depends(get_space),
     session: Session = Depends(get_session),
 ):
-    atom = _get_atom_or_404(session, space, key)
-    target = revision_repo.get_by_seq(session, atom.id, payload.seq)
-    if target is None:
-        raise HTTPException(status_code=404, detail=f"revision seq={payload.seq} not found")
-    atom.statement = target.statement
-    atom.detail = target.detail
-    atom.happened_on = target.happened_on
-    atom.status = AtomStatus.active
-    atom.updated_at = utcnow()
-    revision_repo.add(
-        session, atom, f"回滚到第 {payload.seq} 版", RevisionTrigger.rollback
-    )
-    session.commit()
-    session.refresh(atom)
-    return atom
+    with space_write_lock(space.id):
+        atom = _get_atom_or_404(session, space, key)
+        target = revision_repo.get_by_seq(session, atom.id, payload.seq)
+        if target is None:
+            raise HTTPException(status_code=404, detail=f"revision seq={payload.seq} not found")
+        atom.statement = target.statement
+        atom.detail = target.detail
+        atom.happened_on = target.happened_on
+        atom.status = AtomStatus.active
+        atom.updated_at = utcnow()
+        revision_repo.add(
+            session, atom, f"回滚到第 {payload.seq} 版", RevisionTrigger.rollback
+        )
+        invalidate_atom(session, atom.id)
+        session.commit()
+        session.refresh(atom)
+        return atom
+
 
 
 @router.post("/spaces/{space_uid}/atoms/{key}/archive", response_model=Atom)
@@ -253,12 +258,14 @@ def archive_atom(
     space: Space = Depends(get_space),
     session: Session = Depends(get_session),
 ):
-    atom = _get_atom_or_404(session, space, key)
-    if atom.status == AtomStatus.archived:
+    with space_write_lock(space.id):
+        atom = _get_atom_or_404(session, space, key)
+        if atom.status == AtomStatus.archived:
+            return atom
+        atom.status = AtomStatus.archived
+        atom.updated_at = utcnow()
+        revision_repo.add(session, atom, "人工归档（用户要求遗忘）", RevisionTrigger.manual)
+        invalidate_atom(session, atom.id)
+        session.commit()
+        session.refresh(atom)
         return atom
-    atom.status = AtomStatus.archived
-    atom.updated_at = utcnow()
-    revision_repo.add(session, atom, "人工归档（用户要求遗忘）", RevisionTrigger.manual)
-    session.commit()
-    session.refresh(atom)
-    return atom
