@@ -1,175 +1,118 @@
 # atom-memory
 
-面向 AI 助手的 **Atom-first 长期记忆服务**。
+[简体中文](README.zh-CN.md)
 
-经历先写入原料（source），再固化蒸馏成短原子（atom）。对话默认只注入一句断言；需要细节时再展开。独立部署，HTTP 接到任意助手 / Agent。
+An HTTP service for long-term memory in AI assistants. It stores source material, uses an LLM to turn it into short facts, and retrieves those facts within a character budget.
 
-## 为什么是 wiki，不是日志
+I built it as the memory backend for [Velora](https://github.com/CY202227/Velora). It runs as a separate process, so other applications can use the same API.
 
-| 日志式记忆 | atom-memory |
-|---|---|
-| 每轮塞一段原文 | 蒸馏成可复用的认识 |
-| 越聊越吵 | 同主题改写同一 key，库越用越稠 |
-| 全量检索硬塞上下文 | 短 statement 注入 + 按需 expand |
-| 难纠正、难删除 | revision / evidence / 按来源删除 |
+## How it works
 
-核心信念：**遗忘是功能**——不值得长期保留时，固化可以零操作。
-
-atom-memory 刻意不做那套：为 **有限上下文（如 30B）** 设计——默认只注入短 `statement`，细节走 `expand`；运维上单库 HTTP 即可。
-
-## 数据流
-
-```
-经历（对话 / 纠正 / 日记 / 文档 …）
-  → source                 不可变快照
-  → consolidation          LLM 固化（唯一写通路）
-  → atom                   statement ≤80 字 + detail ≤300 字
-  → atom_revision + evidence
-  → recall / expand        给上游对话注入
+```mermaid
+flowchart LR
+    App[Assistant] -->|Conversation or correction| Source[Source material]
+    Source --> Consolidate[LLM consolidation]
+    Consolidate --> Atom[Stored facts]
+    Atom --> Recall[Recall or expand]
+    Recall -->|Prompt context| App
 ```
 
-- **space**：一份隔离的记忆库（按 `uid`）
-- **source**：原料；可按 `external_ref` 隐私删除
-- **atom**：wiki 页；`kind` + `key` 定位，改写优先于新建
-- **canonical key**：服务端合并称呼 / 人设等近义 key，减轻页膨胀
+A **source** is the original material: a conversation, correction, diary entry, or document. An **atom** is a stored fact with a short `statement` and an optional `detail`. Consolidation creates or updates atoms and records their revisions and supporting sources.
 
-## 快速开始
+The assistant normally receives statements rather than full conversations. It can request details with `expand` when needed. Statements are capped at 80 characters and details at 300 characters; these limits suit short facts better than long documents.
 
-要求：Python ≥ 3.11；OpenAI 兼容的 LLM 端点（固化与可选语义召回）。
+Each `space` has its own sources and atoms. Corrections can update an existing fact, revisions can be rolled back, and sources can be deleted by their upstream reference.
 
-```bash
+## Run locally
+
+Requires Python 3.11 or later. Consolidation needs an OpenAI-compatible chat endpoint. BM25 and fuzzy recall do not need an LLM.
+
+**Windows (PowerShell)**
+
+```powershell
 python -m venv .venv
-
-# Windows
-.venv\Scripts\pip install -e ".[dev]"
-copy .env.example .env
-
-# macOS / Linux
-# .venv/bin/pip install -e ".[dev]"
-# cp .env.example .env
+.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
+Copy-Item .env.example .env
 ```
 
-编辑 `.env`（变量均带 `ATOMMEM_` 前缀）：
+**macOS / Linux**
 
-```env
+```sh
+python3 -m venv .venv
+.venv/bin/python -m pip install -e ".[dev]"
+cp .env.example .env
+```
+
+Set the model connection in `.env`:
+
+```dotenv
 ATOMMEM_DATABASE_URL=sqlite:///./atom_memory.db
 ATOMMEM_LLM_BASE_URL=http://127.0.0.1:8000/v1
 ATOMMEM_LLM_API_KEY=EMPTY
 ATOMMEM_LLM_MODEL=your-model
 ```
 
-启动：
+Use your provider's endpoint, key, and model name. Start the service with the virtual environment's Python:
 
-```bash
+```powershell
 # Windows
-.venv\Scripts\python -m atom_memory.main
-
-# 或
-.venv\Scripts\uvicorn atom_memory.main:app --host 0.0.0.0 --port 8020 --reload
+.\.venv\Scripts\python.exe -m uvicorn atom_memory.main:app --host 127.0.0.1 --port 8020
 ```
 
-| 入口 | 地址 |
-|---|---|
-| 健康检查 | http://127.0.0.1:8020/health |
-| OpenAPI | http://127.0.0.1:8020/docs |
-| 原子预览 | http://127.0.0.1:8020/ui |
-| 聊天调试 | http://127.0.0.1:8020/chat |
-
-测试：
-
-```bash
-.venv\Scripts\python -m pytest
+```sh
+# macOS / Linux
+.venv/bin/python -m uvicorn atom_memory.main:app --host 127.0.0.1 --port 8020
 ```
 
-## 作为产品怎么用
+Open [API docs](http://127.0.0.1:8020/docs), [stored memories](http://127.0.0.1:8020/ui), or the [chat demo](http://127.0.0.1:8020/chat). The demo can save memories when its write option is enabled. `/health` checks that the service is running.
 
-### 接到你的助手（推荐）
+## Connect an assistant
 
-每轮对话：
+The application controls when to write and consolidate memory:
 
-1. `POST /spaces/{uid}/recall` —— 取 `context_block` 注入 prompt  
-2. 模型回复后 `POST .../sources` —— 写入本轮经历  
-3. 定期或纠正后 `POST .../consolidate` —— 固化进 wiki  
-4. statement 不够时 `POST .../atoms/expand` —— 按 key 展开 detail  
+1. Call `POST /spaces` to create a space.
+2. Before answering, call `POST /spaces/{uid}/recall` and add its `context_block` to the prompt.
+3. After answering, send material worth keeping to `POST /spaces/{uid}/sources`.
+4. Call `POST /spaces/{uid}/consolidate` periodically, or immediately after a correction.
+5. Use `POST /spaces/{uid}/atoms/expand` when a statement lacks enough detail.
 
-纠正 / 「请记住」：用 `kind=correction`、较高 `salience`，并立刻 consolidate。
+For a correction, send `kind=correction` with a high `salience`, such as `0.9`. A successful consolidation run does not necessarily mean that correction was consumed: check its source status before telling the user it was remembered.
 
-更细的字段与注入格式见 [docs/contract.md](docs/contract.md)。
+Use an `idempotency_key` when retrying source writes. The application should persist the material and key before sending; atom-memory cannot recover a request it never received.
 
-### 内置聊天调试（/chat）
+Velora connects through `VELORA_ATOM_MEMORY_BASE_URL`. Its repository includes a Compose setup that starts both services. This repository does not yet include a standalone Docker setup.
 
-用于体感「记得 / 假失忆」，**不是生产 SDK**（生产走 sources → consolidate → recall）：
+See the [API contract](docs/contract.md) for request fields, source deletion, and memory layers, and the [upgrade guide](docs/upgrade-and-delivery.md) for database migration and delivery recovery.
 
-1. 每轮自动轻量召回（称呼 sticky + BM25 / 语义 + 清单保底）
-2. 模型可用 `memory_search` / `memory_expand` / `memory_save`
-3. 漏存时由 `memory_judge` 补判（demo 专用；偏好与可复用事实可记）
-4. 快写 Source → 后台固化；日志落在 `logs/chat/`
+## Retrieval
 
-浏览器打开 `/chat` 即可；勾选「允许写入记忆」后才会挂 save / judge。
+- **BM25** is the default for matching words and phrases.
+- **Fuzzy** recall helps with approximate text matches.
+- **LLM** recall asks the configured model to select relevant memories and adds a model call.
+- **Embedding** recall uses a configured embedding endpoint; **hybrid** combines it with BM25.
 
-## Atom 类型（kind）
+`budget_chars` limits the recalled content. The default is 400 characters with `detail=statement`; use `detail=full` or `expand` for additional context. The response includes `chars_used` and `atoms_clipped`. The character budget is not a token limit.
 
-`lesson` · `event` · `person` · `belief` · `procedure` · `self`
+The default layered policy prioritizes stable profile facts (L3), then relevant summaries (L2), then individual facts (L1). `synthesize` and `persona` build the higher layers through separate API calls; the service does not schedule them itself.
 
-约定示例：称呼偏好 → `person` / `user-preferred-name`；人设口癖 → `self` / `persona`。
+## Storage and deployment
 
-## API 速览
+SQLite is the default. PostgreSQL is supported through `ATOMMEM_DATABASE_URL`; the migration path has SQLite regression coverage, but PostgreSQL still needs validation against a live database.
 
-核心（上游循环）：
+Set `ATOMMEM_API_KEY` to require the `X-API-Key` header. `owner_id` is a grouping label, not an authorization system. Runtime writes use a process-local lock, so run a single worker; multiple workers or instances need database-level coordination.
 
-```
-POST /spaces
-GET  /spaces?owner_id=
-DELETE /spaces/{uid}
+## Tests and evaluation
 
-POST /spaces/{uid}/sources
-GET  /spaces/{uid}/sources?status=
-POST /spaces/{uid}/sources/delete-by-ref
-POST /spaces/{uid}/sources/delete-by-ref/preview
+Run `python -m pytest tests -q` with the virtual environment's Python. Tests use scripted models to cover consolidation, corrections, recall, budgets, deletion, and database upgrades.
 
-POST /spaces/{uid}/consolidate
-POST /spaces/{uid}/recall
+The repository also contains LoCoMo and PersonaMem evaluation runners. For an offline LoCoMo smoke test:
 
-GET  /spaces/{uid}/atoms                 # ?page=&page_size=&kind=&updated_after=
-GET  /spaces/{uid}/atoms/{key}            # ?include=revisions,evidence
-POST /spaces/{uid}/atoms/expand
-POST /spaces/{uid}/atoms/{key}/archive
+```sh
+python -m atom_memory.eval.run_locomo --mini
 ```
 
-Admin（OpenAPI tag=`admin`）：`GET …/runs` · `POST …/atoms/{key}/rollback`  
-Demo（不进 OpenAPI）：`GET /ui` · `GET /chat` · `/chat/api/…`  
-健康检查：`GET /health`
+The mini run uses oracle consolidation and checks retrieval. It is not a measure of real-model memory quality. No reproducible real-model benchmark report is published yet.
 
-`GET …/atoms` 返回分页信封 `{count, page, page_size, results}`（默认 page_size=50），供 `/ui` 与管理浏览；**勿把 list 结果整页塞进 prompt**——对话注入走 `recall` / `expand`。
+## License
 
-召回常用参数：`method`（bm25 / fuzzy / llm）、`detail`（statement / full）、`max_atoms`、`budget_chars`。
-
-30B 级上下文建议：`detail=statement`（默认）、`budget_chars` 日常 **200–400**；不够再 `POST …/atoms/expand`。勿默认 `detail=full`。响应里的 `chars_used` / `atoms_clipped` 便于调预算。
-
-可选鉴权：设置 `ATOMMEM_API_KEY` 后请求带 `X-API-Key`。
-
-## 配置要点
-
-| 变量 | 含义 |
-|---|---|
-| `ATOMMEM_DATABASE_URL` | 默认 SQLite；可换 Postgres |
-| `ATOMMEM_LLM_*` | 固化 / 语义召回 / chat demo |
-| `ATOMMEM_API_KEY` | 留空则不鉴权 |
-| `ATOMMEM_CONSOLIDATE_MAX_SOURCES` | 单次固化消费的 pending 上限 |
-| `ATOMMEM_CHAT_HISTORY_MAX_MESSAGES` | `/chat` 短期上下文条数；`0` 不截断 |
-| `ATOMMEM_DASHSCOPE_*` / `ATOMMEM_WEB_SEARCH_MCP_URL` | `/chat` 可选联网搜索 |
-
-## 仓库结构
-
-```
-atom_memory/
-  models/           space · source · atom · revision · evidence · run
-  repositories/     持久化
-  consolidation/    两阶段固化 · canonical 合并 · prompts
-  recall/           fuzzy · bm25 · llm · 预算裁剪
-  demo/             /chat 会话 · judge · 联网
-  api/              HTTP 路由
-  web/              /ui · /chat 前端
-docs/contract.md    输入与召回契约
-tests/              FakeLLM 端到端
-```
+[MIT](LICENSE)
