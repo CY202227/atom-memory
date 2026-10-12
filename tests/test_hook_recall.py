@@ -25,8 +25,8 @@ def test_response_format_passthrough_and_fallback(monkeypatch):
     def post(self, url, **kw):
         payload = kw.get("json") or {}
         calls.append(payload)
-        if "response_format" in payload:
-            raise LLMError("no schema")
+        if payload.get("response_format", {}).get("type") == "json_schema":
+            return httpx.Response(400, json={"error": "response_format json_schema is not supported"})
         return _ok_response(url)
 
     monkeypatch.setattr("atom_memory.llm.openai_compat.httpx.Client.post", post)
@@ -39,7 +39,7 @@ def test_response_format_passthrough_and_fallback(monkeypatch):
     assert res.text
     assert len(calls) == 2
     assert "response_format" in calls[0]
-    assert "response_format" not in calls[1]
+    assert calls[1]["response_format"] == {"type": "json_object"}
 
 
 def test_response_format_supported_single_request(monkeypatch):

@@ -33,6 +33,7 @@ from sqlmodel import Session, SQLModel, create_engine
 from atom_memory.api.deps import get_llm
 from atom_memory.db import get_session
 from atom_memory.eval.locomo import (
+    _ANSWER_SYSTEM,
     aggregate_reports,
     consolidate_sessions_oracle,
     evaluate_locomo_sample,
@@ -143,6 +144,7 @@ def _parse_args(argv: list[str] | None) -> argparse.Namespace:
         choices=("statement", "full"),
     )
     p.add_argument("--diagnostics", action="store_true", help="record atom snapshots and source statuses from public benchmark data")
+    p.add_argument("--source-turns", type=int, default=None, help="LLM only: split sessions into consecutive groups of this many turns")
     p.add_argument("--max-samples", type=int, default=None)
     p.add_argument("--max-sessions", type=int, default=None)
     p.add_argument("--max-questions", type=int, default=None)
@@ -162,6 +164,8 @@ def _parse_args(argv: list[str] | None) -> argparse.Namespace:
 
 def main(argv: list[str] | None = None) -> int:
     args = _parse_args(argv)
+    if args.source_turns is not None and (args.source_turns < 1 or args.consolidate != "llm"):
+        raise ValueError("--source-turns requires LLM consolidation and a positive count")
     if args.mini:
         data_path = _MINI
     elif args.data:
@@ -231,6 +235,7 @@ def main(argv: list[str] | None = None) -> int:
                 sample,
                 max_sessions=args.max_sessions,
                 salience=0.8 if args.consolidate == "oracle" else 0.2,
+                source_turns=args.source_turns,
             )
             if args.consolidate == "oracle":
                 consolidate_sessions_oracle(
@@ -291,7 +296,7 @@ def main(argv: list[str] | None = None) -> int:
                 page = 1
                 while True:
                     body = client.get(f"/spaces/{uid}/atoms", params={"page": page, "page_size": 200}).json()
-                    atoms += [{key: atom.get(key) for key in ("key", "statement", "detail", "happened_on", "memory_layer")} for atom in body["results"]]
+                    atoms += [{key: atom.get(key) for key in ("key", "kind", "statement", "detail", "happened_on", "memory_layer")} for atom in body["results"]]
                     if len(atoms) >= body["count"]:
                         break
                     page += 1
@@ -323,11 +328,13 @@ def main(argv: list[str] | None = None) -> int:
             payload = bench.to_dict()
             if args.diagnostics:
                 payload["diagnostics"] = snapshots
+            payload["llm_diagnostics"] = getattr(answer_llm, "diagnostics", [])
             payload["configuration"] = {
                 "dataset_sha256": hashlib.sha256(data_path.read_bytes()).hexdigest(),
+                "answer_prompt_sha256": hashlib.sha256(_ANSWER_SYSTEM.encode()).hexdigest(),
                 "python": platform.python_version(), "method": args.method,
                 "budget_chars": args.budget_chars, "max_atoms": args.max_atoms,
-                "detail": args.detail, "max_samples": args.max_samples,
+                "detail": args.detail, "source_turns": args.source_turns, "max_samples": args.max_samples,
                 "max_sessions": args.max_sessions, "max_questions": args.max_questions,
                 "consolidate": args.consolidate, "score": args.score,
                 "model": settings.llm_model if need_real_llm else None,
@@ -357,11 +364,13 @@ def main(argv: list[str] | None = None) -> int:
             payload = bench.to_dict()
             if args.diagnostics:
                 payload["diagnostics"] = snapshots
+            payload["llm_diagnostics"] = getattr(answer_llm, "diagnostics", [])
             payload["configuration"] = {
                 "dataset_sha256": hashlib.sha256(data_path.read_bytes()).hexdigest(),
+                "answer_prompt_sha256": hashlib.sha256(_ANSWER_SYSTEM.encode()).hexdigest(),
                 "python": platform.python_version(), "method": args.method,
                 "budget_chars": args.budget_chars, "max_atoms": args.max_atoms,
-                "detail": args.detail, "max_samples": args.max_samples,
+                "detail": args.detail, "source_turns": args.source_turns, "max_samples": args.max_samples,
                 "max_sessions": args.max_sessions, "max_questions": args.max_questions,
                 "consolidate": args.consolidate, "score": args.score,
                 "model": settings.llm_model if need_real_llm else None,
@@ -400,6 +409,8 @@ def main(argv: list[str] | None = None) -> int:
     finally:
         app.dependency_overrides.clear()
         client.close()
+        if answer_llm is not None:
+            answer_llm.close()
 
 
 if __name__ == "__main__":

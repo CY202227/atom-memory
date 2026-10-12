@@ -6,7 +6,9 @@ from dataclasses import dataclass, field
 from sqlmodel import Session, select
 
 from .consolidation import prompts
-from .consolidation.engine import parse_json_object
+from .consolidation.engine import parse_json_object, _json_schema_format
+from pydantic import BaseModel
+
 from .llm.base import ChatLLM, LLMError
 from .models import (
     Atom,
@@ -26,6 +28,12 @@ from .repositories import (
     revision_repo,
     run_repo,
 )
+
+
+class RedactPlan(BaseModel):
+    statement: str
+    detail: str = ""
+    confidence: float | None = None
 
 
 class RedactionError(Exception):
@@ -153,10 +161,11 @@ def _redact_all(
             prompts.REDACT_SYSTEM,
             f"## 原子当前全文\n{prompts.render_atoms_full([atom])}\n\n"
             f"## 剩余证据材料\n{prompts.render_sources(remaining)}",
+            response_format=_json_schema_format("redact_plan", RedactPlan),
         )
         run.prompt_tokens += res.prompt_tokens
         run.completion_tokens += res.completion_tokens
-        rewrite = parse_json_object(res.text)
+        rewrite = RedactPlan.model_validate(parse_json_object(res.text)).model_dump()
         if not rewrite.get("statement"):
             raise ValueError(f"redact output for atom {atom.key!r} has no statement")
         rewrites[atom.id] = rewrite

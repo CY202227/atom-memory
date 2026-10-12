@@ -28,13 +28,15 @@ class OpenAICompatLLM:
         self._model = model
         self._timeout = float(timeout)
         self._extra_body = dict(extra_body or {})
+        self.diagnostics: list[dict[str, Any]] = []
         # 评测会连打很多请求；复用连接。trust_env 控制是否读系统代理。
         self._client = httpx.Client(timeout=self._timeout, trust_env=trust_env)
 
     def _with_extra(self, payload: dict[str, Any]) -> dict[str, Any]:
         if not self._extra_body:
             return payload
-        return {**payload, **self._extra_body}
+        # Request invariants and explicit retry budgets take precedence over extra_body.
+        return {**self._extra_body, **payload}
 
     def complete(
         self, system: str, user: str, response_format: dict | None = None
@@ -47,12 +49,38 @@ class OpenAICompatLLM:
             ],
             "temperature": 0.2,
         }
-        if response_format is not None:
+        if response_format is None:
+            return self._request(payload)
+        formatted = {**payload, "response_format": response_format}
+        for attempt in range(2):
             try:
-                return self._request({**payload, "response_format": response_format})
-            except LLMError:
-                pass
-        return self._request(payload)
+                result = self._request(formatted)
+            except LLMError as exc:
+                if attempt == 0 and (exc.code in ("timeout", "transport") or exc.status_code in (429, 502, 503, 504)):
+                    continue
+                if exc.code == "output_truncated" and attempt == 0:
+                    field = "max_completion_tokens" if "max_completion_tokens" in self._extra_body else "max_tokens"
+                    limit = formatted.get(field, self._extra_body.get(field))
+                    if isinstance(limit, int) and 0 < limit < 16384:
+                        formatted[field] = min(limit * 2, 16384)
+                        continue
+                if exc.code != "unsupported_response_format":
+                    raise
+                if formatted["response_format"].get("type") != "json_schema":
+                    raise
+                # An explicit capability rejection permits JSON mode, never unconstrained output.
+                formatted["response_format"] = {"type": "json_object"}
+                result = self._request(formatted)
+            try:
+                value = json.loads(result.text)
+                if not isinstance(value, dict):
+                    raise ValueError("expected JSON object")
+                return result
+            except (ValueError, TypeError) as exc:
+                if attempt:
+                    raise LLMError("Invalid structured JSON after 2 attempts", code="invalid_json") from exc
+                formatted["messages"] = payload["messages"] + [{"role": "user", "content": "The previous output was invalid JSON. Return exactly one complete JSON object matching the requested schema. No prose or Markdown."}]
+        raise AssertionError("unreachable")
 
     def chat(
         self,
@@ -204,9 +232,22 @@ class OpenAICompatLLM:
     def _request(self, payload: dict) -> ChatResult:
         data = self._request_raw(payload)
         try:
-            text = data["choices"][0]["message"]["content"] or ""
-        except (KeyError, IndexError) as e:
-            raise LLMError(f"unexpected LLM response shape: {data}") from e
+            choice = data["choices"][0]
+            message = choice["message"]
+            self.diagnostics.append({"format": payload.get("response_format", {}).get("type", "text"),
+                "finish_reason": choice.get("finish_reason"),
+                "content_chars": len(message.get("content") or "") if isinstance(message.get("content"), str) else 0,
+                "completion_tokens": (data.get("usage") or {}).get("completion_tokens", 0)})
+            self.diagnostics[:] = self.diagnostics[-256:]
+            if choice.get("finish_reason") == "length":
+                raise LLMError("Structured output truncated at token limit", code="output_truncated")
+            if message.get("refusal") or choice.get("finish_reason") == "content_filter":
+                raise LLMError("Model refused output", code="refusal")
+            text = message["content"] or ""
+            if not isinstance(text, str):
+                raise TypeError("content must be text")
+        except (KeyError, IndexError, TypeError) as e:
+            raise LLMError("Unexpected LLM response shape", code="response_shape") from e
         usage = data.get("usage") or {}
         return ChatResult(
             text=text,
@@ -222,21 +263,27 @@ class OpenAICompatLLM:
                 json=self._with_extra(payload),
             )
             if resp.status_code >= 400:
+                body = resp.text.lower()
+                unsupported = (resp.status_code in (400, 422) and any(token in body for token in ("response_format", "json_schema")) and any(token in body for token in ("unsupported", "not supported", "does not support")))
                 raise LLMError(
-                    f"LLM request failed: {resp.status_code} {resp.reason_phrase}"
-                    f" body={resp.text[:400]}"
+                    f"LLM request failed: {resp.status_code}", status_code=resp.status_code,
+                    code="unsupported_response_format" if unsupported else "request_failed",
                 )
-            return resp.json()
+            try:
+                data = resp.json()
+            except ValueError as exc:
+                raise LLMError("Provider returned non-JSON HTTP body", code="invalid_response_json") from exc
+            if not isinstance(data, dict):
+                raise LLMError("Provider returned non-object HTTP body", code="response_shape")
+            return data
         except LLMError:
             raise
         except httpx.TimeoutException as e:
             raise LLMError(
-                f"LLM request timed out after {self._timeout}s "
-                f"(url={self._base_url}; 经代理访问时请加大 "
-                f"ATOMMEM_LLM_TIMEOUT_SECONDS，并确认代理与模型服务正常)"
+                f"LLM request timed out after {self._timeout}s", code="timeout"
             ) from e
         except httpx.HTTPError as e:
-            raise LLMError(f"LLM request failed: {e}") from e
+            raise LLMError("LLM transport request failed", code="transport") from e
 
     def close(self) -> None:
         self._client.close()

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from datetime import date
+from pydantic import BaseModel
 
 from sqlmodel import Session
 
@@ -33,9 +34,19 @@ from .engine import (
     _STATEMENT_MAX,
     _json_schema_format,
     parse_json_object,
+    AtomOp,
+    SelectPlan,
 )
 
 _MAX_CONFIDENCE = 0.8
+
+
+class DerivedOp(AtomOp):
+    derived_from: list[str] = []
+
+
+class DerivedPlan(BaseModel):
+    operations: list[DerivedOp]
 
 
 class SynthesisEngine:
@@ -83,10 +94,11 @@ class SynthesisEngine:
         res = self._llm.complete(
             prompts.SYNTHESIZE_SELECT_SYSTEM,
             f"## atom 索引\n{index_text}",
+            response_format=_json_schema_format("synthesis_select", SelectPlan),
         )
         run.prompt_tokens += res.prompt_tokens
         run.completion_tokens += res.completion_tokens
-        read_keys = parse_json_object(res.text).get("read") or []
+        read_keys = SelectPlan.model_validate(parse_json_object(res.text)).read
         by_key = {a.key: a for a in atoms}
         context = [by_key[k] for k in read_keys if k in by_key][:max_read]
         if len(context) < 2:
@@ -100,10 +112,11 @@ class SynthesisEngine:
             f"## 当前时间\n{date.today().isoformat()}\n\n"
             f"## atom 索引\n{index_text}\n\n"
             f"## 相关原子全文\n{prompts.render_atoms_full(context)}",
+            response_format=_json_schema_format("synthesis_write", DerivedPlan),
         )
         run.prompt_tokens += res.prompt_tokens
         run.completion_tokens += res.completion_tokens
-        operations = parse_json_object(res.text).get("operations") or []
+        operations = [op.model_dump(mode="json") for op in DerivedPlan.model_validate(parse_json_object(res.text)).operations]
 
         touched: list[str] = []
         for op in operations:

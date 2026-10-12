@@ -1,0 +1,522 @@
+{
+  "mode": "snapshot replay; QA; atom recall plus historical-source lookup",
+  "samples": 1,
+  "total": 12,
+  "hits": 8,
+  "accuracy": 0.6667,
+  "mean_f1": 0.4644,
+  "avg_chars_used": 1915.4,
+  "avg_atoms_clipped": 0.0,
+  "skipped_no_evidence": 0,
+  "any_hits": 8,
+  "any_accuracy": 0.6667,
+  "retrieval_coverage": 1.0,
+  "by_category": {
+    "multi_hop": {
+      "total": 1,
+      "hits": 0,
+      "accuracy": 0.0,
+      "mean_f1": 0.0741,
+      "any_hits": 0,
+      "any_accuracy": 0.0
+    },
+    "open_domain": {
+      "total": 1,
+      "hits": 1,
+      "accuracy": 1.0,
+      "mean_f1": 1.0,
+      "any_hits": 1,
+      "any_accuracy": 1.0
+    },
+    "single_hop": {
+      "total": 3,
+      "hits": 2,
+      "accuracy": 0.6667,
+      "mean_f1": 0.3611,
+      "any_hits": 2,
+      "any_accuracy": 0.6667
+    },
+    "temporal": {
+      "total": 7,
+      "hits": 5,
+      "accuracy": 0.7143,
+      "mean_f1": 0.4879,
+      "any_hits": 5,
+      "any_accuracy": 0.7143
+    }
+  },
+  "samples_detail": [
+    {
+      "sample_id": "conv-26",
+      "total": 12,
+      "hits": 8,
+      "accuracy": 0.6667,
+      "mean_f1": 0.4644,
+      "avg_chars_used": 1915.4,
+      "skipped_no_evidence": 0,
+      "any_hits": 8,
+      "any_accuracy": 0.6667
+    }
+  ],
+  "questions": [
+    {
+      "question": "When did Caroline go to the LGBTQ support group?",
+      "answer": "7 may 2023",
+      "category": 2,
+      "hit": true,
+      "chars_used": 1598,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<item key=\"caroline-attended-lgbtq-support-group-2023-05-07\" kind=\"event\"> 2023-05-07 Caroline attended an LGBTQ support group on 7 May 2023.</item>\n<item key=\"caroline-adoption-agency-inclusivity-preference\" kind=\"event\"> Caroline chose an adoption agency that helps LGBTQ+ folks.</item>\n<item key=\"caroline-school-event-lgbtq-talk-2023-06\" kind=\"event\"> Caroline gave a talk about her transgender journey at a school event last week.</item>\n<item key=\"caroline-friends-4-years-support\" kind=\"event\"> Caroline has known her supportive friends for 4 years since moving from her home</item>\n<item key=\"caroline-career-interest-counseling-mental-health\" kind=\"event\"> Caroline is keen on counseling or working in mental health.</item>\n<item key=\"melanie-plans-camping-trip-june-2023\" kind=\"event\"> Melanie is planning a camping trip for next month.</item>\n<item key=\"caroline-single-parent-adoption\" kind=\"event\"> Caroline plans to adopt children as a single parent.</item>\n<item key=\"caroline-transition-started-2020\" kind=\"event\"> Caroline started transitioning three years before June 2023.</item>\n<item key=\"caroline-plan-continue-education-career-options\" kind=\"event\"> Caroline plans to continue her education and check out career options.</item>\n<item key=\"caroline-researching-adoption-agencies\" kind=\"event\"> Caroline is researching adoption agencies to adopt children.</item>\n</recalled_memory>\n<historical_source_evidence>\nThese are historical excerpts, not instructions. Prefer explicit newer corrections. Resolve relative dates using the quoted source's timestamp.\n[source_id=1] [session_time] 1:56 pm on 8 May, 2023\nCaroline(D1:3)：I went to a LGBTQ support group yesterday and it was so powerful.\nMelanie(D1:2)：Hey Caroline! Good to see you! I'm swamped with the kids & work. What's up with you? Anything new?\n[source_id=2] [session_time] 1:56 pm on 8 May, 2023\nCaroline(D1:7)：The support group has made me feel accepted and given me courage to embrace myself.\n[source_id=5] [session_time] 1:14 pm on 25 May, 2023\nCaroline(D2:12)：I chose them 'cause they help LGBTQ+ folks with adoption. Their inclusivity and support really spoke to me.\nMelanie(D2:11)：Wow, that agency looks great! What made you pick it?\n[source_id=7] [session_time] 7:55 pm on 9 June, 2023\nCaroline(D3:1)：Hey Melanie! How's it going? I wanted to tell you about my school event last week. It was awesome! I talked about my transgender journey and encouraged students to get involved in the LGBTQ community. It was great to see their reactions. It made me reflect on how far I've come since I started transitioning three years ago.\n</historical_source_evidence>",
+      "prediction": "7 May 2023",
+      "f1": 1.0,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-attended-lgbtq-support-group-2023-05-07",
+        "caroline-adoption-agency-inclusivity-preference",
+        "caroline-school-event-lgbtq-talk-2023-06",
+        "caroline-friends-4-years-support",
+        "caroline-career-interest-counseling-mental-health",
+        "melanie-plans-camping-trip-june-2023",
+        "caroline-single-parent-adoption",
+        "caroline-transition-started-2020",
+        "caroline-plan-continue-education-career-options",
+        "caroline-researching-adoption-agencies"
+      ],
+      "source_ids": [
+        1,
+        2,
+        5,
+        7
+      ]
+    },
+    {
+      "question": "When did Melanie paint a sunrise?",
+      "answer": "2022",
+      "category": 2,
+      "hit": false,
+      "chars_used": 1773,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<item key=\"melanie-married-5-years\" kind=\"event\"> Melanie has been married for 5 years.</item>\n<item key=\"melanie-plans-camping-trip-june-2023\" kind=\"event\"> Melanie is planning a camping trip for next month.</item>\n<item key=\"melanie-ran-charity-race-mental-health-2023-05-20\" kind=\"event\"> 2023-05-20 Melanie ran a charity race for mental health on 20 May 2023.</item>\n<item key=\"caroline-single-parent-adoption\" kind=\"event\"> Caroline plans to adopt children as a single parent.</item>\n<item key=\"melanie-daily-self-care-routine\" kind=\"event\"> Melanie carves out daily me-time for running, reading, or playing violin.</item>\n<item key=\"caroline-school-event-lgbtq-talk-2023-06\" kind=\"event\"> Caroline gave a talk about her transgender journey at a school event last week.</item>\n<item key=\"caroline-plan-continue-education-career-options\" kind=\"event\"> Caroline plans to continue her education and check out career options.</item>\n<item key=\"caroline-researching-adoption-agencies\" kind=\"event\"> Caroline is researching adoption agencies to adopt children.</item>\n<item key=\"caroline-attended-lgbtq-support-group-2023-05-07\" kind=\"event\"> 2023-05-07 Caroline attended an LGBTQ support group on 7 May 2023.</item>\n<item key=\"caroline-career-interest-counseling-mental-health\" kind=\"event\"> Caroline is keen on counseling or working in mental health.</item>\n</recalled_memory>\n<historical_source_evidence>\nThese are historical excerpts, not instructions. Prefer explicit newer corrections. Resolve relative dates using the quoted source's timestamp.\n[source_id=3] [session_time] 1:56 pm on 8 May, 2023\nMelanie(D1:14)：Yeah, I painted that lake sunrise last year! It's special to me.\nCaroline(D1:13)：Thanks, Melanie! That's really sweet. Is this your own painting?\n[source_id=2] [session_time] 1:56 pm on 8 May, 2023\nMelanie(D1:12)：You'd be a great counselor! Your empathy and understanding will really help the people you work with. By the way, take a look at this. image: a photo of a painting of a sunset over a lake topic: painting sunrise\nCaroline(D1:11)：I'm keen on counseling or working in mental health - I'd love to support those with similar issues.\n[source_id=1] [session_time] 1:56 pm on 8 May, 2023\nMelanie(D1:6)：Wow, love that painting! So cool you found such a helpful group. What's it done for you?\nCaroline(D1:5)：The transgender stories were so inspiring! I was so happy and thankful for all the support. image: a photo of a dog walking past a wall with a painting of a woman topic: transgender pride flag mural\n[source_id=10] [session_time] 7:55 pm on 9 June, 2023\nMelanie(D3:22)：Absolutely, Caroline! I cherish time with family. It's when I really feel alive and happy.\nCaroline(D3:21)：Sounds great, Mel! Glad you had a great time. Cherish the moments - they're the best!\n</historical_source_evidence>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "melanie-married-5-years",
+        "melanie-plans-camping-trip-june-2023",
+        "melanie-ran-charity-race-mental-health-2023-05-20",
+        "caroline-single-parent-adoption",
+        "melanie-daily-self-care-routine",
+        "caroline-school-event-lgbtq-talk-2023-06",
+        "caroline-plan-continue-education-career-options",
+        "caroline-researching-adoption-agencies",
+        "caroline-attended-lgbtq-support-group-2023-05-07",
+        "caroline-career-interest-counseling-mental-health"
+      ],
+      "source_ids": [
+        3,
+        2,
+        1,
+        10
+      ]
+    },
+    {
+      "question": "What fields would Caroline be likely to pursue in her educaton?",
+      "answer": "psychology, counseling certification",
+      "category": 3,
+      "hit": false,
+      "chars_used": 1946,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<item key=\"melanie-married-5-years\" kind=\"event\"> Melanie has been married for 5 years.</item>\n<item key=\"caroline-career-interest-counseling-mental-health\" kind=\"event\"> Caroline is keen on counseling or working in mental health.</item>\n<item key=\"caroline-single-parent-adoption\" kind=\"event\"> Caroline plans to adopt children as a single parent.</item>\n<item key=\"caroline-plan-continue-education-career-options\" kind=\"event\"> Caroline plans to continue her education and check out career options.</item>\n<item key=\"caroline-adoption-agency-inclusivity-preference\" kind=\"event\"> Caroline chose an adoption agency that helps LGBTQ+ folks.</item>\n<item key=\"caroline-transition-started-2020\" kind=\"event\"> Caroline started transitioning three years before June 2023.</item>\n<item key=\"caroline-school-event-lgbtq-talk-2023-06\" kind=\"event\"> Caroline gave a talk about her transgender journey at a school event last week.</item>\n<item key=\"caroline-friends-4-years-support\" kind=\"event\"> Caroline has known her supportive friends for 4 years since moving from her home</item>\n<item key=\"caroline-researching-adoption-agencies\" kind=\"event\"> Caroline is researching adoption agencies to adopt children.</item>\n<item key=\"caroline-attended-lgbtq-support-group-2023-05-07\" kind=\"event\"> 2023-05-07 Caroline attended an LGBTQ support group on 7 May 2023.</item>\n</recalled_memory>\n<historical_source_evidence>\nThese are historical excerpts, not instructions. Prefer explicit newer corrections. Resolve relative dates using the quoted source's timestamp.\n[source_id=7] [session_time] 7:55 pm on 9 June, 2023\nMelanie(D3:2)：Hey Caroline! Great to hear from you. Sounds like your event was amazing! I'm so proud of you for spreading awareness and getting others involved in the LGBTQ community. You've come a long way since your transition - keep on inspiring people with your strength and courage!\nCaroline(D3:1)：Hey Melanie! How's it going? I wanted to tell you about my school event last week. It was awesome! I talked about my transgender journey and encouraged students to get involved in the LGBTQ community. It was great to see their reactions. It made me reflect on how far I've come since I started transitioning three years ago.\n[source_id=9] [session_time] 7:55 pm on 9 June, 2023\nMelanie(D3:16)：5 years already! Time flies- feels like just yesterday I put this dress on! Thanks, Caroline! image: a photo of a bride in a wedding dress holding a bouquet topic: wedding day\nCaroline(D3:15)：Wow, what an amazing family pic! How long have you been married?\n[source_id=10] [session_time] 7:55 pm on 9 June, 2023\nCaroline(D3:19)：Looks like you had a great day! How was it? You all look so happy!\n[source_id=3] [session_time] 1:56 pm on 8 May, 2023\nCaroline(D1:15)：Wow, Melanie! The colors really blend nicely. Painting looks like a great outlet for expressing yourself.\nMelanie(D1:14)：Yeah, I painted that lake sunrise last year! It's special to me.\n</historical_source_evidence>",
+      "prediction": "Based on the recalled memory, Caroline is keen on **counseling** or working in **mental health**. Therefore, she would likely pursue education in these fields.",
+      "f1": 0.07407407407407407,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "melanie-married-5-years",
+        "caroline-career-interest-counseling-mental-health",
+        "caroline-single-parent-adoption",
+        "caroline-plan-continue-education-career-options",
+        "caroline-adoption-agency-inclusivity-preference",
+        "caroline-transition-started-2020",
+        "caroline-school-event-lgbtq-talk-2023-06",
+        "caroline-friends-4-years-support",
+        "caroline-researching-adoption-agencies",
+        "caroline-attended-lgbtq-support-group-2023-05-07"
+      ],
+      "source_ids": [
+        7,
+        9,
+        10,
+        3
+      ]
+    },
+    {
+      "question": "What did Caroline research?",
+      "answer": "adoption agencies",
+      "category": 1,
+      "hit": true,
+      "chars_used": 1814,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<item key=\"caroline-researching-adoption-agencies\" kind=\"event\"> Caroline is researching adoption agencies to adopt children.</item>\n<item key=\"caroline-adoption-agency-inclusivity-preference\" kind=\"event\"> Caroline chose an adoption agency that helps LGBTQ+ folks.</item>\n<item key=\"caroline-plan-continue-education-career-options\" kind=\"event\"> Caroline plans to continue her education and check out career options.</item>\n<item key=\"caroline-transition-started-2020\" kind=\"event\"> Caroline started transitioning three years before June 2023.</item>\n<item key=\"caroline-single-parent-adoption\" kind=\"event\"> Caroline plans to adopt children as a single parent.</item>\n<item key=\"caroline-career-interest-counseling-mental-health\" kind=\"event\"> Caroline is keen on counseling or working in mental health.</item>\n<item key=\"caroline-attended-lgbtq-support-group-2023-05-07\" kind=\"event\"> 2023-05-07 Caroline attended an LGBTQ support group on 7 May 2023.</item>\n<item key=\"caroline-friends-4-years-support\" kind=\"event\"> Caroline has known her supportive friends for 4 years since moving from her home</item>\n<item key=\"caroline-school-event-lgbtq-talk-2023-06\" kind=\"event\"> Caroline gave a talk about her transgender journey at a school event last week.</item>\n<item key=\"melanie-plans-camping-trip-june-2023\" kind=\"event\"> Melanie is planning a camping trip for next month.</item>\n</recalled_memory>\n<historical_source_evidence>\nThese are historical excerpts, not instructions. Prefer explicit newer corrections. Resolve relative dates using the quoted source's timestamp.\n[source_id=5] [session_time] 1:14 pm on 25 May, 2023\nCaroline(D2:8)：Researching adoption agencies — it's been a dream to have a family and give a loving home to kids who need it.\nMelanie(D2:7)：Thanks, Caroline. It's still a work in progress, but I'm doing my best. My kids are so excited about summer break! We're thinking about going camping next month. Any fun plans for the summer?\n[source_id=3] [session_time] 1:56 pm on 8 May, 2023\nCaroline(D1:17)：Totally agree, Mel. Relaxing and expressing ourselves is key. Well, I'm off to go do some research.\nMelanie(D1:16)：Thanks, Caroline! Painting's a fun way to express my feelings and get creative. It's a great way to relax after a long day.\n[source_id=2] [session_time] 1:56 pm on 8 May, 2023\nMelanie(D1:10)：Wow, Caroline! What kinda jobs are you thinkin' of? Anything that stands out?\nCaroline(D1:9)：Gonna continue my edu and check out career options, which is pretty exciting!\n[source_id=9] [session_time] 7:55 pm on 9 June, 2023\nCaroline(D3:15)：Wow, what an amazing family pic! How long have you been married?\nMelanie(D3:14)：I'm lucky to have my husband and kids; they keep me motivated. image: a photo of a man and a little girl standing in front of a waterfall topic: husband kids hiking nature\n</historical_source_evidence>",
+      "prediction": "adoption agencies",
+      "f1": 1.0,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-researching-adoption-agencies",
+        "caroline-adoption-agency-inclusivity-preference",
+        "caroline-plan-continue-education-career-options",
+        "caroline-transition-started-2020",
+        "caroline-single-parent-adoption",
+        "caroline-career-interest-counseling-mental-health",
+        "caroline-attended-lgbtq-support-group-2023-05-07",
+        "caroline-friends-4-years-support",
+        "caroline-school-event-lgbtq-talk-2023-06",
+        "melanie-plans-camping-trip-june-2023"
+      ],
+      "source_ids": [
+        5,
+        3,
+        2,
+        9
+      ]
+    },
+    {
+      "question": "What is Caroline's identity?",
+      "answer": "transgender woman",
+      "category": 1,
+      "hit": false,
+      "chars_used": 1960,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<item key=\"caroline-plan-continue-education-career-options\" kind=\"event\"> Caroline plans to continue her education and check out career options.</item>\n<item key=\"caroline-adoption-agency-inclusivity-preference\" kind=\"event\"> Caroline chose an adoption agency that helps LGBTQ+ folks.</item>\n<item key=\"caroline-career-interest-counseling-mental-health\" kind=\"event\"> Caroline is keen on counseling or working in mental health.</item>\n<item key=\"caroline-single-parent-adoption\" kind=\"event\"> Caroline plans to adopt children as a single parent.</item>\n<item key=\"caroline-researching-adoption-agencies\" kind=\"event\"> Caroline is researching adoption agencies to adopt children.</item>\n<item key=\"caroline-transition-started-2020\" kind=\"event\"> Caroline started transitioning three years before June 2023.</item>\n<item key=\"melanie-plans-camping-trip-june-2023\" kind=\"event\"> Melanie is planning a camping trip for next month.</item>\n<item key=\"caroline-friends-4-years-support\" kind=\"event\"> Caroline has known her supportive friends for 4 years since moving from her home</item>\n<item key=\"caroline-attended-lgbtq-support-group-2023-05-07\" kind=\"event\"> 2023-05-07 Caroline attended an LGBTQ support group on 7 May 2023.</item>\n<item key=\"caroline-school-event-lgbtq-talk-2023-06\" kind=\"event\"> Caroline gave a talk about her transgender journey at a school event last week.</item>\n</recalled_memory>\n<historical_source_evidence>\nThese are historical excerpts, not instructions. Prefer explicit newer corrections. Resolve relative dates using the quoted source's timestamp.\n[source_id=7] [session_time] 7:55 pm on 9 June, 2023\nCaroline(D3:3)：Thanks, Mel! Your backing really means a lot. I felt super powerful giving my talk. I shared my own journey, the struggles I had and how much I've developed since coming out. It was wonderful to see how the audience related to what I said and how it inspired them to be better allies. Conversations about gender identity and inclusion are so necessary and I'm thankful for being able to give a voice to the trans community.\nMelanie(D3:2)：Hey Caroline! Great to hear from you. Sounds like your event was amazing! I'm so proud of you for spreading awareness and getting others involved in the LGBTQ community. You've come a long way since your transition - keep on inspiring people with your strength and courage!\n[source_id=3] [session_time] 1:56 pm on 8 May, 2023\nCaroline(D1:13)：Thanks, Melanie! That's really sweet. Is this your own painting?\n[source_id=2] [session_time] 1:56 pm on 8 May, 2023\nMelanie(D1:10)：Wow, Caroline! What kinda jobs are you thinkin' of? Anything that stands out?\nCaroline(D1:9)：Gonna continue my edu and check out career options, which is pretty exciting!\n[source_id=1] [session_time] 1:56 pm on 8 May, 2023\nMelanie(D1:4)：Wow, that's cool, Caroline! What happened that was so awesome? Did you hear any inspiring stories?\nCaroline(D1:3)：I went to a LGBTQ support group yesterday and it was so powerful.\n</historical_source_evidence>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-plan-continue-education-career-options",
+        "caroline-adoption-agency-inclusivity-preference",
+        "caroline-career-interest-counseling-mental-health",
+        "caroline-single-parent-adoption",
+        "caroline-researching-adoption-agencies",
+        "caroline-transition-started-2020",
+        "melanie-plans-camping-trip-june-2023",
+        "caroline-friends-4-years-support",
+        "caroline-attended-lgbtq-support-group-2023-05-07",
+        "caroline-school-event-lgbtq-talk-2023-06"
+      ],
+      "source_ids": [
+        7,
+        3,
+        2,
+        1
+      ]
+    },
+    {
+      "question": "When did Melanie run a charity race?",
+      "answer": "the sunday before 25 may 2023",
+      "category": 2,
+      "hit": false,
+      "chars_used": 1639,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<item key=\"melanie-ran-charity-race-mental-health-2023-05-20\" kind=\"event\"> 2023-05-20 Melanie ran a charity race for mental health on 20 May 2023.</item>\n<item key=\"melanie-daily-self-care-routine\" kind=\"event\"> Melanie carves out daily me-time for running, reading, or playing violin.</item>\n<item key=\"melanie-married-5-years\" kind=\"event\"> Melanie has been married for 5 years.</item>\n<item key=\"melanie-plans-camping-trip-june-2023\" kind=\"event\"> Melanie is planning a camping trip for next month.</item>\n<item key=\"caroline-single-parent-adoption\" kind=\"event\"> Caroline plans to adopt children as a single parent.</item>\n<item key=\"caroline-plan-continue-education-career-options\" kind=\"event\"> Caroline plans to continue her education and check out career options.</item>\n<item key=\"caroline-school-event-lgbtq-talk-2023-06\" kind=\"event\"> Caroline gave a talk about her transgender journey at a school event last week.</item>\n<item key=\"caroline-researching-adoption-agencies\" kind=\"event\"> Caroline is researching adoption agencies to adopt children.</item>\n<item key=\"caroline-attended-lgbtq-support-group-2023-05-07\" kind=\"event\"> 2023-05-07 Caroline attended an LGBTQ support group on 7 May 2023.</item>\n<item key=\"caroline-career-interest-counseling-mental-health\" kind=\"event\"> Caroline is keen on counseling or working in mental health.</item>\n</recalled_memory>\n<historical_source_evidence>\nThese are historical excerpts, not instructions. Prefer explicit newer corrections. Resolve relative dates using the quoted source's timestamp.\n[source_id=4] [session_time] 1:14 pm on 25 May, 2023\nMelanie(D2:1)：Hey Caroline, since we last chatted, I've had a lot of things happening to me. I ran a charity race for mental health last Saturday – it was really rewarding. Really made me think about taking care of our minds.\n[source_id=1] [session_time] 1:56 pm on 8 May, 2023\nMelanie(D1:4)：Wow, that's cool, Caroline! What happened that was so awesome? Did you hear any inspiring stories?\nCaroline(D1:3)：I went to a LGBTQ support group yesterday and it was so powerful.\n[source_id=10] [session_time] 7:55 pm on 9 June, 2023\nMelanie(D3:22)：Absolutely, Caroline! I cherish time with family. It's when I really feel alive and happy.\nCaroline(D3:21)：Sounds great, Mel! Glad you had a great time. Cherish the moments - they're the best!\n[source_id=6] [session_time] 1:14 pm on 25 May, 2023\nMelanie(D2:15)：You're doing something amazing! Creating a family for those kids is so lovely. You'll be an awesome mom! Good luck!\nCaroline(D2:14)：I'm thrilled to make a family for kids who need one. It'll be tough as a single parent, but I'm up for the challenge!\n</historical_source_evidence>",
+      "prediction": "20 May 2023",
+      "f1": 0.4444444444444444,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "melanie-ran-charity-race-mental-health-2023-05-20",
+        "melanie-daily-self-care-routine",
+        "melanie-married-5-years",
+        "melanie-plans-camping-trip-june-2023",
+        "caroline-single-parent-adoption",
+        "caroline-plan-continue-education-career-options",
+        "caroline-school-event-lgbtq-talk-2023-06",
+        "caroline-researching-adoption-agencies",
+        "caroline-attended-lgbtq-support-group-2023-05-07",
+        "caroline-career-interest-counseling-mental-health"
+      ],
+      "source_ids": [
+        4,
+        1,
+        10,
+        6
+      ]
+    },
+    {
+      "question": "When is Melanie planning on going camping?",
+      "answer": "june 2023",
+      "category": 2,
+      "hit": true,
+      "chars_used": 1841,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<item key=\"melanie-plans-camping-trip-june-2023\" kind=\"event\"> Melanie is planning a camping trip for next month.</item>\n<item key=\"caroline-single-parent-adoption\" kind=\"event\"> Caroline plans to adopt children as a single parent.</item>\n<item key=\"caroline-plan-continue-education-career-options\" kind=\"event\"> Caroline plans to continue her education and check out career options.</item>\n<item key=\"caroline-career-interest-counseling-mental-health\" kind=\"event\"> Caroline is keen on counseling or working in mental health.</item>\n<item key=\"melanie-married-5-years\" kind=\"event\"> Melanie has been married for 5 years.</item>\n<item key=\"caroline-researching-adoption-agencies\" kind=\"event\"> Caroline is researching adoption agencies to adopt children.</item>\n<item key=\"melanie-ran-charity-race-mental-health-2023-05-20\" kind=\"event\"> 2023-05-20 Melanie ran a charity race for mental health on 20 May 2023.</item>\n<item key=\"melanie-daily-self-care-routine\" kind=\"event\"> Melanie carves out daily me-time for running, reading, or playing violin.</item>\n<item key=\"caroline-attended-lgbtq-support-group-2023-05-07\" kind=\"event\"> 2023-05-07 Caroline attended an LGBTQ support group on 7 May 2023.</item>\n<item key=\"caroline-school-event-lgbtq-talk-2023-06\" kind=\"event\"> Caroline gave a talk about her transgender journey at a school event last week.</item>\n</recalled_memory>\n<historical_source_evidence>\nThese are historical excerpts, not instructions. Prefer explicit newer corrections. Resolve relative dates using the quoted source's timestamp.\n[source_id=5] [session_time] 1:14 pm on 25 May, 2023\nMelanie(D2:7)：Thanks, Caroline. It's still a work in progress, but I'm doing my best. My kids are so excited about summer break! We're thinking about going camping next month. Any fun plans for the summer?\n[source_id=3] [session_time] 1:56 pm on 8 May, 2023\nMelanie(D1:18)：Yep, Caroline. Taking care of ourselves is vital. I'm off to go swimming with the kids. Talk to you soon!\nCaroline(D1:17)：Totally agree, Mel. Relaxing and expressing ourselves is key. Well, I'm off to go do some research.\n[source_id=7] [session_time] 7:55 pm on 9 June, 2023\nCaroline(D3:1)：Hey Melanie! How's it going? I wanted to tell you about my school event last week. It was awesome! I talked about my transgender journey and encouraged students to get involved in the LGBTQ community. It was great to see their reactions. It made me reflect on how far I've come since I started transitioning three years ago.\n[source_id=8] [session_time] 7:55 pm on 9 June, 2023\nCaroline(D3:7)：Your words mean a lot to me. I'm grateful for the chance to share my story and give others hope. We all have unique paths, and by working together we can build a more inclusive and understanding world. I'm going to keep using my voice to make a change and lift others up. And you're part of that!\n</historical_source_evidence>",
+      "prediction": "Based on the recalled memory and historical source evidence, Melanie is planning a camping trip for **June 2023** (specifically mentioned as \"next month\" in a conversation on May 25, 2023).",
+      "f1": 0.125,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "melanie-plans-camping-trip-june-2023",
+        "caroline-single-parent-adoption",
+        "caroline-plan-continue-education-career-options",
+        "caroline-career-interest-counseling-mental-health",
+        "melanie-married-5-years",
+        "caroline-researching-adoption-agencies",
+        "melanie-ran-charity-race-mental-health-2023-05-20",
+        "melanie-daily-self-care-routine",
+        "caroline-attended-lgbtq-support-group-2023-05-07",
+        "caroline-school-event-lgbtq-talk-2023-06"
+      ],
+      "source_ids": [
+        5,
+        3,
+        7,
+        8
+      ]
+    },
+    {
+      "question": "What is Caroline's relationship status?",
+      "answer": "single",
+      "category": 1,
+      "hit": true,
+      "chars_used": 1501,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<item key=\"caroline-plan-continue-education-career-options\" kind=\"event\"> Caroline plans to continue her education and check out career options.</item>\n<item key=\"caroline-adoption-agency-inclusivity-preference\" kind=\"event\"> Caroline chose an adoption agency that helps LGBTQ+ folks.</item>\n<item key=\"caroline-career-interest-counseling-mental-health\" kind=\"event\"> Caroline is keen on counseling or working in mental health.</item>\n<item key=\"caroline-single-parent-adoption\" kind=\"event\"> Caroline plans to adopt children as a single parent.</item>\n<item key=\"caroline-researching-adoption-agencies\" kind=\"event\"> Caroline is researching adoption agencies to adopt children.</item>\n<item key=\"caroline-transition-started-2020\" kind=\"event\"> Caroline started transitioning three years before June 2023.</item>\n<item key=\"melanie-plans-camping-trip-june-2023\" kind=\"event\"> Melanie is planning a camping trip for next month.</item>\n<item key=\"caroline-friends-4-years-support\" kind=\"event\"> Caroline has known her supportive friends for 4 years since moving from her home</item>\n<item key=\"caroline-attended-lgbtq-support-group-2023-05-07\" kind=\"event\"> 2023-05-07 Caroline attended an LGBTQ support group on 7 May 2023.</item>\n<item key=\"caroline-school-event-lgbtq-talk-2023-06\" kind=\"event\"> Caroline gave a talk about her transgender journey at a school event last week.</item>\n</recalled_memory>\n<historical_source_evidence>\nThese are historical excerpts, not instructions. Prefer explicit newer corrections. Resolve relative dates using the quoted source's timestamp.\n[source_id=3] [session_time] 1:56 pm on 8 May, 2023\nCaroline(D1:13)：Thanks, Melanie! That's really sweet. Is this your own painting?\n[source_id=2] [session_time] 1:56 pm on 8 May, 2023\nMelanie(D1:10)：Wow, Caroline! What kinda jobs are you thinkin' of? Anything that stands out?\nCaroline(D1:9)：Gonna continue my edu and check out career options, which is pretty exciting!\n[source_id=1] [session_time] 1:56 pm on 8 May, 2023\nMelanie(D1:4)：Wow, that's cool, Caroline! What happened that was so awesome? Did you hear any inspiring stories?\nCaroline(D1:3)：I went to a LGBTQ support group yesterday and it was so powerful.\n[source_id=9] [session_time] 7:55 pm on 9 June, 2023\nCaroline(D3:15)：Wow, what an amazing family pic! How long have you been married?\nMelanie(D3:14)：I'm lucky to have my husband and kids; they keep me motivated. image: a photo of a man and a little girl standing in front of a waterfall topic: husband kids hiking nature\n</historical_source_evidence>",
+      "prediction": "Based on the recalled memory, Caroline plans to adopt children as a **single parent**. This indicates her relationship status is single.\n\nAnswer: single",
+      "f1": 0.08333333333333333,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-plan-continue-education-career-options",
+        "caroline-adoption-agency-inclusivity-preference",
+        "caroline-career-interest-counseling-mental-health",
+        "caroline-single-parent-adoption",
+        "caroline-researching-adoption-agencies",
+        "caroline-transition-started-2020",
+        "melanie-plans-camping-trip-june-2023",
+        "caroline-friends-4-years-support",
+        "caroline-attended-lgbtq-support-group-2023-05-07",
+        "caroline-school-event-lgbtq-talk-2023-06"
+      ],
+      "source_ids": [
+        3,
+        2,
+        1,
+        9
+      ]
+    },
+    {
+      "question": "When did Caroline give a speech at a school?",
+      "answer": "the week before 9 june 2023",
+      "category": 2,
+      "hit": true,
+      "chars_used": 2321,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<item key=\"caroline-school-event-lgbtq-talk-2023-06\" kind=\"event\"> Caroline gave a talk about her transgender journey at a school event last week.</item>\n<item key=\"caroline-researching-adoption-agencies\" kind=\"event\"> Caroline is researching adoption agencies to adopt children.</item>\n<item key=\"caroline-single-parent-adoption\" kind=\"event\"> Caroline plans to adopt children as a single parent.</item>\n<item key=\"caroline-adoption-agency-inclusivity-preference\" kind=\"event\"> Caroline chose an adoption agency that helps LGBTQ+ folks.</item>\n<item key=\"melanie-plans-camping-trip-june-2023\" kind=\"event\"> Melanie is planning a camping trip for next month.</item>\n<item key=\"caroline-plan-continue-education-career-options\" kind=\"event\"> Caroline plans to continue her education and check out career options.</item>\n<item key=\"caroline-attended-lgbtq-support-group-2023-05-07\" kind=\"event\"> 2023-05-07 Caroline attended an LGBTQ support group on 7 May 2023.</item>\n<item key=\"caroline-transition-started-2020\" kind=\"event\"> Caroline started transitioning three years before June 2023.</item>\n<item key=\"melanie-ran-charity-race-mental-health-2023-05-20\" kind=\"event\"> 2023-05-20 Melanie ran a charity race for mental health on 20 May 2023.</item>\n<item key=\"caroline-friends-4-years-support\" kind=\"event\"> Caroline has known her supportive friends for 4 years since moving from her home</item>\n</recalled_memory>\n<historical_source_evidence>\nThese are historical excerpts, not instructions. Prefer explicit newer corrections. Resolve relative dates using the quoted source's timestamp.\n[source_id=7] [session_time] 7:55 pm on 9 June, 2023\nCaroline(D3:1)：Hey Melanie! How's it going? I wanted to tell you about my school event last week. It was awesome! I talked about my transgender journey and encouraged students to get involved in the LGBTQ community. It was great to see their reactions. It made me reflect on how far I've come since I started transitioning three years ago.\n[source_id=5] [session_time] 1:14 pm on 25 May, 2023\nCaroline(D2:10)：Thanks, Mel! My goal is to give kids a loving home. I'm truly grateful for all the support I've got from friends and mentors. Now the hard work starts to turn my dream into a reality. And here's one of the adoption agencies I'm looking into. It's a lot to take in, but I'm feeling hopeful and optimistic. image: a photography of a sign for a new arrival and an information and domestic building topic: adoption agency brochure\nMelanie(D2:9)：Wow, Caroline! That's awesome! Taking in kids in need - you're so kind. Your future family is gonna be so lucky to have you!\n[source_id=8] [session_time] 7:55 pm on 9 June, 2023\nCaroline(D3:11)：Thanks, Mel! My friends, family and mentors are my rocks – they motivate me and give me the strength to push on. Here's a pic from when we met up last week! image: a photo of a family posing for a picture in a yard topic: group of friends and family\nMelanie(D3:10)：Yes, Caroline! We can do it. Your courage is inspiring. I want to be couragous for my family- they motivate me and give me love. What motivates you?\n[source_id=1] [session_time] 1:56 pm on 8 May, 2023\nMelanie(D1:4)：Wow, that's cool, Caroline! What happened that was so awesome? Did you hear any inspiring stories?\nCaroline(D1:3)：I went to a LGBTQ support group yesterday and it was so powerful.\n</historical_source_evidence>",
+      "prediction": "Last week (relative to June 9, 2023).",
+      "f1": 0.6153846153846153,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-school-event-lgbtq-talk-2023-06",
+        "caroline-researching-adoption-agencies",
+        "caroline-single-parent-adoption",
+        "caroline-adoption-agency-inclusivity-preference",
+        "melanie-plans-camping-trip-june-2023",
+        "caroline-plan-continue-education-career-options",
+        "caroline-attended-lgbtq-support-group-2023-05-07",
+        "caroline-transition-started-2020",
+        "melanie-ran-charity-race-mental-health-2023-05-20",
+        "caroline-friends-4-years-support"
+      ],
+      "source_ids": [
+        7,
+        5,
+        8,
+        1
+      ]
+    },
+    {
+      "question": "When did Caroline meet up with her friends, family, and mentors?",
+      "answer": "the week before 9 june 2023",
+      "category": 2,
+      "hit": true,
+      "chars_used": 2284,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<item key=\"caroline-friends-4-years-support\" kind=\"event\"> Caroline has known her supportive friends for 4 years since moving from her home</item>\n<item key=\"caroline-single-parent-adoption\" kind=\"event\"> Caroline plans to adopt children as a single parent.</item>\n<item key=\"caroline-researching-adoption-agencies\" kind=\"event\"> Caroline is researching adoption agencies to adopt children.</item>\n<item key=\"caroline-adoption-agency-inclusivity-preference\" kind=\"event\"> Caroline chose an adoption agency that helps LGBTQ+ folks.</item>\n<item key=\"caroline-career-interest-counseling-mental-health\" kind=\"event\"> Caroline is keen on counseling or working in mental health.</item>\n<item key=\"caroline-plan-continue-education-career-options\" kind=\"event\"> Caroline plans to continue her education and check out career options.</item>\n<item key=\"caroline-transition-started-2020\" kind=\"event\"> Caroline started transitioning three years before June 2023.</item>\n<item key=\"caroline-school-event-lgbtq-talk-2023-06\" kind=\"event\"> Caroline gave a talk about her transgender journey at a school event last week.</item>\n<item key=\"melanie-plans-camping-trip-june-2023\" kind=\"event\"> Melanie is planning a camping trip for next month.</item>\n<item key=\"caroline-attended-lgbtq-support-group-2023-05-07\" kind=\"event\"> 2023-05-07 Caroline attended an LGBTQ support group on 7 May 2023.</item>\n</recalled_memory>\n<historical_source_evidence>\nThese are historical excerpts, not instructions. Prefer explicit newer corrections. Resolve relative dates using the quoted source's timestamp.\n[source_id=8] [session_time] 7:55 pm on 9 June, 2023\nCaroline(D3:11)：Thanks, Mel! My friends, family and mentors are my rocks – they motivate me and give me the strength to push on. Here's a pic from when we met up last week! image: a photo of a family posing for a picture in a yard topic: group of friends and family\nMelanie(D3:10)：Yes, Caroline! We can do it. Your courage is inspiring. I want to be couragous for my family- they motivate me and give me love. What motivates you?\n[source_id=5] [session_time] 1:14 pm on 25 May, 2023\nCaroline(D2:10)：Thanks, Mel! My goal is to give kids a loving home. I'm truly grateful for all the support I've got from friends and mentors. Now the hard work starts to turn my dream into a reality. And here's one of the adoption agencies I'm looking into. It's a lot to take in, but I'm feeling hopeful and optimistic. image: a photography of a sign for a new arrival and an information and domestic building topic: adoption agency brochure\nMelanie(D2:9)：Wow, Caroline! That's awesome! Taking in kids in need - you're so kind. Your future family is gonna be so lucky to have you!\n[source_id=9] [session_time] 7:55 pm on 9 June, 2023\nCaroline(D3:13)：Yeah, I'm really lucky to have them. They've been there through everything, I've known these friends for 4 years, since I moved from my home country. Their love and help have been so important especially after that tough breakup. I'm super thankful. Who supports you, Mel?\n[source_id=10] [session_time] 7:55 pm on 9 June, 2023\nMelanie(D3:22)：Absolutely, Caroline! I cherish time with family. It's when I really feel alive and happy.\nCaroline(D3:21)：Sounds great, Mel! Glad you had a great time. Cherish the moments - they're the best!\n</historical_source_evidence>",
+      "prediction": "Based on the historical source evidence, specifically source [8] dated **9 June, 2023**, Caroline states, \"Here's a pic from when we met up **last week**!\"\n\nTherefore, Caroline met up with her friends, family, and mentors the week before June 9, 2023 (approximately **early June 2023**).",
+      "f1": 0.23076923076923078,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-friends-4-years-support",
+        "caroline-single-parent-adoption",
+        "caroline-researching-adoption-agencies",
+        "caroline-adoption-agency-inclusivity-preference",
+        "caroline-career-interest-counseling-mental-health",
+        "caroline-plan-continue-education-career-options",
+        "caroline-transition-started-2020",
+        "caroline-school-event-lgbtq-talk-2023-06",
+        "melanie-plans-camping-trip-june-2023",
+        "caroline-attended-lgbtq-support-group-2023-05-07"
+      ],
+      "source_ids": [
+        8,
+        5,
+        9,
+        10
+      ]
+    },
+    {
+      "question": "How long has Caroline had her current group of friends for?",
+      "answer": "4 years",
+      "category": 2,
+      "hit": true,
+      "chars_used": 2174,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<item key=\"caroline-friends-4-years-support\" kind=\"event\"> Caroline has known her supportive friends for 4 years since moving from her home</item>\n<item key=\"caroline-attended-lgbtq-support-group-2023-05-07\" kind=\"event\"> 2023-05-07 Caroline attended an LGBTQ support group on 7 May 2023.</item>\n<item key=\"caroline-transition-started-2020\" kind=\"event\"> Caroline started transitioning three years before June 2023.</item>\n<item key=\"caroline-plan-continue-education-career-options\" kind=\"event\"> Caroline plans to continue her education and check out career options.</item>\n<item key=\"caroline-adoption-agency-inclusivity-preference\" kind=\"event\"> Caroline chose an adoption agency that helps LGBTQ+ folks.</item>\n<item key=\"melanie-plans-camping-trip-june-2023\" kind=\"event\"> Melanie is planning a camping trip for next month.</item>\n<item key=\"caroline-single-parent-adoption\" kind=\"event\"> Caroline plans to adopt children as a single parent.</item>\n<item key=\"melanie-ran-charity-race-mental-health-2023-05-20\" kind=\"event\"> 2023-05-20 Melanie ran a charity race for mental health on 20 May 2023.</item>\n<item key=\"caroline-school-event-lgbtq-talk-2023-06\" kind=\"event\"> Caroline gave a talk about her transgender journey at a school event last week.</item>\n<item key=\"caroline-career-interest-counseling-mental-health\" kind=\"event\"> Caroline is keen on counseling or working in mental health.</item>\n</recalled_memory>\n<historical_source_evidence>\nThese are historical excerpts, not instructions. Prefer explicit newer corrections. Resolve relative dates using the quoted source's timestamp.\n[source_id=8] [session_time] 7:55 pm on 9 June, 2023\nCaroline(D3:11)：Thanks, Mel! My friends, family and mentors are my rocks – they motivate me and give me the strength to push on. Here's a pic from when we met up last week! image: a photo of a family posing for a picture in a yard topic: group of friends and family\nMelanie(D3:10)：Yes, Caroline! We can do it. Your courage is inspiring. I want to be couragous for my family- they motivate me and give me love. What motivates you?\n[source_id=5] [session_time] 1:14 pm on 25 May, 2023\nCaroline(D2:10)：Thanks, Mel! My goal is to give kids a loving home. I'm truly grateful for all the support I've got from friends and mentors. Now the hard work starts to turn my dream into a reality. And here's one of the adoption agencies I'm looking into. It's a lot to take in, but I'm feeling hopeful and optimistic. image: a photography of a sign for a new arrival and an information and domestic building topic: adoption agency brochure\nMelanie(D2:9)：Wow, Caroline! That's awesome! Taking in kids in need - you're so kind. Your future family is gonna be so lucky to have you!\n[source_id=9] [session_time] 7:55 pm on 9 June, 2023\nCaroline(D3:13)：Yeah, I'm really lucky to have them. They've been there through everything, I've known these friends for 4 years, since I moved from my home country. Their love and help have been so important especially after that tough breakup. I'm super thankful. Who supports you, Mel?\n[source_id=2] [session_time] 1:56 pm on 8 May, 2023\nCaroline(D1:7)：The support group has made me feel accepted and given me courage to embrace myself.\n</historical_source_evidence>",
+      "prediction": "4 years",
+      "f1": 1.0,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-friends-4-years-support",
+        "caroline-attended-lgbtq-support-group-2023-05-07",
+        "caroline-transition-started-2020",
+        "caroline-plan-continue-education-career-options",
+        "caroline-adoption-agency-inclusivity-preference",
+        "melanie-plans-camping-trip-june-2023",
+        "caroline-single-parent-adoption",
+        "melanie-ran-charity-race-mental-health-2023-05-20",
+        "caroline-school-event-lgbtq-talk-2023-06",
+        "caroline-career-interest-counseling-mental-health"
+      ],
+      "source_ids": [
+        8,
+        5,
+        9,
+        2
+      ]
+    },
+    {
+      "question": "What did the charity race raise awareness for?",
+      "answer": "mental health",
+      "category": 4,
+      "hit": true,
+      "chars_used": 2134,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<item key=\"melanie-ran-charity-race-mental-health-2023-05-20\" kind=\"event\"> 2023-05-20 Melanie ran a charity race for mental health on 20 May 2023.</item>\n<item key=\"caroline-attended-lgbtq-support-group-2023-05-07\" kind=\"event\"> 2023-05-07 Caroline attended an LGBTQ support group on 7 May 2023.</item>\n<item key=\"caroline-single-parent-adoption\" kind=\"event\"> Caroline plans to adopt children as a single parent.</item>\n<item key=\"caroline-school-event-lgbtq-talk-2023-06\" kind=\"event\"> Caroline gave a talk about her transgender journey at a school event last week.</item>\n<item key=\"caroline-adoption-agency-inclusivity-preference\" kind=\"event\"> Caroline chose an adoption agency that helps LGBTQ+ folks.</item>\n<item key=\"caroline-transition-started-2020\" kind=\"event\"> Caroline started transitioning three years before June 2023.</item>\n<item key=\"melanie-daily-self-care-routine\" kind=\"event\"> Melanie carves out daily me-time for running, reading, or playing violin.</item>\n<item key=\"melanie-plans-camping-trip-june-2023\" kind=\"event\"> Melanie is planning a camping trip for next month.</item>\n<item key=\"melanie-married-5-years\" kind=\"event\"> Melanie has been married for 5 years.</item>\n<item key=\"caroline-friends-4-years-support\" kind=\"event\"> Caroline has known her supportive friends for 4 years since moving from her home</item>\n</recalled_memory>\n<historical_source_evidence>\nThese are historical excerpts, not instructions. Prefer explicit newer corrections. Resolve relative dates using the quoted source's timestamp.\n[source_id=4] [session_time] 1:14 pm on 25 May, 2023\nCaroline(D2:2)：That charity race sounds great, Mel! Making a difference & raising awareness for mental health is super rewarding - I'm really proud of you for taking part!\nMelanie(D2:1)：Hey Caroline, since we last chatted, I've had a lot of things happening to me. I ran a charity race for mental health last Saturday – it was really rewarding. Really made me think about taking care of our minds.\n[source_id=7] [session_time] 7:55 pm on 9 June, 2023\nMelanie(D3:2)：Hey Caroline! Great to hear from you. Sounds like your event was amazing! I'm so proud of you for spreading awareness and getting others involved in the LGBTQ community. You've come a long way since your transition - keep on inspiring people with your strength and courage!\nCaroline(D3:1)：Hey Melanie! How's it going? I wanted to tell you about my school event last week. It was awesome! I talked about my transgender journey and encouraged students to get involved in the LGBTQ community. It was great to see their reactions. It made me reflect on how far I've come since I started transitioning three years ago.\n[source_id=1] [session_time] 1:56 pm on 8 May, 2023\nMelanie(D1:4)：Wow, that's cool, Caroline! What happened that was so awesome? Did you hear any inspiring stories?\nCaroline(D1:3)：I went to a LGBTQ support group yesterday and it was so powerful.\n[source_id=2] [session_time] 1:56 pm on 8 May, 2023\nMelanie(D1:8)：That's really cool. You've got guts. What now?\nCaroline(D1:7)：The support group has made me feel accepted and given me courage to embrace myself.\n</historical_source_evidence>",
+      "prediction": "mental health",
+      "f1": 1.0,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "melanie-ran-charity-race-mental-health-2023-05-20",
+        "caroline-attended-lgbtq-support-group-2023-05-07",
+        "caroline-single-parent-adoption",
+        "caroline-school-event-lgbtq-talk-2023-06",
+        "caroline-adoption-agency-inclusivity-preference",
+        "caroline-transition-started-2020",
+        "melanie-daily-self-care-routine",
+        "melanie-plans-camping-trip-june-2023",
+        "melanie-married-5-years",
+        "caroline-friends-4-years-support"
+      ],
+      "source_ids": [
+        4,
+        7,
+        1,
+        2
+      ]
+    }
+  ],
+  "configuration": {
+    "snapshot_sha256": "142e3a4a366e61d5e13891741ee4aa8b700b8ae76c819259b9c90f1e71c76b60",
+    "dataset_sha256": "a63bb6c041efe6784245f9f4b2fd43cbb496e6075f4faa2228c21e89dd2053db",
+    "method": "bm25",
+    "atom_budget": 1200,
+    "source_budget": 2400,
+    "max_atoms": 10,
+    "max_sources": 4,
+    "model_alias": "odb",
+    "source_turns": 6,
+    "limitation": "Same saved atoms and questions, no new consolidation. Old snapshots without kind default to event (all saved atoms are L1). Increased evidence budget; automatic source lookup, not a full Velora tool-use evaluation.",
+    "answer_prompt_sha256": "47795bd4dc8f33bf976aab27c77ea3a55ffea9d2719369d427b985d9792c25cf"
+  },
+  "llm_diagnostics": [
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 10,
+      "completion_tokens": 8
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 159,
+      "completion_tokens": 34
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 17,
+      "completion_tokens": 4
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 11,
+      "completion_tokens": 9
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 189,
+      "completion_tokens": 50
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 152,
+      "completion_tokens": 30
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 37,
+      "completion_tokens": 16
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 287,
+      "completion_tokens": 80
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 3
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 13,
+      "completion_tokens": 3
+    }
+  ]
+}

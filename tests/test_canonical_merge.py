@@ -88,6 +88,15 @@ def test_apply_canonical_updates_op():
     assert "merged_into" in out["change_reason"]
 
 
+def test_distinct_events_are_not_merged_by_similar_wording():
+    existing = [Atom(space_id=1, key="paris-trip", kind=AtomKind.event,
+        statement="Alice visited Paris in May 2023.")]
+    key, note = resolve_write_key(key="rome-trip", kind=AtomKind.event,
+        statement="Alice visited Rome in May 2024.", active_atoms=existing)
+    assert key == "rome-trip"
+    assert note is None
+
+
 def test_consolidate_forces_canonical_name(client, fake_llm):
     import json
 
