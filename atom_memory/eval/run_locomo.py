@@ -332,11 +332,13 @@ def main(argv: list[str] | None = None) -> int:
             payload["configuration"] = {
                 "dataset_sha256": hashlib.sha256(data_path.read_bytes()).hexdigest(),
                 "answer_prompt_sha256": hashlib.sha256(_ANSWER_SYSTEM.encode()).hexdigest(),
+                "qa_scoring_protocol": "token F1 >= 0.5 with abstention/negation guards; answer-word coverage is not correctness",
                 "python": platform.python_version(), "method": args.method,
                 "budget_chars": args.budget_chars, "max_atoms": args.max_atoms,
                 "detail": args.detail, "source_turns": args.source_turns, "max_samples": args.max_samples,
                 "max_sessions": args.max_sessions, "max_questions": args.max_questions,
                 "consolidate": args.consolidate, "score": args.score,
+                "extract_facts": settings.consolidate_extract_facts, "review_skips": settings.consolidate_review_skips,
                 "model": settings.llm_model if need_real_llm else None,
                 "limitation": "Oracle consolidation evaluates retrieval over scripted atoms, not real LLM consolidation or answer quality" if args.consolidate == "oracle" else "LLM run; inspect individual failures and data subset before comparing scores",
             }
@@ -368,11 +370,13 @@ def main(argv: list[str] | None = None) -> int:
             payload["configuration"] = {
                 "dataset_sha256": hashlib.sha256(data_path.read_bytes()).hexdigest(),
                 "answer_prompt_sha256": hashlib.sha256(_ANSWER_SYSTEM.encode()).hexdigest(),
+                "qa_scoring_protocol": "token F1 >= 0.5 with abstention/negation guards; answer-word coverage is not correctness",
                 "python": platform.python_version(), "method": args.method,
                 "budget_chars": args.budget_chars, "max_atoms": args.max_atoms,
                 "detail": args.detail, "source_turns": args.source_turns, "max_samples": args.max_samples,
                 "max_sessions": args.max_sessions, "max_questions": args.max_questions,
                 "consolidate": args.consolidate, "score": args.score,
+                "extract_facts": settings.consolidate_extract_facts, "review_skips": settings.consolidate_review_skips,
                 "model": settings.llm_model if need_real_llm else None,
                 "limitation": "Oracle consolidation evaluates retrieval over scripted atoms, not real LLM consolidation or answer quality" if args.consolidate == "oracle" else "LLM run; inspect individual failures and data subset before comparing scores",
             }

@@ -1,0 +1,465 @@
+{
+  "mode": "snapshot replay; QA; atom recall plus historical-source lookup",
+  "samples": 1,
+  "total": 12,
+  "hits": 5,
+  "accuracy": 0.4167,
+  "mean_f1": 0.4931,
+  "avg_chars_used": 440.1,
+  "avg_atoms_clipped": 0.0,
+  "skipped_no_evidence": 0,
+  "any_hits": 5,
+  "any_accuracy": 0.4167,
+  "retrieval_coverage": 1.0,
+  "by_category": {
+    "multi_hop": {
+      "total": 1,
+      "hits": 0,
+      "accuracy": 0.0,
+      "mean_f1": 0.0741,
+      "any_hits": 0,
+      "any_accuracy": 0.0
+    },
+    "open_domain": {
+      "total": 1,
+      "hits": 1,
+      "accuracy": 1.0,
+      "mean_f1": 1.0,
+      "any_hits": 1,
+      "any_accuracy": 1.0
+    },
+    "single_hop": {
+      "total": 3,
+      "hits": 1,
+      "accuracy": 0.3333,
+      "mean_f1": 0.4035,
+      "any_hits": 1,
+      "any_accuracy": 0.3333
+    },
+    "temporal": {
+      "total": 7,
+      "hits": 3,
+      "accuracy": 0.4286,
+      "mean_f1": 0.5189,
+      "any_hits": 3,
+      "any_accuracy": 0.4286
+    }
+  },
+  "samples_detail": [
+    {
+      "sample_id": "conv-26",
+      "total": 12,
+      "hits": 5,
+      "accuracy": 0.4167,
+      "mean_f1": 0.4931,
+      "avg_chars_used": 440.1,
+      "skipped_no_evidence": 0,
+      "any_hits": 5,
+      "any_accuracy": 0.4167
+    }
+  ],
+  "questions": [
+    {
+      "question": "When did Caroline go to the LGBTQ support group?",
+      "answer": "7 may 2023",
+      "category": 2,
+      "hit": false,
+      "chars_used": 438,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"caroline-attended-lgbtq-support-group\" kind=\"event\" statement=\"Caroline attended an LGBTQ support group the day before the conversation.\">\nCaroline said: \"I went to a LGBTQ support group yesterday\" (fact_id 2). The conversation took place on 8 May, 2023. | time_facts=星期日, Sunday, 2023-05-07\n</memory>\n<memory key=\"caroline-support-group-impact\" kind=\"event\" statement=\"Caroline felt accepted and gained courage from the LGBTQ support group.\">\nCaroline said: \"The support group has made me feel accepted and given me courage to embrace myself.\" (fact_id 1). Conversation on 8 May, 2023.\n</memory>\n</recalled_memory>",
+      "prediction": "The day before the conversation, which was on 7 May 2023 (Sunday).",
+      "f1": 0.4,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-attended-lgbtq-support-group",
+        "caroline-support-group-impact"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true
+    },
+    {
+      "question": "When did Melanie paint a sunrise?",
+      "answer": "2022",
+      "category": 2,
+      "hit": false,
+      "chars_used": 169,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"melanie-painted-lake-sunrise\" kind=\"event\" statement=\"Melanie painted a lake sunrise last year.\">\nMelanie said, \"I painted that lake sunrise last year! It's special to me.\" (fact_id: 1) | time_facts=2022, year=2022 (last year)\n</memory>\n</recalled_memory>",
+      "prediction": "last year",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "melanie-painted-lake-sunrise"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false
+    },
+    {
+      "question": "What fields would Caroline be likely to pursue in her educaton?",
+      "answer": "psychology, counseling certification",
+      "category": 3,
+      "hit": false,
+      "chars_used": 427,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"caroline-career-interest-mental-health\" kind=\"person\" statement=\"Caroline is interested in counseling or working in mental health.\">\nCaroline said: \"I'm keen on counseling or working in mental health - I'd love to support those with similar issues.\" (fact_id 3). Conversation on 8 May, 2023.\n</memory>\n<memory key=\"caroline-education-career-plan\" kind=\"event\" statement=\"Caroline plans to continue her education and explore career options.\">\nCaroline said: \"Gonna continue my edu and check out career options, which is pretty exciting!\" (fact_id 2). Conversation on 8 May, 2023.\n</memory>\n</recalled_memory>",
+      "prediction": "Based on the recalled memory, Caroline is interested in **counseling** or working in **mental health**. Therefore, she would likely pursue education in these fields.",
+      "f1": 0.07407407407407407,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-career-interest-mental-health",
+        "caroline-education-career-plan"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false
+    },
+    {
+      "question": "What did Caroline research?",
+      "answer": "adoption agencies",
+      "category": 1,
+      "hit": true,
+      "chars_used": 310,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"caroline-researching-adoption-agencies\" kind=\"event\" statement=\"Caroline is researching adoption agencies.\">\nCaroline said: \"Researching adoption agencies — it's been a dream to have a family and give a loving home to kids who need it.\" (fact_id 3). Conversation on 25 May, 2023.\n</memory>\n<memory key=\"caroline-research-plan\" kind=\"event\" statement=\"Caroline planned to do some research.\">\nCaroline said, \"I'm off to go do some research.\" (fact_id: 4)\n</memory>\n</recalled_memory>",
+      "prediction": "adoption agencies",
+      "f1": 1.0,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-researching-adoption-agencies",
+        "caroline-research-plan"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true
+    },
+    {
+      "question": "What is Caroline's identity?",
+      "answer": "transgender woman",
+      "category": 1,
+      "hit": false,
+      "chars_used": 1110,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"caroline-transition-timeline\" kind=\"person\" statement=\"Caroline started transitioning three years before June 2023.\">\nCaroline said: \"It made me reflect on how far I've come since I started transitioning three years ago.\" (fact_id 3). Conversation on 9 June, 2023.\n</memory>\n<memory key=\"caroline-school-event-lgbtq-talk\" kind=\"event\" statement=\"Caroline gave a talk at a school event about her transgender journey.\">\nCaroline said: \"I wanted to tell you about my school event last week.\" (fact_id 1) and \"I talked about my transgender journey and encouraged students to get involved in the LGBTQ community.\" (fact_id 2). Conversation on 9 June, 2023.\n</memory>\n<memory key=\"caroline-chose-lgbtq-friendly-adoption-agency\" kind=\"person\" statement=\"Caroline chose an adoption agency that helps LGBTQ+ folks.\">\nCaroline said: \"I chose them 'cause they help LGBTQ+ folks with adoption.\" (fact_id 6). Conversation on 25 May, 2023.\n</memory>\n<memory key=\"caroline-thankful-voice-trans-community\" kind=\"belief\" statement=\"Caroline is thankful for being able to give a voice to the trans community.\">\nCaroline said: \"I'm thankful for being able to give a voice to the trans community.\" (fact_id 6). Conversation on 9 June, 2023.\n</memory>\n<memory key=\"caroline-attended-lgbtq-support-group\" kind=\"event\" statement=\"Caroline attended an LGBTQ support group the day before the conversation.\">\nCaroline said: \"I went to a LGBTQ support group yesterday\" (fact_id 2). The conversation took place on 8 May, 2023. | time_facts=星期日, Sunday, 2023-05-07\n</memory>\n</recalled_memory>",
+      "prediction": "Based on the recalled memory, Caroline is a transgender woman (indicated by her \"transgender journey\" and \"transitioning\").",
+      "f1": 0.21052631578947367,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-transition-timeline",
+        "caroline-school-event-lgbtq-talk",
+        "caroline-chose-lgbtq-friendly-adoption-agency",
+        "caroline-thankful-voice-trans-community",
+        "caroline-attended-lgbtq-support-group"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true
+    },
+    {
+      "question": "When did Melanie run a charity race?",
+      "answer": "the sunday before 25 may 2023",
+      "category": 2,
+      "hit": false,
+      "chars_used": 208,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"melanie-ran-charity-race-mental-health\" kind=\"event\" statement=\"Melanie ran a charity race for mental health last Saturday.\">\nMelanie said: \"I ran a charity race for mental health last Saturday\" (fact_id 1). Session time: 1:14 pm on 25 May, 2023. | time_facts=2023-05-20（星期六）\n</memory>\n</recalled_memory>",
+      "prediction": "last Saturday",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "melanie-ran-charity-race-mental-health"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false
+    },
+    {
+      "question": "When is Melanie planning on going camping?",
+      "answer": "june 2023",
+      "category": 2,
+      "hit": true,
+      "chars_used": 218,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"melanie-camping-plan-next-month\" kind=\"event\" statement=\"Melanie is thinking about going camping next month.\">\nMelanie said: \"We're thinking about going camping next month.\" (fact_id 2). Conversation on 25 May, 2023, so next month is June 2023. | time_facts=2023-06 (next month)\n</memory>\n</recalled_memory>",
+      "prediction": "June 2023",
+      "f1": 1.0,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "melanie-camping-plan-next-month"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true
+    },
+    {
+      "question": "What is Caroline's relationship status?",
+      "answer": "single",
+      "category": 1,
+      "hit": false,
+      "chars_used": 414,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"caroline-single-parent-challenge\" kind=\"person\" statement=\"Caroline acknowledges it will be tough as a single parent but is up for the chal\">\nCaroline said: \"It'll be tough as a single parent, but I'm up for the challenge!\" (fact_id 2). Conversation on 25 May, 2023.\n</memory>\n<memory key=\"caroline-friends-support-after-breakup\" kind=\"person\" statement=\"Caroline's friends' love and help were important after a tough breakup.\">\nCaroline said: \"Their love and help have been so important especially after that tough breakup.\" (fact_id 2). Conversation on 9 June, 2023.\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-single-parent-challenge",
+        "caroline-friends-support-after-breakup"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false
+    },
+    {
+      "question": "When did Caroline give a speech at a school?",
+      "answer": "the week before 9 june 2023",
+      "category": 2,
+      "hit": false,
+      "chars_used": 690,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"caroline-school-event-lgbtq-talk\" kind=\"event\" statement=\"Caroline gave a talk at a school event about her transgender journey.\">\nCaroline said: \"I wanted to tell you about my school event last week.\" (fact_id 1) and \"I talked about my transgender journey and encouraged students to get involved in the LGBTQ community.\" (fact_id 2). Conversation on 9 June, 2023.\n</memory>\n<memory key=\"caroline-felt-powerful-giving-talk\" kind=\"event\" statement=\"Caroline felt super powerful giving her talk at the school event.\">\nCaroline said: \"I felt super powerful giving my talk.\" (fact_id 4). Conversation on 9 June, 2023.\n</memory>\n<memory key=\"caroline-shared-struggles-development\" kind=\"event\" statement=\"Caroline shared her struggles and development since coming out at the event.\">\nCaroline said: \"I shared my own journey, the struggles I had and how much I've developed since coming out.\" (fact_id 5). Conversation on 9 June, 2023.\n</memory>\n</recalled_memory>",
+      "prediction": "Based on the recalled memory, Caroline gave a talk at a school event **last week** relative to the conversation date of **9 June, 2023**. Therefore, the event took place in the week prior to June 9, 2023.",
+      "f1": 0.23255813953488372,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-school-event-lgbtq-talk",
+        "caroline-felt-powerful-giving-talk",
+        "caroline-shared-struggles-development"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false
+    },
+    {
+      "question": "When did Caroline meet up with her friends, family, and mentors?",
+      "answer": "the week before 9 june 2023",
+      "category": 2,
+      "hit": true,
+      "chars_used": 878,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"caroline-metup-last-week\" kind=\"event\" statement=\"Caroline met up with a group of friends and family the week before 9 June 2023.\">\nCaroline shared a photo saying: \"Here's a pic from when we met up last week!\" (fact_id 4). The photo shows a family posing in a yard. Conversation on 9 June, 2023.\n</memory>\n<memory key=\"caroline-support-system-identity\" kind=\"person\" statement=\"Caroline identifies her friends, family, and mentors as her support system.\">\nCaroline said: \"My friends, family and mentors are my rocks – they motivate me and give me the strength to push on.\" (fact_id 3). Conversation on 9 June, 2023.\n</memory>\n<memory key=\"caroline-friends-4-years-since-move\" kind=\"person\" statement=\"Caroline has known her friends for 4 years since moving from her home country.\">\nCaroline said: \"I've known these friends for 4 years, since I moved from my home country.\" (fact_id 1). Conversation on 9 June, 2023.\n</memory>\n<memory key=\"caroline-grateful-support-friends-mentors\" kind=\"person\" statement=\"Caroline is grateful for support from friends and mentors.\">\nCaroline said: \"I'm truly grateful for all the support I've got from friends and mentors.\" (fact_id 5). Conversation on 25 May, 2023.\n</memory>\n</recalled_memory>",
+      "prediction": "The week before 9 June 2023",
+      "f1": 1.0,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-metup-last-week",
+        "caroline-support-system-identity",
+        "caroline-friends-4-years-since-move",
+        "caroline-grateful-support-friends-mentors"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true
+    },
+    {
+      "question": "How long has Caroline had her current group of friends for?",
+      "answer": "4 years",
+      "category": 2,
+      "hit": true,
+      "chars_used": 211,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"caroline-friends-4-years-since-move\" kind=\"person\" statement=\"Caroline has known her friends for 4 years since moving from her home country.\">\nCaroline said: \"I've known these friends for 4 years, since I moved from my home country.\" (fact_id 1). Conversation on 9 June, 2023.\n</memory>\n</recalled_memory>",
+      "prediction": "4 years",
+      "f1": 1.0,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-friends-4-years-since-move"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true
+    },
+    {
+      "question": "What did the charity race raise awareness for?",
+      "answer": "mental health",
+      "category": 4,
+      "hit": true,
+      "chars_used": 208,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"melanie-ran-charity-race-mental-health\" kind=\"event\" statement=\"Melanie ran a charity race for mental health last Saturday.\">\nMelanie said: \"I ran a charity race for mental health last Saturday\" (fact_id 1). Session time: 1:14 pm on 25 May, 2023. | time_facts=2023-05-20（星期六）\n</memory>\n</recalled_memory>",
+      "prediction": "mental health",
+      "f1": 1.0,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "melanie-ran-charity-race-mental-health"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true
+    }
+  ],
+  "configuration": {
+    "answer_prompt_sha256": "47795bd4dc8f33bf976aab27c77ea3a55ffea9d2719369d427b985d9792c25cf",
+    "snapshot_sha256": "5ae743b4789f813628553ed39c3948d3b56d34145f2ba6eed0bc4d5ec96fcaae",
+    "dataset_sha256": "a63bb6c041efe6784245f9f4b2fd43cbb496e6075f4faa2228c21e89dd2053db",
+    "method": "llm",
+    "detail": "full",
+    "atom_only": true,
+    "atom_budget": 1200,
+    "source_budget": 0,
+    "max_atoms": 10,
+    "max_sources": 0,
+    "model_alias": "odb",
+    "source_turns": 6,
+    "limitation": "Same saved atoms and questions, no new consolidation. Old snapshots without kind default to event (all saved atoms are L1). Increased evidence budget; automatic source lookup, not a full Velora tool-use evaluation."
+  },
+  "llm_diagnostics": [
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 84,
+      "completion_tokens": 23
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 66,
+      "completion_tokens": 21
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 42,
+      "completion_tokens": 15
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 9,
+      "completion_tokens": 3
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 86,
+      "completion_tokens": 23
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 165,
+      "completion_tokens": 34
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 78,
+      "completion_tokens": 22
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 17,
+      "completion_tokens": 4
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 211,
+      "completion_tokens": 58
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 123,
+      "completion_tokens": 27
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 52,
+      "completion_tokens": 17
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 13,
+      "completion_tokens": 3
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 45,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 9,
+      "completion_tokens": 7
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 88,
+      "completion_tokens": 22
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 125,
+      "completion_tokens": 34
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 204,
+      "completion_tokens": 56
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 158,
+      "completion_tokens": 45
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 27,
+      "completion_tokens": 12
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 49,
+      "completion_tokens": 16
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 3
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 52,
+      "completion_tokens": 17
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 13,
+      "completion_tokens": 3
+    }
+  ]
+}

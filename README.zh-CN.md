@@ -116,3 +116,7 @@ python -m atom_memory.eval.run_locomo --mini
 ## 许可证
 
 [MIT](LICENSE)
+
+来源查证提供词法检索和可选语义选择，返回有来源 ID 的历史原文片段；它与当前原子断言分开，明确较新的纠正优先。公开试点、失败记录与评分限制见[评测说明](docs/evaluation/README.md)。
+
+可选的事实预提取试验：`ATOMMEM_CONSOLIDATE_EXTRACT_FACTS=true`。固化前列出原文引用，并校验这些引用在写入后仍被保留；失败不消费来源。默认关闭：公开试点保留了更多事实，但问答没有改善。[评测说明](docs/evaluation/README.md)保留了失败记录与对照结果。

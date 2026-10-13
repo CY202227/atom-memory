@@ -113,6 +113,7 @@ class SourceSearchRequest(BaseModel):
     query: str = Field(min_length=1, max_length=500)
     max_sources: int = Field(default=4, ge=1, le=10)
     budget_chars: int = Field(default=2400, ge=40, le=6000)
+    method: Literal["bm25", "llm"] = "bm25"
 
 
 class AtomNeighborsResponse(BaseModel):

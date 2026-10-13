@@ -1,9 +1,8 @@
-"""固化写路径的 canonical key 与近重复合并（服务端硬规则）。"""
+"""固化写路径的 canonical key 与同类型精确去重。"""
 
 from __future__ import annotations
 
 import re
-from difflib import SequenceMatcher
 from typing import Any
 
 from ..linking import keyify
@@ -48,11 +47,8 @@ _PERSONA_KEY_RE = re.compile(
     re.IGNORECASE,
 )
 
-_NEAR_DUP_RATIO = 0.78
-
-
 def _norm_text(text: str) -> str:
-    return "".join((text or "").split()).lower()
+    return " ".join((text or "").split())
 
 
 def resolve_write_key(
@@ -61,8 +57,10 @@ def resolve_write_key(
     kind: AtomKind | str,
     statement: str,
     active_atoms: list[Atom],
+    detail: str = "",
+    happened_on=None,
 ) -> tuple[str, str | None]:
-    """将拟写入 key 规范到 canonical / 近重复已有 key。
+    """将拟写入 key 规范到 canonical / 同类型精确重复的已有 key。
 
     Returns:
         (final_key, merge_note)；无改写时 merge_note 为 None。
@@ -75,7 +73,7 @@ def resolve_write_key(
     by_key = {a.key: a for a in active_atoms}
 
     # --- 称呼（仅别名/key 形态；不按 statement 误伤人物页如 lao-zhang）---
-    if raw in _PREFERRED_NAME_ALIASES or _PREFERRED_NAME_KEY_RE.search(raw):
+    if raw in _PREFERRED_NAME_ALIASES or (raw.startswith("user-") and _PREFERRED_NAME_KEY_RE.search(raw)):
         if raw != CANONICAL_PREFERRED_NAME:
             return CANONICAL_PREFERRED_NAME, f"merged_into:{CANONICAL_PREFERRED_NAME}"
         return CANONICAL_PREFERRED_NAME, None
@@ -92,8 +90,8 @@ def resolve_write_key(
             return CANONICAL_PERSONA, f"merged_into:{CANONICAL_PERSONA}"
         return CANONICAL_PERSONA, None
 
-    # --- statement 近重复：并入已有 atom ---
-    dup = _find_near_duplicate(statement, active_atoms, prefer_kind=kind_val)
+    # Text similarity cannot prove semantic identity. Reuse only exact same-kind facts.
+    dup = _find_exact_duplicate(statement, active_atoms, prefer_kind=kind_val, detail=detail, happened_on=happened_on)
     if dup is not None and dup != raw and raw not in by_key:
         return dup, f"merged_into:{dup}"
 
@@ -109,38 +107,23 @@ def _find_existing_persona(active_atoms: list[Atom]) -> str | None:
     return None
 
 
-def _find_near_duplicate(
+def _find_exact_duplicate(
     statement: str,
     active_atoms: list[Atom],
     *,
     prefer_kind: str | None = None,
+    detail: str = "",
+    happened_on=None,
 ) -> str | None:
     needle = _norm_text(statement)
     if len(needle) < 6:
         return None
-    best_key: str | None = None
-    best_score = 0.0
     for a in active_atoms:
-        hay = _norm_text(a.statement)
-        if not hay:
-            continue
-        # Similar wording is not evidence that two dated experiences are identical.
-        # Explicit same-key updates remain available for genuine corrections.
-        if (prefer_kind == AtomKind.event.value or a.kind == AtomKind.event) and needle != hay:
-            continue
-        if needle == hay or needle in hay or hay in needle:
-            score = 1.0
-        else:
-            score = SequenceMatcher(None, needle, hay).ratio()
-        if score < _NEAR_DUP_RATIO:
-            continue
-        # 同 kind 优先
-        bonus = 0.01 if prefer_kind and a.kind.value == prefer_kind else 0.0
-        score += bonus
-        if score > best_score:
-            best_score = score
-            best_key = a.key
-    return best_key
+        existing_date = a.happened_on.isoformat() if a.happened_on else None
+        requested_date = str(happened_on) if happened_on else None
+        if a.kind.value == prefer_kind and needle == _norm_text(a.statement) and _norm_text(detail) == _norm_text(a.detail) and existing_date == requested_date:
+            return a.key
+    return None
 
 
 def apply_canonical_to_op(
@@ -157,6 +140,8 @@ def apply_canonical_to_op(
         kind=kind,
         statement=statement,
         active_atoms=active_atoms,
+        detail=op.get("detail") or "",
+        happened_on=op.get("happened_on"),
     )
     if not final:
         return op, None

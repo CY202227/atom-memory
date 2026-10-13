@@ -85,6 +85,8 @@ class LocomoQAResult:
     gold_keys: list[str] = field(default_factory=list)
     recalled_keys: list[str] = field(default_factory=list)
     source_ids: list[int] = field(default_factory=list)
+    abstained: bool = False
+    answer_coverage: bool = False
 
 
 @dataclass
@@ -429,6 +431,22 @@ def token_f1(prediction: str, answer: Any) -> float:
     return 2 * precision * recall / (precision + recall)
 
 
+def score_generated_answer(prediction: str, answer: Any, *, threshold: float = 0.5) -> tuple[float, bool, bool]:
+    """Token grading, not truth judgment. Mentioning the gold in an abstention is not a hit."""
+    text = prediction.strip().lstrip("*_>\"'")
+    if text.lower().startswith("error:"):
+        return 0.0, False, False
+    abstained = bool(re.match(r"(?:unknown\b|(?:i|we)\s+(?:do not|don't|cannot|can't)\s+(?:know|confirm|determine)|(?:i|we)\s+(?:do not|don't)\s+have\s+(?:(?:a|an|any|clear|explicit)\s+)*(?:record|evidence|information)\b|(?:i|we)\s+have\s+no\s+(?:clear\s+|explicit\s+)?(?:record|evidence|information)\b|insufficient evidence\b|not enough (?:information|evidence)\b|不知道|无法确定|无法确认)", text, re.IGNORECASE))
+    if abstained and normalize_answer(answer) != "unknown":
+        return 0.0, False, True
+    gold = normalize_answer(answer)
+    clean_prediction = re.sub(r"[*_`]", "", normalize_answer(prediction))
+    if gold and re.search(r"\b(?:not|never|isn't|isn’t|aren't|wasn't)\s+" + re.escape(gold) + r"\b", clean_prediction):
+        return 0.0, False, abstained
+    f1 = token_f1(prediction, answer)
+    return f1, f1 >= threshold, abstained
+
+
 def score_answer_in_text(
     text: str,
     answer: Any,
@@ -500,6 +518,7 @@ def evaluate_locomo_sample(
     hit_f1_threshold: float = 0.5,
     retrieval_coverage: float = 1.0,
     source_evidence: bool = False,
+    source_method: str = "bm25",
 ) -> LocomoReport:
     """对 sample.qa 做 recall 并计分。
 
@@ -554,7 +573,7 @@ def evaluate_locomo_sample(
         source_ids = []
         if source_evidence:
             evidence_response = client.post(f"/spaces/{uid}/sources/search", json={"query": item.question,
-                "max_sources": 4, "budget_chars": 2400})
+                "max_sources": 4, "budget_chars": 2400, "method": source_method})
             if getattr(evidence_response, "status_code", 200) >= 400:
                 raise RuntimeError(f"source search failed: {evidence_response.status_code}")
             evidence = evidence_response.json().get("hits", [])
@@ -573,6 +592,8 @@ def evaluate_locomo_sample(
         prediction = ""
         gold_keys_list: list[str] = []
         hit_any = False
+        abstained = False
+        answer_coverage = False
         if score_mode == "retrieval":
             ok = score_answer_in_text(
                 hit_text, item.answer, coverage=retrieval_coverage
@@ -594,10 +615,9 @@ def evaluate_locomo_sample(
             except LLMError as e:
                 # 单题超时/失败不中断整场；计入未命中
                 prediction = f"error: {type(e).__name__}"
-            f1 = token_f1(prediction, item.answer)
-            ok = f1 >= hit_f1_threshold or score_answer_in_text(
-                prediction, item.answer, coverage=retrieval_coverage
-            )
+            f1, ok, abstained = score_generated_answer(prediction, item.answer, threshold=hit_f1_threshold)
+            # Coverage is a retrieval diagnostic, not generated-answer correctness.
+            answer_coverage = score_answer_in_text(prediction, item.answer, coverage=retrieval_coverage)
             hit_any = ok
 
         results.append(
@@ -615,6 +635,8 @@ def evaluate_locomo_sample(
                 gold_keys=gold_keys_list,
                 recalled_keys=recalled_keys,
                 source_ids=source_ids,
+                abstained=abstained,
+                answer_coverage=answer_coverage,
             )
         )
         cat_hits.setdefault(item.category, []).append(ok)

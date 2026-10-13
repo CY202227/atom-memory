@@ -205,10 +205,10 @@ def test_keyword_recall_and_budget(client, fake_llm):
         f"/spaces/{uid}/recall",
         json={"query": "量子力学", "method": "bm25", "include_recent_sources": False},
     )
-    # BM25 无词面命中时仍可 inventory/空召回保底，返回最近原子
+    # 具体查询没有相关事实时必须保持空召回，不注入无关近期事实。
     body = r.json()
-    assert body["hits"]
-    assert "recalled_memory" in body["context_block"]
+    assert body["hits"] == []
+    assert body["context_block"] == ""
     assert fake_llm.calls == []
 
     inv = client.post(

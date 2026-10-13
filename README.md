@@ -19,6 +19,8 @@ flowchart LR
 
 A **source** is the original material: a conversation, correction, diary entry, or document. An **atom** is a stored fact with a short `statement` and an optional `detail`. Consolidation creates or updates atoms and records their revisions and supporting sources.
 
+The assistant can also search retained sources when a short fact is insufficient. Source search returns historical excerpts separately from current atoms; explicit later corrections take precedence. BM25 is local, while optional LLM search selects existing passages within a bounded candidate index.
+
 The assistant normally receives statements rather than full conversations. It can request details with `expand` when needed. Statements are capped at 80 characters and details at 300 characters; these limits suit short facts better than long documents.
 
 Each `space` has its own sources and atoms. Corrections can update an existing fact, revisions can be rolled back, and sources can be deleted by their upstream reference.
@@ -116,3 +118,7 @@ The mini run uses oracle consolidation and checks retrieval. It is not a measure
 ## License
 
 [MIT](LICENSE)
+
+Public retrieval pilots, failed runs, and scoring limitations are documented in [evaluation notes](docs/evaluation/README.md).
+
+Experimental fact extraction before consolidation is available with `ATOMMEM_CONSOLIDATE_EXTRACT_FACTS=true`. It validates original quotes and their retention before consuming sources. It remains off by default: the public pilot retained more facts but did not improve QA. See [evaluation notes](docs/evaluation/README.md) for the failures and comparisons.

@@ -1,0 +1,456 @@
+{
+  "mode": "raw-source passage evidence retrieval; no consolidation or QA generation",
+  "configuration": {
+    "dataset_sha256": "79fa87e90f04081343b8c8debecb80a9a6842b76a7aa537dc9fdf651ea698ff4",
+    "sample_index": 1,
+    "sample_id": "conv-30",
+    "method": "llm",
+    "max_questions": 20,
+    "source_turns": 6,
+    "max_sources": 4,
+    "budget_chars": 2400,
+    "model_alias": "odb",
+    "limitation": "Different task from atom evidence recall. Labels are scored only against original dia_id markers in returned excerpts. Model-dependent semantic selection may use only a bounded candidate subset."
+  },
+  "questions": [
+    {
+      "question": "When Jon has lost his job as a banker?",
+      "gold_evidence": [
+        "D1:2"
+      ],
+      "retrieved_evidence": [
+        "D16:7",
+        "D16:8",
+        "D1:1",
+        "D1:2",
+        "D1:3",
+        "D5:10",
+        "D5:9",
+        "D6:10",
+        "D6:11"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 1819,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "When Gina has lost her job at Door Dash?",
+      "gold_evidence": [
+        "D1:3"
+      ],
+      "retrieved_evidence": [
+        "D1:2",
+        "D1:3",
+        "D6:3",
+        "D6:4"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 634,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "How do Jon and Gina both like to destress?",
+      "gold_evidence": [
+        "D1:6",
+        "D1:7"
+      ],
+      "retrieved_evidence": [
+        "D1:7",
+        "D2:10",
+        "D2:11"
+      ],
+      "hit_all": false,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 578,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "What do Jon and Gina both have in common?",
+      "gold_evidence": [
+        "D1:2",
+        "D1:3",
+        "D1:4",
+        "D2:1"
+      ],
+      "retrieved_evidence": [
+        "D10:5",
+        "D10:6",
+        "D18:17",
+        "D18:18",
+        "D18:19",
+        "D18:20",
+        "D18:21",
+        "D18:4",
+        "D18:5"
+      ],
+      "hit_all": false,
+      "hit_any": false,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 1835,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "Why did Jon decide to start his dance studio?",
+      "gold_evidence": [
+        "D1:2",
+        "D1:4"
+      ],
+      "retrieved_evidence": [
+        "D11:2",
+        "D11:3",
+        "D11:8",
+        "D11:9",
+        "D1:3",
+        "D1:4",
+        "D1:5",
+        "D1:6",
+        "D5:3",
+        "D5:4"
+      ],
+      "hit_all": false,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 1585,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "What Jon thinks the ideal dance studio should look like?",
+      "gold_evidence": [
+        "D1:20",
+        "D2:4",
+        "D2:8"
+      ],
+      "retrieved_evidence": [
+        "D1:19",
+        "D1:20",
+        "D1:21",
+        "D1:22",
+        "D2:3",
+        "D2:4",
+        "D2:7",
+        "D2:8"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 1696,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "When is Jon's group performing at a festival?",
+      "gold_evidence": [
+        "D1:24"
+      ],
+      "retrieved_evidence": [
+        "D1:23",
+        "D1:24",
+        "D1:25",
+        "D1:26",
+        "D5:1",
+        "D5:2"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 1563,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "When did Gina launch an ad campaign for her store?",
+      "gold_evidence": [
+        "D2:1"
+      ],
+      "retrieved_evidence": [
+        "D2:1"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 377,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "When was Jon in Paris?",
+      "gold_evidence": [
+        "D2:4"
+      ],
+      "retrieved_evidence": [
+        "D2:3",
+        "D2:4",
+        "D2:5"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 800,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "Which city have both Jean and John visited?",
+      "gold_evidence": [
+        "D15:1",
+        "D2:5"
+      ],
+      "retrieved_evidence": [],
+      "hit_all": false,
+      "hit_any": false,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 0,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "When did Gina team up with a local artist for some cool designs?",
+      "gold_evidence": [
+        "D5:5"
+      ],
+      "retrieved_evidence": [
+        "D5:4",
+        "D5:5",
+        "D5:6",
+        "D5:7"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 1073,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "When did Gina get her tattoo?",
+      "gold_evidence": [
+        "D5:15"
+      ],
+      "retrieved_evidence": [
+        "D5:13",
+        "D5:14",
+        "D5:15"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 566,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "When did Jon start to go to the gym?",
+      "gold_evidence": [
+        "D6:1"
+      ],
+      "retrieved_evidence": [
+        "D6:1"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 231,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "When did Gina open her online clothing store?",
+      "gold_evidence": [
+        "D6:6"
+      ],
+      "retrieved_evidence": [
+        "D10:1",
+        "D10:2",
+        "D14:7",
+        "D14:8",
+        "D2:1",
+        "D6:5",
+        "D6:6"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 1816,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "When did Jon start expanding his studio's social media presence?",
+      "gold_evidence": [
+        "D8:13"
+      ],
+      "retrieved_evidence": [
+        "D14:3",
+        "D14:4",
+        "D14:5",
+        "D18:13",
+        "D18:14",
+        "D8:13"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 1892,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "When did Jon host a dance competition?",
+      "gold_evidence": [
+        "D8:13"
+      ],
+      "retrieved_evidence": [
+        "D8:13",
+        "D8:17"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 800,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "When did Jon go to a fair to get more exposure for his dance studio?",
+      "gold_evidence": [
+        "D10:1"
+      ],
+      "retrieved_evidence": [
+        "D10:1",
+        "D10:2"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 800,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "Why did Gina decide to start her own clothing store?",
+      "gold_evidence": [
+        "D1:3",
+        "D6:8"
+      ],
+      "retrieved_evidence": [
+        "D14:7",
+        "D14:8",
+        "D1:2",
+        "D1:3",
+        "D2:1",
+        "D6:5",
+        "D6:6"
+      ],
+      "hit_all": false,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 1366,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "Do Jon and Gina start businesses out of what they love?",
+      "gold_evidence": [
+        "D1:4",
+        "D6:8"
+      ],
+      "retrieved_evidence": [
+        "D1:3",
+        "D1:4",
+        "D1:5",
+        "D1:6",
+        "D6:7",
+        "D6:8",
+        "D8:7",
+        "D8:8",
+        "D9:1",
+        "D9:2",
+        "D9:3"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 1917,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    },
+    {
+      "question": "When did Gina interview for a design internship?",
+      "gold_evidence": [
+        "D11:14"
+      ],
+      "retrieved_evidence": [
+        "D11:13",
+        "D11:14",
+        "D11:15"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 787,
+      "coverage": "candidate_subset",
+      "candidate_count": 64,
+      "total_passages": 369
+    }
+  ],
+  "source_count": 71,
+  "summary": {
+    "total": 20,
+    "all_hits": 15,
+    "any_hits": 18,
+    "all_accuracy": 0.75,
+    "any_accuracy": 0.9,
+    "errors": 0,
+    "skipped_no_evidence": 0,
+    "avg_chars": 1106.75
+  }
+}

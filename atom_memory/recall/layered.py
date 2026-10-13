@@ -12,6 +12,7 @@ from ..models import Atom
 from .base import RecallHit, RecallOutcome
 from .bm25 import Bm25Recall
 from .tokenize import tokenize
+from .fallback import is_inventory_query
 
 _L3_MAX = 2
 _L2_MAX = 2
@@ -37,7 +38,9 @@ def _rank_l2(
     outcome = Bm25Recall().retrieve(atoms_l2, query, max(limit, 5))
     if outcome.hits:
         return outcome.hits[:limit]
-    # 无命中时按更新时间兜底
+    if not is_inventory_query(query):
+        return []
+    # 只有记忆清单查询才允许按更新时间兜底。
     ordered = sorted(
         atoms_l2, key=lambda a: a.updated_at, reverse=True
     )
@@ -70,12 +73,7 @@ def compose_layered(
     if tokenize(query):
         l2_hits = _rank_l2(atoms_l2, query, limit=l2_budget)
     else:
-        l2_hits = [
-            RecallHit(atom=a, score=None)
-            for a in sorted(
-                atoms_l2, key=lambda x: x.updated_at, reverse=True
-            )[:l2_budget]
-        ]
+        l2_hits = []
 
     have = {h.atom.key for h in l3_hits} | {h.atom.key for h in l2_hits}
     l1_extra = [h for h in l1_hits if h.atom.key not in have]

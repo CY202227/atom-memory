@@ -1,0 +1,1266 @@
+{
+  "protocol": "token F1 >= 0.5; abstention and explicit negation guards; word coverage diagnostic only",
+  "limitation": "Token metrics penalize verbose correct answers and synonyms; not independent truth or grounding judgment. Original reports remain unchanged for provenance.",
+  "runs": [
+    {
+      "file": "locomo-live-2026-10-12.json",
+      "sha256": "e489599be4ec02683a5838adaaaec09a4db267a1d9fdc2390897636f19456205",
+      "total": 12,
+      "strict_hits": 0,
+      "mean_f1": 0.0,
+      "abstentions": 12,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-answer-prompt-trial-2026-10-12.json",
+      "sha256": "3327611771c97d3435d9e4553efe64e83f59ed57f1cbd88469dd4484949c8511",
+      "total": 12,
+      "strict_hits": 3,
+      "mean_f1": 0.28703703703703703,
+      "abstentions": 8,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-chunked-2026-10-12.json",
+      "sha256": "8b8984ca38ed1ab20f4937c47725c2a8f4b58417b096d5a38b4daebdd236508d",
+      "total": 12,
+      "strict_hits": 2,
+      "mean_f1": 0.23905723905723905,
+      "abstentions": 6,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 0.3333333333333333,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.09090909090909091,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.2222222222222222,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.2222222222222222,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-fact-inventory-2026-10-13.json",
+      "sha256": "5ae743b4789f813628553ed39c3948d3b56d34145f2ba6eed0bc4d5ec96fcaae",
+      "total": 12,
+      "strict_hits": 4,
+      "mean_f1": 0.34259259259259256,
+      "abstentions": 3,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 0.3333333333333333,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.1111111111111111,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-inventory-semantic-2026-10-13.json",
+      "sha256": "de4d8553e84125cf66ab92ebb47c8aaeda6bbdbbe18726331d4a13e1384500ea",
+      "total": 12,
+      "strict_hits": 5,
+      "mean_f1": 0.493096544116536,
+      "abstentions": 1,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.07407407407407407,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.21052631578947367,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.23255813953488372,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-retention-2026-10-12.json",
+      "sha256": "10cd921e365a66202d4a1379fba72eb36e8fbc5330c68c8d9f6e1f764ddf51e2",
+      "total": 12,
+      "strict_hits": 4,
+      "mean_f1": 0.405513468013468,
+      "abstentions": 3,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.1111111111111111,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.06060606060606061,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.25,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-retention-final-2026-10-12.json",
+      "sha256": "6265dff4a27c3913227dec794f8bb12c5fdcf6d37a733f8f65b51b967a35a965",
+      "total": 12,
+      "strict_hits": 5,
+      "mean_f1": 0.5015432098765432,
+      "abstentions": 3,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.07407407407407407,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.05555555555555555,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-retention-semantic-2026-10-13.json",
+      "sha256": "f2f18f5cc0fb409af438320ad8765a2e96614f99f123071878e1ca09afe61ff4",
+      "total": 12,
+      "strict_hits": 6,
+      "mean_f1": 0.5701058201058201,
+      "abstentions": 2,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.28571428571428575,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.33333333333333337,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-skip-review-2026-10-12.json",
+      "sha256": "1fe014d2aab82a11247f3aa7e24bb43a5deefb01ed323b853f942664f8243763",
+      "total": 12,
+      "strict_hits": 4,
+      "mean_f1": 0.4318181818181818,
+      "abstentions": 3,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.1111111111111111,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.18181818181818182,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-source-anchored-2026-10-12.json",
+      "sha256": "1a9cd68eb1e81c33a1ab48496b8eb6c37155dd47806c2d184472e1f59f38c2be",
+      "total": 12,
+      "strict_hits": 6,
+      "mean_f1": 0.5783334997171475,
+      "abstentions": 1,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.07407407407407407,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.047619047619047616,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.18867924528301885,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.1851851851851852,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-source-replay-2026-10-12.json",
+      "sha256": "b874301120c1d814ea7cacd6d46947ec11de4d4347d87ec351da602eb2793c43",
+      "total": 12,
+      "strict_hits": 5,
+      "mean_f1": 0.4644171415004748,
+      "abstentions": 2,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.07407407407407407,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 0.125,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.08333333333333333,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.6153846153846153,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.23076923076923078,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-velora-agent-2026-10-12.json",
+      "sha256": "f896d76069f114ab23ca0b73b20b3a4fa159f00d3ed65d38c39e16eb22ab0dd9",
+      "total": 12,
+      "strict_hits": 0,
+      "mean_f1": 0.19520480391381337,
+      "abstentions": 1,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 0.4615384615384615,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.07999999999999999,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.0625,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 0.14814814814814814,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.0909090909090909,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.28571428571428575,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 0.15384615384615385,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.2857142857142857,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.41379310344827586,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 0.125,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 0.23529411764705882,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-velora-agent-fixed-2026-10-12.json",
+      "sha256": "9b8dc88511c3bacd90d1f25731c4e05dbd913a4627cb013b4ff3036843cdc916",
+      "total": 12,
+      "strict_hits": 0,
+      "mean_f1": 0.18127305715172562,
+      "abstentions": 1,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 0.42857142857142855,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true,
+          "answer_span": "May 7, 2023",
+          "span_f1": 1.0,
+          "span_hit": true
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.09523809523809523,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true,
+          "answer_span": "2022",
+          "span_f1": 1.0,
+          "span_hit": true
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.10810810810810811,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false,
+          "answer_span": "counseling, psychology, or another mental-health-focused program",
+          "span_f1": 0.36363636363636365,
+          "span_hit": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 0.18181818181818182,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true,
+          "answer_span": "adoption agencies",
+          "span_f1": 1.0,
+          "span_hit": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.09756097560975609,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true,
+          "answer_span": "a transgender woman",
+          "span_f1": 0.8,
+          "span_hit": true
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.2222222222222222,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false,
+          "answer_span": "20 May 2023",
+          "span_f1": 0.4444444444444444,
+          "span_hit": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 0.13793103448275862,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true,
+          "answer_span": "June 2023",
+          "span_f1": 1.0,
+          "span_hit": true
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": true,
+          "answer_span": "unknown",
+          "span_f1": 0.0,
+          "span_hit": false
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.3,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true,
+          "answer_span": "roughly early June 2023 (around 2–8 June)",
+          "span_f1": 0.28571428571428575,
+          "span_hit": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.3157894736842105,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true,
+          "answer_span": "around May 29 – June 4, 2023",
+          "span_f1": 0.3333333333333333,
+          "span_hit": false
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 0.09756097560975609,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true,
+          "answer_span": "4 years",
+          "span_f1": 1.0,
+          "span_hit": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 0.1904761904761905,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true,
+          "answer_span": "mental health",
+          "span_f1": 1.0,
+          "span_hit": true
+        }
+      ],
+      "span_hits": 7,
+      "span_mean_f1": 0.6855940355940356
+    }
+  ]
+}

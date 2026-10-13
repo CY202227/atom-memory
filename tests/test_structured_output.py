@@ -108,3 +108,16 @@ def test_schema_retry_recovers_before_consuming_source(client, fake_llm):
     assert run["status"] == "succeeded"
     assert len(fake_llm.calls) == 2
     assert client.get(f"/spaces/{uid}/sources").json()[0]["status"] == "consolidated"
+
+
+@pytest.mark.parametrize("source_ids", [[], [999]])
+def test_invalid_citations_do_not_create_atoms_or_consume_ordinary_sources(client, fake_llm, source_ids):
+    uid = client.post("/spaces", json={"owner_id": "evidence", "subject_id": "test"}).json()["uid"]
+    client.post(f"/spaces/{uid}/sources", json={"kind": "turn", "content": "Alice likes tea.", "salience": 0.2})
+    response = json.dumps({"operations": [{"op": "upsert", "kind": "person", "key": "tea", "statement": "Alice likes tea.", "source_ids": source_ids}]})
+    fake_llm.responses = [response, response]
+    run = client.post(f"/spaces/{uid}/consolidate", json={}).json()
+    assert run["status"] == "failed"
+    assert "invalid_evidence" in run["error"]
+    assert client.get(f"/spaces/{uid}/atoms").json()["count"] == 0
+    assert client.get(f"/spaces/{uid}/sources").json()[0]["status"] == "pending"

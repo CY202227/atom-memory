@@ -1,0 +1,511 @@
+{
+  "mode": "raw-source passage evidence retrieval; no consolidation or QA generation",
+  "configuration": {
+    "dataset_sha256": "79fa87e90f04081343b8c8debecb80a9a6842b76a7aa537dc9fdf651ea698ff4",
+    "sample_index": 2,
+    "sample_id": "conv-41",
+    "method": "llm",
+    "max_questions": 20,
+    "question_offset": 20,
+    "source_turns": 6,
+    "max_sources": 4,
+    "budget_chars": 2400,
+    "model_alias": "odb",
+    "limitation": "Different task from atom evidence recall. Labels are scored only against original dia_id markers in returned excerpts. Model-dependent semantic selection may use only a bounded candidate subset."
+  },
+  "questions": [
+    {
+      "question": "When did John take a road trip to the Pacific Northwest?",
+      "gold_evidence": [
+        "D11:3",
+        "D11:5"
+      ],
+      "retrieved_evidence": [
+        "D11:3",
+        "D11:4",
+        "D11:5",
+        "D11:6",
+        "D11:7",
+        "D11:8"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 1382,
+      "coverage": "candidate_subset",
+      "candidate_count": 44,
+      "total_passages": 663
+    },
+    {
+      "question": "What areas of the U.S. has John been to or is planning to go to?",
+      "gold_evidence": [
+        "D11:5",
+        "D12:17"
+      ],
+      "retrieved_evidence": [
+        "D12:15",
+        "D12:16",
+        "D12:17",
+        "D12:18",
+        "D1:1",
+        "D1:2"
+      ],
+      "hit_all": false,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 758,
+      "coverage": "candidate_subset",
+      "candidate_count": 45,
+      "total_passages": 663
+    },
+    {
+      "question": "When did John go to a convention with colleagues?",
+      "gold_evidence": [
+        "D12:9"
+      ],
+      "retrieved_evidence": [
+        "D12:10",
+        "D12:7",
+        "D12:8",
+        "D12:9"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 800,
+      "coverage": "candidate_subset",
+      "candidate_count": 45,
+      "total_passages": 663
+    },
+    {
+      "question": "What desserts has Maria made?",
+      "gold_evidence": [
+        "D13:18",
+        "D2:25"
+      ],
+      "retrieved_evidence": [
+        "D13:16",
+        "D13:17",
+        "D13:18"
+      ],
+      "hit_all": false,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 800,
+      "coverage": "candidate_subset",
+      "candidate_count": 40,
+      "total_passages": 663
+    },
+    {
+      "question": "When did John start boot camp with his family?",
+      "gold_evidence": [
+        "D13:3"
+      ],
+      "retrieved_evidence": [
+        "D13:1",
+        "D13:13",
+        "D13:14",
+        "D13:15",
+        "D13:16",
+        "D13:2",
+        "D13:3",
+        "D13:4"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 1558,
+      "coverage": "candidate_subset",
+      "candidate_count": 36,
+      "total_passages": 663
+    },
+    {
+      "question": "What European countries has Maria been to?",
+      "gold_evidence": [
+        "D13:24",
+        "D8:15"
+      ],
+      "retrieved_evidence": [
+        "D8:16",
+        "D8:17",
+        "D8:18"
+      ],
+      "hit_all": false,
+      "hit_any": false,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 525,
+      "coverage": "candidate_subset",
+      "candidate_count": 44,
+      "total_passages": 663
+    },
+    {
+      "question": "What has Maria done to feel closer to her faith?",
+      "gold_evidence": [
+        "D11:10",
+        "D14:10"
+      ],
+      "retrieved_evidence": [
+        "D11:10",
+        "D11:11",
+        "D11:8",
+        "D11:9",
+        "D14:10",
+        "D14:11",
+        "D14:8",
+        "D14:9"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 1423,
+      "coverage": "candidate_subset",
+      "candidate_count": 42,
+      "total_passages": 663
+    },
+    {
+      "question": "When did John have a party with veterans?",
+      "gold_evidence": [
+        "D15:11"
+      ],
+      "retrieved_evidence": [
+        "D15:10",
+        "D15:11",
+        "D15:12",
+        "D15:13",
+        "D15:14",
+        "D15:9"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 1431,
+      "coverage": "candidate_subset",
+      "candidate_count": 41,
+      "total_passages": 663
+    },
+    {
+      "question": "What causes does John feel passionate about supporting?",
+      "gold_evidence": [
+        "D12:5",
+        "D15:3",
+        "D1:8",
+        "D9:8"
+      ],
+      "retrieved_evidence": [
+        "D15:1",
+        "D15:10",
+        "D15:2",
+        "D15:3",
+        "D15:4",
+        "D15:7",
+        "D15:8",
+        "D15:9",
+        "D1:6",
+        "D1:7",
+        "D1:8",
+        "D1:9",
+        "D29:10",
+        "D29:7",
+        "D29:8",
+        "D29:9"
+      ],
+      "hit_all": false,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 2400,
+      "coverage": "candidate_subset",
+      "candidate_count": 40,
+      "total_passages": 663
+    },
+    {
+      "question": "What events is Maria planning for the homeless shelter funraiser?",
+      "gold_evidence": [
+        "D15:18",
+        "D16:4"
+      ],
+      "retrieved_evidence": [
+        "D15:16",
+        "D15:17",
+        "D15:18",
+        "D16:2",
+        "D16:3",
+        "D16:4",
+        "D16:5"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 1356,
+      "coverage": "candidate_subset",
+      "candidate_count": 34,
+      "total_passages": 663
+    },
+    {
+      "question": "What shelters does Maria volunteer at?",
+      "gold_evidence": [
+        "D11:10",
+        "D17:12",
+        "D2:1"
+      ],
+      "retrieved_evidence": [
+        "D11:10",
+        "D11:11",
+        "D11:8",
+        "D11:9",
+        "D12:16",
+        "D12:17",
+        "D12:18",
+        "D1:1",
+        "D1:2",
+        "D1:3",
+        "D1:4",
+        "D29:1",
+        "D29:2"
+      ],
+      "hit_all": false,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 2400,
+      "coverage": "candidate_subset",
+      "candidate_count": 38,
+      "total_passages": 663
+    },
+    {
+      "question": "When did John get his dog Max?",
+      "gold_evidence": [
+        "D17:1"
+      ],
+      "retrieved_evidence": [
+        "D17:1",
+        "D17:2",
+        "D17:3"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 800,
+      "coverage": "candidate_subset",
+      "candidate_count": 40,
+      "total_passages": 663
+    },
+    {
+      "question": "What outdoor activities has John done with his colleagues?",
+      "gold_evidence": [
+        "D16:2",
+        "D18:2"
+      ],
+      "retrieved_evidence": [
+        "D10:1",
+        "D10:2",
+        "D12:10",
+        "D12:7",
+        "D12:8",
+        "D12:9",
+        "D7:14",
+        "D7:15",
+        "D7:16",
+        "D7:17"
+      ],
+      "hit_all": false,
+      "hit_any": false,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 2070,
+      "coverage": "candidate_subset",
+      "candidate_count": 45,
+      "total_passages": 663
+    },
+    {
+      "question": "What types of yoga has Maria practiced?",
+      "gold_evidence": [
+        "D18:15",
+        "D19:3",
+        "D1:3"
+      ],
+      "retrieved_evidence": [
+        "D18:14",
+        "D18:15",
+        "D18:16",
+        "D18:17",
+        "D18:18",
+        "D18:19",
+        "D18:20",
+        "D19:2",
+        "D19:3",
+        "D1:1",
+        "D1:2",
+        "D1:3",
+        "D1:4"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 2400,
+      "coverage": "candidate_subset",
+      "candidate_count": 43,
+      "total_passages": 663
+    },
+    {
+      "question": "When did Maria join a gym?",
+      "gold_evidence": [
+        "D19:1"
+      ],
+      "retrieved_evidence": [
+        "D19:1",
+        "D19:2"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 476,
+      "coverage": "candidate_subset",
+      "candidate_count": 42,
+      "total_passages": 663
+    },
+    {
+      "question": "What states has Maria vacationed at?",
+      "gold_evidence": [
+        "D18:3",
+        "D19:23"
+      ],
+      "retrieved_evidence": [
+        "D13:27",
+        "D13:28",
+        "D13:29",
+        "D13:30",
+        "D19:21",
+        "D19:22",
+        "D19:23"
+      ],
+      "hit_all": false,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 1489,
+      "coverage": "candidate_subset",
+      "candidate_count": 42,
+      "total_passages": 663
+    },
+    {
+      "question": "What music events has John attended?",
+      "gold_evidence": [
+        "D20:4",
+        "D8:12"
+      ],
+      "retrieved_evidence": [
+        "D20:2",
+        "D20:3",
+        "D20:4",
+        "D20:5",
+        "D8:10",
+        "D8:11",
+        "D8:12"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 1276,
+      "coverage": "candidate_subset",
+      "candidate_count": 39,
+      "total_passages": 663
+    },
+    {
+      "question": "What events for veterans has John participated in?",
+      "gold_evidence": [
+        "D15:1",
+        "D15:11",
+        "D21:22",
+        "D24:1",
+        "D29:4"
+      ],
+      "retrieved_evidence": [
+        "D15:11",
+        "D15:12",
+        "D15:13",
+        "D15:14",
+        "D21:20",
+        "D21:21",
+        "D21:22",
+        "D21:23",
+        "D24:1",
+        "D29:2",
+        "D29:3",
+        "D29:4"
+      ],
+      "hit_all": false,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 2400,
+      "coverage": "candidate_subset",
+      "candidate_count": 36,
+      "total_passages": 663
+    },
+    {
+      "question": "When did Maria get in a car accident?",
+      "gold_evidence": [
+        "D21:3"
+      ],
+      "retrieved_evidence": [
+        "D21:3",
+        "D21:4",
+        "D21:5",
+        "D21:6"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 800,
+      "coverage": "candidate_subset",
+      "candidate_count": 42,
+      "total_passages": 663
+    },
+    {
+      "question": "Around which US holiday did Maria get into a car accident?",
+      "gold_evidence": [
+        "D21:3"
+      ],
+      "retrieved_evidence": [
+        "D21:3",
+        "D21:4",
+        "D21:5",
+        "D21:6"
+      ],
+      "hit_all": true,
+      "hit_any": true,
+      "has_evidence": true,
+      "http_status": 200,
+      "chars_used": 800,
+      "coverage": "candidate_subset",
+      "candidate_count": 43,
+      "total_passages": 663
+    }
+  ],
+  "source_count": 122,
+  "summary": {
+    "total": 20,
+    "all_hits": 12,
+    "any_hits": 18,
+    "all_accuracy": 0.6,
+    "any_accuracy": 0.9,
+    "errors": 0,
+    "skipped_no_evidence": 0,
+    "avg_chars": 1367.2
+  }
+}

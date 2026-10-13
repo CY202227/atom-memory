@@ -138,7 +138,8 @@ def recall(
         raise HTTPException(status_code=502, detail=f"recall embedder failed: {e}")
 
     hits_raw = list(outcome.hits)
-    need_fallback = (not hits_raw or is_inventory_query(payload.query)) and atoms
+    # A failed relevance search is not a request to inject random recent facts.
+    need_fallback = is_inventory_query(payload.query) and atoms
     if need_fallback:
         exclude = {h.atom.key for h in hits_raw}
         fill = fallback_hits(
