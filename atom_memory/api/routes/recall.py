@@ -17,8 +17,10 @@ from ...recall import (
     render_statement_block,
 )
 from ...recall.base import RecallHit
-from ...recall.layered import layered_retrieve, partition_by_layer
+from ...recall.layered import layered_retrieve
 from ...recall.llm import RecallError
+from ...recall.render import time_context, memory_content_cost
+from ...recall.source_time import evidence_time_anchor
 from ...repositories import atom_link_repo, atom_repo, source_repo
 from .. import schemas
 from ..deps import (
@@ -35,9 +37,7 @@ _NEIGHBOR_SCORE_FACTOR = 0.5
 
 
 def _hit_cost(h: RecallHit, detail: str) -> int:
-    if detail == "full":
-        return len(h.atom.statement) + len(h.atom.detail or "")
-    return len(h.atom.statement)
+    return memory_content_cost(h.atom, detail=detail, source_anchor=h.source_anchor)
 
 
 def _apply_derived_confidence_penalty(
@@ -102,6 +102,8 @@ def _hit_out(h: RecallHit, *, detail: str) -> schemas.RecallHitOut:
         happened_on=h.atom.happened_on,
         detail=h.atom.detail if detail == "full" else None,
         memory_layer=int(h.atom.memory_layer or 1),
+        time_context=time_context(h.atom, source_anchor=h.source_anchor),
+        source_time=h.source_anchor,
     )
 
 
@@ -119,14 +121,8 @@ def recall(
         payload.method, llm, session=session, embedder=embedder
     )
 
-    # layered：主检索在 L1 子集上；flat：全量
-    if payload.policy == "layered":
-        l1_atoms, _l2, _l3 = partition_by_layer(
-            atoms, derived_ids=derived_ids
-        )
-        retrieve_pool = l1_atoms if l1_atoms else atoms
-    else:
-        retrieve_pool = atoms
+    # The selected strategy ranks all layers; layered policy adds only sticky identity.
+    retrieve_pool = atoms
 
     try:
         outcome = strategy.retrieve(
@@ -161,6 +157,7 @@ def recall(
             strategy_outcome=outcome,
             max_atoms=payload.max_atoms,
             derived_ids=derived_ids,
+            ranked_all_layers=True,
         )
     else:
         hits_raw = list(outcome.hits)
@@ -173,6 +170,8 @@ def recall(
         )
 
     pre_budget = list(hits_raw)
+    for hit in hits_raw:
+        hit.source_anchor = evidence_time_anchor(session, hit.atom)
     hits = clip_by_budget(hits_raw, payload.budget_chars)
 
     recent_lines: list[str] = []
@@ -185,13 +184,13 @@ def recall(
         used = 0
         for h in hits:
             cost = _hit_cost(h, "full")
-            if kept and used + cost > payload.budget_chars:
-                break
+            if used + cost > payload.budget_chars:
+                continue
             kept.append(h)
             used += cost
         hits = kept
         chars_used = used
-        block = render_detail_block([h.atom for h in hits])
+        block = render_detail_block([h.atom for h in hits], source_anchors={h.atom.key: h.source_anchor for h in hits if h.source_anchor})
     else:
         chars_used = sum(_hit_cost(h, "statement") for h in hits)
         block = render_statement_block(hits)

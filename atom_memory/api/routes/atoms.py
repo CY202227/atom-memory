@@ -91,6 +91,7 @@ def _atom_detail(
         evidence_dates=dates,
         revisions=revisions,
         evidence=evidence,
+        current_source_ids=[source.id for source in evidence_repo.current_sources(session, atom)] if with_evidence else None,
     )
 
 
@@ -152,18 +153,22 @@ def expand_atoms(
     space: Space = Depends(get_space),
     session: Session = Depends(get_session),
 ):
+    from ...recall.render import time_context, memory_content_cost
+    from ...recall.source_time import evidence_time_anchor
     hits: list[schemas.ExpandHitOut] = []
     atoms: list[Atom] = []
     missing: list[str] = []
     used = 0
+    source_anchors = {}
     for key in payload.keys[:10]:
         atom = atom_repo.get_by_key(session, space.id, key)
         if atom is None or atom.status != AtomStatus.active:
             missing.append(key)
             continue
         detail = atom.detail or atom.statement
-        cost = len(atom.statement) + len(detail)
-        if hits and used + cost > payload.budget_chars:
+        source_anchor = evidence_time_anchor(session, atom)
+        cost = memory_content_cost(atom, detail="full", source_anchor=source_anchor)
+        if used + cost > payload.budget_chars:
             missing.append(key)
             continue
         excerpts = []
@@ -193,15 +198,19 @@ def expand_atoms(
                 statement=atom.statement,
                 detail=detail,
                 happened_on=atom.happened_on,
+                time_context=time_context(atom, source_anchor=source_anchor),
+                source_time=source_anchor,
                 evidence_excerpts=excerpts,
             )
         )
         atoms.append(atom)
+        if source_anchor:
+            source_anchors[atom.key] = source_anchor
         used += cost
     return schemas.ExpandResponse(
         hits=hits,
         missing=missing,
-        context_block=render_detail_block(atoms),
+        context_block=render_detail_block(atoms, source_anchors=source_anchors),
     )
 
 
@@ -245,9 +254,11 @@ def rollback_atom(
         atom.happened_on = target.happened_on
         atom.status = AtomStatus.active
         atom.updated_at = utcnow()
-        revision_repo.add(
+        restored_revision = revision_repo.add(
             session, atom, f"回滚到第 {payload.seq} 版", RevisionTrigger.rollback
         )
+        evidence_repo.add_many(session, restored_revision.id,
+            [source.id for source in evidence_repo.sources_for_revision(session, target.id, space.id)])
         invalidate_atom(session, atom.id)
         session.commit()
         session.refresh(atom)

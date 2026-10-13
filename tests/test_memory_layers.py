@@ -271,3 +271,28 @@ def test_persona_endpoint_marks_l3(client, fake_llm):
     assert run["status"] == "succeeded"
     atom = client.get(f"/spaces/{uid}/atoms/persona").json()
     assert atom["memory_layer"] == LAYER_L3
+
+
+def test_layered_semantic_search_sees_l2_without_inserting_unselected_background(client, fake_llm):
+    from atom_memory.db import get_session
+    from atom_memory.main import app
+    uid = _uid(client)
+    generator = app.dependency_overrides[get_session]()
+    session = next(generator)
+    try:
+        from sqlmodel import select
+        from atom_memory.models import Space
+        owner = session.exec(select(Space).where(Space.uid == uid)).one()
+        session.add_all([
+            Atom(space_id=owner.id, key='background', kind=AtomKind.belief, statement='Alice likes watching films.', memory_layer=2),
+            Atom(space_id=owner.id, key='painting-year', kind=AtomKind.event, statement='Alice painted in 2022.', memory_layer=2),
+            Atom(space_id=owner.id, key='tea', kind=AtomKind.person, statement='Alice likes tea.', memory_layer=1),
+        ])
+        session.commit()
+    finally:
+        generator.close()
+    fake_llm.responses = ['{"keys": ["painting-year"]}']
+    result = client.post(f'/spaces/{uid}/recall', json={'query': 'When did Alice paint?', 'method': 'llm', 'max_atoms': 2, 'policy': 'layered', 'include_recent_sources': False}).json()
+    assert [hit['key'] for hit in result['hits']] == ['painting-year']
+    assert 'painting-year' in fake_llm.calls[-1][1]
+    assert 'background' not in result['context_block']

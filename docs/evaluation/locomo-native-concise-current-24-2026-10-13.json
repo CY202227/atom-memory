@@ -1,0 +1,621 @@
+{
+  "mode": "real Velora RecallMemory -> ComposePrompt -> LLMNode streaming/tool loop; saved public atoms",
+  "complete": true,
+  "configuration": {
+    "dataset_sha256": "d235443a69910bdb219210c4efdb189fb17d2f29dd50b8652fed5042eece090b",
+    "snapshot_sha256": "1169653fde552b04bbc4e6d60bd8c099219ac3f1434ea4893622340701d319b7",
+    "model_alias": "odb",
+    "initial_budget": 400,
+    "initial_max_atoms": 5,
+    "max_tool_rounds": 4,
+    "answer_span_normalization": false,
+    "temperature": 0.0,
+    "limitation": "Public snapshot replay, no new ingestion/consolidation or persistence. Evaluation persona uses question language and two read-only memory tools. Missing snapshot kind defaults to event; all atoms are L1. Raw and optional normalized-span token scores are separate; normalizer sees no gold and must copy an asserted span. Neither is independent truth/grounding judgment."
+  },
+  "questions": [
+    {
+      "question": "Is it likely that Nate has friends besides Joanna?",
+      "answer": "Yesteammates on hisvideo game team.",
+      "prediction": "Yes, it's likely. Nate has started hanging out with people he met at the video game tournament, and he tends to stick around the more chill ones there.",
+      "f1": 0.0588235294117647,
+      "hit": false,
+      "category": 3,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"joanna-hobbies\" kind=\"person\">Joanna enjoys writing, reading, watching movies, and exploring nature.</item>\n<item key=\"joanna-recommends-little-women\" kind=\"event\">Joanna recommended the movie Little Women to Nate.</item>\n<item key=\"nate-made-dairy-free-chocolate-cake\" kind=\"event\">Nate made a dairy-free chocolate cake with berries on it.</item>\n<item key=\"joanna-watched-eternal-sunshine\" kind=\"event\"><source_time>2022-01-21</source_time> <event_time>around 2019 (year precision)</event_time> Joanna has watched Eternal Sunshine of the Spotless Mind a few times.</item>\n<item key=\"joanna-recommends-eternal-sunshine\" kind=\"event\">Joanna recommended the movie Eternal Sunshine of the Spotless Mind to Nate.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Nate friends other than Joanna\", \"method\": \"hybrid\"}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": "hybrid",
+          "source_coverage": "candidate_subset",
+          "errors": {}
+        }
+      ],
+      "abstained": false
+    },
+    {
+      "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+      "answer": "2019",
+      "prediction": "Joanna first watched it around 2019 — she said in a January 2022 conversation that it was about three years earlier.",
+      "f1": 0.09523809523809523,
+      "hit": false,
+      "category": 2,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"joanna-watched-eternal-sunshine\" kind=\"event\"><source_time>2022-01-21</source_time> <event_time>around 2019 (year precision)</event_time> Joanna has watched Eternal Sunshine of the Spotless Mind a few times.</item>\n<item key=\"joanna-recommends-eternal-sunshine\" kind=\"event\">Joanna recommended the movie Eternal Sunshine of the Spotless Mind to Nate.</item>\n<item key=\"joanna-owns-eternal-sunshine-dvd\" kind=\"person\">Joanna owns a physical copy of Eternal Sunshine of the Spotless Mind.</item>\n<item key=\"joanna-finished-first-screenplay\" kind=\"event\"><source_time>2022-01-23</source_time> <event_time>2022-01-21 (day precision)</event_time> Joanna finished her first full screenplay and printed it last Friday.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Joanna first watched Eternal Sunshine of the Spotless Mind\", \"method\": \"hybrid\"}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": "hybrid",
+          "source_coverage": "candidate_subset",
+          "errors": {}
+        }
+      ],
+      "abstained": false
+    },
+    {
+      "question": "When did Nate win his first video game tournament?",
+      "answer": "the week before 21Janury, 2022",
+      "prediction": "Nate won his first video game tournament the week before January 21, 2022.",
+      "f1": 0.4444444444444444,
+      "hit": false,
+      "category": 2,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"nate-won-first-video-game-tournament\" kind=\"event\"><source_time>2022-01-21</source_time> <event_time>week before 21 January 2022 (week precision)</event_time> Nate won his first video game tournament last week.</item>\n<item key=\"nate-hangs-out-with-tournament-people\" kind=\"event\">Nate started hanging out with people he met at the video game tournament.</item>\n<item key=\"nate-hobbies\" kind=\"person\">Nate&#x27;s main hobbies are playing video games and watching movies.</item>\n<item key=\"joanna-finished-first-screenplay\" kind=\"event\"><source_time>2022-01-23</source_time> <event_time>2022-01-21 (day precision)</event_time> Joanna finished her first full screenplay and printed it last Friday.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "abstained": false
+    },
+    {
+      "question": "What pets wouldn't cause any discomfort to Joanna?",
+      "answer": "Hairless cats or pigs,since they don't have fur, which is one of the main causes of Joanna's allergy.",
+      "prediction": "I don't have a list of pets that are safe for Joanna — the memory only says she's allergic to most reptiles and animals with fur. So I can't name specific pets that wouldn't bother her without guessing.",
+      "f1": 0.2580645161290323,
+      "hit": false,
+      "category": 3,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"nate-owns-pet-turtles\" kind=\"person\"><source_time>2022-01-23</source_time> <event_time>around 2019 (year precision)</event_time> Nate has had pet turtles for 3 years.</item>\n<item key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\">Joanna plans to submit her finished screenplay to film festivals.</item>\n<item key=\"joanna-screenplay-festival-submitted\" kind=\"event\">Joanna submitted her screenplay to a film festival.</item>\n<item key=\"joanna-movie-genre-preference\" kind=\"person\">Joanna loves dramas and romcoms.</item>\n<item key=\"joanna-pet-allergy\" kind=\"person\">Joanna is allergic to most reptiles and animals with fur.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Joanna pet allergy reptiles fur which animals safe\", \"method\": \"hybrid\"}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": "hybrid",
+          "source_coverage": "candidate_subset",
+          "errors": {}
+        }
+      ],
+      "abstained": false
+    },
+    {
+      "question": "What are Joanna's hobbies?",
+      "answer": "Writing, watchingmovies, exploringnature, hanging withfriends.",
+      "prediction": "Joanna enjoys writing, reading, watching movies, and exploring nature.",
+      "f1": 0.14285714285714285,
+      "hit": false,
+      "category": 1,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"nate-hobbies\" kind=\"person\">Nate&#x27;s main hobbies are playing video games and watching movies.</item>\n<item key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\">Joanna plans to submit her finished screenplay to film festivals.</item>\n<item key=\"joanna-movie-genre-preference\" kind=\"person\">Joanna loves dramas and romcoms.</item>\n<item key=\"joanna-recommends-little-women\" kind=\"event\">Joanna recommended the movie Little Women to Nate.</item>\n<item key=\"joanna-hobbies\" kind=\"person\">Joanna enjoys writing, reading, watching movies, and exploring nature.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "abstained": false
+    },
+    {
+      "question": "How long has Nate had his first two turtles?",
+      "answer": "three years",
+      "prediction": "Nate has had his two turtles for 3 years.",
+      "f1": 0.1818181818181818,
+      "hit": false,
+      "category": 2,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"nate-owns-pet-turtles\" kind=\"person\"><source_time>2022-01-23</source_time> <event_time>around 2019 (year precision)</event_time> Nate has had pet turtles for 3 years.</item>\n<item key=\"nate-won-first-video-game-tournament\" kind=\"event\"><source_time>2022-01-21</source_time> <event_time>week before 21 January 2022 (week precision)</event_time> Nate won his first video game tournament last week.</item>\n<item key=\"joanna-watched-eternal-sunshine\" kind=\"event\"><source_time>2022-01-21</source_time> <event_time>around 2019 (year precision)</event_time> Joanna has watched Eternal Sunshine of the Spotless Mind a few times.</item>\n<item key=\"joanna-finished-first-screenplay\" kind=\"event\"><source_time>2022-01-23</source_time> <event_time>2022-01-21 (day precision)</event_time> Joanna finished her first full screenplay and printed it last Friday.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Nate first two turtles how long\", \"method\": \"hybrid\"}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": "hybrid",
+          "source_coverage": "candidate_subset",
+          "errors": {}
+        }
+      ],
+      "abstained": false
+    },
+    {
+      "question": "When did Joanna finish her first screenplay?",
+      "answer": "The Friday before 23January, 2022",
+      "prediction": "Joanna finished her first screenplay on January 21, 2022.",
+      "f1": 0.14285714285714285,
+      "hit": false,
+      "category": 2,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"joanna-finished-first-screenplay\" kind=\"event\"><source_time>2022-01-23</source_time> <event_time>2022-01-21 (day precision)</event_time> Joanna finished her first full screenplay and printed it last Friday.</item>\n<item key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\">Joanna plans to submit her finished screenplay to film festivals.</item>\n<item key=\"joanna-screenplay-festival-submitted\" kind=\"event\">Joanna submitted her screenplay to a film festival.</item>\n<item key=\"nate-won-first-video-game-tournament\" kind=\"event\"><source_time>2022-01-21</source_time> <event_time>week before 21 January 2022 (week precision)</event_time> Nate won his first video game tournament last week.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "abstained": false
+    },
+    {
+      "question": "When did Nate get his first two turtles?",
+      "answer": "2019",
+      "prediction": "Around 2019 — Nate said in January 2022 that he'd had his two turtles for 3 years.",
+      "f1": 0.1111111111111111,
+      "hit": false,
+      "category": 2,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"nate-owns-pet-turtles\" kind=\"person\"><source_time>2022-01-23</source_time> <event_time>around 2019 (year precision)</event_time> Nate has had pet turtles for 3 years.</item>\n<item key=\"nate-won-first-video-game-tournament\" kind=\"event\"><source_time>2022-01-21</source_time> <event_time>week before 21 January 2022 (week precision)</event_time> Nate won his first video game tournament last week.</item>\n<item key=\"joanna-finished-first-screenplay\" kind=\"event\"><source_time>2022-01-23</source_time> <event_time>2022-01-21 (day precision)</event_time> Joanna finished her first full screenplay and printed it last Friday.</item>\n<item key=\"joanna-movie-genre-preference\" kind=\"person\">Joanna loves dramas and romcoms.</item>\n<item key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\">Joanna plans to submit her finished screenplay to film festivals.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_expand",
+          "arguments": "{\"keys\": [\"nate-owns-pet-turtles\"]}",
+          "round": 0
+        },
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Nate first two turtles got\", \"method\": \"llm\"}",
+          "round": 1
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": null,
+          "fallback_from": null,
+          "source_coverage": null,
+          "errors": null
+        },
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": null,
+          "source_coverage": "candidate_subset",
+          "errors": {}
+        }
+      ],
+      "abstained": false
+    },
+    {
+      "question": "What major achievement did Joanna accomplish in January 2022?",
+      "answer": "finished her screenplay and printed it",
+      "prediction": "In January 2022, Joanna finished her first full screenplay — she completed it around January 21 and printed it out.",
+      "f1": 0.4799999999999999,
+      "hit": false,
+      "category": 2,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"joanna-movie-genre-preference\" kind=\"person\">Joanna loves dramas and romcoms.</item>\n<item key=\"joanna-hobbies\" kind=\"person\">Joanna enjoys writing, reading, watching movies, and exploring nature.</item>\n<item key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\">Joanna plans to submit her finished screenplay to film festivals.</item>\n<item key=\"joanna-owns-eternal-sunshine-dvd\" kind=\"person\">Joanna owns a physical copy of Eternal Sunshine of the Spotless Mind.</item>\n<item key=\"joanna-finished-first-screenplay\" kind=\"event\"><source_time>2022-01-23</source_time> <event_time>2022-01-21 (day precision)</event_time> Joanna finished her first full screenplay and printed it last Friday.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "abstained": false
+    },
+    {
+      "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+      "answer": "Relief, excitement,worry, hope,anxiety.",
+      "prediction": "She's bouncing between relief, excitement, and worry about it.",
+      "f1": 0.4,
+      "hit": false,
+      "category": 1,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"joanna-screenplay-festival-submitted\" kind=\"event\">Joanna submitted her screenplay to a film festival.</item>\n<item key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\">Joanna plans to submit her finished screenplay to film festivals.</item>\n<item key=\"joanna-movie-genre-preference\" kind=\"person\">Joanna loves dramas and romcoms.</item>\n<item key=\"joanna-finished-first-screenplay\" kind=\"event\"><source_time>2022-01-23</source_time> <event_time>2022-01-21 (day precision)</event_time> Joanna finished her first full screenplay and printed it last Friday.</item>\n<item key=\"joanna-pet-allergy\" kind=\"person\">Joanna is allergic to most reptiles and animals with fur.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Joanna emotions feelings about screenplay submitted film festival nervous excited proud\", \"method\": \"hybrid\"}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": "hybrid",
+          "source_coverage": "candidate_subset",
+          "errors": {}
+        }
+      ],
+      "abstained": false
+    },
+    {
+      "question": "What type of movies does Nate enjoy watching the most?",
+      "answer": "action and sci-fi",
+      "prediction": "Nate loves action and sci-fi movies the most — he's a fan of the cool effects. He also enjoys watching classics.",
+      "f1": 0.3076923076923077,
+      "hit": false,
+      "category": 4,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"joanna-hobbies\" kind=\"person\">Joanna enjoys writing, reading, watching movies, and exploring nature.</item>\n<item key=\"joanna-recommends-eternal-sunshine\" kind=\"event\">Joanna recommended the movie Eternal Sunshine of the Spotless Mind to Nate.</item>\n<item key=\"nate-hobbies\" kind=\"person\">Nate&#x27;s main hobbies are playing video games and watching movies.</item>\n<item key=\"joanna-recommends-little-women\" kind=\"event\">Joanna recommended the movie Little Women to Nate.</item>\n<item key=\"nate-dairy-free-dessert-flavor-preference\" kind=\"person\">Nate loves coconut milk, chocolate, and mixed berry flavors for dairy-free desse</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Nate favorite movie genre enjoys watching\", \"method\": \"hybrid\"}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": "hybrid",
+          "source_coverage": "candidate_subset",
+          "errors": {}
+        }
+      ],
+      "abstained": false
+    },
+    {
+      "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+      "answer": "screenplay",
+      "prediction": "She finished her first full screenplay — and printed it out.",
+      "f1": 0.18181818181818182,
+      "hit": false,
+      "category": 4,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"joanna-finished-first-screenplay\" kind=\"event\"><source_time>2022-01-23</source_time> <event_time>2022-01-21 (day precision)</event_time> Joanna finished her first full screenplay and printed it last Friday.</item>\n<item key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\">Joanna plans to submit her finished screenplay to film festivals.</item>\n<item key=\"nate-won-first-video-game-tournament\" kind=\"event\"><source_time>2022-01-21</source_time> <event_time>week before 21 January 2022 (week precision)</event_time> Nate won his first video game tournament last week.</item>\n<item key=\"joanna-movie-genre-preference\" kind=\"person\">Joanna loves dramas and romcoms.</item>\n<item key=\"joanna-pet-allergy\" kind=\"person\">Joanna is allergic to most reptiles and animals with fur.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "abstained": false
+    },
+    {
+      "question": "What genre is Joanna's first screenplay?",
+      "answer": "drama and romance",
+      "prediction": "It’s a mix of drama and romance.",
+      "f1": 0.5454545454545454,
+      "hit": true,
+      "category": 4,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"joanna-finished-first-screenplay\" kind=\"event\"><source_time>2022-01-23</source_time> <event_time>2022-01-21 (day precision)</event_time> Joanna finished her first full screenplay and printed it last Friday.</item>\n<item key=\"joanna-screenplay-festival-submitted\" kind=\"event\">Joanna submitted her screenplay to a film festival.</item>\n<item key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\">Joanna plans to submit her finished screenplay to film festivals.</item>\n<item key=\"nate-won-first-video-game-tournament\" kind=\"event\"><source_time>2022-01-21</source_time> <event_time>week before 21 January 2022 (week precision)</event_time> Nate won his first video game tournament last week.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Joanna first screenplay genre\", \"method\": \"hybrid\"}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": "hybrid",
+          "source_coverage": "candidate_subset",
+          "errors": {}
+        }
+      ],
+      "abstained": false
+    },
+    {
+      "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+      "answer": "submit it to film festivals and get producers and directors to check it out",
+      "prediction": "In January 2022, Joanna planned to submit her finished screenplay to film festivals, hoping to get producers and directors to check it out.",
+      "f1": 0.6486486486486486,
+      "hit": true,
+      "category": 4,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\">Joanna plans to submit her finished screenplay to film festivals.</item>\n<item key=\"joanna-finished-first-screenplay\" kind=\"event\"><source_time>2022-01-23</source_time> <event_time>2022-01-21 (day precision)</event_time> Joanna finished her first full screenplay and printed it last Friday.</item>\n<item key=\"joanna-screenplay-festival-submitted\" kind=\"event\">Joanna submitted her screenplay to a film festival.</item>\n<item key=\"joanna-movie-genre-preference\" kind=\"person\">Joanna loves dramas and romcoms.</item>\n<item key=\"joanna-pet-allergy\" kind=\"person\">Joanna is allergic to most reptiles and animals with fur.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_expand",
+          "arguments": "{\"keys\": [\"joanna-plans-submit-screenplay-festivals\", \"joanna-finished-first-screenplay\"]}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": null,
+          "fallback_from": null,
+          "source_coverage": null,
+          "errors": null
+        }
+      ],
+      "abstained": false
+    },
+    {
+      "question": "For how long has Nate had his turtles?",
+      "answer": "3 years",
+      "prediction": "Nate has had his turtles for 3 years.",
+      "f1": 0.4,
+      "hit": false,
+      "category": 4,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"nate-owns-pet-turtles\" kind=\"person\"><source_time>2022-01-23</source_time> <event_time>around 2019 (year precision)</event_time> Nate has had pet turtles for 3 years.</item>\n<item key=\"nate-won-first-video-game-tournament\" kind=\"event\"><source_time>2022-01-21</source_time> <event_time>week before 21 January 2022 (week precision)</event_time> Nate won his first video game tournament last week.</item>\n<item key=\"nate-movie-genre-preference\" kind=\"person\">Nate loves action and sci-fi movies.</item>\n<item key=\"nate-dairy-free-dessert-flavor-preference\" kind=\"person\">Nate loves coconut milk, chocolate, and mixed berry flavors for dairy-free desse</item>\n<item key=\"nate-hobbies\" kind=\"person\">Nate&#x27;s main hobbies are playing video games and watching movies.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "abstained": false
+    },
+    {
+      "question": "What did Nate think of the coconut milk ice cream he made?",
+      "answer": "Super good, rich and creamy",
+      "prediction": "He thought it was super good — rich and creamy, and possibly his new favorite snack. He was pretty proud of himself for pulling it off.",
+      "f1": 0.33333333333333337,
+      "hit": false,
+      "category": 4,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"nate-made-coconut-milk-icecream\" kind=\"event\">Nate made homemade coconut milk ice cream.</item>\n<item key=\"nate-dairy-free-dessert-flavor-preference\" kind=\"person\">Nate loves coconut milk, chocolate, and mixed berry flavors for dairy-free desse</item>\n<item key=\"nate-made-dairy-free-chocolate-cake\" kind=\"event\">Nate made a dairy-free chocolate cake with berries on it.</item>\n<item key=\"nate-hangs-out-with-tournament-people\" kind=\"event\">Nate started hanging out with people he met at the video game tournament.</item>\n<item key=\"joanna-recommends-eternal-sunshine\" kind=\"event\">Joanna recommended the movie Eternal Sunshine of the Spotless Mind to Nate.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Nate coconut milk ice cream taste thought opinion\", \"method\": \"hybrid\"}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": "hybrid",
+          "source_coverage": "candidate_subset",
+          "errors": {}
+        }
+      ],
+      "abstained": false
+    },
+    {
+      "question": "Which dairy-free dessert flavors does Nate enjoy?",
+      "answer": "chocolate and mixed berry",
+      "prediction": "Nate enjoys coconut milk, chocolate, and mixed berry flavors for dairy-free desserts.",
+      "f1": 0.47058823529411764,
+      "hit": false,
+      "category": 4,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"nate-dairy-free-dessert-flavor-preference\" kind=\"person\">Nate loves coconut milk, chocolate, and mixed berry flavors for dairy-free desse</item>\n<item key=\"nate-made-dairy-free-chocolate-cake\" kind=\"event\">Nate made a dairy-free chocolate cake with berries on it.</item>\n<item key=\"joanna-hobbies\" kind=\"person\">Joanna enjoys writing, reading, watching movies, and exploring nature.</item>\n<item key=\"nate-movie-genre-preference\" kind=\"person\">Nate loves action and sci-fi movies.</item>\n<item key=\"nate-hobbies\" kind=\"person\">Nate&#x27;s main hobbies are playing video games and watching movies.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "abstained": false
+    },
+    {
+      "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+      "answer": "\"Little Women\"",
+      "prediction": "Joanna watched and recommended **Little Women** to Nate on February 7, 2022.",
+      "f1": 0.2857142857142857,
+      "hit": false,
+      "category": 4,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"joanna-recommends-eternal-sunshine\" kind=\"event\">Joanna recommended the movie Eternal Sunshine of the Spotless Mind to Nate.</item>\n<item key=\"joanna-recommends-little-women\" kind=\"event\">Joanna recommended the movie Little Women to Nate.</item>\n<item key=\"joanna-screenplay-festival-submitted\" kind=\"event\">Joanna submitted her screenplay to a film festival.</item>\n<item key=\"nate-made-coconut-milk-icecream\" kind=\"event\">Nate made homemade coconut milk ice cream.</item>\n<item key=\"nate-made-dairy-free-chocolate-cake\" kind=\"event\">Nate made a dairy-free chocolate cake with berries on it.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_expand",
+          "arguments": "{\"keys\": [\"joanna-recommends-eternal-sunshine\", \"joanna-recommends-little-women\"]}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": null,
+          "fallback_from": null,
+          "source_coverage": null,
+          "errors": null
+        }
+      ],
+      "abstained": false
+    },
+    {
+      "question": "What is \"Little Women\" about according to Joanna?",
+      "answer": "Sisterhood, love, and reaching for your dreams",
+      "prediction": "According to Joanna, it's a great story about sisterhood, love, and reaching for your dreams.",
+      "f1": 0.6086956521739131,
+      "hit": true,
+      "category": 4,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"joanna-recommends-little-women\" kind=\"event\">Joanna recommended the movie Little Women to Nate.</item>\n<item key=\"joanna-movie-genre-preference\" kind=\"person\">Joanna loves dramas and romcoms.</item>\n<item key=\"joanna-screenplay-festival-submitted\" kind=\"event\">Joanna submitted her screenplay to a film festival.</item>\n<item key=\"joanna-pet-allergy\" kind=\"person\">Joanna is allergic to most reptiles and animals with fur.</item>\n<item key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\">Joanna plans to submit her finished screenplay to film festivals.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Joanna Little Women movie plot description what it's about\", \"method\": \"hybrid\"}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": "hybrid",
+          "source_coverage": "candidate_subset",
+          "errors": {}
+        }
+      ],
+      "abstained": false
+    },
+    {
+      "question": "What type of movies does Nate hate watching the most?",
+      "answer": "",
+      "prediction": "I don't have any record of what movies Nate hates — only that he loves action and sci-fi. So that one's unknown.",
+      "f1": 0.0,
+      "hit": false,
+      "category": 5,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"nate-hobbies\" kind=\"person\">Nate&#x27;s main hobbies are playing video games and watching movies.</item>\n<item key=\"joanna-recommends-eternal-sunshine\" kind=\"event\">Joanna recommended the movie Eternal Sunshine of the Spotless Mind to Nate.</item>\n<item key=\"joanna-recommends-little-women\" kind=\"event\">Joanna recommended the movie Little Women to Nate.</item>\n<item key=\"joanna-hobbies\" kind=\"person\">Joanna enjoys writing, reading, watching movies, and exploring nature.</item>\n<item key=\"nate-movie-genre-preference\" kind=\"person\">Nate loves action and sci-fi movies.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Nate hates movies genre dislikes\", \"method\": \"llm\"}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": null,
+          "source_coverage": "candidate_subset",
+          "errors": {}
+        }
+      ],
+      "abstained": true
+    },
+    {
+      "question": "What genre is Joanna's first novella?",
+      "answer": "",
+      "prediction": "unknown — 记忆里只提到 Joanna 完成了第一部完整剧本（drama 和 romance 混合），没有关于她 novella 的信息。",
+      "f1": 0.0,
+      "hit": false,
+      "category": 5,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"joanna-finished-first-screenplay\" kind=\"event\"><source_time>2022-01-23</source_time> <event_time>2022-01-21 (day precision)</event_time> Joanna finished her first full screenplay and printed it last Friday.</item>\n<item key=\"nate-won-first-video-game-tournament\" kind=\"event\"><source_time>2022-01-21</source_time> <event_time>week before 21 January 2022 (week precision)</event_time> Nate won his first video game tournament last week.</item>\n<item key=\"joanna-watched-eternal-sunshine\" kind=\"event\"><source_time>2022-01-21</source_time> <event_time>around 2019 (year precision)</event_time> Joanna has watched Eternal Sunshine of the Spotless Mind a few times.</item>\n<item key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\">Joanna plans to submit her finished screenplay to film festivals.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Joanna first novella genre\", \"method\": \"hybrid\"}",
+          "round": 0
+        },
+        {
+          "name": "memory_search",
+          "arguments": "{\"method\": \"llm\", \"query\": \"Joanna novella\"}",
+          "round": 1
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": "hybrid",
+          "source_coverage": "candidate_subset",
+          "errors": {}
+        },
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": null,
+          "source_coverage": "candidate_subset",
+          "errors": {}
+        }
+      ],
+      "abstained": true
+    },
+    {
+      "question": "What are Nate's plans for his finished screenplay in January 2022?",
+      "answer": "",
+      "prediction": "Nate doesn't have a finished screenplay in my memory — that was Joanna. She finished her first full screenplay in late January 2022 and planned to submit it to film festivals, hoping producers and directors would check it out.",
+      "f1": 0.0,
+      "hit": false,
+      "category": 5,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\">Joanna plans to submit her finished screenplay to film festivals.</item>\n<item key=\"joanna-finished-first-screenplay\" kind=\"event\"><source_time>2022-01-23</source_time> <event_time>2022-01-21 (day precision)</event_time> Joanna finished her first full screenplay and printed it last Friday.</item>\n<item key=\"joanna-screenplay-festival-submitted\" kind=\"event\">Joanna submitted her screenplay to a film festival.</item>\n<item key=\"nate-hobbies\" kind=\"person\">Nate&#x27;s main hobbies are playing video games and watching movies.</item>\n<item key=\"nate-won-first-video-game-tournament\" kind=\"event\"><source_time>2022-01-21</source_time> <event_time>week before 21 January 2022 (week precision)</event_time> Nate won his first video game tournament last week.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Nate screenplay finished plans\"}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": null,
+          "source_coverage": null,
+          "errors": {}
+        }
+      ],
+      "abstained": false
+    },
+    {
+      "question": "For how long has Nate had his snakes?",
+      "answer": "",
+      "prediction": "I don't have any record of Nate having snakes — what I know is that he has pet turtles, which he'd had for 3 years as of early 2022. If you meant the turtles, that's the answer; otherwise, unknown.",
+      "f1": 0.0,
+      "hit": false,
+      "category": 5,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"nate-won-first-video-game-tournament\" kind=\"event\"><source_time>2022-01-21</source_time> <event_time>week before 21 January 2022 (week precision)</event_time> Nate won his first video game tournament last week.</item>\n<item key=\"nate-owns-pet-turtles\" kind=\"person\"><source_time>2022-01-23</source_time> <event_time>around 2019 (year precision)</event_time> Nate has had pet turtles for 3 years.</item>\n<item key=\"nate-movie-genre-preference\" kind=\"person\">Nate loves action and sci-fi movies.</item>\n<item key=\"nate-dairy-free-dessert-flavor-preference\" kind=\"person\">Nate loves coconut milk, chocolate, and mixed berry flavors for dairy-free desse</item>\n<item key=\"nate-hobbies\" kind=\"person\">Nate&#x27;s main hobbies are playing video games and watching movies.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Nate snakes pet how long\", \"method\": \"hybrid\"}",
+          "round": 0
+        },
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Nate pet snake reptile\", \"method\": \"llm\"}",
+          "round": 1
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": "hybrid",
+          "source_coverage": "candidate_subset",
+          "errors": {}
+        },
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": null,
+          "source_coverage": "candidate_subset",
+          "errors": {}
+        }
+      ],
+      "abstained": true
+    },
+    {
+      "question": "What did Nate think of the caramel ice cream he made?",
+      "answer": "",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit": false,
+      "category": 5,
+      "initial_memory_block": "<recalled_memory>\n<item key=\"nate-made-coconut-milk-icecream\" kind=\"event\">Nate made homemade coconut milk ice cream.</item>\n<item key=\"nate-made-dairy-free-chocolate-cake\" kind=\"event\">Nate made a dairy-free chocolate cake with berries on it.</item>\n<item key=\"nate-hangs-out-with-tournament-people\" kind=\"event\">Nate started hanging out with people he met at the video game tournament.</item>\n<item key=\"joanna-recommends-eternal-sunshine\" kind=\"event\">Joanna recommended the movie Eternal Sunshine of the Spotless Mind to Nate.</item>\n<item key=\"nate-won-first-video-game-tournament\" kind=\"event\"><source_time>2022-01-21</source_time> <event_time>week before 21 January 2022 (week precision)</event_time> Nate won his first video game tournament last week.</item>\n</recalled_memory>",
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Nate caramel ice cream made thought\", \"method\": \"hybrid\"}",
+          "round": 0
+        },
+        {
+          "name": "memory_search",
+          "arguments": "{\"method\": \"llm\", \"query\": \"caramel ice cream flavor Nate\"}",
+          "round": 1
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": "hybrid",
+          "source_coverage": "candidate_subset",
+          "errors": {}
+        },
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": null,
+          "source_coverage": "candidate_subset",
+          "errors": {}
+        }
+      ],
+      "abstained": true
+    }
+  ],
+  "summary": {
+    "total": 24,
+    "hits": 3,
+    "mean_f1": 0.2540483064165104,
+    "questions_with_tools": 17
+  }
+}

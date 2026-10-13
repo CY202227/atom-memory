@@ -19,3 +19,9 @@ def test_unrelated_l2_atom_is_not_used_as_recent_fallback():
     from atom_memory.recall.layered import compose_layered
     atom = Atom(space_id=1, key="museum", kind=AtomKind.belief, statement="Alice enjoys museums.", memory_layer=2)
     assert compose_layered([atom], "quantum mechanics", l1_hits=[], max_atoms=5) == []
+
+
+def test_invalid_key_after_recall_limit_is_not_silently_ignored(fake_llm):
+    fake_llm.responses=['{"keys": ["tea", "invented"]}']
+    with pytest.raises(RecallError, match='unknown memory key'):
+        LlmRecall(fake_llm).retrieve([Atom(space_id=1,key='tea',kind=AtomKind.person,statement='Alice likes tea.')], 'drinks', 1)

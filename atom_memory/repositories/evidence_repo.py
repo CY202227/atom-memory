@@ -4,7 +4,7 @@ from typing import Iterable, Optional
 
 from sqlmodel import Session, select
 
-from ..models import AtomRevision, Evidence, Source
+from ..models import Atom, AtomRevision, Evidence, Source
 
 
 def add_many(
@@ -36,3 +36,19 @@ def list_for_atom(session: Session, atom_id: int) -> list[dict]:
         }
         for rev, ev, src in rows
     ]
+
+
+def current_sources(session: Session, atom: Atom) -> list[Source]:
+    """Use the latest revision's receipts; identical text does not imply identical source time."""
+    revision = session.exec(select(AtomRevision).where(AtomRevision.atom_id == atom.id)
+        .order_by(AtomRevision.seq.desc())).first()
+    if revision is None or any(getattr(revision, field) != getattr(atom, field)
+            for field in ("statement", "detail", "happened_on")):
+        return []
+    return sources_for_revision(session, revision.id, atom.space_id)
+
+
+def sources_for_revision(session: Session, revision_id: int, space_id: int) -> list[Source]:
+    rows = session.exec(select(Source).where(Evidence.revision_id == revision_id)
+        .where(Source.id == Evidence.source_id).where(Source.space_id == space_id)).all()
+    return list({source.id: source for source in rows}.values())

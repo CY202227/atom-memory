@@ -62,7 +62,7 @@ Chat Memory 采用与业界分层叙事对齐的四层结构（设计参考
 
 | `policy` | 行为 |
 |---|---|
-| `layered`（默认） | L3 sticky（≤2）→ L2 相关（≤2）→ L1 检索填满；仍受 `max_atoms` / 预算 |
+| `layered`（默认） | L3 核心身份优先（≤2），其他层由同一检索策略统一排序；不固定插入 L2 背景，仍受 `max_atoms` / 预算 |
 | `flat` | 旧平铺检索（对照/评测） |
 
 | `neighbor_hops` | 行为 |
@@ -76,10 +76,10 @@ Chat Memory 采用与业界分层叙事对齐的四层结构（设计参考
 30B 级上下文建议：`detail=statement`，`budget_chars` 日常 **200–400**；不够再
 `POST …/atoms/expand`。勿默认 `detail=full`。
 
-响应另含：`chars_used`（计入预算的 statement/detail 字符）、`atoms_clipped`
+响应另含：`chars_used`（计入预算的 statement/detail 和时间信息字符，不含格式标签）、`atoms_clipped`
 （因预算裁掉的 hit 数），便于上游调参。
 
-空检索或清单式问句（如「你记得什么」）会按 `updated_at` 补最近的
+只有清单式问句（如「你记得什么」）才按 `updated_at` 补最近的
 person/event/lesson/self，仍受 `max_atoms` / `budget_chars` 约束。
 注入 `context_block` 时：若 `happened_on` 等于当天，或 statement 已含该日，
 则不再前缀日期（避免写入日噪声）。
@@ -189,3 +189,11 @@ HTTP 200 或 consolidation run 的 `succeeded` 只说明运行结束，不能证
 与 (space_id, idempotency_key) 唯一索引；旧行无需回填，旧请求仍兼容。
 升级前停止服务并备份数据库，先在副本启动新版、验证 sources / recall 后再切换。
 迁移由 `atom_memory_schema` 记录已执行版本，启动时按序执行；新于当前程序的数据库会拒绝启动。详见 [升级与联动恢复](upgrade-and-delivery.md)。
+
+### 引用时间与回滚
+
+`recall` 和 `expand` 的 hit 增加 `source_time`（可空）与 `time_context`。前者仅是当前修订所引用材料的日期，不能当成事件日期；后者只给出有依据的年、月、日或周精度，不把“上周”补成具体某一天。没有原始引用或引用时间冲突时，不使用处理日期猜测。历史导入应提供原始会话时间头或 `occurred_at`，后者的日期按 UTC 读取。
+
+短断言也会在 `context_block` 中附带受预算约束的时间信息，字段正文计入 `chars_used`；所有 hit 都超过预算时可以返回空结果。文本和属性转义后渲染，原文中的标签不是新的记忆节点。
+
+`GET …/atoms/{key}?include=evidence` 额外返回 `current_source_ids`，区别于所有历史出处。回滚会复制目标修订仍有效、同一空间内的来源引用；已删除的来源不会被恢复。读取不按相同文字猜测它属于哪一轮经历。

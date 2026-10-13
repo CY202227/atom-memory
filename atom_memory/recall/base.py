@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass, field
 from typing import Optional, Protocol
+from datetime import date
 
 from ..models import Atom
 
@@ -10,6 +11,7 @@ from ..models import Atom
 class RecallHit:
     atom: Atom
     score: Optional[float] = None
+    source_anchor: Optional[date] = None
 
 
 @dataclass

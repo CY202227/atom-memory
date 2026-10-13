@@ -1,0 +1,882 @@
+{
+  "mode": "consolidate=llm;score=qa",
+  "samples": 1,
+  "total": 12,
+  "hits": 7,
+  "accuracy": 0.5833,
+  "mean_f1": 0.4508,
+  "avg_chars_used": 765.8,
+  "avg_atoms_clipped": 0.0,
+  "skipped_no_evidence": 0,
+  "any_hits": 7,
+  "any_accuracy": 0.5833,
+  "retrieval_coverage": 1.0,
+  "by_category": {
+    "multi_hop": {
+      "total": 2,
+      "hits": 0,
+      "accuracy": 0.0,
+      "mean_f1": 0.0,
+      "any_hits": 0,
+      "any_accuracy": 0.0
+    },
+    "open_domain": {
+      "total": 2,
+      "hits": 1,
+      "accuracy": 0.5,
+      "mean_f1": 0.6444,
+      "any_hits": 1,
+      "any_accuracy": 0.5
+    },
+    "single_hop": {
+      "total": 2,
+      "hits": 1,
+      "accuracy": 0.5,
+      "mean_f1": 0.4048,
+      "any_hits": 1,
+      "any_accuracy": 0.5
+    },
+    "temporal": {
+      "total": 6,
+      "hits": 5,
+      "accuracy": 0.8333,
+      "mean_f1": 0.5518,
+      "any_hits": 5,
+      "any_accuracy": 0.8333
+    }
+  },
+  "samples_detail": [
+    {
+      "sample_id": "conv-42",
+      "total": 12,
+      "hits": 7,
+      "accuracy": 0.5833,
+      "mean_f1": 0.4508,
+      "avg_chars_used": 765.8,
+      "skipped_no_evidence": 0,
+      "any_hits": 7,
+      "any_accuracy": 0.5833
+    }
+  ],
+  "diagnostics": [
+    {
+      "sample": "conv-42",
+      "atoms": [
+        {
+          "key": "joanna-recommended-little-women",
+          "kind": "event",
+          "statement": "Joanna recommended the movie Little Women to Nate.",
+          "detail": "Joanna said she just watched Little Women and it was amazing, describing it as a great story about sisterhood, love, and reaching for your dreams. She called it a must-see. Nate said he would add it to his list. Source timestamp: 7 February, 2022.",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            12
+          ]
+        },
+        {
+          "key": "nate-dairy-free-dessert-flavor-preferences",
+          "kind": "person",
+          "statement": "Nate's favorite dairy-free dessert flavors are coconut milk, chocolate, and mixe",
+          "detail": "On 7 February, 2022, Nate told Joanna he loves coconut milk, but also enjoys chocolate and mixed berry flavors for dairy-free desserts.",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            11
+          ]
+        },
+        {
+          "key": "nate-made-dairy-free-chocolate-cake",
+          "kind": "event",
+          "statement": "Nate made a dairy-free chocolate cake with berries.",
+          "detail": "On 7 February, 2022, Nate told Joanna he made a dairy-free chocolate cake with berries on it the other day and offered it to her.",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            11
+          ]
+        },
+        {
+          "key": "nate-made-coconut-milk-ice-cream",
+          "kind": "event",
+          "statement": "Nate made homemade coconut milk ice cream.",
+          "detail": "On 7 February, 2022, Nate told Joanna he discovered he can make coconut milk ice cream and tried it. He described it as rich and creamy and said it might be his new favorite snack.",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            10
+          ]
+        },
+        {
+          "key": "joanna-submitted-screenplay-festival",
+          "kind": "event",
+          "statement": "Joanna submitted her screenplay to a film festival.",
+          "detail": "On 7 February, 2022, Joanna told Nate she sent in her screenplay to the film festival and has been thinking about it all day, feeling relief, excitement, and worry.",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            10
+          ]
+        },
+        {
+          "key": "joanna-writing-significance",
+          "kind": "person",
+          "statement": "Joanna says writing is essential to her life and a way to express feelings.",
+          "detail": "Joanna told Nate on 23 January, 2022: \"Writing helps me create wild worlds with awesome characters. Plus, it's a great way to express my feelings. I can't imagine life without it.\" She also said she will keep pursuing her passion for writing.",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            9
+          ]
+        },
+        {
+          "key": "joanna-pet-allergies",
+          "kind": "person",
+          "statement": "Joanna is allergic to most reptiles and animals with fur.",
+          "detail": "On 23 January, 2022, Joanna stated her face gets puffy and itchy around certain animals, so she has always stayed away from them.",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            8
+          ]
+        },
+        {
+          "key": "nate-friends-from-tournament",
+          "kind": "event",
+          "statement": "Nate started hanging out with people from his video game tournament.",
+          "detail": "Nate told Joanna he started to hang out with some people outside of his circle at the tournament. He described them as pretty cool and noted he tends to stick around the more chill people because some are more competitive than others. | time_facts=around 2022-01-23 (recently)",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            7
+          ]
+        },
+        {
+          "key": "nate-owns-pet-turtles",
+          "kind": "person",
+          "statement": "Nate has owned pet turtles for 3 years.",
+          "detail": "On 23 January, 2022, Nate shared a photo of a turtle and a turtleling on a rock, stating he has had them for 3 years and they bring him tons of joy. He uses them to stay calm when nervous. | time_facts=around 2019 (elapsed years; year precision)",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            6
+          ]
+        },
+        {
+          "key": "joanna-plans-submit-screenplay-festivals",
+          "kind": "event",
+          "statement": "Joanna plans to submit her screenplay to film festivals.",
+          "detail": "On 23 January, 2022, Joanna told Nate she is going to submit her finished screenplay to some film festivals and hopes to get producers and directors to check it out.",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            6
+          ]
+        },
+        {
+          "key": "joanna-screenplay-genre",
+          "kind": "person",
+          "statement": "Joanna's first screenplay is a mix of drama and romance.",
+          "detail": "When Nate asked what the screenplay was about, Joanna replied that it is a mix of drama and romance.",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            5
+          ]
+        },
+        {
+          "key": "joanna-finished-first-screenplay",
+          "kind": "event",
+          "statement": "Joanna finished her first full screenplay and printed it last Friday.",
+          "detail": "Joanna told Nate on 23 January, 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            5
+          ]
+        },
+        {
+          "key": "joanna-movie-genre-preference",
+          "kind": "person",
+          "statement": "Joanna's favorite movie genres are dramas and romcoms.",
+          "detail": "Joanna stated that Eternal Sunshine of the Spotless Mind is one of her favorites, praising the idea and the acting. She previously identified dramas and romcoms as her favorite genres.",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            4
+          ]
+        },
+        {
+          "key": "joanna-bought-eternal-sunshine-dvd",
+          "kind": "event",
+          "statement": "Joanna bought a physical DVD copy of Eternal Sunshine of the Spotless Mind.",
+          "detail": "Joanna said she first watched the movie around 3 years ago and went out to get a physical copy, showing a photo of the DVD on a table. | time_facts=around 2019 (elapsed years; year precision)",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            3
+          ]
+        },
+        {
+          "key": "joanna-recommended-eternal-sunshine",
+          "kind": "event",
+          "statement": "Joanna recommended the movie Eternal Sunshine of the Spotless Mind to Nate.",
+          "detail": "Joanna suggested the romantic drama about memory and relationships, showing a poster image. Nate replied he might check it out soon and loves watching classics.",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            3
+          ]
+        },
+        {
+          "key": "nate-movie-genre-preference",
+          "kind": "person",
+          "statement": "Nate loves action and sci-fi movies.",
+          "detail": "Nate stated, \"I love action and sci-fi movies, the effects are so cool!\" during a conversation with Joanna on 21 January, 2022.",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            3
+          ]
+        },
+        {
+          "key": "joanna-hobbies",
+          "kind": "person",
+          "statement": "Joanna enjoys writing, reading, watching movies, and exploring nature.",
+          "detail": "Joanna told Nate that besides writing, she also enjoys reading, watching movies, and exploring nature. The conversation took place on 21 January, 2022.",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            2
+          ]
+        },
+        {
+          "key": "nate-hobbies",
+          "kind": "person",
+          "statement": "Nate's main hobbies are playing video games and watching movies.",
+          "detail": "Nate stated that playing video games and watching movies are his main hobbies during a conversation with Joanna on 21 January, 2022.",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            2
+          ]
+        },
+        {
+          "key": "nate-won-first-video-game-tournament",
+          "kind": "event",
+          "statement": "Nate won his first video game tournament last week.",
+          "detail": "Nate told Joanna he won his first video game tournament last week. He described it as a team shooter game. The conversation took place on 21 January, 2022. | time_facts=week before 2022-01-21 (last week)",
+          "happened_on": null,
+          "memory_layer": 1,
+          "current_source_ids": [
+            2
+          ]
+        }
+      ],
+      "source_statuses": [
+        {
+          "id": 1,
+          "status": "consolidated"
+        },
+        {
+          "id": 2,
+          "status": "consolidated"
+        },
+        {
+          "id": 3,
+          "status": "consolidated"
+        },
+        {
+          "id": 4,
+          "status": "consolidated"
+        },
+        {
+          "id": 5,
+          "status": "consolidated"
+        },
+        {
+          "id": 6,
+          "status": "consolidated"
+        },
+        {
+          "id": 7,
+          "status": "consolidated"
+        },
+        {
+          "id": 8,
+          "status": "consolidated"
+        },
+        {
+          "id": 9,
+          "status": "consolidated"
+        },
+        {
+          "id": 10,
+          "status": "consolidated"
+        },
+        {
+          "id": 11,
+          "status": "consolidated"
+        },
+        {
+          "id": 12,
+          "status": "consolidated"
+        },
+        {
+          "id": 13,
+          "status": "skipped"
+        },
+        {
+          "id": 14,
+          "status": "skipped"
+        }
+      ]
+    }
+  ],
+  "llm_diagnostics": [
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 499,
+      "completion_tokens": 147
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 50,
+      "completion_tokens": 15
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 1538,
+      "completion_tokens": 436
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 44,
+      "completion_tokens": 16
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 2041,
+      "completion_tokens": 591
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 49,
+      "completion_tokens": 15
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 660,
+      "completion_tokens": 177
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 61,
+      "completion_tokens": 20
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 1056,
+      "completion_tokens": 297
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 1098,
+      "completion_tokens": 324
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 75,
+      "completion_tokens": 25
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 728,
+      "completion_tokens": 197
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 35,
+      "completion_tokens": 14
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 472,
+      "completion_tokens": 144
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 28,
+      "completion_tokens": 10
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 691,
+      "completion_tokens": 188
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 54,
+      "completion_tokens": 16
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 1124,
+      "completion_tokens": 327
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 17
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 1034,
+      "completion_tokens": 302
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 74,
+      "completion_tokens": 24
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 610,
+      "completion_tokens": 171
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 84,
+      "completion_tokens": 25
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 18,
+      "completion_tokens": 6
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 12,
+      "completion_tokens": 6
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 18,
+      "completion_tokens": 6
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 12,
+      "completion_tokens": 6
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 48,
+      "completion_tokens": 17
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 11,
+      "completion_tokens": 7
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 50,
+      "completion_tokens": 15
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 32,
+      "completion_tokens": 14
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 34,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 28,
+      "completion_tokens": 10
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 70,
+      "completion_tokens": 15
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 35,
+      "completion_tokens": 14
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 3
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 10,
+      "completion_tokens": 11
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 35,
+      "completion_tokens": 14
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 11,
+      "completion_tokens": 7
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 42,
+      "completion_tokens": 9
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 73,
+      "completion_tokens": 21
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 29,
+      "completion_tokens": 8
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 65,
+      "completion_tokens": 21
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 25,
+      "completion_tokens": 7
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 26,
+      "completion_tokens": 6
+    }
+  ],
+  "configuration": {
+    "dataset_sha256": "e56ed2d890f06718a054cfb7b65bb1d18f66aeb32cc301bfdaef86ee2b950d2d",
+    "answer_prompt_sha256": "47795bd4dc8f33bf976aab27c77ea3a55ffea9d2719369d427b985d9792c25cf",
+    "qa_scoring_protocol": "token F1 >= 0.5 with abstention/negation guards; answer-word coverage is not correctness",
+    "python": "3.14.6",
+    "method": "llm",
+    "budget_chars": 1200,
+    "max_atoms": 10,
+    "detail": "full",
+    "source_turns": 6,
+    "max_samples": null,
+    "max_sessions": null,
+    "max_questions": null,
+    "consolidate": "llm",
+    "score": "qa",
+    "extract_facts": false,
+    "review_skips": false,
+    "model": "odb",
+    "limitation": "LLM run; inspect individual failures and data subset before comparing scores"
+  },
+  "questions": [
+    {
+      "sample_id": "conv-42",
+      "question": "Is it likely that Nate has friends besides Joanna?",
+      "answer": "yesteammates on hisvideo game team.",
+      "prediction": "unknown",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 3,
+      "chars_used": 378,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "nate-movie-genre-preference"
+      ]
+    },
+    {
+      "sample_id": "conv-42",
+      "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+      "answer": "2019",
+      "prediction": "Around 2019",
+      "hit": true,
+      "hit_any": true,
+      "f1": 0.6667,
+      "category": 2,
+      "chars_used": 757,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "joanna-bought-eternal-sunshine-dvd"
+      ]
+    },
+    {
+      "sample_id": "conv-42",
+      "question": "When did Nate win his first video game tournament?",
+      "answer": "the week before 21janury, 2022",
+      "prediction": "The week before 21 January 2022.",
+      "hit": true,
+      "hit_any": true,
+      "f1": 0.7273,
+      "category": 2,
+      "chars_used": 841,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-friends-from-tournament",
+        "nate-movie-genre-preference",
+        "nate-won-first-video-game-tournament"
+      ]
+    },
+    {
+      "sample_id": "conv-42",
+      "question": "What pets wouldn't cause any discomfort to Joanna?",
+      "answer": "hairless cats or pigs,since they don't have fur, which is one of the main causes of joanna's allergy.",
+      "prediction": "unknown",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 3,
+      "chars_used": 622,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-pet-allergies"
+      ]
+    },
+    {
+      "sample_id": "conv-42",
+      "question": "What are Joanna's hobbies?",
+      "answer": "writing, watchingmovies, exploringnature, hanging withfriends.",
+      "prediction": "Joanna enjoys writing, reading, watching movies, and exploring nature.",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.1429,
+      "category": 1,
+      "chars_used": 674,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "joanna-hobbies"
+      ]
+    },
+    {
+      "sample_id": "conv-42",
+      "question": "How long has Nate had his first two turtles?",
+      "answer": "three years",
+      "prediction": "3 years",
+      "hit": true,
+      "hit_any": true,
+      "f1": 0.5,
+      "category": 2,
+      "chars_used": 855,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-friends-from-tournament",
+        "nate-movie-genre-preference",
+        "nate-owns-pet-turtles"
+      ]
+    },
+    {
+      "sample_id": "conv-42",
+      "question": "When did Joanna finish her first screenplay?",
+      "answer": "the friday before 23january, 2022",
+      "prediction": "2022-01-21",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.25,
+      "category": 2,
+      "chars_used": 778,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-submitted-screenplay-festival",
+        "joanna-finished-first-screenplay"
+      ]
+    },
+    {
+      "sample_id": "conv-42",
+      "question": "When did Nate get his first two turtles?",
+      "answer": "2019",
+      "prediction": "around 2019",
+      "hit": true,
+      "hit_any": true,
+      "f1": 0.6667,
+      "category": 2,
+      "chars_used": 913,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "nate-friends-from-tournament",
+        "nate-owns-pet-turtles"
+      ]
+    },
+    {
+      "sample_id": "conv-42",
+      "question": "What major achievement did Joanna accomplish in January 2022?",
+      "answer": "finished her screenplay and printed it",
+      "prediction": "Joanna finished her first full screenplay.",
+      "hit": true,
+      "hit_any": true,
+      "f1": 0.5,
+      "category": 2,
+      "chars_used": 726,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-finished-first-screenplay"
+      ]
+    },
+    {
+      "sample_id": "conv-42",
+      "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+      "answer": "relief, excitement,worry, hope,anxiety.",
+      "prediction": "relief, excitement, and worry",
+      "hit": true,
+      "hit_any": true,
+      "f1": 0.6667,
+      "category": 1,
+      "chars_used": 934,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-finished-first-screenplay",
+        "joanna-screenplay-genre"
+      ]
+    },
+    {
+      "sample_id": "conv-42",
+      "question": "What type of movies does Nate enjoy watching the most?",
+      "answer": "action and sci-fi",
+      "prediction": "Action and sci-fi movies.",
+      "hit": true,
+      "hit_any": true,
+      "f1": 0.8889,
+      "category": 4,
+      "chars_used": 832,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-movie-genre-preference",
+        "nate-hobbies",
+        "joanna-recommended-eternal-sunshine"
+      ]
+    },
+    {
+      "sample_id": "conv-42",
+      "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+      "answer": "screenplay",
+      "prediction": "Her first full screenplay.",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.4,
+      "category": 4,
+      "chars_used": 880,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-writing-significance",
+        "joanna-finished-first-screenplay"
+      ]
+    }
+  ],
+  "pilot_scope": {
+    "sample_index": 3,
+    "sessions": 3,
+    "questions": 12,
+    "batch_size": 1,
+    "source_turns": 6,
+    "timeout_seconds": 120,
+    "extract_facts": false,
+    "temperature": 0.0,
+    "selection": "first 12 questions whose evidence lies inside first 3 sessions",
+    "limitation": "input granularity differs from earlier whole-session pilot; not comparable to 98-question oracle runs; model alias does not establish model identity"
+  }
+}

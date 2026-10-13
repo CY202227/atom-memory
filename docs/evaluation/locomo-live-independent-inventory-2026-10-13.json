@@ -1,0 +1,13 @@
+{
+  "status": "failed",
+  "error_type": "RuntimeError",
+  "failure_reason": "consolidation_failed",
+  "nested_error_type": "LLMError",
+  "error_code": "invalid_evidence",
+  "http_status": null,
+  "model_alias": "odb",
+  "sample_index": 3,
+  "sessions": 3,
+  "questions": 12,
+  "extract_facts": true
+}
