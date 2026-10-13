@@ -1,0 +1,980 @@
+{
+  "mode": "consolidate=llm;score=qa",
+  "samples": 1,
+  "total": 12,
+  "hits": 4,
+  "accuracy": 0.3333,
+  "mean_f1": 0.3426,
+  "avg_chars_used": 618.0,
+  "avg_atoms_clipped": 0.0,
+  "skipped_no_evidence": 0,
+  "any_hits": 4,
+  "any_accuracy": 0.3333,
+  "retrieval_coverage": 1.0,
+  "by_category": {
+    "multi_hop": {
+      "total": 1,
+      "hits": 0,
+      "accuracy": 0.0,
+      "mean_f1": 0.1111,
+      "any_hits": 0,
+      "any_accuracy": 0.0
+    },
+    "open_domain": {
+      "total": 1,
+      "hits": 1,
+      "accuracy": 1.0,
+      "mean_f1": 1.0,
+      "any_hits": 1,
+      "any_accuracy": 1.0
+    },
+    "single_hop": {
+      "total": 3,
+      "hits": 1,
+      "accuracy": 0.3333,
+      "mean_f1": 0.2222,
+      "any_hits": 1,
+      "any_accuracy": 0.3333
+    },
+    "temporal": {
+      "total": 7,
+      "hits": 2,
+      "accuracy": 0.2857,
+      "mean_f1": 0.3333,
+      "any_hits": 2,
+      "any_accuracy": 0.2857
+    }
+  },
+  "samples_detail": [
+    {
+      "sample_id": "conv-26",
+      "total": 12,
+      "hits": 4,
+      "accuracy": 0.3333,
+      "mean_f1": 0.3426,
+      "avg_chars_used": 618.0,
+      "skipped_no_evidence": 0,
+      "any_hits": 4,
+      "any_accuracy": 0.3333
+    }
+  ],
+  "diagnostics": [
+    {
+      "sample": "conv-26",
+      "atoms": [
+        {
+          "key": "melanie-family-day-activities",
+          "kind": "event",
+          "statement": "Melanie played games, ate good food, and hung out with family.",
+          "detail": "Melanie said: \"We played games, ate good food, and just hung out together.\" (fact_id 1). Conversation on 9 June, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "melanie-married-5-years",
+          "kind": "person",
+          "statement": "Melanie has been married for 5 years.",
+          "detail": "Melanie said: \"5 years already! Time flies- feels like just yesterday I put this dress on!\" (fact_id 4). Conversation on 9 June, 2023. | time_facts=2023-06-08（星期四）",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "melanie-husband-kids-motivation",
+          "kind": "person",
+          "statement": "Melanie's husband and kids keep her motivated.",
+          "detail": "Melanie said: \"I'm lucky to have my husband and kids; they keep me motivated.\" (fact_id 3). Conversation on 9 June, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-friends-support-after-breakup",
+          "kind": "person",
+          "statement": "Caroline's friends' love and help were important after a tough breakup.",
+          "detail": "Caroline said: \"Their love and help have been so important especially after that tough breakup.\" (fact_id 2). Conversation on 9 June, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-friends-4-years-since-move",
+          "kind": "person",
+          "statement": "Caroline has known her friends for 4 years since moving from her home country.",
+          "detail": "Caroline said: \"I've known these friends for 4 years, since I moved from my home country.\" (fact_id 1). Conversation on 9 June, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-metup-last-week",
+          "kind": "event",
+          "statement": "Caroline met up with a group of friends and family the week before 9 June 2023.",
+          "detail": "Caroline shared a photo saying: \"Here's a pic from when we met up last week!\" (fact_id 4). The photo shows a family posing in a yard. Conversation on 9 June, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-support-system-identity",
+          "kind": "person",
+          "statement": "Caroline identifies her friends, family, and mentors as her support system.",
+          "detail": "Caroline said: \"My friends, family and mentors are my rocks – they motivate me and give me the strength to push on.\" (fact_id 3). Conversation on 9 June, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "melanie-motivation-family-courage",
+          "kind": "belief",
+          "statement": "Melanie wants to be courageous for her family, who motivate her and give her lov",
+          "detail": "Melanie said: \"I want to be couragous for my family- they motivate me and give me love.\" (fact_id 2). Conversation on 9 June, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-commitment-using-voice-change",
+          "kind": "belief",
+          "statement": "Caroline is committed to using her voice to make a change and lift others up.",
+          "detail": "Caroline said: \"I'm going to keep using my voice to make a change and lift others up.\" (fact_id 1). Conversation on 9 June, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-blessed-love-support-journey",
+          "kind": "person",
+          "statement": "Caroline feels blessed with love and support throughout her journey.",
+          "detail": "Caroline said: \"I've been blessed with loads of love and support throughout this journey\" (fact_id 7). Conversation on 9 June, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-thankful-voice-trans-community",
+          "kind": "belief",
+          "statement": "Caroline is thankful for being able to give a voice to the trans community.",
+          "detail": "Caroline said: \"I'm thankful for being able to give a voice to the trans community.\" (fact_id 6). Conversation on 9 June, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-shared-struggles-development",
+          "kind": "event",
+          "statement": "Caroline shared her struggles and development since coming out at the event.",
+          "detail": "Caroline said: \"I shared my own journey, the struggles I had and how much I've developed since coming out.\" (fact_id 5). Conversation on 9 June, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-felt-powerful-giving-talk",
+          "kind": "event",
+          "statement": "Caroline felt super powerful giving her talk at the school event.",
+          "detail": "Caroline said: \"I felt super powerful giving my talk.\" (fact_id 4). Conversation on 9 June, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-transition-timeline",
+          "kind": "person",
+          "statement": "Caroline started transitioning three years before June 2023.",
+          "detail": "Caroline said: \"It made me reflect on how far I've come since I started transitioning three years ago.\" (fact_id 3). Conversation on 9 June, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-school-event-lgbtq-talk",
+          "kind": "event",
+          "statement": "Caroline gave a talk at a school event about her transgender journey.",
+          "detail": "Caroline said: \"I wanted to tell you about my school event last week.\" (fact_id 1) and \"I talked about my transgender journey and encouraged students to get involved in the LGBTQ community.\" (fact_id 2). Conversation on 9 June, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-commitment-safe-loving-home",
+          "kind": "belief",
+          "statement": "Caroline is committed to ensuring the kids have a safe and loving home.",
+          "detail": "Caroline said: \"I'll do my best to make sure these kids have a safe and loving home.\" (fact_id 3). Conversation on 25 May, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-single-parent-challenge",
+          "kind": "person",
+          "statement": "Caroline acknowledges it will be tough as a single parent but is up for the chal",
+          "detail": "Caroline said: \"It'll be tough as a single parent, but I'm up for the challenge!\" (fact_id 2). Conversation on 25 May, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-excited-make-family",
+          "kind": "event",
+          "statement": "Caroline is thrilled to make a family for kids who need one.",
+          "detail": "Caroline said: \"I'm thrilled to make a family for kids who need one.\" (fact_id 1). Conversation on 25 May, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-chose-lgbtq-friendly-adoption-agency",
+          "kind": "person",
+          "statement": "Caroline chose an adoption agency that helps LGBTQ+ folks.",
+          "detail": "Caroline said: \"I chose them 'cause they help LGBTQ+ folks with adoption.\" (fact_id 6). Conversation on 25 May, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-grateful-support-friends-mentors",
+          "kind": "person",
+          "statement": "Caroline is grateful for support from friends and mentors.",
+          "detail": "Caroline said: \"I'm truly grateful for all the support I've got from friends and mentors.\" (fact_id 5). Conversation on 25 May, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-goal-give-kids-loving-home",
+          "kind": "belief",
+          "statement": "Caroline's goal is to give kids a loving home.",
+          "detail": "Caroline said: \"My goal is to give kids a loving home.\" (fact_id 4). Conversation on 25 May, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-researching-adoption-agencies",
+          "kind": "event",
+          "statement": "Caroline is researching adoption agencies.",
+          "detail": "Caroline said: \"Researching adoption agencies — it's been a dream to have a family and give a loving home to kids who need it.\" (fact_id 3). Conversation on 25 May, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "melanie-camping-plan-next-month",
+          "kind": "event",
+          "statement": "Melanie is thinking about going camping next month.",
+          "detail": "Melanie said: \"We're thinking about going camping next month.\" (fact_id 2). Conversation on 25 May, 2023, so next month is June 2023. | time_facts=2023-06 (next month)",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "melanie-kids-excited-summer-break",
+          "kind": "person",
+          "statement": "Melanie's kids are excited about summer break.",
+          "detail": "Melanie said: \"My kids are so excited about summer break!\" (fact_id 1). Conversation on 25 May, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "melanie-daily-me-time-activities",
+          "kind": "person",
+          "statement": "Melanie carves out daily me-time for running, reading, or playing violin.",
+          "detail": "Melanie said: \"I'm carving out some me-time each day - running, reading, or playing my violin\" (fact_id 4)",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "melanie-self-care-helps-family",
+          "kind": "belief",
+          "statement": "Melanie believes looking after herself helps her look after her family.",
+          "detail": "Melanie said: \"when I look after myself, I'm able to better look after my family.\" (fact_id 3)",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "melanie-believes-self-care-important",
+          "kind": "belief",
+          "statement": "Melanie is starting to realize that self-care is really important.",
+          "detail": "Melanie stated: \"I'm starting to realize that self-care is really important.\" (fact_id 2)",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "melanie-ran-charity-race-mental-health",
+          "kind": "event",
+          "statement": "Melanie ran a charity race for mental health last Saturday.",
+          "detail": "Melanie said: \"I ran a charity race for mental health last Saturday\" (fact_id 1). Session time: 1:14 pm on 25 May, 2023. | time_facts=2023-05-20（星期六）",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "melanie-swimming-with-kids",
+          "kind": "event",
+          "statement": "Melanie planned to go swimming with the kids.",
+          "detail": "Melanie said, \"I'm off to go swimming with the kids.\" (fact_id: 5)",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-research-plan",
+          "kind": "event",
+          "statement": "Caroline planned to do some research.",
+          "detail": "Caroline said, \"I'm off to go do some research.\" (fact_id: 4)",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "melanie-painting-for-relaxation",
+          "kind": "person",
+          "statement": "Melanie uses painting to relax after a long day.",
+          "detail": "Melanie noted, \"It's a great way to relax after a long day.\" (fact_id: 3)",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "melanie-painting-as-expression",
+          "kind": "person",
+          "statement": "Melanie finds painting a fun way to express feelings and get creative.",
+          "detail": "Melanie stated, \"Painting's a fun way to express my feelings and get creative.\" (fact_id: 2)",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "melanie-painted-lake-sunrise",
+          "kind": "event",
+          "statement": "Melanie painted a lake sunrise last year.",
+          "detail": "Melanie said, \"I painted that lake sunrise last year! It's special to me.\" (fact_id: 1) | time_facts=2022, year=2022 (last year)",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-career-interest-mental-health",
+          "kind": "person",
+          "statement": "Caroline is interested in counseling or working in mental health.",
+          "detail": "Caroline said: \"I'm keen on counseling or working in mental health - I'd love to support those with similar issues.\" (fact_id 3). Conversation on 8 May, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-education-career-plan",
+          "kind": "event",
+          "statement": "Caroline plans to continue her education and explore career options.",
+          "detail": "Caroline said: \"Gonna continue my edu and check out career options, which is pretty exciting!\" (fact_id 2). Conversation on 8 May, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-support-group-impact",
+          "kind": "event",
+          "statement": "Caroline felt accepted and gained courage from the LGBTQ support group.",
+          "detail": "Caroline said: \"The support group has made me feel accepted and given me courage to embrace myself.\" (fact_id 1). Conversation on 8 May, 2023.",
+          "happened_on": null,
+          "memory_layer": 1
+        },
+        {
+          "key": "caroline-attended-lgbtq-support-group",
+          "kind": "event",
+          "statement": "Caroline attended an LGBTQ support group the day before the conversation.",
+          "detail": "Caroline said: \"I went to a LGBTQ support group yesterday\" (fact_id 2). The conversation took place on 8 May, 2023. | time_facts=星期日, Sunday, 2023-05-07",
+          "happened_on": "2023-05-07",
+          "memory_layer": 1
+        },
+        {
+          "key": "melanie-busy-with-kids-work",
+          "kind": "person",
+          "statement": "Melanie is swamped with the kids and work.",
+          "detail": "Melanie said: \"I'm swamped with the kids & work.\" (fact_id 1)",
+          "happened_on": null,
+          "memory_layer": 1
+        }
+      ],
+      "source_statuses": [
+        {
+          "id": 1,
+          "status": "consolidated"
+        },
+        {
+          "id": 2,
+          "status": "consolidated"
+        },
+        {
+          "id": 3,
+          "status": "consolidated"
+        },
+        {
+          "id": 4,
+          "status": "consolidated"
+        },
+        {
+          "id": 5,
+          "status": "consolidated"
+        },
+        {
+          "id": 6,
+          "status": "consolidated"
+        },
+        {
+          "id": 7,
+          "status": "consolidated"
+        },
+        {
+          "id": 8,
+          "status": "consolidated"
+        },
+        {
+          "id": 9,
+          "status": "consolidated"
+        },
+        {
+          "id": 10,
+          "status": "consolidated"
+        }
+      ]
+    }
+  ],
+  "llm_diagnostics": [
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 199,
+      "completion_tokens": 74
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 858,
+      "completion_tokens": 282
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 51,
+      "completion_tokens": 15
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 437,
+      "completion_tokens": 129
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 1618,
+      "completion_tokens": 454
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 12,
+      "completion_tokens": 6
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 494,
+      "completion_tokens": 171
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 2059,
+      "completion_tokens": 641
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 75,
+      "completion_tokens": 22
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 486,
+      "completion_tokens": 155
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 1832,
+      "completion_tokens": 562
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 84,
+      "completion_tokens": 23
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 703,
+      "completion_tokens": 221
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 2744,
+      "completion_tokens": 830
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 98,
+      "completion_tokens": 30
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 362,
+      "completion_tokens": 123
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 1419,
+      "completion_tokens": 450
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 88,
+      "completion_tokens": 24
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 896,
+      "completion_tokens": 264
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 2974,
+      "completion_tokens": 901
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 96,
+      "completion_tokens": 28
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 514,
+      "completion_tokens": 167
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 2134,
+      "completion_tokens": 633
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 128,
+      "completion_tokens": 34
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 520,
+      "completion_tokens": 161
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 1990,
+      "completion_tokens": 583
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 73,
+      "completion_tokens": 24
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 132,
+      "completion_tokens": 49
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 494,
+      "completion_tokens": 148
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 10,
+      "completion_tokens": 11
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 9,
+      "completion_tokens": 3
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 103,
+      "completion_tokens": 23
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 38,
+      "completion_tokens": 7
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 13,
+      "completion_tokens": 3
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 10,
+      "completion_tokens": 3
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 28,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 3
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 13,
+      "completion_tokens": 3
+    }
+  ],
+  "configuration": {
+    "dataset_sha256": "a63bb6c041efe6784245f9f4b2fd43cbb496e6075f4faa2228c21e89dd2053db",
+    "answer_prompt_sha256": "47795bd4dc8f33bf976aab27c77ea3a55ffea9d2719369d427b985d9792c25cf",
+    "qa_scoring_protocol": "token F1 >= 0.5 with abstention/negation guards; answer-word coverage is not correctness",
+    "python": "3.14.6",
+    "method": "bm25",
+    "budget_chars": 1200,
+    "max_atoms": 10,
+    "detail": "statement",
+    "source_turns": 6,
+    "max_samples": null,
+    "max_sessions": null,
+    "max_questions": null,
+    "consolidate": "llm",
+    "score": "qa",
+    "model": "odb",
+    "limitation": "LLM run; inspect individual failures and data subset before comparing scores"
+  },
+  "questions": [
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline go to the LGBTQ support group?",
+      "answer": "7 may 2023",
+      "prediction": "2023-05-07",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.3333,
+      "category": 2,
+      "chars_used": 653,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-attended-lgbtq-support-group",
+        "caroline-metup-last-week",
+        "caroline-chose-lgbtq-friendly-adoption-agency",
+        "caroline-grateful-support-friends-mentors",
+        "caroline-support-group-impact",
+        "caroline-support-system-identity",
+        "caroline-blessed-love-support-journey",
+        "caroline-research-plan",
+        "caroline-school-event-lgbtq-talk",
+        "caroline-career-interest-mental-health"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Melanie paint a sunrise?",
+      "answer": "2022",
+      "prediction": "last year",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 2,
+      "chars_used": 534,
+      "gold_keys": [],
+      "recalled_keys": [
+        "melanie-painted-lake-sunrise",
+        "melanie-painting-for-relaxation",
+        "melanie-painting-as-expression",
+        "melanie-busy-with-kids-work",
+        "melanie-swimming-with-kids",
+        "melanie-self-care-helps-family",
+        "melanie-kids-excited-summer-break",
+        "melanie-husband-kids-motivation",
+        "melanie-ran-charity-race-mental-health",
+        "melanie-believes-self-care-important"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What fields would Caroline be likely to pursue in her educaton?",
+      "answer": "psychology, counseling certification",
+      "prediction": "Based on the recalled memory, Caroline is interested in **counseling** or working in **mental health**.",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.1111,
+      "category": 3,
+      "chars_used": 581,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-support-system-identity",
+        "caroline-support-group-impact",
+        "melanie-married-5-years",
+        "caroline-career-interest-mental-health",
+        "caroline-education-career-plan",
+        "caroline-research-plan",
+        "caroline-felt-powerful-giving-talk",
+        "caroline-thankful-voice-trans-community",
+        "caroline-researching-adoption-agencies",
+        "caroline-goal-give-kids-loving-home"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What did Caroline research?",
+      "answer": "adoption agencies",
+      "prediction": "Caroline researched adoption agencies.",
+      "hit": true,
+      "hit_any": true,
+      "f1": 0.6667,
+      "category": 1,
+      "chars_used": 580,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-research-plan",
+        "caroline-researching-adoption-agencies",
+        "caroline-chose-lgbtq-friendly-adoption-agency",
+        "caroline-goal-give-kids-loving-home",
+        "caroline-support-group-impact",
+        "caroline-felt-powerful-giving-talk",
+        "caroline-support-system-identity",
+        "caroline-transition-timeline",
+        "caroline-grateful-support-friends-mentors",
+        "caroline-education-career-plan"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What is Caroline's identity?",
+      "answer": "transgender woman",
+      "prediction": "unknown",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 596,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-researching-adoption-agencies",
+        "caroline-goal-give-kids-loving-home",
+        "caroline-support-group-impact",
+        "caroline-support-system-identity",
+        "caroline-grateful-support-friends-mentors",
+        "caroline-friends-support-after-breakup",
+        "caroline-excited-make-family",
+        "caroline-career-interest-mental-health",
+        "caroline-research-plan",
+        "caroline-commitment-safe-loving-home"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Melanie run a charity race?",
+      "answer": "the sunday before 25 may 2023",
+      "prediction": "last Saturday",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 2,
+      "chars_used": 541,
+      "gold_keys": [],
+      "recalled_keys": [
+        "melanie-ran-charity-race-mental-health",
+        "melanie-daily-me-time-activities",
+        "melanie-busy-with-kids-work",
+        "melanie-painting-for-relaxation",
+        "melanie-swimming-with-kids",
+        "melanie-self-care-helps-family",
+        "melanie-painted-lake-sunrise",
+        "melanie-kids-excited-summer-break",
+        "melanie-painting-as-expression",
+        "melanie-husband-kids-motivation"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When is Melanie planning on going camping?",
+      "answer": "june 2023",
+      "prediction": "next month",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 2,
+      "chars_used": 603,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-support-system-identity",
+        "caroline-support-group-impact",
+        "melanie-camping-plan-next-month",
+        "melanie-swimming-with-kids",
+        "caroline-research-plan",
+        "caroline-education-career-plan",
+        "caroline-commitment-using-voice-change",
+        "melanie-busy-with-kids-work",
+        "melanie-believes-self-care-important",
+        "melanie-self-care-helps-family"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What is Caroline's relationship status?",
+      "answer": "single",
+      "prediction": "unknown",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 1,
+      "chars_used": 596,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-researching-adoption-agencies",
+        "caroline-goal-give-kids-loving-home",
+        "caroline-support-group-impact",
+        "caroline-support-system-identity",
+        "caroline-grateful-support-friends-mentors",
+        "caroline-friends-support-after-breakup",
+        "caroline-excited-make-family",
+        "caroline-career-interest-mental-health",
+        "caroline-research-plan",
+        "caroline-commitment-safe-loving-home"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline give a speech at a school?",
+      "answer": "the week before 9 june 2023",
+      "prediction": "unknown",
+      "hit": false,
+      "hit_any": false,
+      "f1": 0.0,
+      "category": 2,
+      "chars_used": 659,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-felt-powerful-giving-talk",
+        "caroline-school-event-lgbtq-talk",
+        "caroline-goal-give-kids-loving-home",
+        "caroline-thankful-voice-trans-community",
+        "caroline-support-system-identity",
+        "caroline-support-group-impact",
+        "melanie-motivation-family-courage",
+        "caroline-researching-adoption-agencies",
+        "caroline-shared-struggles-development",
+        "caroline-excited-make-family"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "When did Caroline meet up with her friends, family, and mentors?",
+      "answer": "the week before 9 june 2023",
+      "prediction": "The week before 9 June 2023.",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 667,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-grateful-support-friends-mentors",
+        "caroline-metup-last-week",
+        "caroline-support-system-identity",
+        "melanie-self-care-helps-family",
+        "caroline-support-group-impact",
+        "caroline-friends-4-years-since-move",
+        "caroline-friends-support-after-breakup",
+        "melanie-family-day-activities",
+        "caroline-excited-make-family",
+        "caroline-researching-adoption-agencies"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "How long has Caroline had her current group of friends for?",
+      "answer": "4 years",
+      "prediction": "4 years",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 2,
+      "chars_used": 697,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-metup-last-week",
+        "caroline-friends-4-years-since-move",
+        "melanie-painting-for-relaxation",
+        "caroline-grateful-support-friends-mentors",
+        "caroline-support-system-identity",
+        "caroline-support-group-impact",
+        "caroline-attended-lgbtq-support-group",
+        "caroline-friends-support-after-breakup",
+        "caroline-shared-struggles-development",
+        "caroline-blessed-love-support-journey"
+      ]
+    },
+    {
+      "sample_id": "conv-26",
+      "question": "What did the charity race raise awareness for?",
+      "answer": "mental health",
+      "prediction": "mental health",
+      "hit": true,
+      "hit_any": true,
+      "f1": 1.0,
+      "category": 4,
+      "chars_used": 709,
+      "gold_keys": [],
+      "recalled_keys": [
+        "caroline-support-group-impact",
+        "caroline-support-system-identity",
+        "melanie-ran-charity-race-mental-health",
+        "caroline-thankful-voice-trans-community",
+        "caroline-single-parent-challenge",
+        "caroline-grateful-support-friends-mentors",
+        "caroline-excited-make-family",
+        "caroline-attended-lgbtq-support-group",
+        "caroline-friends-4-years-since-move",
+        "melanie-motivation-family-courage"
+      ]
+    }
+  ],
+  "pilot_scope": {
+    "sessions": 3,
+    "questions": 12,
+    "batch_size": 1,
+    "source_turns": 6,
+    "timeout_seconds": 120,
+    "extract_facts": true,
+    "selection": "first 12 questions whose evidence lies inside first 3 sessions",
+    "limitation": "input granularity differs from earlier whole-session pilot; not comparable to 98-question oracle runs; model alias does not establish model identity"
+  }
+}

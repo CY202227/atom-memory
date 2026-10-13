@@ -241,7 +241,7 @@ def append_time_facts_to_detail(
     if marker in base:
         return base[:max_chars]
     suffix = f" | {marker}{', '.join(facts)}"
-    room = max_chars - len(suffix)
-    if room <= 0:
-        return suffix[-max_chars:]
-    return (base[:room].rstrip() + suffix)[:max_chars]
+    # Derived calendar labels must never erase retained source evidence.
+    if len(base.rstrip()) + len(suffix) > max_chars:
+        return base[:max_chars]
+    return base.rstrip() + suffix

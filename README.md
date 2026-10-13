@@ -120,3 +120,5 @@ The mini run uses oracle consolidation and checks retrieval. It is not a measure
 [MIT](LICENSE)
 
 Public retrieval pilots, failed runs, and scoring limitations are documented in [evaluation notes](docs/evaluation/README.md).
+
+Experimental fact extraction before consolidation is available with `ATOMMEM_CONSOLIDATE_EXTRACT_FACTS=true`. It validates original quotes and their retention before consuming sources. It remains off by default: the public pilot retained more facts but did not improve QA. See [evaluation notes](docs/evaluation/README.md) for the failures and comparisons.

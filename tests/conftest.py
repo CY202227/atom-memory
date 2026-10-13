@@ -35,6 +35,7 @@ def client(fake_llm, monkeypatch):
     from atom_memory.config import settings
     # Existing deterministic fixtures test the supplied write plans; review has dedicated tests.
     monkeypatch.setattr(settings, "consolidate_review_skips", False)
+    monkeypatch.setattr(settings, "consolidate_extract_facts", False)
     engine = create_engine(
         "sqlite://", connect_args={"check_same_thread": False}, poolclass=StaticPool
     )

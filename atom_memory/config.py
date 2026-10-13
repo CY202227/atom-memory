@@ -48,6 +48,8 @@ class Settings(BaseSettings):
     consolidate_max_sources: int = 20
     # Review uncited material before declaring it skippable; optional extra model calls.
     consolidate_review_skips: bool = False
+    # Experimental grounded fact inventory before writing; adds one model call.
+    consolidate_extract_facts: bool = False
 
     # /chat demo：喂给主模型的短期 history 条数上限（user+assistant 合计）；
     # 0 表示不截断。长上下文变笨/费钱时可调低。

@@ -4,6 +4,8 @@ import hashlib
 import json
 import re
 import sys
+import subprocess
+import types
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -17,6 +19,7 @@ def main(argv=None):
     parser.add_argument("--max-questions", type=int, default=20)
     parser.add_argument("--question-offset", type=int, default=0)
     parser.add_argument("--method", choices=["bm25", "llm"], default="bm25")
+    parser.add_argument("--baseline-ref", help="Full local commit SHA; replay its source retrieval module only")
     args = parser.parse_args(argv)
     if args.question_offset < 0 or args.max_questions < 1:
         raise ValueError("question offset must be nonnegative and count positive")
@@ -26,6 +29,18 @@ def main(argv=None):
     from atom_memory.eval.run_locomo import _build_client, _QueueLLM
     from atom_memory.llm.openai_compat import OpenAICompatLLM
     from atom_memory.main import app
+    from atom_memory.recall import sources as source_retrieval
+    original_search = source_retrieval.semantic_source_search
+    baseline_search = original_search
+    if args.baseline_ref:
+        if not re.fullmatch(r"[a-fA-F0-9]{40}", args.baseline_ref):
+            raise ValueError("baseline-ref must be a full local commit SHA")
+        code = subprocess.check_output(["git", "show", args.baseline_ref + ":atom_memory/recall/sources.py"],
+            cwd=Path(__file__).resolve().parents[1], encoding="utf-8")
+        baseline = types.ModuleType("atom_memory.recall.benchmark_baseline")
+        baseline.__package__ = "atom_memory.recall"
+        exec(compile(code, "<local committed source retrieval>", "exec"), baseline.__dict__)
+        baseline_search = baseline.semantic_source_search
     samples = load_locomo(args.dataset)
     sample = samples[args.sample_index]
     llm = OpenAICompatLLM(settings.llm_base_url, settings.llm_api_key, settings.llm_model,
@@ -35,11 +50,14 @@ def main(argv=None):
     client = _build_client(llm)
     results = []
     report = {"mode": "raw-source passage evidence retrieval; no consolidation or QA generation",
+        "complete": False,
         "configuration": {"dataset_sha256": hashlib.sha256(args.dataset.read_bytes()).hexdigest(), "sample_index": args.sample_index,
             "sample_id": sample.sample_id, "method": args.method, "max_questions": args.max_questions, "question_offset": args.question_offset, "source_turns": 6,
-            "max_sources": 4, "budget_chars": 2400, "model_alias": settings.llm_model if args.method == "llm" else None,
+            "max_sources": 4, "budget_chars": 2400, "source_module_baseline_ref": args.baseline_ref,
+            "model_alias": settings.llm_model if args.method == "llm" else None,
             "limitation": "Different task from atom evidence recall. Labels are scored only against original dia_id markers in returned excerpts. Model-dependent semantic selection may use only a bounded candidate subset."}, "questions": results}
     try:
+        source_retrieval.semantic_source_search = baseline_search
         space = client.post("/spaces", json={"owner_id": "public-source-bench", "subject_id": sample.sample_id}).json()
         ids = ingest_locomo_sample(client, space["uid"], sample, salience=0.2, source_turns=6)
         report["source_count"] = len(ids)
@@ -62,8 +80,11 @@ def main(argv=None):
                 "avg_chars": sum(row["chars_used"] for row in results) / len(results)}
             args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
             print({"question": index, "http_status": response.status_code, "hit_all": results[-1]["hit_all"]}, flush=True)
+        report["complete"] = True
+        args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
         return report["summary"]
     finally:
+        source_retrieval.semantic_source_search = original_search
         client.close()
         app.dependency_overrides.clear()
         close = getattr(llm, "close", None)
