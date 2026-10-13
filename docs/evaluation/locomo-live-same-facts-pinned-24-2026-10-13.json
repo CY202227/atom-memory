@@ -1,0 +1,2606 @@
+{
+  "mode": "snapshot replay; repeated retrieval and QA; atom only",
+  "samples": 3,
+  "total": 72,
+  "hits": 23,
+  "accuracy": 0.3194,
+  "mean_f1": 0.3026,
+  "avg_chars_used": 779.7,
+  "avg_atoms_clipped": 0.0,
+  "skipped_no_evidence": 0,
+  "any_hits": 23,
+  "any_accuracy": 0.3194,
+  "retrieval_coverage": 1.0,
+  "by_category": {
+    "adversarial": {
+      "total": 15,
+      "hits": 0,
+      "accuracy": 0.0,
+      "mean_f1": 0.0,
+      "any_hits": 0,
+      "any_accuracy": 0.0
+    },
+    "multi_hop": {
+      "total": 6,
+      "hits": 0,
+      "accuracy": 0.0,
+      "mean_f1": 0.0274,
+      "any_hits": 0,
+      "any_accuracy": 0.0
+    },
+    "open_domain": {
+      "total": 27,
+      "hits": 15,
+      "accuracy": 0.5556,
+      "mean_f1": 0.583,
+      "any_hits": 15,
+      "any_accuracy": 0.5556
+    },
+    "single_hop": {
+      "total": 6,
+      "hits": 3,
+      "accuracy": 0.5,
+      "mean_f1": 0.4048,
+      "any_hits": 3,
+      "any_accuracy": 0.5
+    },
+    "temporal": {
+      "total": 18,
+      "hits": 5,
+      "accuracy": 0.2778,
+      "mean_f1": 0.1921,
+      "any_hits": 5,
+      "any_accuracy": 0.2778
+    }
+  },
+  "samples_detail": [
+    {
+      "sample_id": "conv-42",
+      "total": 24,
+      "hits": 8,
+      "accuracy": 0.3333,
+      "mean_f1": 0.32,
+      "avg_chars_used": 777.0,
+      "skipped_no_evidence": 0,
+      "any_hits": 8,
+      "any_accuracy": 0.3333
+    },
+    {
+      "sample_id": "conv-42",
+      "total": 24,
+      "hits": 7,
+      "accuracy": 0.2917,
+      "mean_f1": 0.2852,
+      "avg_chars_used": 765.7,
+      "skipped_no_evidence": 0,
+      "any_hits": 7,
+      "any_accuracy": 0.2917
+    },
+    {
+      "sample_id": "conv-42",
+      "total": 24,
+      "hits": 8,
+      "accuracy": 0.3333,
+      "mean_f1": 0.3027,
+      "avg_chars_used": 796.4,
+      "skipped_no_evidence": 0,
+      "any_hits": 8,
+      "any_accuracy": 0.3333
+    }
+  ],
+  "questions": [
+    {
+      "question": "Is it likely that Nate has friends besides Joanna?",
+      "answer": "yesteammates on hisvideo game team.",
+      "category": 3,
+      "hit": false,
+      "chars_used": 998,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"nate-socializing-tournament-people\" kind=\"event\" statement=\"Nate started hanging out with people from the tournament outside his usual circl\">\nNate told Joanna on 23 January 2022 that he started to hang out with some people outside of his circle at the tournament. He noted some people are more competitive than others, so he tends to stick around the more chill people.\n</memory>\n<memory key=\"nate-video-game-tournament-win\" kind=\"event\" statement=\"Nate won his first video game tournament in Counter-Strike: Global Offensive.\">\nNate told Joanna on 21 January 2022 that he won his first video game tournament last week. He later specified the game was Counter-Strike: Global Offensive and said he and his team had a blast to the very end.\n</memory>\n</recalled_memory>",
+      "prediction": "Yes, it is likely. The recalled memory states that Nate started hanging out with people from a tournament outside of his usual circle, indicating he has other social connections.",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "nate-movie-genre-preference",
+        "nate-socializing-tournament-people",
+        "nate-video-game-tournament-win"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 1
+    },
+    {
+      "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+      "answer": "2019",
+      "category": 2,
+      "hit": false,
+      "chars_used": 649,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-owns-eternal-sunshine-dvd\" kind=\"event\" statement=\"Joanna owns a physical DVD copy of Eternal Sunshine of the Spotless Mind.\">\nJoanna told Nate on 21 January 2022 that she first watched the movie around 3 years ago and went out to get a physical copy.\n</memory>\n</recalled_memory>",
+      "prediction": "Around 3 years before 21 January 2022.",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-owns-eternal-sunshine-dvd"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 1
+    },
+    {
+      "question": "When did Nate win his first video game tournament?",
+      "answer": "the week before 21janury, 2022",
+      "category": 2,
+      "hit": false,
+      "chars_used": 691,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-video-game-tournament-win\" kind=\"event\" statement=\"Nate won his first video game tournament in Counter-Strike: Global Offensive.\">\nNate told Joanna on 21 January 2022 that he won his first video game tournament last week. He later specified the game was Counter-Strike: Global Offensive and said he and his team had a blast to the very end.\n</memory>\n</recalled_memory>",
+      "prediction": "Nate won his first video game tournament in Counter-Strike: Global Offensive last week, as he told Joanna on 21 January 2022.",
+      "f1": 0.14814814814814814,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "nate-video-game-tournament-win"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 1
+    },
+    {
+      "question": "What pets wouldn't cause any discomfort to Joanna?",
+      "answer": "hairless cats or pigs,since they don't have fur, which is one of the main causes of joanna's allergy.",
+      "category": 3,
+      "hit": false,
+      "chars_used": 734,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-pet-allergy\" kind=\"person\" statement=\"Joanna is allergic to most reptiles and animals with fur.\">\nJoanna told Nate on 23 January 2022 that her allergy is really bad: her face gets puffy and itchy around certain animals, so she has always stayed away. She said it can be a bit of a drag but she finds other ways to be happy.\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-submitted-screenplay-festival",
+        "joanna-pet-allergy"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 1
+    },
+    {
+      "question": "What are Joanna's hobbies?",
+      "answer": "writing, watchingmovies, exploringnature, hanging withfriends.",
+      "category": 1,
+      "hit": false,
+      "chars_used": 596,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-hobbies\" kind=\"person\" statement=\"Joanna enjoys writing, reading, watching movies, and exploring nature.\">\nJoanna told Nate on 21 January 2022 that besides writing, she also enjoys reading, watching movies, and exploring nature.\n</memory>\n</recalled_memory>",
+      "prediction": "Joanna enjoys writing, reading, watching movies, and exploring nature.",
+      "f1": 0.14285714285714285,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "nate-movie-genre-preference",
+        "joanna-hobbies"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 1
+    },
+    {
+      "question": "How long has Nate had his first two turtles?",
+      "answer": "three years",
+      "category": 2,
+      "hit": true,
+      "chars_used": 619,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"nate-owns-pet-turtles\" kind=\"person\" statement=\"Nate has had pet turtles for 3 years.\">\nNate told Joanna on 23 January 2022 that he has had his pet turtles for 3 years and they bring him tons of joy. He shared a photo of a turtle and a turtleling sitting on a rock.\n</memory>\n</recalled_memory>",
+      "prediction": "3 years",
+      "f1": 0.5,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "nate-movie-genre-preference",
+        "nate-owns-pet-turtles"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 1
+    },
+    {
+      "question": "When did Joanna finish her first screenplay?",
+      "answer": "the friday before 23january, 2022",
+      "category": 2,
+      "hit": false,
+      "chars_used": 757,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n</recalled_memory>",
+      "prediction": "Based on the recalled memory, Joanna told Nate on 23 January 2022 that she finished her first full screenplay \"last Friday.\" The memory explicitly notes that this date corresponds to **21 January 2022** (Friday).\n\nAnswer: 21 January 2022",
+      "f1": 0.1395348837209302,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-submitted-screenplay-festival",
+        "joanna-finished-first-screenplay"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 1
+    },
+    {
+      "question": "When did Nate get his first two turtles?",
+      "answer": "2019",
+      "category": 2,
+      "hit": false,
+      "chars_used": 615,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"nate-owns-pet-turtles\" kind=\"person\" statement=\"Nate has had pet turtles for 3 years.\">\nNate told Joanna on 23 January 2022 that he has had his pet turtles for 3 years and they bring him tons of joy. He shared a photo of a turtle and a turtleling sitting on a rock.\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "nate-movie-genre-preference",
+        "nate-owns-pet-turtles"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 1
+    },
+    {
+      "question": "What major achievement did Joanna accomplish in January 2022?",
+      "answer": "finished her screenplay and printed it",
+      "category": 2,
+      "hit": true,
+      "chars_used": 706,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n</recalled_memory>",
+      "prediction": "Joanna finished her first full screenplay.",
+      "f1": 0.5,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-finished-first-screenplay"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 1
+    },
+    {
+      "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+      "answer": "relief, excitement,worry, hope,anxiety.",
+      "category": 1,
+      "hit": true,
+      "chars_used": 757,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n</recalled_memory>",
+      "prediction": "relief, excitement, and worry",
+      "f1": 0.6666666666666665,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-finished-first-screenplay"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 1
+    },
+    {
+      "question": "What type of movies does Nate enjoy watching the most?",
+      "answer": "action and sci-fi",
+      "category": 4,
+      "hit": true,
+      "chars_used": 1139,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-hobbies\" kind=\"person\" statement=\"Nate's main hobbies are playing video games and watching movies.\">\nNate told Joanna on 21 January 2022 that playing video games and watching movies are his main hobbies.\n</memory>\n<memory key=\"joanna-recommends-eternal-sunshine\" kind=\"event\" statement=\"Joanna recommended Eternal Sunshine of the Spotless Mind to Nate.\">\nOn 21 January 2022, Joanna recommended the romantic drama about memory and relationships, Eternal Sunshine of the Spotless Mind, to Nate. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-recommends-little-women\" kind=\"event\" statement=\"Joanna recommended the movie \"Little Women\" to Nate.\">\nOn 7 February 2022, Joanna told Nate she just watched \"Little Women\" and found it amazing, describing it as a great story about sisterhood, love, and reaching for your dreams, and called it a must-see. Nate said he would add it to his list. | time_facts=星期一, Monday, 2022-02-07\n</memory>\n</recalled_memory>",
+      "prediction": "Action and sci-fi movies.",
+      "f1": 0.888888888888889,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "nate-hobbies",
+        "joanna-recommends-eternal-sunshine",
+        "joanna-recommends-little-women"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 1
+    },
+    {
+      "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+      "answer": "screenplay",
+      "category": 4,
+      "hit": false,
+      "chars_used": 706,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n</recalled_memory>",
+      "prediction": "Her first full screenplay.",
+      "f1": 0.4,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "nate-movie-genre-preference",
+        "joanna-finished-first-screenplay"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 1
+    },
+    {
+      "question": "What genre is Joanna's first screenplay?",
+      "answer": "drama and romance",
+      "category": 4,
+      "hit": false,
+      "chars_used": 1165,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n<memory key=\"joanna-movie-genre-preference\" kind=\"person\" statement=\"Joanna prefers dramas and romcoms.\">\nJoanna stated on 21 January 2022 that Eternal Sunshine of the Spotless Mind is one of her favorites, and she really likes the idea and the acting. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-hobbies\" kind=\"person\" statement=\"Joanna enjoys writing, reading, watching movies, and exploring nature.\">\nJoanna told Nate on 21 January 2022 that besides writing, she also enjoys reading, watching movies, and exploring nature.\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-finished-first-screenplay",
+        "joanna-movie-genre-preference",
+        "joanna-hobbies"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 1
+    },
+    {
+      "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+      "answer": "submit it to film festivals and get producers and directors to check it out",
+      "category": 4,
+      "hit": false,
+      "chars_used": 757,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n</recalled_memory>",
+      "prediction": "Based on the recalled memory, Joanna's plans for her finished screenplay in January 2022 were to **submit it to some film festivals** with the hope of getting producers and directors to check it out.",
+      "f1": 0.4897959183673469,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-submitted-screenplay-festival",
+        "joanna-finished-first-screenplay"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 1
+    },
+    {
+      "question": "For how long has Nate had his turtles?",
+      "answer": "3 years",
+      "category": 4,
+      "hit": true,
+      "chars_used": 619,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"nate-owns-pet-turtles\" kind=\"person\" statement=\"Nate has had pet turtles for 3 years.\">\nNate told Joanna on 23 January 2022 that he has had his pet turtles for 3 years and they bring him tons of joy. He shared a photo of a turtle and a turtleling sitting on a rock.\n</memory>\n</recalled_memory>",
+      "prediction": "3 years",
+      "f1": 1.0,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "nate-movie-genre-preference",
+        "nate-owns-pet-turtles"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 1
+    },
+    {
+      "question": "What did Nate think of the coconut milk ice cream he made?",
+      "answer": "super good, rich and creamy",
+      "category": 4,
+      "hit": false,
+      "chars_used": 671,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-made-coconut-milk-ice-cream\" kind=\"event\" statement=\"Nate made coconut milk ice cream and found it rich and creamy.\">\nNate told Joanna on 7 February 2022 that he discovered he can make coconut milk ice cream, tried it, and it was pretty good. He described it as rich and creamy and said it might be his new favorite snack.\n</memory>\n</recalled_memory>",
+      "prediction": "He found it rich and creamy, pretty good, and possibly his new favorite snack.",
+      "f1": 0.4210526315789473,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "nate-made-coconut-milk-ice-cream"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 1
+    },
+    {
+      "question": "Which dairy-free dessert flavors does Nate enjoy?",
+      "answer": "chocolate and mixed berry",
+      "category": 4,
+      "hit": true,
+      "chars_used": 623,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-dairy-free-dessert-flavor-preference\" kind=\"person\" statement=\"Nate loves coconut milk, chocolate, and mixed berry flavors for dairy-free desse\">\nNate told Joanna on 7 February 2022 that he loves coconut milk, but also enjoys chocolate and mixed berry flavors for dairy-free desserts.\n</memory>\n</recalled_memory>",
+      "prediction": "Coconut milk, chocolate, and mixed berry.",
+      "f1": 0.8,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "nate-dairy-free-dessert-flavor-preference"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 1
+    },
+    {
+      "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+      "answer": "\"little women\"",
+      "category": 4,
+      "hit": true,
+      "chars_used": 781,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-recommends-little-women\" kind=\"event\" statement=\"Joanna recommended the movie \"Little Women\" to Nate.\">\nOn 7 February 2022, Joanna told Nate she just watched \"Little Women\" and found it amazing, describing it as a great story about sisterhood, love, and reaching for your dreams, and called it a must-see. Nate said he would add it to his list. | time_facts=星期一, Monday, 2022-02-07\n</memory>\n</recalled_memory>",
+      "prediction": "Little Women",
+      "f1": 1.0,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-recommends-little-women"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 1
+    },
+    {
+      "question": "What is \"Little Women\" about according to Joanna?",
+      "answer": "sisterhood, love, and reaching for your dreams",
+      "category": 4,
+      "hit": true,
+      "chars_used": 781,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-recommends-little-women\" kind=\"event\" statement=\"Joanna recommended the movie \"Little Women\" to Nate.\">\nOn 7 February 2022, Joanna told Nate she just watched \"Little Women\" and found it amazing, describing it as a great story about sisterhood, love, and reaching for your dreams, and called it a must-see. Nate said he would add it to his list. | time_facts=星期一, Monday, 2022-02-07\n</memory>\n</recalled_memory>",
+      "prediction": "According to Joanna, \"Little Women\" is a great story about sisterhood, love, and reaching for your dreams.",
+      "f1": 0.5833333333333334,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-submitted-screenplay-festival",
+        "joanna-recommends-little-women"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 1
+    },
+    {
+      "question": "What type of movies does Nate hate watching the most?",
+      "answer": "",
+      "category": 5,
+      "hit": false,
+      "chars_used": 788,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-hobbies\" kind=\"person\" statement=\"Nate's main hobbies are playing video games and watching movies.\">\nNate told Joanna on 21 January 2022 that playing video games and watching movies are his main hobbies.\n</memory>\n<memory key=\"joanna-movie-genre-preference\" kind=\"person\" statement=\"Joanna prefers dramas and romcoms.\">\nJoanna stated on 21 January 2022 that Eternal Sunshine of the Spotless Mind is one of her favorites, and she really likes the idea and the acting. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "nate-hobbies",
+        "joanna-movie-genre-preference"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 1
+    },
+    {
+      "question": "What genre is Joanna's first novella?",
+      "answer": "",
+      "category": 5,
+      "hit": false,
+      "chars_used": 948,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n<memory key=\"joanna-hobbies\" kind=\"person\" statement=\"Joanna enjoys writing, reading, watching movies, and exploring nature.\">\nJoanna told Nate on 21 January 2022 that besides writing, she also enjoys reading, watching movies, and exploring nature.\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-finished-first-screenplay",
+        "joanna-hobbies"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 1
+    },
+    {
+      "question": "What are Nate's plans for his finished screenplay in January 2022?",
+      "answer": "",
+      "category": 5,
+      "hit": false,
+      "chars_used": 757,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-submitted-screenplay-festival",
+        "joanna-finished-first-screenplay"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 1
+    },
+    {
+      "question": "For how long has Nate had his snakes?",
+      "answer": "",
+      "category": 5,
+      "hit": false,
+      "chars_used": 901,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"nate-owns-pet-turtles\" kind=\"person\" statement=\"Nate has had pet turtles for 3 years.\">\nNate told Joanna on 23 January 2022 that he has had his pet turtles for 3 years and they bring him tons of joy. He shared a photo of a turtle and a turtleling sitting on a rock.\n</memory>\n<memory key=\"joanna-pet-allergy\" kind=\"person\" statement=\"Joanna is allergic to most reptiles and animals with fur.\">\nJoanna told Nate on 23 January 2022 that her allergy is really bad: her face gets puffy and itchy around certain animals, so she has always stayed away. She said it can be a bit of a drag but she finds other ways to be happy.\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "nate-movie-genre-preference",
+        "nate-owns-pet-turtles",
+        "joanna-pet-allergy"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 1
+    },
+    {
+      "question": "What did Nate think of the caramel ice cream he made?",
+      "answer": "",
+      "category": 5,
+      "hit": false,
+      "chars_used": 889,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-made-coconut-milk-ice-cream\" kind=\"event\" statement=\"Nate made coconut milk ice cream and found it rich and creamy.\">\nNate told Joanna on 7 February 2022 that he discovered he can make coconut milk ice cream, tried it, and it was pretty good. He described it as rich and creamy and said it might be his new favorite snack.\n</memory>\n<memory key=\"nate-dairy-free-dessert-flavor-preference\" kind=\"person\" statement=\"Nate loves coconut milk, chocolate, and mixed berry flavors for dairy-free desse\">\nNate told Joanna on 7 February 2022 that he loves coconut milk, but also enjoys chocolate and mixed berry flavors for dairy-free desserts.\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "nate-made-coconut-milk-ice-cream",
+        "nate-dairy-free-dessert-flavor-preference"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 1
+    },
+    {
+      "question": "Is it likely that Nate has friends besides Joanna?",
+      "answer": "yesteammates on hisvideo game team.",
+      "category": 3,
+      "hit": false,
+      "chars_used": 998,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"nate-socializing-tournament-people\" kind=\"event\" statement=\"Nate started hanging out with people from the tournament outside his usual circl\">\nNate told Joanna on 23 January 2022 that he started to hang out with some people outside of his circle at the tournament. He noted some people are more competitive than others, so he tends to stick around the more chill people.\n</memory>\n<memory key=\"nate-video-game-tournament-win\" kind=\"event\" statement=\"Nate won his first video game tournament in Counter-Strike: Global Offensive.\">\nNate told Joanna on 21 January 2022 that he won his first video game tournament last week. He later specified the game was Counter-Strike: Global Offensive and said he and his team had a blast to the very end.\n</memory>\n</recalled_memory>",
+      "prediction": "Yes. The recalled memory states that Nate \"started to hang out with some people outside of his circle at the tournament\" and that he \"tends to stick around the more chill people,\" indicating he has other social connections.",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "nate-movie-genre-preference",
+        "nate-socializing-tournament-people",
+        "nate-video-game-tournament-win"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 2
+    },
+    {
+      "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+      "answer": "2019",
+      "category": 2,
+      "hit": false,
+      "chars_used": 649,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-owns-eternal-sunshine-dvd\" kind=\"event\" statement=\"Joanna owns a physical DVD copy of Eternal Sunshine of the Spotless Mind.\">\nJoanna told Nate on 21 January 2022 that she first watched the movie around 3 years ago and went out to get a physical copy.\n</memory>\n</recalled_memory>",
+      "prediction": "Around 3 years before 21 January 2022.",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-owns-eternal-sunshine-dvd"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 2
+    },
+    {
+      "question": "When did Nate win his first video game tournament?",
+      "answer": "the week before 21janury, 2022",
+      "category": 2,
+      "hit": false,
+      "chars_used": 691,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-video-game-tournament-win\" kind=\"event\" statement=\"Nate won his first video game tournament in Counter-Strike: Global Offensive.\">\nNate told Joanna on 21 January 2022 that he won his first video game tournament last week. He later specified the game was Counter-Strike: Global Offensive and said he and his team had a blast to the very end.\n</memory>\n</recalled_memory>",
+      "prediction": "Nate won his first video game tournament on 21 January 2022.",
+      "f1": 0.12500000000000003,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "nate-video-game-tournament-win"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 2
+    },
+    {
+      "question": "What pets wouldn't cause any discomfort to Joanna?",
+      "answer": "hairless cats or pigs,since they don't have fur, which is one of the main causes of joanna's allergy.",
+      "category": 3,
+      "hit": false,
+      "chars_used": 948,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-pet-allergy\" kind=\"person\" statement=\"Joanna is allergic to most reptiles and animals with fur.\">\nJoanna told Nate on 23 January 2022 that her allergy is really bad: her face gets puffy and itchy around certain animals, so she has always stayed away. She said it can be a bit of a drag but she finds other ways to be happy.\n</memory>\n<memory key=\"nate-owns-pet-turtles\" kind=\"person\" statement=\"Nate has had pet turtles for 3 years.\">\nNate told Joanna on 23 January 2022 that he has had his pet turtles for 3 years and they bring him tons of joy. He shared a photo of a turtle and a turtleling sitting on a rock.\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-submitted-screenplay-festival",
+        "joanna-pet-allergy",
+        "nate-owns-pet-turtles"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 2
+    },
+    {
+      "question": "What are Joanna's hobbies?",
+      "answer": "writing, watchingmovies, exploringnature, hanging withfriends.",
+      "category": 1,
+      "hit": false,
+      "chars_used": 596,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-hobbies\" kind=\"person\" statement=\"Joanna enjoys writing, reading, watching movies, and exploring nature.\">\nJoanna told Nate on 21 January 2022 that besides writing, she also enjoys reading, watching movies, and exploring nature.\n</memory>\n</recalled_memory>",
+      "prediction": "Joanna enjoys writing, reading, watching movies, and exploring nature.",
+      "f1": 0.14285714285714285,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "nate-movie-genre-preference",
+        "joanna-hobbies"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 2
+    },
+    {
+      "question": "How long has Nate had his first two turtles?",
+      "answer": "three years",
+      "category": 2,
+      "hit": false,
+      "chars_used": 619,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"nate-owns-pet-turtles\" kind=\"person\" statement=\"Nate has had pet turtles for 3 years.\">\nNate told Joanna on 23 January 2022 that he has had his pet turtles for 3 years and they bring him tons of joy. He shared a photo of a turtle and a turtleling sitting on a rock.\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "nate-movie-genre-preference",
+        "nate-owns-pet-turtles"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 2
+    },
+    {
+      "question": "When did Joanna finish her first screenplay?",
+      "answer": "the friday before 23january, 2022",
+      "category": 2,
+      "hit": false,
+      "chars_used": 757,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n</recalled_memory>",
+      "prediction": "Based on the recalled memory, Joanna finished her first full screenplay on **Friday, January 21, 2022**.\n\nThis is derived from the memory `joanna-finished-first-screenplay`, which states she told Nate on 23 January 2022 that she finished it \"last Friday,\" and the associated time fact explicitly identifies that Friday as **2022-01-21**.",
+      "f1": 0.10169491525423728,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-submitted-screenplay-festival",
+        "joanna-finished-first-screenplay"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 2
+    },
+    {
+      "question": "When did Nate get his first two turtles?",
+      "answer": "2019",
+      "category": 2,
+      "hit": false,
+      "chars_used": 615,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"nate-owns-pet-turtles\" kind=\"person\" statement=\"Nate has had pet turtles for 3 years.\">\nNate told Joanna on 23 January 2022 that he has had his pet turtles for 3 years and they bring him tons of joy. He shared a photo of a turtle and a turtleling sitting on a rock.\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "nate-movie-genre-preference",
+        "nate-owns-pet-turtles"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 2
+    },
+    {
+      "question": "What major achievement did Joanna accomplish in January 2022?",
+      "answer": "finished her screenplay and printed it",
+      "category": 2,
+      "hit": true,
+      "chars_used": 706,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n</recalled_memory>",
+      "prediction": "Joanna finished her first full screenplay.",
+      "f1": 0.5,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-finished-first-screenplay"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 2
+    },
+    {
+      "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+      "answer": "relief, excitement,worry, hope,anxiety.",
+      "category": 1,
+      "hit": true,
+      "chars_used": 757,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n</recalled_memory>",
+      "prediction": "relief, excitement, and worry",
+      "f1": 0.6666666666666665,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-finished-first-screenplay"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 2
+    },
+    {
+      "question": "What type of movies does Nate enjoy watching the most?",
+      "answer": "action and sci-fi",
+      "category": 4,
+      "hit": true,
+      "chars_used": 1139,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-hobbies\" kind=\"person\" statement=\"Nate's main hobbies are playing video games and watching movies.\">\nNate told Joanna on 21 January 2022 that playing video games and watching movies are his main hobbies.\n</memory>\n<memory key=\"joanna-recommends-eternal-sunshine\" kind=\"event\" statement=\"Joanna recommended Eternal Sunshine of the Spotless Mind to Nate.\">\nOn 21 January 2022, Joanna recommended the romantic drama about memory and relationships, Eternal Sunshine of the Spotless Mind, to Nate. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-recommends-little-women\" kind=\"event\" statement=\"Joanna recommended the movie \"Little Women\" to Nate.\">\nOn 7 February 2022, Joanna told Nate she just watched \"Little Women\" and found it amazing, describing it as a great story about sisterhood, love, and reaching for your dreams, and called it a must-see. Nate said he would add it to his list. | time_facts=星期一, Monday, 2022-02-07\n</memory>\n</recalled_memory>",
+      "prediction": "Nate loves action and sci-fi movies.",
+      "f1": 0.7272727272727273,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "nate-hobbies",
+        "joanna-recommends-eternal-sunshine",
+        "joanna-recommends-little-women"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 2
+    },
+    {
+      "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+      "answer": "screenplay",
+      "category": 4,
+      "hit": false,
+      "chars_used": 706,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n</recalled_memory>",
+      "prediction": "Her first full screenplay.",
+      "f1": 0.4,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "nate-movie-genre-preference",
+        "joanna-finished-first-screenplay"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 2
+    },
+    {
+      "question": "What genre is Joanna's first screenplay?",
+      "answer": "drama and romance",
+      "category": 4,
+      "hit": false,
+      "chars_used": 1165,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n<memory key=\"joanna-movie-genre-preference\" kind=\"person\" statement=\"Joanna prefers dramas and romcoms.\">\nJoanna stated on 21 January 2022 that Eternal Sunshine of the Spotless Mind is one of her favorites, and she really likes the idea and the acting. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-hobbies\" kind=\"person\" statement=\"Joanna enjoys writing, reading, watching movies, and exploring nature.\">\nJoanna told Nate on 21 January 2022 that besides writing, she also enjoys reading, watching movies, and exploring nature.\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-finished-first-screenplay",
+        "joanna-movie-genre-preference",
+        "joanna-hobbies"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 2
+    },
+    {
+      "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+      "answer": "submit it to film festivals and get producers and directors to check it out",
+      "category": 4,
+      "hit": true,
+      "chars_used": 757,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n</recalled_memory>",
+      "prediction": "Joanna plans to submit her finished screenplay to film festivals, hoping to get producers and directors to check it out.",
+      "f1": 0.7058823529411764,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-submitted-screenplay-festival",
+        "joanna-finished-first-screenplay"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 2
+    },
+    {
+      "question": "For how long has Nate had his turtles?",
+      "answer": "3 years",
+      "category": 4,
+      "hit": true,
+      "chars_used": 619,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"nate-owns-pet-turtles\" kind=\"person\" statement=\"Nate has had pet turtles for 3 years.\">\nNate told Joanna on 23 January 2022 that he has had his pet turtles for 3 years and they bring him tons of joy. He shared a photo of a turtle and a turtleling sitting on a rock.\n</memory>\n</recalled_memory>",
+      "prediction": "3 years",
+      "f1": 1.0,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "nate-movie-genre-preference",
+        "nate-owns-pet-turtles"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 2
+    },
+    {
+      "question": "What did Nate think of the coconut milk ice cream he made?",
+      "answer": "super good, rich and creamy",
+      "category": 4,
+      "hit": false,
+      "chars_used": 671,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-made-coconut-milk-ice-cream\" kind=\"event\" statement=\"Nate made coconut milk ice cream and found it rich and creamy.\">\nNate told Joanna on 7 February 2022 that he discovered he can make coconut milk ice cream, tried it, and it was pretty good. He described it as rich and creamy and said it might be his new favorite snack.\n</memory>\n</recalled_memory>",
+      "prediction": "He found it rich and creamy, pretty good, and possibly his new favorite snack.",
+      "f1": 0.4210526315789473,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "nate-made-coconut-milk-ice-cream"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 2
+    },
+    {
+      "question": "Which dairy-free dessert flavors does Nate enjoy?",
+      "answer": "chocolate and mixed berry",
+      "category": 4,
+      "hit": false,
+      "chars_used": 623,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-dairy-free-dessert-flavor-preference\" kind=\"person\" statement=\"Nate loves coconut milk, chocolate, and mixed berry flavors for dairy-free desse\">\nNate told Joanna on 7 February 2022 that he loves coconut milk, but also enjoys chocolate and mixed berry flavors for dairy-free desserts.\n</memory>\n</recalled_memory>",
+      "prediction": "Nate enjoys coconut milk, chocolate, and mixed berry flavors for dairy-free desserts.",
+      "f1": 0.47058823529411764,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "nate-dairy-free-dessert-flavor-preference"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 2
+    },
+    {
+      "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+      "answer": "\"little women\"",
+      "category": 4,
+      "hit": true,
+      "chars_used": 781,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-recommends-little-women\" kind=\"event\" statement=\"Joanna recommended the movie \"Little Women\" to Nate.\">\nOn 7 February 2022, Joanna told Nate she just watched \"Little Women\" and found it amazing, describing it as a great story about sisterhood, love, and reaching for your dreams, and called it a must-see. Nate said he would add it to his list. | time_facts=星期一, Monday, 2022-02-07\n</memory>\n</recalled_memory>",
+      "prediction": "Little Women",
+      "f1": 1.0,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-recommends-little-women"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 2
+    },
+    {
+      "question": "What is \"Little Women\" about according to Joanna?",
+      "answer": "sisterhood, love, and reaching for your dreams",
+      "category": 4,
+      "hit": true,
+      "chars_used": 781,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-recommends-little-women\" kind=\"event\" statement=\"Joanna recommended the movie \"Little Women\" to Nate.\">\nOn 7 February 2022, Joanna told Nate she just watched \"Little Women\" and found it amazing, describing it as a great story about sisterhood, love, and reaching for your dreams, and called it a must-see. Nate said he would add it to his list. | time_facts=星期一, Monday, 2022-02-07\n</memory>\n</recalled_memory>",
+      "prediction": "According to Joanna, \"Little Women\" is a great story about sisterhood, love, and reaching for your dreams.",
+      "f1": 0.5833333333333334,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-submitted-screenplay-festival",
+        "joanna-recommends-little-women"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 2
+    },
+    {
+      "question": "What type of movies does Nate hate watching the most?",
+      "answer": "",
+      "category": 5,
+      "hit": false,
+      "chars_used": 788,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-hobbies\" kind=\"person\" statement=\"Nate's main hobbies are playing video games and watching movies.\">\nNate told Joanna on 21 January 2022 that playing video games and watching movies are his main hobbies.\n</memory>\n<memory key=\"joanna-movie-genre-preference\" kind=\"person\" statement=\"Joanna prefers dramas and romcoms.\">\nJoanna stated on 21 January 2022 that Eternal Sunshine of the Spotless Mind is one of her favorites, and she really likes the idea and the acting. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "nate-hobbies",
+        "joanna-movie-genre-preference"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 2
+    },
+    {
+      "question": "What genre is Joanna's first novella?",
+      "answer": "",
+      "category": 5,
+      "hit": false,
+      "chars_used": 948,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n<memory key=\"joanna-hobbies\" kind=\"person\" statement=\"Joanna enjoys writing, reading, watching movies, and exploring nature.\">\nJoanna told Nate on 21 January 2022 that besides writing, she also enjoys reading, watching movies, and exploring nature.\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-finished-first-screenplay",
+        "joanna-hobbies"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 2
+    },
+    {
+      "question": "What are Nate's plans for his finished screenplay in January 2022?",
+      "answer": "",
+      "category": 5,
+      "hit": false,
+      "chars_used": 757,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-submitted-screenplay-festival",
+        "joanna-finished-first-screenplay"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 2
+    },
+    {
+      "question": "For how long has Nate had his snakes?",
+      "answer": "",
+      "category": 5,
+      "hit": false,
+      "chars_used": 901,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"nate-owns-pet-turtles\" kind=\"person\" statement=\"Nate has had pet turtles for 3 years.\">\nNate told Joanna on 23 January 2022 that he has had his pet turtles for 3 years and they bring him tons of joy. He shared a photo of a turtle and a turtleling sitting on a rock.\n</memory>\n<memory key=\"joanna-pet-allergy\" kind=\"person\" statement=\"Joanna is allergic to most reptiles and animals with fur.\">\nJoanna told Nate on 23 January 2022 that her allergy is really bad: her face gets puffy and itchy around certain animals, so she has always stayed away. She said it can be a bit of a drag but she finds other ways to be happy.\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "nate-movie-genre-preference",
+        "nate-owns-pet-turtles",
+        "joanna-pet-allergy"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 2
+    },
+    {
+      "question": "What did Nate think of the caramel ice cream he made?",
+      "answer": "",
+      "category": 5,
+      "hit": false,
+      "chars_used": 405,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-submitted-screenplay-festival"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 2
+    },
+    {
+      "question": "Is it likely that Nate has friends besides Joanna?",
+      "answer": "yesteammates on hisvideo game team.",
+      "category": 3,
+      "hit": false,
+      "chars_used": 998,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"nate-socializing-tournament-people\" kind=\"event\" statement=\"Nate started hanging out with people from the tournament outside his usual circl\">\nNate told Joanna on 23 January 2022 that he started to hang out with some people outside of his circle at the tournament. He noted some people are more competitive than others, so he tends to stick around the more chill people.\n</memory>\n<memory key=\"nate-video-game-tournament-win\" kind=\"event\" statement=\"Nate won his first video game tournament in Counter-Strike: Global Offensive.\">\nNate told Joanna on 21 January 2022 that he won his first video game tournament last week. He later specified the game was Counter-Strike: Global Offensive and said he and his team had a blast to the very end.\n</memory>\n</recalled_memory>",
+      "prediction": "Yes, it is likely. The recalled memory states that Nate \"started to hang out with some people outside of his circle at the tournament\" and that he \"tends to stick around the more chill people,\" indicating he has other social connections.",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "nate-movie-genre-preference",
+        "nate-socializing-tournament-people",
+        "nate-video-game-tournament-win"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 3
+    },
+    {
+      "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+      "answer": "2019",
+      "category": 2,
+      "hit": false,
+      "chars_used": 649,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-owns-eternal-sunshine-dvd\" kind=\"event\" statement=\"Joanna owns a physical DVD copy of Eternal Sunshine of the Spotless Mind.\">\nJoanna told Nate on 21 January 2022 that she first watched the movie around 3 years ago and went out to get a physical copy.\n</memory>\n</recalled_memory>",
+      "prediction": "Around 3 years before 21 January 2022.",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-owns-eternal-sunshine-dvd"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 3
+    },
+    {
+      "question": "When did Nate win his first video game tournament?",
+      "answer": "the week before 21janury, 2022",
+      "category": 2,
+      "hit": false,
+      "chars_used": 691,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-video-game-tournament-win\" kind=\"event\" statement=\"Nate won his first video game tournament in Counter-Strike: Global Offensive.\">\nNate told Joanna on 21 January 2022 that he won his first video game tournament last week. He later specified the game was Counter-Strike: Global Offensive and said he and his team had a blast to the very end.\n</memory>\n</recalled_memory>",
+      "prediction": "Based on the recalled memory, Nate told Joanna on **21 January 2022** that he won his first video game tournament **last week**. Therefore, the tournament win occurred in the week prior to January 21, 2022 (approximately mid-January 2022).\n\nAnswer: The week before 21 January 2022",
+      "f1": 0.1568627450980392,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "nate-video-game-tournament-win"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 3
+    },
+    {
+      "question": "What pets wouldn't cause any discomfort to Joanna?",
+      "answer": "hairless cats or pigs,since they don't have fur, which is one of the main causes of joanna's allergy.",
+      "category": 3,
+      "hit": false,
+      "chars_used": 734,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-pet-allergy\" kind=\"person\" statement=\"Joanna is allergic to most reptiles and animals with fur.\">\nJoanna told Nate on 23 January 2022 that her allergy is really bad: her face gets puffy and itchy around certain animals, so she has always stayed away. She said it can be a bit of a drag but she finds other ways to be happy.\n</memory>\n</recalled_memory>",
+      "prediction": "Based on the recalled memory, Joanna is allergic to most reptiles and animals with fur. Therefore, pets that are **not reptiles and do not have fur** (such as fish, birds, or amphibians) would not cause her discomfort.\n\nAnswer: Pets that are not reptiles and do not have fur (e.g., fish, birds).",
+      "f1": 0.1643835616438356,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-submitted-screenplay-festival",
+        "joanna-pet-allergy"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 3
+    },
+    {
+      "question": "What are Joanna's hobbies?",
+      "answer": "writing, watchingmovies, exploringnature, hanging withfriends.",
+      "category": 1,
+      "hit": false,
+      "chars_used": 596,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-hobbies\" kind=\"person\" statement=\"Joanna enjoys writing, reading, watching movies, and exploring nature.\">\nJoanna told Nate on 21 January 2022 that besides writing, she also enjoys reading, watching movies, and exploring nature.\n</memory>\n</recalled_memory>",
+      "prediction": "Joanna enjoys writing, reading, watching movies, and exploring nature.",
+      "f1": 0.14285714285714285,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "nate-movie-genre-preference",
+        "joanna-hobbies"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 3
+    },
+    {
+      "question": "How long has Nate had his first two turtles?",
+      "answer": "three years",
+      "category": 2,
+      "hit": true,
+      "chars_used": 619,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"nate-owns-pet-turtles\" kind=\"person\" statement=\"Nate has had pet turtles for 3 years.\">\nNate told Joanna on 23 January 2022 that he has had his pet turtles for 3 years and they bring him tons of joy. He shared a photo of a turtle and a turtleling sitting on a rock.\n</memory>\n</recalled_memory>",
+      "prediction": "3 years",
+      "f1": 0.5,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "nate-movie-genre-preference",
+        "nate-owns-pet-turtles"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 3
+    },
+    {
+      "question": "When did Joanna finish her first screenplay?",
+      "answer": "the friday before 23january, 2022",
+      "category": 2,
+      "hit": false,
+      "chars_used": 757,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n</recalled_memory>",
+      "prediction": "Based on the recalled memory, Joanna finished her first full screenplay on **Friday, January 21, 2022**.",
+      "f1": 0.2857142857142857,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-submitted-screenplay-festival",
+        "joanna-finished-first-screenplay"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 3
+    },
+    {
+      "question": "When did Nate get his first two turtles?",
+      "answer": "2019",
+      "category": 2,
+      "hit": false,
+      "chars_used": 615,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"nate-owns-pet-turtles\" kind=\"person\" statement=\"Nate has had pet turtles for 3 years.\">\nNate told Joanna on 23 January 2022 that he has had his pet turtles for 3 years and they bring him tons of joy. He shared a photo of a turtle and a turtleling sitting on a rock.\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "nate-movie-genre-preference",
+        "nate-owns-pet-turtles"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 3
+    },
+    {
+      "question": "What major achievement did Joanna accomplish in January 2022?",
+      "answer": "finished her screenplay and printed it",
+      "category": 2,
+      "hit": true,
+      "chars_used": 706,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n</recalled_memory>",
+      "prediction": "Joanna finished her first full screenplay.",
+      "f1": 0.5,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-finished-first-screenplay"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 3
+    },
+    {
+      "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+      "answer": "relief, excitement,worry, hope,anxiety.",
+      "category": 1,
+      "hit": true,
+      "chars_used": 757,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n</recalled_memory>",
+      "prediction": "relief, excitement, and worry",
+      "f1": 0.6666666666666665,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-finished-first-screenplay"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 3
+    },
+    {
+      "question": "What type of movies does Nate enjoy watching the most?",
+      "answer": "action and sci-fi",
+      "category": 4,
+      "hit": true,
+      "chars_used": 1139,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-hobbies\" kind=\"person\" statement=\"Nate's main hobbies are playing video games and watching movies.\">\nNate told Joanna on 21 January 2022 that playing video games and watching movies are his main hobbies.\n</memory>\n<memory key=\"joanna-recommends-eternal-sunshine\" kind=\"event\" statement=\"Joanna recommended Eternal Sunshine of the Spotless Mind to Nate.\">\nOn 21 January 2022, Joanna recommended the romantic drama about memory and relationships, Eternal Sunshine of the Spotless Mind, to Nate. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-recommends-little-women\" kind=\"event\" statement=\"Joanna recommended the movie \"Little Women\" to Nate.\">\nOn 7 February 2022, Joanna told Nate she just watched \"Little Women\" and found it amazing, describing it as a great story about sisterhood, love, and reaching for your dreams, and called it a must-see. Nate said he would add it to his list. | time_facts=星期一, Monday, 2022-02-07\n</memory>\n</recalled_memory>",
+      "prediction": "Nate loves action and sci-fi movies.",
+      "f1": 0.7272727272727273,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "nate-hobbies",
+        "joanna-recommends-eternal-sunshine",
+        "joanna-recommends-little-women"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 3
+    },
+    {
+      "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+      "answer": "screenplay",
+      "category": 4,
+      "hit": false,
+      "chars_used": 706,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n</recalled_memory>",
+      "prediction": "Joanna finished her first full screenplay last Friday.",
+      "f1": 0.2222222222222222,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "nate-movie-genre-preference",
+        "joanna-finished-first-screenplay"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 3
+    },
+    {
+      "question": "What genre is Joanna's first screenplay?",
+      "answer": "drama and romance",
+      "category": 4,
+      "hit": false,
+      "chars_used": 1165,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n<memory key=\"joanna-hobbies\" kind=\"person\" statement=\"Joanna enjoys writing, reading, watching movies, and exploring nature.\">\nJoanna told Nate on 21 January 2022 that besides writing, she also enjoys reading, watching movies, and exploring nature.\n</memory>\n<memory key=\"joanna-movie-genre-preference\" kind=\"person\" statement=\"Joanna prefers dramas and romcoms.\">\nJoanna stated on 21 January 2022 that Eternal Sunshine of the Spotless Mind is one of her favorites, and she really likes the idea and the acting. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-finished-first-screenplay",
+        "joanna-hobbies",
+        "joanna-movie-genre-preference"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 3
+    },
+    {
+      "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+      "answer": "submit it to film festivals and get producers and directors to check it out",
+      "category": 4,
+      "hit": true,
+      "chars_used": 757,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n</recalled_memory>",
+      "prediction": "Based on the recalled memory, Joanna's plan in January 2022 was to submit her finished screenplay to film festivals, hoping to get producers and directors to check it out.",
+      "f1": 0.5454545454545455,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-submitted-screenplay-festival",
+        "joanna-finished-first-screenplay"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 3
+    },
+    {
+      "question": "For how long has Nate had his turtles?",
+      "answer": "3 years",
+      "category": 4,
+      "hit": true,
+      "chars_used": 619,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"nate-owns-pet-turtles\" kind=\"person\" statement=\"Nate has had pet turtles for 3 years.\">\nNate told Joanna on 23 January 2022 that he has had his pet turtles for 3 years and they bring him tons of joy. He shared a photo of a turtle and a turtleling sitting on a rock.\n</memory>\n</recalled_memory>",
+      "prediction": "3 years",
+      "f1": 1.0,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "nate-movie-genre-preference",
+        "nate-owns-pet-turtles"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 3
+    },
+    {
+      "question": "What did Nate think of the coconut milk ice cream he made?",
+      "answer": "super good, rich and creamy",
+      "category": 4,
+      "hit": false,
+      "chars_used": 671,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-made-coconut-milk-ice-cream\" kind=\"event\" statement=\"Nate made coconut milk ice cream and found it rich and creamy.\">\nNate told Joanna on 7 February 2022 that he discovered he can make coconut milk ice cream, tried it, and it was pretty good. He described it as rich and creamy and said it might be his new favorite snack.\n</memory>\n</recalled_memory>",
+      "prediction": "He found it rich and creamy and said it might be his new favorite snack.",
+      "f1": 0.3,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "nate-made-coconut-milk-ice-cream"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": false,
+      "repeat": 3
+    },
+    {
+      "question": "Which dairy-free dessert flavors does Nate enjoy?",
+      "answer": "chocolate and mixed berry",
+      "category": 4,
+      "hit": false,
+      "chars_used": 1089,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-dairy-free-dessert-flavor-preference\" kind=\"person\" statement=\"Nate loves coconut milk, chocolate, and mixed berry flavors for dairy-free desse\">\nNate told Joanna on 7 February 2022 that he loves coconut milk, but also enjoys chocolate and mixed berry flavors for dairy-free desserts.\n</memory>\n<memory key=\"nate-made-coconut-milk-ice-cream\" kind=\"event\" statement=\"Nate made coconut milk ice cream and found it rich and creamy.\">\nNate told Joanna on 7 February 2022 that he discovered he can make coconut milk ice cream, tried it, and it was pretty good. He described it as rich and creamy and said it might be his new favorite snack.\n</memory>\n<memory key=\"nate-made-dairy-free-chocolate-cake\" kind=\"event\" statement=\"Nate made a dairy-free chocolate cake with berries on it.\">\nNate told Joanna on 7 February 2022 that he made a dairy-free chocolate cake with berries on it the other day, and suggested she might like it.\n</memory>\n</recalled_memory>",
+      "prediction": "Nate enjoys coconut milk, chocolate, and mixed berry flavors for dairy-free desserts.",
+      "f1": 0.47058823529411764,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "nate-dairy-free-dessert-flavor-preference",
+        "nate-made-coconut-milk-ice-cream",
+        "nate-made-dairy-free-chocolate-cake"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 3
+    },
+    {
+      "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+      "answer": "\"little women\"",
+      "category": 4,
+      "hit": true,
+      "chars_used": 781,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-recommends-little-women\" kind=\"event\" statement=\"Joanna recommended the movie \"Little Women\" to Nate.\">\nOn 7 February 2022, Joanna told Nate she just watched \"Little Women\" and found it amazing, describing it as a great story about sisterhood, love, and reaching for your dreams, and called it a must-see. Nate said he would add it to his list. | time_facts=星期一, Monday, 2022-02-07\n</memory>\n</recalled_memory>",
+      "prediction": "Little Women",
+      "f1": 1.0,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-recommends-little-women"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 3
+    },
+    {
+      "question": "What is \"Little Women\" about according to Joanna?",
+      "answer": "sisterhood, love, and reaching for your dreams",
+      "category": 4,
+      "hit": true,
+      "chars_used": 781,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-recommends-little-women\" kind=\"event\" statement=\"Joanna recommended the movie \"Little Women\" to Nate.\">\nOn 7 February 2022, Joanna told Nate she just watched \"Little Women\" and found it amazing, describing it as a great story about sisterhood, love, and reaching for your dreams, and called it a must-see. Nate said he would add it to his list. | time_facts=星期一, Monday, 2022-02-07\n</memory>\n</recalled_memory>",
+      "prediction": "According to Joanna, \"Little Women\" is a great story about sisterhood, love, and reaching for your dreams.",
+      "f1": 0.5833333333333334,
+      "hit_any": true,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-submitted-screenplay-festival",
+        "joanna-recommends-little-women"
+      ],
+      "source_ids": [],
+      "abstained": false,
+      "answer_coverage": true,
+      "repeat": 3
+    },
+    {
+      "question": "What type of movies does Nate hate watching the most?",
+      "answer": "",
+      "category": 5,
+      "hit": false,
+      "chars_used": 788,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-hobbies\" kind=\"person\" statement=\"Nate's main hobbies are playing video games and watching movies.\">\nNate told Joanna on 21 January 2022 that playing video games and watching movies are his main hobbies.\n</memory>\n<memory key=\"joanna-movie-genre-preference\" kind=\"person\" statement=\"Joanna prefers dramas and romcoms.\">\nJoanna stated on 21 January 2022 that Eternal Sunshine of the Spotless Mind is one of her favorites, and she really likes the idea and the acting. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "nate-hobbies",
+        "joanna-movie-genre-preference"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 3
+    },
+    {
+      "question": "What genre is Joanna's first novella?",
+      "answer": "",
+      "category": 5,
+      "hit": false,
+      "chars_used": 948,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n<memory key=\"joanna-hobbies\" kind=\"person\" statement=\"Joanna enjoys writing, reading, watching movies, and exploring nature.\">\nJoanna told Nate on 21 January 2022 that besides writing, she also enjoys reading, watching movies, and exploring nature.\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-finished-first-screenplay",
+        "joanna-hobbies"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 3
+    },
+    {
+      "question": "What are Nate's plans for his finished screenplay in January 2022?",
+      "answer": "",
+      "category": 5,
+      "hit": false,
+      "chars_used": 757,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-plans-submit-screenplay-festivals\" kind=\"event\" statement=\"Joanna plans to submit her finished screenplay to film festivals.\">\nJoanna told Nate on 23 January 2022 that she is going to submit the screenplay to some film festivals and hopes to get producers and directors to check it out.\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"joanna-finished-first-screenplay\" kind=\"event\" statement=\"Joanna finished her first full screenplay and printed it last Friday.\">\nJoanna told Nate on 23 January 2022 that she finally finished her first full screenplay and printed it last Friday. She said she had been working on it for a while and felt such a relief to have it all done. | time_facts=2022-01-21（星期五）\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-plans-submit-screenplay-festivals",
+        "joanna-submitted-screenplay-festival",
+        "joanna-finished-first-screenplay"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 3
+    },
+    {
+      "question": "For how long has Nate had his snakes?",
+      "answer": "",
+      "category": 5,
+      "hit": false,
+      "chars_used": 901,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"nate-owns-pet-turtles\" kind=\"person\" statement=\"Nate has had pet turtles for 3 years.\">\nNate told Joanna on 23 January 2022 that he has had his pet turtles for 3 years and they bring him tons of joy. He shared a photo of a turtle and a turtleling sitting on a rock.\n</memory>\n<memory key=\"joanna-pet-allergy\" kind=\"person\" statement=\"Joanna is allergic to most reptiles and animals with fur.\">\nJoanna told Nate on 23 January 2022 that her allergy is really bad: her face gets puffy and itchy around certain animals, so she has always stayed away. She said it can be a bit of a drag but she finds other ways to be happy.\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "joanna-submitted-screenplay-festival",
+        "nate-movie-genre-preference",
+        "nate-owns-pet-turtles",
+        "joanna-pet-allergy"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 3
+    },
+    {
+      "question": "What did Nate think of the caramel ice cream he made?",
+      "answer": "",
+      "category": 5,
+      "hit": false,
+      "chars_used": 889,
+      "atoms_clipped": 0,
+      "context_block": "<recalled_memory>\n<memory key=\"nate-movie-genre-preference\" kind=\"person\" statement=\"Nate loves action and sci-fi movies.\">\nNate told Joanna on 21 January 2022 that he loves action and sci-fi movies because the effects are cool. | time_facts=星期五, Friday, 2022-01-21\n</memory>\n<memory key=\"joanna-submitted-screenplay-festival\" kind=\"event\" statement=\"Joanna submitted her screenplay to a film festival.\">\nJoanna told Nate on 7 February 2022 that the screenplay she sent in to the film festival has been on her mind all day, and she is bouncing between relief, excitement, and worry.\n</memory>\n<memory key=\"nate-made-coconut-milk-ice-cream\" kind=\"event\" statement=\"Nate made coconut milk ice cream and found it rich and creamy.\">\nNate told Joanna on 7 February 2022 that he discovered he can make coconut milk ice cream, tried it, and it was pretty good. He described it as rich and creamy and said it might be his new favorite snack.\n</memory>\n<memory key=\"nate-dairy-free-dessert-flavor-preference\" kind=\"person\" statement=\"Nate loves coconut milk, chocolate, and mixed berry flavors for dairy-free desse\">\nNate told Joanna on 7 February 2022 that he loves coconut milk, but also enjoys chocolate and mixed berry flavors for dairy-free desserts.\n</memory>\n</recalled_memory>",
+      "prediction": "unknown",
+      "f1": 0.0,
+      "hit_any": false,
+      "gold_keys": [],
+      "recalled_keys": [
+        "nate-movie-genre-preference",
+        "joanna-submitted-screenplay-festival",
+        "nate-made-coconut-milk-ice-cream",
+        "nate-dairy-free-dessert-flavor-preference"
+      ],
+      "source_ids": [],
+      "abstained": true,
+      "answer_coverage": false,
+      "repeat": 3
+    }
+  ],
+  "configuration": {
+    "answer_prompt_sha256": "47795bd4dc8f33bf976aab27c77ea3a55ffea9d2719369d427b985d9792c25cf",
+    "snapshot_sha256": "e870ff87792f048c3c1282b6c0f888d05be52cf2e0831ade754c63f1352ab376",
+    "dataset_sha256": "d235443a69910bdb219210c4efdb189fb17d2f29dd50b8652fed5042eece090b",
+    "method": "llm",
+    "detail": "full",
+    "atom_only": true,
+    "atom_budget": 1200,
+    "source_budget": 0,
+    "max_atoms": 10,
+    "max_sources": 0,
+    "model_alias": "odb",
+    "source_turns": 6,
+    "repeats": 3,
+    "temperature": 0.0,
+    "limitation": "Saved public atoms, no new consolidation. Evidence links are restored only when explicitly present in the snapshot and the exact original subset matches. Each repeat makes new retrieval and QA model calls. Repeated questions are not independent new test cases. Token scores are not independent truth judgment or a full Velora tool-use evaluation."
+  },
+  "complete": true,
+  "repeat_scores": [
+    {
+      "hits": 8,
+      "mean_f1": 0.3200115672317252,
+      "total": 24
+    },
+    {
+      "hits": 7,
+      "mean_f1": 0.2851811668832645,
+      "total": 24
+    },
+    {
+      "hits": 8,
+      "mean_f1": 0.30272314439820486,
+      "total": 24
+    }
+  ],
+  "llm_diagnostics": [
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 82,
+      "completion_tokens": 23
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 178,
+      "completion_tokens": 34
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 17
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 38,
+      "completion_tokens": 16
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 44,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 125,
+      "completion_tokens": 34
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 32,
+      "completion_tokens": 12
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 28,
+      "completion_tokens": 10
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 70,
+      "completion_tokens": 15
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 35,
+      "completion_tokens": 14
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 3
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 237,
+      "completion_tokens": 65
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 35,
+      "completion_tokens": 14
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 42,
+      "completion_tokens": 9
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 29,
+      "completion_tokens": 8
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 98,
+      "completion_tokens": 33
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 25,
+      "completion_tokens": 7
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 26,
+      "completion_tokens": 6
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 97,
+      "completion_tokens": 29
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 199,
+      "completion_tokens": 44
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 35,
+      "completion_tokens": 14
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 3
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 17
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 78,
+      "completion_tokens": 18
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 55,
+      "completion_tokens": 17
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 41,
+      "completion_tokens": 11
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 44,
+      "completion_tokens": 15
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 12,
+      "completion_tokens": 3
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 44,
+      "completion_tokens": 15
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 106,
+      "completion_tokens": 25
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 59,
+      "completion_tokens": 20
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 64,
+      "completion_tokens": 19
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 57,
+      "completion_tokens": 22
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 91,
+      "completion_tokens": 30
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 82,
+      "completion_tokens": 23
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 223,
+      "completion_tokens": 46
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 17
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 38,
+      "completion_tokens": 16
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 44,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 60,
+      "completion_tokens": 20
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 57,
+      "completion_tokens": 22
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 28,
+      "completion_tokens": 10
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 70,
+      "completion_tokens": 15
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 35,
+      "completion_tokens": 14
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 337,
+      "completion_tokens": 89
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 35,
+      "completion_tokens": 14
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 42,
+      "completion_tokens": 9
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 29,
+      "completion_tokens": 8
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 98,
+      "completion_tokens": 33
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 36,
+      "completion_tokens": 10
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 26,
+      "completion_tokens": 6
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 97,
+      "completion_tokens": 29
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 120,
+      "completion_tokens": 24
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 35,
+      "completion_tokens": 14
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 3
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 17
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 78,
+      "completion_tokens": 18
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 55,
+      "completion_tokens": 17
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 85,
+      "completion_tokens": 18
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 44,
+      "completion_tokens": 15
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 12,
+      "completion_tokens": 3
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 44,
+      "completion_tokens": 15
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 106,
+      "completion_tokens": 25
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 59,
+      "completion_tokens": 20
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 64,
+      "completion_tokens": 19
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 57,
+      "completion_tokens": 22
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 12,
+      "completion_tokens": 6
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 82,
+      "completion_tokens": 23
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 237,
+      "completion_tokens": 50
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 17
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 38,
+      "completion_tokens": 16
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 44,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 280,
+      "completion_tokens": 80
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 32,
+      "completion_tokens": 12
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 295,
+      "completion_tokens": 73
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 28,
+      "completion_tokens": 10
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 70,
+      "completion_tokens": 15
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 35,
+      "completion_tokens": 14
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 3
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 104,
+      "completion_tokens": 28
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 35,
+      "completion_tokens": 14
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 42,
+      "completion_tokens": 9
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 29,
+      "completion_tokens": 8
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 98,
+      "completion_tokens": 33
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 36,
+      "completion_tokens": 10
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 54,
+      "completion_tokens": 11
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 97,
+      "completion_tokens": 29
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 171,
+      "completion_tokens": 38
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 35,
+      "completion_tokens": 14
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 3
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 17
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 72,
+      "completion_tokens": 17
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 130,
+      "completion_tokens": 42
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 85,
+      "completion_tokens": 18
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 44,
+      "completion_tokens": 15
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 12,
+      "completion_tokens": 3
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 44,
+      "completion_tokens": 15
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 106,
+      "completion_tokens": 25
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 59,
+      "completion_tokens": 20
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 64,
+      "completion_tokens": 19
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 46,
+      "completion_tokens": 13
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 57,
+      "completion_tokens": 22
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    },
+    {
+      "format": "json_schema",
+      "finish_reason": "stop",
+      "content_chars": 91,
+      "completion_tokens": 30
+    },
+    {
+      "format": "text",
+      "finish_reason": "stop",
+      "content_chars": 7,
+      "completion_tokens": 2
+    }
+  ]
+}

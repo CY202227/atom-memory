@@ -54,6 +54,7 @@ def compose_layered(
     l1_hits: list[RecallHit],
     max_atoms: int,
     derived_ids: set[int] | None = None,
+    ranked_all_layers: bool = False,
 ) -> list[RecallHit]:
     """L3 sticky（≤2）+ L2 相关（≤2）+ L1 检索，去重后截断。"""
     if max_atoms <= 0:
@@ -61,6 +62,10 @@ def compose_layered(
 
     l3 = sticky_l3_atoms(atoms, limit=_L3_MAX)
     l3_hits = [RecallHit(atom=a, score=None) for a in l3]
+    if ranked_all_layers:
+        # Relevance ranking must see L2 facts too; don't prefill slots with a
+        # separate lexical search that can overrule the requested strategy.
+        return _dedupe(l3_hits + l1_hits)[:max_atoms]
 
     atoms_l2 = [
         a
@@ -109,6 +114,7 @@ def layered_retrieve(
     strategy_outcome: RecallOutcome,
     max_atoms: int,
     derived_ids: set[int] | None = None,
+    ranked_all_layers: bool = False,
 ) -> list[RecallHit]:
     """在已有 L1 策略召回结果上组分层包。"""
     return compose_layered(
@@ -117,4 +123,5 @@ def layered_retrieve(
         l1_hits=list(strategy_outcome.hits),
         max_atoms=max_atoms,
         derived_ids=derived_ids,
+        ranked_all_layers=ranked_all_layers,
     )

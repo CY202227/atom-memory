@@ -67,6 +67,7 @@ class AtomDetail(BaseModel):
     evidence_dates: list[str]
     revisions: Optional[list[dict]] = None
     evidence: Optional[list[dict]] = None
+    current_source_ids: Optional[list[int]] = None
 
 
 class AtomListResponse(BaseModel):
@@ -130,6 +131,8 @@ class RecallHitOut(BaseModel):
     happened_on: Optional[date] = None
     detail: Optional[str] = None  # 仅 detail=full 时填充
     memory_layer: Optional[int] = None
+    time_context: str = ""
+    source_time: Optional[date] = None
 
 
 class RecallResponse(BaseModel):
@@ -154,6 +157,8 @@ class ExpandHitOut(BaseModel):
     statement: str
     detail: str
     happened_on: Optional[date] = None
+    time_context: str = ""
+    source_time: Optional[date] = None
     evidence_excerpts: list[dict] = []
 
 

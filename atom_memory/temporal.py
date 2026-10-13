@@ -175,6 +175,9 @@ def resolve_relative(expr: str, anchor: date) -> date | None:
 
 
 _LAST_YEAR = re.compile(r"\blast\s+year\b|去年", re.IGNORECASE)
+_YEAR_NUMBERS = {word: number for number, word in enumerate(
+    ("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"))}
+_YEAR_COUNT = r"(\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten)"
 
 
 def _positive_time_text(text: str) -> str:
@@ -188,6 +191,7 @@ def derive_time_facts(
     *,
     today: date | None = None,
     source_anchor: date | None = None,
+    include_contextual_periods: bool = False,
 ) -> list[str]:
     """产出可追加到 detail 的时间派生表述（短句列表）。"""
     facts: list[str] = []
@@ -211,6 +215,29 @@ def derive_time_facts(
         if re.search(r"\bnext\s+month\b|下个?月", text, re.IGNORECASE):
             year, month = (anchor.year + 1, 1) if anchor.month == 12 else (anchor.year, anchor.month + 1)
             facts.append(f"{year:04d}-{month:02d} (next month)")
+        if include_contextual_periods and re.search(r"\blast\s+week\b|上个?周|上星期", text, re.IGNORECASE) and not re.search(r"\bnot\s+last\s+week\b|不是上周|并非上周", text, re.IGNORECASE):
+            facts.append(f"week before {anchor.isoformat()} (last week)")
+        patterns = (
+            r"\b" + _YEAR_COUNT + r"\s+years?\s+ago\b",
+            r"\b(?:had|owned|kept|known)\b[^.!?\n]{0,80}\bfor\s+" + _YEAR_COUNT + r"\s+years?\b",
+        )
+        for pattern in patterns if include_contextual_periods else ():
+            for match in re.finditer(pattern, text, re.IGNORECASE):
+                prefix = text[max(0, match.start() - 25):match.start()]
+                if re.search(r"\b(?:not|never|didn't|haven't|hasn't)\b", prefix, re.IGNORECASE):
+                    continue
+                raw = match.group(1).lower()
+                count = int(raw) if raw.isdigit() else _YEAR_NUMBERS[raw]
+                if 0 < count <= 99 and anchor.year > count:
+                    facts.append(f"around {anchor.year - count} (elapsed years; year precision)")
+        zh_numbers = {"一": 1, "二": 2, "两": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9, "十": 10}
+        for match in re.finditer(r"(\d{1,2}|[一二两三四五六七八九十])年前", text if include_contextual_periods else ""):
+            if re.search(r"不是|并非|不在", text[max(0, match.start() - 4):match.start()]):
+                continue
+            raw = match.group(1)
+            count = int(raw) if raw.isdigit() else zh_numbers[raw]
+            if 0 < count <= 99 and anchor.year > count:
+                facts.append(f"around {anchor.year - count} (elapsed years; year precision)")
 
     # 去重保序
     seen: set[str] = set()

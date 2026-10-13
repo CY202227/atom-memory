@@ -9,7 +9,7 @@ import re
 from datetime import date
 from typing import Literal, Optional
 
-from pydantic import BaseModel, Field, StrictInt
+from pydantic import BaseModel, Field, StrictInt, create_model
 from sqlmodel import Session
 
 from ..linking import keyify
@@ -145,9 +145,14 @@ def request_plan(llm: ChatLLM, system: str, user: str, model: type[BaseModel], n
                 validator(plan)
             return plan
         except ValueError as exc:
+            diagnostics = getattr(llm, "diagnostics", None)
+            if isinstance(diagnostics, list) and diagnostics:
+                diagnostics[-1]["plan_name"] = name
+                diagnostics[-1]["validation_issue"] = str(exc) if isinstance(exc, EvidencePlanError) else "invalid_schema"
             if attempt:
                 code = "invalid_evidence" if isinstance(exc, EvidencePlanError) else "invalid_schema"
-                raise LLMError("Structured output failed plan validation after 2 attempts", code=code) from exc
+                reason = ": " + str(exc) if isinstance(exc, EvidencePlanError) else ""
+                raise LLMError("Structured output failed plan validation after 2 attempts" + reason, code=code) from exc
             user += "\nReturn a complete JSON object matching every field and type in the schema. Use only source_ids shown in the supplied sources; every operation needs supporting source_ids and every upsert needs a nonempty statement. The previous output failed validation."
             if isinstance(exc, EvidencePlanError):
                 user += " Validation requirement: " + str(exc)
@@ -271,6 +276,9 @@ class ConsolidationEngine:
         valid_ids = {s.id for s in pending}
         inventory = self._extract_facts(pending, run) if settings.consolidate_extract_facts else None
         facts = {index: fact for index, fact in enumerate(inventory.facts, 1)} if inventory else {}
+        def quoted_fact_ids(op):
+            return [index for index, fact in facts.items()
+                if fact.source_id in op.source_ids and fact.quote.strip() in op.detail.strip() and op.op == "upsert"]
         def validate_evidence(plan):
             seen_keys = {}
             covered = set()
@@ -285,29 +293,40 @@ class ConsolidationEngine:
                     raise EvidencePlanError("Independent writes must not overwrite the same key in one batch")
                 seen_keys[key] = signature
                 if inventory is not None:
-                    for fact_id in op.fact_ids:
+                    assigned = quoted_fact_ids(op)
+                    for fact_id in assigned:
                         if fact_id not in facts or facts[fact_id].source_id not in op.source_ids or op.op != "upsert":
                             raise EvidencePlanError("Fact coverage must cite the extracted fact's source in an upsert")
                         retained = op.statement.strip()[:_STATEMENT_MAX] + "\n" + op.detail.strip()[:_DETAIL_MAX]
                         if facts[fact_id].quote.strip() not in retained:
                             raise EvidencePlanError("Retained memory must preserve each claimed inventory quote verbatim")
-                    covered.update(op.fact_ids)
+                    covered.update(assigned)
             if inventory is not None and covered != set(facts):
                 raise EvidencePlanError("Write plan omitted inventory fact_ids: " + str(sorted(set(facts) - covered)))
         fact_text = ""
         if inventory is not None:
             fact_text = "\n\n## Verified original quotes (fact_ids refer to this list)\n" + json.dumps(
                 [{"fact_id": index, **fact.model_dump()} for index, fact in facts.items()], ensure_ascii=False)
-            fact_text += "\nRetain every listed fact in an upsert and list its fact_id in fact_ids. Keep independent facts in separate keys. Copy each listed quote VERBATIM into detail, within the 300-character limit; merely listing a fact_id is insufficient. Do not invent facts beyond the sources."
+            fact_text += "\nRetain every listed fact in an upsert. Keep independent facts in separate keys. Do not invent facts beyond the sources."
+            fact_text += "\nThe detail field must be EXACTLY one of the listed quotes, without commentary, quotation marks or date annotations added around it. Use separate operations for disjoint quotes. Always return fact_ids=[]; the backend computes quote coverage itself. Source time is resolved by the backend from citations."
+        write_model = WritePlan
+        if inventory is not None:
+            quotes = tuple(dict.fromkeys(["", *[fact.quote for fact in facts.values()]]))
+            grounded_op = create_model("GroundedAtomOp", __base__=AtomOp, detail=(Literal[quotes], ""),
+                fact_ids=(list[StrictInt], Field(default_factory=list, max_length=0)))
+            write_model = create_model("GroundedWritePlan", __base__=WritePlan, operations=(list[grounded_op], ...))
         plan = request_plan(self._llm,
             prompts.CONSOLIDATE_SYSTEM,
             f"## 当前时间\n{today.isoformat()}\n\n"
             f"## atom 索引\n{index_text}\n\n"
             f"## 相关原子全文\n{prompts.render_atoms_full(context_atoms)}\n\n"
             f"## 最近经历\n{sources_text}{fact_text}",
-            WritePlan, "write_plan", run, validator=validate_evidence,
+            write_model, "write_plan", run, validator=validate_evidence,
         )
         operations = [op.model_dump(mode="json", exclude_unset=True) for op in plan.operations]
+        if inventory is not None:
+            for op, raw in zip(plan.operations, operations):
+                raw["fact_ids"] = quoted_fact_ids(op)
         if settings.consolidate_review_skips:
             operations.extend(self._review_skips(pending, operations, index_text, context_atoms, run))
             validate_evidence(WritePlan.model_validate({"operations": operations}))

@@ -7,7 +7,7 @@ def setup(client, monkeypatch):
     uid = client.post('/spaces', json={'owner_id': 'facts', 'subject_id': 'inventory'}).json()['uid']
     source = client.post(f'/spaces/{uid}/sources', json={'kind': 'turn', 'content': 'Alice painted a sunrise. Alice lives in Paris.'}).json()['id']
     inventory = {'facts': [{'source_id': source, 'quote': 'Alice painted a sunrise.'}, {'source_id': source, 'quote': 'Alice lives in Paris.'}]}
-    ops = [{'op': 'upsert', 'key': key, 'statement': quote, 'detail': quote, 'source_ids': [source], 'fact_ids': [index]} for index, key, quote in [(1, 'sunrise', 'Alice painted a sunrise.'), (2, 'home', 'Alice lives in Paris.')]]
+    ops = [{'op': 'upsert', 'key': key, 'statement': quote, 'detail': quote, 'source_ids': [source], 'fact_ids': []} for index, key, quote in [(1, 'sunrise', 'Alice painted a sunrise.'), (2, 'home', 'Alice lives in Paris.')]]
     return uid, source, inventory, ops
 
 

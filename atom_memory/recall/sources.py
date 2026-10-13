@@ -68,7 +68,7 @@ def _snippet(source, lines, index, segment, previous):
     # Matching passage first, then surrounding turns; never infer missing referents.
     excerpt = "\n".join(value for value in (anchor, segment, *reversed(before), *after) if value)[:800]
     time_anchor = source_time_anchor(anchor)
-    time_facts = derive_time_facts(None, segment, source_anchor=time_anchor) if time_anchor else []
+    time_facts = derive_time_facts(None, segment, source_anchor=time_anchor, include_contextual_periods=True) if time_anchor else []
     if time_facts:
         excerpt = (excerpt[:600] + "\n[derived_time] " + "; ".join(time_facts))[:800]
     return excerpt, context_ids

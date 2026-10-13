@@ -31,12 +31,13 @@ class LlmRecall:
                 response_format=_json_schema_format("recall_plan", RecallPlan),
             )
             data = parse_json_object(res.text)
-            keys = list(dict.fromkeys(RecallPlan.model_validate(data).keys))[:max_atoms]
+            keys = list(dict.fromkeys(RecallPlan.model_validate(data).keys))
         except (LLMError, ValueError) as e:
             raise RecallError(str(e)) from e
         by_key = {a.key: a for a in atoms}
         if any(key not in by_key for key in keys):
             raise RecallError("Model selected an unknown memory key")
+        keys = keys[:max_atoms]
         hits = [RecallHit(atom=by_key[k]) for k in dict.fromkeys(keys)]
         return RecallOutcome(
             hits=hits,

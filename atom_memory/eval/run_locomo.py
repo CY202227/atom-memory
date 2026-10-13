@@ -296,10 +296,28 @@ def main(argv: list[str] | None = None) -> int:
                 page = 1
                 while True:
                     body = client.get(f"/spaces/{uid}/atoms", params={"page": page, "page_size": 200}).json()
-                    atoms += [{key: atom.get(key) for key in ("key", "kind", "statement", "detail", "happened_on", "memory_layer")} for atom in body["results"]]
+                    atoms += [{key: atom.get(key) for key in ("key", "kind", "statement", "detail", "happened_on", "memory_layer", "status", "confidence")} for atom in body["results"]]
                     if len(atoms) >= body["count"]:
                         break
                     page += 1
+                for atom in atoms:
+                    detail_response = client.get(f"/spaces/{uid}/atoms/{atom['key']}", params={"include": "evidence,revisions"})
+                    if detail_response.status_code != 200:
+                        raise RuntimeError("public snapshot evidence capture failed")
+                    detail = detail_response.json()
+                    ids = detail.get("current_source_ids")
+                    if ids is None:
+                        # Older APIs expose the same receipts through revision/evidence lists.
+                        matching = {revision["seq"] for revision in detail.get("revisions", [])
+                            if all(revision.get(field) == atom.get(field) for field in ("statement", "detail", "happened_on"))}
+                        latest = max(matching, default=None)
+                        evidence = detail.get("evidence", [])
+                        ids = list(dict.fromkeys(row["source_id"] for row in evidence if row["revision_seq"] == latest))
+                    atom["current_source_ids"] = ids
+                    neighbor_response = client.get(f"/spaces/{uid}/atoms/{atom['key']}/neighbors")
+                    if neighbor_response.status_code != 200:
+                        raise RuntimeError("public snapshot graph capture failed")
+                    atom["links"] = neighbor_response.json().get("out", [])
                 sources = client.get(f"/spaces/{uid}/sources").json()
                 snapshots.append({"sample": sample.sample_id, "atoms": atoms,
                     "source_statuses": [{"id": source["id"], "status": source["status"]} for source in sources]})

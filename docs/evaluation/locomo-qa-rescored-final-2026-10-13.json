@@ -1,0 +1,4558 @@
+{
+  "protocol": "token F1 >= 0.5; abstention and explicit negation guards; word coverage diagnostic only",
+  "limitation": "Token metrics penalize verbose correct answers and synonyms; not independent truth or grounding judgment. Original reports remain unchanged for provenance.",
+  "runs": [
+    {
+      "file": "locomo-live-2026-10-12.json",
+      "sha256": "e489599be4ec02683a5838adaaaec09a4db267a1d9fdc2390897636f19456205",
+      "total": 12,
+      "strict_hits": 0,
+      "mean_f1": 0.0,
+      "abstentions": 12,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-answer-prompt-trial-2026-10-12.json",
+      "sha256": "3327611771c97d3435d9e4553efe64e83f59ed57f1cbd88469dd4484949c8511",
+      "total": 12,
+      "strict_hits": 3,
+      "mean_f1": 0.28703703703703703,
+      "abstentions": 8,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-chunked-2026-10-12.json",
+      "sha256": "8b8984ca38ed1ab20f4937c47725c2a8f4b58417b096d5a38b4daebdd236508d",
+      "total": 12,
+      "strict_hits": 2,
+      "mean_f1": 0.23905723905723905,
+      "abstentions": 6,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 0.3333333333333333,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.09090909090909091,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.2222222222222222,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.2222222222222222,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-cross-layer-repeat-24-2026-10-13.json",
+      "sha256": "6deddba2c0a57a637539955f6a7cba850a4b734ad6e6ac86cc78c5974b6c7300",
+      "total": 72,
+      "strict_hits": 27,
+      "mean_f1": 0.3406971851744712,
+      "abstentions": 24,
+      "questions": [
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.047619047619047616,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.7272727272727272,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.2,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.12500000000000003,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.15,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.8,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.6666666666666665,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.888888888888889,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What genre is Joanna's first screenplay?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+          "f1": 0.7058823529411764,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "For how long has Nate had his turtles?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Nate think of the coconut milk ice cream he made?",
+          "f1": 0.2857142857142857,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Which dairy-free dessert flavors does Nate enjoy?",
+          "f1": 0.47058823529411764,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is \"Little Women\" about according to Joanna?",
+          "f1": 0.5833333333333334,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What type of movies does Nate hate watching the most?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What genre is Joanna's first novella?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Nate's plans for his finished screenplay in January 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "For how long has Nate had his snakes?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Nate think of the caramel ice cream he made?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.048780487804878044,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.7272727272727272,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.12213740458015265,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.14285714285714285,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.25000000000000006,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.631578947368421,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.6666666666666665,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.5714285714285715,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What genre is Joanna's first screenplay?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+          "f1": 0.7058823529411764,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "For how long has Nate had his turtles?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Nate think of the coconut milk ice cream he made?",
+          "f1": 0.2857142857142857,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Which dairy-free dessert flavors does Nate enjoy?",
+          "f1": 0.47058823529411764,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is \"Little Women\" about according to Joanna?",
+          "f1": 0.5833333333333334,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What type of movies does Nate hate watching the most?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What genre is Joanna's first novella?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Nate's plans for his finished screenplay in January 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "For how long has Nate had his snakes?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Nate think of the caramel ice cream he made?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.048780487804878044,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.7272727272727272,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.1714285714285714,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.14285714285714285,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.15,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.631578947368421,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.6666666666666665,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.888888888888889,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What genre is Joanna's first screenplay?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+          "f1": 0.7058823529411764,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "For how long has Nate had his turtles?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Nate think of the coconut milk ice cream he made?",
+          "f1": 0.2857142857142857,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Which dairy-free dessert flavors does Nate enjoy?",
+          "f1": 0.47058823529411764,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is \"Little Women\" about according to Joanna?",
+          "f1": 0.5833333333333334,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What type of movies does Nate hate watching the most?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What genre is Joanna's first novella?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Nate's plans for his finished screenplay in January 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "For how long has Nate had his snakes?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Nate think of the caramel ice cream he made?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-current-24-2026-10-13.json",
+      "sha256": "1169653fde552b04bbc4e6d60bd8c099219ac3f1434ea4893622340701d319b7",
+      "total": 24,
+      "strict_hits": 10,
+      "mean_f1": 0.34202482317643484,
+      "abstentions": 8,
+      "questions": [
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.041666666666666664,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.7272727272727272,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.13793103448275862,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.14285714285714285,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.25000000000000006,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.5,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.6666666666666665,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.888888888888889,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.2857142857142857,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What genre is Joanna's first screenplay?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+          "f1": 0.5652173913043478,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "For how long has Nate had his turtles?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Nate think of the coconut milk ice cream he made?",
+          "f1": 0.2857142857142857,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Which dairy-free dessert flavors does Nate enjoy?",
+          "f1": 0.8,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is \"Little Women\" about according to Joanna?",
+          "f1": 0.5833333333333334,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What type of movies does Nate hate watching the most?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What genre is Joanna's first novella?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Nate's plans for his finished screenplay in January 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "For how long has Nate had his snakes?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Nate think of the caramel ice cream he made?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-current-repeat-24-2026-10-13.json",
+      "sha256": "7de1cabd5a1c59c5437a38c0d8fe12f798f589cabda535cff1a603cd9708a19f",
+      "total": 72,
+      "strict_hits": 26,
+      "mean_f1": 0.3384533648785438,
+      "abstentions": 24,
+      "questions": [
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.06060606060606061,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.7272727272727272,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.12213740458015265,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.14285714285714285,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.25000000000000006,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.631578947368421,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.6666666666666665,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.888888888888889,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What genre is Joanna's first screenplay?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+          "f1": 0.7058823529411764,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "For how long has Nate had his turtles?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Nate think of the coconut milk ice cream he made?",
+          "f1": 0.2857142857142857,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Which dairy-free dessert flavors does Nate enjoy?",
+          "f1": 0.47058823529411764,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is \"Little Women\" about according to Joanna?",
+          "f1": 0.5833333333333334,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What type of movies does Nate hate watching the most?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What genre is Joanna's first novella?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Nate's plans for his finished screenplay in January 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "For how long has Nate had his snakes?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Nate think of the caramel ice cream he made?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.046511627906976744,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.7272727272727272,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.20689655172413793,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.12500000000000003,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.2857142857142857,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.07407407407407407,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.631578947368421,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.6666666666666665,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.888888888888889,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What genre is Joanna's first screenplay?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+          "f1": 0.7058823529411764,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "For how long has Nate had his turtles?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Nate think of the coconut milk ice cream he made?",
+          "f1": 0.2857142857142857,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Which dairy-free dessert flavors does Nate enjoy?",
+          "f1": 0.47058823529411764,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is \"Little Women\" about according to Joanna?",
+          "f1": 0.5833333333333334,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What type of movies does Nate hate watching the most?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What genre is Joanna's first novella?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Nate's plans for his finished screenplay in January 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "For how long has Nate had his snakes?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Nate think of the caramel ice cream he made?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.048780487804878044,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.7272727272727272,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.1643835616438356,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.14285714285714285,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.2857142857142857,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.631578947368421,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.6666666666666665,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.888888888888889,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What genre is Joanna's first screenplay?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+          "f1": 0.7058823529411764,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "For how long has Nate had his turtles?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Nate think of the coconut milk ice cream he made?",
+          "f1": 0.2857142857142857,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Which dairy-free dessert flavors does Nate enjoy?",
+          "f1": 0.47058823529411764,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is \"Little Women\" about according to Joanna?",
+          "f1": 0.5833333333333334,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What type of movies does Nate hate watching the most?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What genre is Joanna's first novella?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Nate's plans for his finished screenplay in January 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "For how long has Nate had his snakes?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Nate think of the caramel ice cream he made?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-fact-inventory-2026-10-13.json",
+      "sha256": "5ae743b4789f813628553ed39c3948d3b56d34145f2ba6eed0bc4d5ec96fcaae",
+      "total": 12,
+      "strict_hits": 4,
+      "mean_f1": 0.34259259259259256,
+      "abstentions": 3,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 0.3333333333333333,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.1111111111111111,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-independent-baseline-2026-10-13.json",
+      "sha256": "8e2a2c974f2e91fbc3f859e8b7ff0b15f678f7af909fcd31949beb135a4ece37",
+      "total": 12,
+      "strict_hits": 3,
+      "mean_f1": 0.27857686462011,
+      "abstentions": 1,
+      "questions": [
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.046511627906976744,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.25,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.17977528089887637,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.14285714285714285,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.5,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.16216216216216214,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.5,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.2727272727272727,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.888888888888889,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-independent-grounded-baseline-2026-10-13.json",
+      "sha256": "2351e6f10cebf89db9ffba8114280166166666ba785153dfad8eafa9b09be3cc",
+      "total": 12,
+      "strict_hits": 7,
+      "mean_f1": 0.45075156325156324,
+      "abstentions": 2,
+      "questions": [
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.7272727272727272,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.14285714285714285,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.5,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.25,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.5,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.6666666666666665,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.888888888888889,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-inventory-semantic-2026-10-13.json",
+      "sha256": "de4d8553e84125cf66ab92ebb47c8aaeda6bbdbbe18726331d4a13e1384500ea",
+      "total": 12,
+      "strict_hits": 5,
+      "mean_f1": 0.493096544116536,
+      "abstentions": 1,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.07407407407407407,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.21052631578947367,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.23255813953488372,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-pinned-baseline-24-2026-10-13.json",
+      "sha256": "05830cccba2acb0adad978706bf1b8119f437629e44791e16c1884c86e43c1f0",
+      "total": 24,
+      "strict_hits": 10,
+      "mean_f1": 0.3723037640919618,
+      "abstentions": 6,
+      "questions": [
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.07017543859649124,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.3333333333333333,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.2033898305084746,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.16666666666666666,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.5,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.0983606557377049,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.5,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.6666666666666665,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.888888888888889,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What genre is Joanna's first screenplay?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+          "f1": 0.7878787878787878,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "For how long has Nate had his turtles?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Nate think of the coconut milk ice cream he made?",
+          "f1": 0.45454545454545453,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "Which dairy-free dessert flavors does Nate enjoy?",
+          "f1": 0.6153846153846153,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is \"Little Women\" about according to Joanna?",
+          "f1": 0.5833333333333334,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What type of movies does Nate hate watching the most?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What genre is Joanna's first novella?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Nate's plans for his finished screenplay in January 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "For how long has Nate had his snakes?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Nate think of the caramel ice cream he made?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-pinned-repeat-24-2026-10-13.json",
+      "sha256": "3d48df78479fab8d21319714c7e186320e21b3a15545fcd566b3dc895ead5dd6",
+      "total": 72,
+      "strict_hits": 27,
+      "mean_f1": 0.3547604377972261,
+      "abstentions": 21,
+      "questions": [
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.3333333333333333,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.20689655172413793,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.14285714285714285,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.2857142857142857,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.5,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.6666666666666665,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.888888888888889,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What genre is Joanna's first screenplay?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+          "f1": 0.742857142857143,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "For how long has Nate had his turtles?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Nate think of the coconut milk ice cream he made?",
+          "f1": 0.3571428571428571,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "Which dairy-free dessert flavors does Nate enjoy?",
+          "f1": 0.8,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is \"Little Women\" about according to Joanna?",
+          "f1": 0.5833333333333334,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What type of movies does Nate hate watching the most?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What genre is Joanna's first novella?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Nate's plans for his finished screenplay in January 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "For how long has Nate had his snakes?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Nate think of the caramel ice cream he made?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.3333333333333333,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.13953488372093023,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.12500000000000003,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.28571428571428575,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.5,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.6666666666666665,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.888888888888889,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What genre is Joanna's first screenplay?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+          "f1": 0.742857142857143,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "For how long has Nate had his turtles?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Nate think of the coconut milk ice cream he made?",
+          "f1": 0.2727272727272727,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Which dairy-free dessert flavors does Nate enjoy?",
+          "f1": 0.8,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is \"Little Women\" about according to Joanna?",
+          "f1": 0.5833333333333334,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What type of movies does Nate hate watching the most?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What genre is Joanna's first novella?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Nate's plans for his finished screenplay in January 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "For how long has Nate had his snakes?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Nate think of the caramel ice cream he made?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.3333333333333333,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.10852713178294573,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.14285714285714285,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.2857142857142857,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.6,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.6666666666666665,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.888888888888889,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What genre is Joanna's first screenplay?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+          "f1": 0.742857142857143,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "For how long has Nate had his turtles?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Nate think of the coconut milk ice cream he made?",
+          "f1": 0.3448275862068966,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "Which dairy-free dessert flavors does Nate enjoy?",
+          "f1": 0.8,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is \"Little Women\" about according to Joanna?",
+          "f1": 0.5833333333333334,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What type of movies does Nate hate watching the most?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What genre is Joanna's first novella?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Nate's plans for his finished screenplay in January 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "For how long has Nate had his snakes?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Nate think of the caramel ice cream he made?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-receipted-baseline-24-2026-10-13.json",
+      "sha256": "e870ff87792f048c3c1282b6c0f888d05be52cf2e0831ade754c63f1352ab376",
+      "total": 24,
+      "strict_hits": 7,
+      "mean_f1": 0.2979324845577381,
+      "abstentions": 8,
+      "questions": [
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.1818181818181818,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.20689655172413793,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.14285714285714285,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.10344827586206896,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.5,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.6666666666666665,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.888888888888889,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What genre is Joanna's first screenplay?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+          "f1": 0.7058823529411764,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "For how long has Nate had his turtles?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Nate think of the coconut milk ice cream he made?",
+          "f1": 0.3,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Which dairy-free dessert flavors does Nate enjoy?",
+          "f1": 0.47058823529411764,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is \"Little Women\" about according to Joanna?",
+          "f1": 0.5833333333333334,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What type of movies does Nate hate watching the most?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What genre is Joanna's first novella?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Nate's plans for his finished screenplay in January 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "For how long has Nate had his snakes?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Nate think of the caramel ice cream he made?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-retention-2026-10-12.json",
+      "sha256": "10cd921e365a66202d4a1379fba72eb36e8fbc5330c68c8d9f6e1f764ddf51e2",
+      "total": 12,
+      "strict_hits": 4,
+      "mean_f1": 0.405513468013468,
+      "abstentions": 3,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.1111111111111111,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.06060606060606061,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.25,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-retention-final-2026-10-12.json",
+      "sha256": "6265dff4a27c3913227dec794f8bb12c5fdcf6d37a733f8f65b51b967a35a965",
+      "total": 12,
+      "strict_hits": 5,
+      "mean_f1": 0.5015432098765432,
+      "abstentions": 3,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.07407407407407407,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.05555555555555555,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-retention-semantic-2026-10-13.json",
+      "sha256": "f2f18f5cc0fb409af438320ad8765a2e96614f99f123071878e1ca09afe61ff4",
+      "total": 12,
+      "strict_hits": 6,
+      "mean_f1": 0.5701058201058201,
+      "abstentions": 2,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.28571428571428575,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.33333333333333337,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-same-facts-current-24-2026-10-13.json",
+      "sha256": "f9e080ab4044a55754521c08688625e418b73f2ed39db1a0a7ad3419705d7489",
+      "total": 72,
+      "strict_hits": 33,
+      "mean_f1": 0.39358570204391974,
+      "abstentions": 22,
+      "questions": [
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.7272727272727272,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.12500000000000003,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.09999999999999999,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.2857142857142857,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.631578947368421,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.6666666666666665,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.888888888888889,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What genre is Joanna's first screenplay?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+          "f1": 0.6285714285714286,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "For how long has Nate had his turtles?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Nate think of the coconut milk ice cream he made?",
+          "f1": 0.4210526315789473,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Which dairy-free dessert flavors does Nate enjoy?",
+          "f1": 0.8,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is \"Little Women\" about according to Joanna?",
+          "f1": 0.5833333333333334,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What type of movies does Nate hate watching the most?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What genre is Joanna's first novella?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Nate's plans for his finished screenplay in January 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "For how long has Nate had his snakes?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Nate think of the caramel ice cream he made?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.7272727272727272,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.14285714285714285,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.25,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.631578947368421,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.5,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.888888888888889,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What genre is Joanna's first screenplay?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+          "f1": 0.6486486486486486,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "For how long has Nate had his turtles?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Nate think of the coconut milk ice cream he made?",
+          "f1": 0.3,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Which dairy-free dessert flavors does Nate enjoy?",
+          "f1": 0.8,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is \"Little Women\" about according to Joanna?",
+          "f1": 0.5833333333333334,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What type of movies does Nate hate watching the most?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What genre is Joanna's first novella?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Nate's plans for his finished screenplay in January 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "For how long has Nate had his snakes?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Nate think of the caramel ice cream he made?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.7272727272727272,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.20689655172413793,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.14285714285714285,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.2857142857142857,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.6666666666666666,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.5,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.6666666666666665,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.888888888888889,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What genre is Joanna's first screenplay?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+          "f1": 0.7058823529411764,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "For how long has Nate had his turtles?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Nate think of the coconut milk ice cream he made?",
+          "f1": 0.3,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Which dairy-free dessert flavors does Nate enjoy?",
+          "f1": 0.8,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is \"Little Women\" about according to Joanna?",
+          "f1": 0.5833333333333334,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What type of movies does Nate hate watching the most?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What genre is Joanna's first novella?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Nate's plans for his finished screenplay in January 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "For how long has Nate had his snakes?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Nate think of the caramel ice cream he made?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-same-facts-pinned-24-2026-10-13.json",
+      "sha256": "ffe7de6d30e776a3711acae4039394cedbf0c3327e7b8b8ffdfbef990d0adab1",
+      "total": 72,
+      "strict_hits": 23,
+      "mean_f1": 0.30263862617106485,
+      "abstentions": 24,
+      "questions": [
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.14814814814814814,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.14285714285714285,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.5,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.1395348837209302,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.5,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.6666666666666665,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.888888888888889,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What genre is Joanna's first screenplay?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+          "f1": 0.4897959183673469,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "For how long has Nate had his turtles?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Nate think of the coconut milk ice cream he made?",
+          "f1": 0.4210526315789473,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Which dairy-free dessert flavors does Nate enjoy?",
+          "f1": 0.8,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is \"Little Women\" about according to Joanna?",
+          "f1": 0.5833333333333334,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What type of movies does Nate hate watching the most?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What genre is Joanna's first novella?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Nate's plans for his finished screenplay in January 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "For how long has Nate had his snakes?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Nate think of the caramel ice cream he made?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.12500000000000003,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.14285714285714285,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.10169491525423728,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.5,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.6666666666666665,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.7272727272727273,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.4,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What genre is Joanna's first screenplay?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+          "f1": 0.7058823529411764,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "For how long has Nate had his turtles?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Nate think of the coconut milk ice cream he made?",
+          "f1": 0.4210526315789473,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Which dairy-free dessert flavors does Nate enjoy?",
+          "f1": 0.47058823529411764,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is \"Little Women\" about according to Joanna?",
+          "f1": 0.5833333333333334,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What type of movies does Nate hate watching the most?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What genre is Joanna's first novella?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Nate's plans for his finished screenplay in January 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "For how long has Nate had his snakes?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Nate think of the caramel ice cream he made?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Is it likely that Nate has friends besides Joanna?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate win his first video game tournament?",
+          "f1": 0.1568627450980392,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What pets wouldn't cause any discomfort to Joanna?",
+          "f1": 0.1643835616438356,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's hobbies?",
+          "f1": 0.14285714285714285,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Nate had his first two turtles?",
+          "f1": 0.5,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Joanna finish her first screenplay?",
+          "f1": 0.2857142857142857,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Nate get his first two turtles?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What major achievement did Joanna accomplish in January 2022?",
+          "f1": 0.5,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What emotions is Joanna feeling about  the screenplay she submitted?",
+          "f1": 0.6666666666666665,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What type of movies does Nate enjoy watching the most?",
+          "f1": 0.7272727272727273,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna just finish last Friday on 23 January, 2022?",
+          "f1": 0.2222222222222222,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What genre is Joanna's first screenplay?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Joanna's plans for her finished screenplay in January 2022?",
+          "f1": 0.5454545454545455,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "For how long has Nate had his turtles?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Nate think of the coconut milk ice cream he made?",
+          "f1": 0.3,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "Which dairy-free dessert flavors does Nate enjoy?",
+          "f1": 0.47058823529411764,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did Joanna recently watch and recommend to Nate on February 7, 2022?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is \"Little Women\" about according to Joanna?",
+          "f1": 0.5833333333333334,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What type of movies does Nate hate watching the most?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What genre is Joanna's first novella?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What are Nate's plans for his finished screenplay in January 2022?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "For how long has Nate had his snakes?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Nate think of the caramel ice cream he made?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-skip-review-2026-10-12.json",
+      "sha256": "1fe014d2aab82a11247f3aa7e24bb43a5deefb01ed323b853f942664f8243763",
+      "total": 12,
+      "strict_hits": 4,
+      "mean_f1": 0.4318181818181818,
+      "abstentions": 3,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.1111111111111111,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.18181818181818182,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-source-anchored-2026-10-12.json",
+      "sha256": "1a9cd68eb1e81c33a1ab48496b8eb6c37155dd47806c2d184472e1f59f38c2be",
+      "total": 12,
+      "strict_hits": 6,
+      "mean_f1": 0.5783334997171475,
+      "abstentions": 1,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.07407407407407407,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.047619047619047616,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.18867924528301885,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.1851851851851852,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-source-replay-2026-10-12.json",
+      "sha256": "b874301120c1d814ea7cacd6d46947ec11de4d4347d87ec351da602eb2793c43",
+      "total": 12,
+      "strict_hits": 5,
+      "mean_f1": 0.4644171415004748,
+      "abstentions": 2,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.07407407407407407,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.4444444444444444,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 0.125,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.08333333333333333,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.6153846153846153,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.23076923076923078,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 1.0,
+          "strict_hit": true,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-velora-agent-2026-10-12.json",
+      "sha256": "f896d76069f114ab23ca0b73b20b3a4fa159f00d3ed65d38c39e16eb22ab0dd9",
+      "total": 12,
+      "strict_hits": 0,
+      "mean_f1": 0.19520480391381337,
+      "abstentions": 1,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 0.4615384615384615,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.07999999999999999,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.0625,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 0.14814814814814814,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.0909090909090909,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.28571428571428575,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 0.15384615384615385,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.2857142857142857,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.41379310344827586,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 0.125,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 0.23529411764705882,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true
+        }
+      ]
+    },
+    {
+      "file": "locomo-live-velora-agent-fixed-2026-10-12.json",
+      "sha256": "9b8dc88511c3bacd90d1f25731c4e05dbd913a4627cb013b4ff3036843cdc916",
+      "total": 12,
+      "strict_hits": 0,
+      "mean_f1": 0.18127305715172562,
+      "abstentions": 1,
+      "questions": [
+        {
+          "question": "When did Caroline go to the LGBTQ support group?",
+          "f1": 0.42857142857142855,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true,
+          "answer_span": "May 7, 2023",
+          "span_f1": 1.0,
+          "span_hit": true
+        },
+        {
+          "question": "When did Melanie paint a sunrise?",
+          "f1": 0.09523809523809523,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true,
+          "answer_span": "2022",
+          "span_f1": 1.0,
+          "span_hit": true
+        },
+        {
+          "question": "What fields would Caroline be likely to pursue in her educaton?",
+          "f1": 0.10810810810810811,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false,
+          "answer_span": "counseling, psychology, or another mental-health-focused program",
+          "span_f1": 0.36363636363636365,
+          "span_hit": false
+        },
+        {
+          "question": "What did Caroline research?",
+          "f1": 0.18181818181818182,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true,
+          "answer_span": "adoption agencies",
+          "span_f1": 1.0,
+          "span_hit": true
+        },
+        {
+          "question": "What is Caroline's identity?",
+          "f1": 0.09756097560975609,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true,
+          "answer_span": "a transgender woman",
+          "span_f1": 0.8,
+          "span_hit": true
+        },
+        {
+          "question": "When did Melanie run a charity race?",
+          "f1": 0.2222222222222222,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": false,
+          "answer_span": "20 May 2023",
+          "span_f1": 0.4444444444444444,
+          "span_hit": false
+        },
+        {
+          "question": "When is Melanie planning on going camping?",
+          "f1": 0.13793103448275862,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true,
+          "answer_span": "June 2023",
+          "span_f1": 1.0,
+          "span_hit": true
+        },
+        {
+          "question": "What is Caroline's relationship status?",
+          "f1": 0.0,
+          "strict_hit": false,
+          "abstained": true,
+          "legacy_word_coverage": true,
+          "answer_span": "unknown",
+          "span_f1": 0.0,
+          "span_hit": false
+        },
+        {
+          "question": "When did Caroline give a speech at a school?",
+          "f1": 0.3,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true,
+          "answer_span": "roughly early June 2023 (around 2–8 June)",
+          "span_f1": 0.28571428571428575,
+          "span_hit": false
+        },
+        {
+          "question": "When did Caroline meet up with her friends, family, and mentors?",
+          "f1": 0.3157894736842105,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true,
+          "answer_span": "around May 29 – June 4, 2023",
+          "span_f1": 0.3333333333333333,
+          "span_hit": false
+        },
+        {
+          "question": "How long has Caroline had her current group of friends for?",
+          "f1": 0.09756097560975609,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true,
+          "answer_span": "4 years",
+          "span_f1": 1.0,
+          "span_hit": true
+        },
+        {
+          "question": "What did the charity race raise awareness for?",
+          "f1": 0.1904761904761905,
+          "strict_hit": false,
+          "abstained": false,
+          "legacy_word_coverage": true,
+          "answer_span": "mental health",
+          "span_f1": 1.0,
+          "span_hit": true
+        }
+      ],
+      "span_hits": 7,
+      "span_mean_f1": 0.6855940355940356
+    }
+  ]
+}
