@@ -81,11 +81,14 @@ def source_time_anchor(text: str) -> date | None:
     for header in re.findall(r"^\[session_time\]\s*(.+)$", text or "", re.MULTILINE):
         iso = re.search(r"\b(\d{4}-\d{2}-\d{2})\b", header)
         english = re.search(r"\b(\d{1,2})\s+([A-Za-z]+),?\s+(\d{4})\b", header)
+        chinese = re.search(r"(\d{4})年(\d{1,2})月(\d{1,2})日", header)
         try:
             if iso:
                 anchors.add(date.fromisoformat(iso.group(1)))
             elif english and english.group(2)[:3].lower() in _MONTH_ABBR:
                 anchors.add(date(int(english.group(3)), _MONTH_ABBR[english.group(2)[:3].lower()], int(english.group(1))))
+            elif chinese:
+                anchors.add(date(int(chinese.group(1)), int(chinese.group(2)), int(chinese.group(3))))
         except ValueError:
             continue
     return next(iter(anchors)) if len(anchors) == 1 else None

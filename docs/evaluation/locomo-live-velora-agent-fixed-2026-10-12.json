@@ -1,0 +1,315 @@
+{
+  "mode": "real Velora RecallMemory -> ComposePrompt -> LLMNode streaming/tool loop; saved public atoms",
+  "configuration": {
+    "dataset_sha256": "a63bb6c041efe6784245f9f4b2fd43cbb496e6075f4faa2228c21e89dd2053db",
+    "snapshot_sha256": "10cd921e365a66202d4a1379fba72eb36e8fbc5330c68c8d9f6e1f764ddf51e2",
+    "model_alias": "odb",
+    "initial_budget": 400,
+    "initial_max_atoms": 5,
+    "max_tool_rounds": 4,
+    "answer_span_normalization": true,
+    "limitation": "Public snapshot replay, no new ingestion/consolidation or persistence. Evaluation persona uses question language and two read-only memory tools. Missing snapshot kind defaults to event; all atoms are L1. Raw and optional normalized-span token scores are separate; normalizer sees no gold and must copy an asserted span. Neither is independent truth/grounding judgment."
+  },
+  "questions": [
+    {
+      "question": "When did Caroline go to the LGBTQ support group?",
+      "answer": "7 May 2023",
+      "prediction": "Caroline went to the LGBTQ support group on May 7, 2023.",
+      "f1": 0.42857142857142855,
+      "hit": false,
+      "stop_reason": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "abstained": false,
+      "answer_span": "May 7, 2023",
+      "span_f1": 1.0,
+      "span_hit": true
+    },
+    {
+      "question": "When did Melanie paint a sunrise?",
+      "answer": 2022,
+      "prediction": "Melanie painted the sunrise in **2022** — on 8 May 2023 she said she'd painted that lake sunrise \"last year.\"",
+      "f1": 0.09523809523809523,
+      "hit": false,
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Melanie painted a sunrise painting\", \"include_source_evidence\": true}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": null,
+          "source_coverage": null,
+          "errors": {}
+        }
+      ],
+      "abstained": false,
+      "answer_span": "2022",
+      "span_f1": 1.0,
+      "span_hit": true
+    },
+    {
+      "question": "What fields would Caroline be likely to pursue in her educaton?",
+      "answer": "Psychology, counseling certification",
+      "prediction": "Based on what I know, Caroline is keen on counseling or working in mental health, so she'd most likely pursue fields like **counseling, psychology, or another mental-health-focused program** in her education.",
+      "f1": 0.10810810810810811,
+      "hit": false,
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Caroline education field study counseling mental health psychology career\", \"include_source_evidence\": true}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": null,
+          "source_coverage": null,
+          "errors": {}
+        }
+      ],
+      "abstained": false,
+      "answer_span": "counseling, psychology, or another mental-health-focused program",
+      "span_f1": 0.36363636363636365,
+      "span_hit": false
+    },
+    {
+      "question": "What did Caroline research?",
+      "answer": "Adoption agencies",
+      "prediction": "Caroline researched adoption agencies — she's looking into agencies to adopt children, and she chose one that supports LGBTQ+ folks.",
+      "f1": 0.18181818181818182,
+      "hit": false,
+      "stop_reason": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "abstained": false,
+      "answer_span": "adoption agencies",
+      "span_f1": 1.0,
+      "span_hit": true
+    },
+    {
+      "question": "What is Caroline's identity?",
+      "answer": "Transgender woman",
+      "prediction": "Caroline is a transgender woman. She's been on her transition journey since around 2020, and her identity is part of her broader story as a single parent planning to adopt, with interests in counseling and mental health work.",
+      "f1": 0.09756097560975609,
+      "hit": false,
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Caroline identity LGBTQ gender orientation single parent\", \"method\": \"hybrid\"}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": "hybrid",
+          "source_coverage": "all_passages",
+          "errors": {}
+        }
+      ],
+      "abstained": false,
+      "answer_span": "a transgender woman",
+      "span_f1": 0.8,
+      "span_hit": true
+    },
+    {
+      "question": "When did Melanie run a charity race?",
+      "answer": "The sunday before 25 May 2023",
+      "prediction": "Melanie ran a charity race for mental health on **20 May 2023**.",
+      "f1": 0.2222222222222222,
+      "hit": false,
+      "stop_reason": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "abstained": false,
+      "answer_span": "20 May 2023",
+      "span_f1": 0.4444444444444444,
+      "span_hit": false
+    },
+    {
+      "question": "When is Melanie planning on going camping?",
+      "answer": "June 2023",
+      "prediction": "Melanie is planning to go camping in **June 2023** — she mentioned it on May 25, 2023, saying \"next month\" as her kids got excited about summer break.",
+      "f1": 0.13793103448275862,
+      "hit": false,
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_expand",
+          "arguments": "{\"keys\": [\"melanie-plans-camping-trip-june-2023\"]}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": null,
+          "fallback_from": null,
+          "source_coverage": null,
+          "errors": null
+        }
+      ],
+      "abstained": false,
+      "answer_span": "June 2023",
+      "span_f1": 1.0,
+      "span_hit": true
+    },
+    {
+      "question": "What is Caroline's relationship status?",
+      "answer": "Single",
+      "prediction": "I don't have a clear record of Caroline's relationship status. The closest thing I know is that she's planning to adopt children as a single parent.",
+      "f1": 0.06666666666666667,
+      "hit": false,
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Caroline relationship status single dating partner\"}",
+          "round": 0
+        },
+        {
+          "name": "memory_expand",
+          "arguments": "{\"keys\": [\"caroline-single-parent-adoption\"]}",
+          "round": 1
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": null,
+          "source_coverage": null,
+          "errors": {}
+        },
+        {
+          "ok": true,
+          "partial": null,
+          "fallback_from": null,
+          "source_coverage": null,
+          "errors": null
+        }
+      ],
+      "abstained": false,
+      "answer_span": "single parent",
+      "span_f1": 0.6666666666666666,
+      "span_hit": true
+    },
+    {
+      "question": "When did Caroline give a speech at a school?",
+      "answer": "The week before 9 June 2023",
+      "prediction": "Caroline mentioned on 9 June 2023 that the talk was at a school event **the previous week** — so it took place in the week before that, roughly early June 2023 (around 2–8 June).",
+      "f1": 0.3,
+      "hit": false,
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_expand",
+          "arguments": "{\"keys\": [\"caroline-school-event-lgbtq-talk-2023-06\"]}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": null,
+          "fallback_from": null,
+          "source_coverage": null,
+          "errors": null
+        }
+      ],
+      "abstained": false,
+      "answer_span": "roughly early June 2023 (around 2–8 June)",
+      "span_f1": 0.28571428571428575,
+      "span_hit": false
+    },
+    {
+      "question": "When did Caroline meet up with her friends, family, and mentors?",
+      "answer": "The week before 9 June 2023",
+      "prediction": "She told Mel on June 9, 2023 that the photo was from when they \"met up last week\" — so the get-together happened the week before, around May 29 – June 4, 2023.",
+      "f1": 0.3157894736842105,
+      "hit": false,
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_search",
+          "arguments": "{\"query\": \"Caroline met up with friends family mentors\", \"method\": \"hybrid\"}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": false,
+          "fallback_from": "hybrid",
+          "source_coverage": "all_passages",
+          "errors": {}
+        }
+      ],
+      "abstained": false,
+      "answer_span": "around May 29 – June 4, 2023",
+      "span_f1": 0.3333333333333333,
+      "span_hit": false
+    },
+    {
+      "question": "How long has Caroline had her current group of friends for?",
+      "answer": "4 years",
+      "prediction": "Caroline has had her current group of supportive friends for 4 years, since she moved from home. She's said she's lucky to have them, especially since they've stuck by her through everything, including a tough breakup.",
+      "f1": 0.09756097560975609,
+      "hit": false,
+      "stop_reason": null,
+      "tool_calls": [
+        {
+          "name": "memory_expand",
+          "arguments": "{\"keys\": [\"caroline-friends-4-years-support\"]}",
+          "round": 0
+        }
+      ],
+      "tool_results": [
+        {
+          "ok": true,
+          "partial": null,
+          "fallback_from": null,
+          "source_coverage": null,
+          "errors": null
+        }
+      ],
+      "abstained": false,
+      "answer_span": "4 years",
+      "span_f1": 1.0,
+      "span_hit": true
+    },
+    {
+      "question": "What did the charity race raise awareness for?",
+      "answer": "mental health",
+      "prediction": "It raised awareness for mental health — that's what Melanie's charity race on 20 May 2023 was for.",
+      "f1": 0.1904761904761905,
+      "hit": false,
+      "stop_reason": null,
+      "tool_calls": [],
+      "tool_results": [],
+      "abstained": false,
+      "answer_span": "mental health",
+      "span_f1": 1.0,
+      "span_hit": true
+    }
+  ],
+  "summary": {
+    "total": 12,
+    "hits": 0,
+    "mean_f1": 0.1868286127072812,
+    "questions_with_tools": 8,
+    "span_hits": 8,
+    "span_mean_f1": 0.7411495911495911
+  }
+}

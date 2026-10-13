@@ -46,6 +46,8 @@ class Settings(BaseSettings):
 
     # 单次固化最多消费的 pending source 数
     consolidate_max_sources: int = 20
+    # Review uncited material before declaring it skippable; optional extra model calls.
+    consolidate_review_skips: bool = False
 
     # /chat demo：喂给主模型的短期 history 条数上限（user+assistant 合计）；
     # 0 表示不截断。长上下文变笨/费钱时可调低。

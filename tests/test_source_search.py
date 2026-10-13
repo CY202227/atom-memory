@@ -50,3 +50,38 @@ def test_matching_passage_uses_its_preceding_session_anchor(client):
     hit = client.post(f"/spaces/{uid}/sources/search", json={"query": "sunrise"}).json()["hits"][0]
     assert "[session_time] 2024-05-08" in hit["excerpt"]
     assert "year=2023" in hit["excerpt"]
+
+
+def test_adjacent_chunks_keep_dialogue_context_and_deleted_context_disappears(client):
+    uid = space(client, "chunks")
+    previous = client.post(f"/spaces/{uid}/sources", json={"kind": "turn", "content": "Jon dances to relax.", "external_ref": {"system": "dialogue", "conversation": "a", "chunk": 0}}).json()["id"]
+    client.post(f"/spaces/{uid}/sources", json={"kind": "turn", "content": "Gina also likes that creative outlet.", "external_ref": {"system": "dialogue", "conversation": "a", "chunk": 1}})
+    payload = {"query": "Gina creative outlet"}
+    hit = client.post(f"/spaces/{uid}/sources/search", json=payload).json()["hits"][0]
+    assert "Jon dances" in hit["excerpt"]
+    assert hit["context_source_ids"] == [previous]
+    assert client.post(f"/spaces/{uid}/sources/delete-by-ref", json={"external_ref": {"system": "dialogue", "conversation": "a", "chunk": 0}}).status_code == 200
+    hit = client.post(f"/spaces/{uid}/sources/search", json=payload).json()["hits"][0]
+    assert "Jon dances" not in hit["excerpt"]
+    assert hit["context_source_ids"] == []
+
+
+def test_ambiguous_duplicate_chunk_is_not_used_as_context(client):
+    uid = space(client, "ambiguous")
+    ref = {"system": "dialogue", "conversation": "a", "chunk": 0}
+    for content in ("Jon dances to relax.", "Bob swims to relax."):
+        client.post(f"/spaces/{uid}/sources", json={"kind": "turn", "content": content, "external_ref": ref})
+    client.post(f"/spaces/{uid}/sources", json={"kind": "turn", "content": "Gina also likes that creative outlet.", "external_ref": {**ref, "chunk": 1}})
+    hit = client.post(f"/spaces/{uid}/sources/search", json={"query": "Gina creative outlet"}).json()["hits"][0]
+    assert hit["context_source_ids"] == []
+
+
+def test_atom_expansion_cites_matching_fact_after_long_source_prefix(client, fake_llm):
+    uid = space(client, "expand")
+    source = client.post(f"/spaces/{uid}/sources", json={"kind": "manual", "content": "unrelated opening notes\n" * 40 + "Alice painted a sunrise last year."}).json()["id"]
+    fake_llm.responses = [json.dumps({"operations": [{"op": "upsert", "kind": "event", "key": "sunrise", "statement": "Alice painted a sunrise.", "source_ids": [source]}]})]
+    assert client.post(f"/spaces/{uid}/consolidate", json={}).json()["status"] == "succeeded"
+    hit = client.post(f"/spaces/{uid}/atoms/expand", json={"keys": ["sunrise"], "with_evidence": True}).json()["hits"][0]
+    assert "painted a sunrise" in hit["evidence_excerpts"][0]["excerpt"]
+    assert hit["evidence_excerpts"][0]["source_id"] == source
+    assert hit["evidence_excerpts"][0]["match_status"] == "lexical_match"

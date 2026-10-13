@@ -54,7 +54,7 @@ def test_persona_new_defaults_to_persona():
     assert note == f"merged_into:{CANONICAL_PERSONA}"
 
 
-def test_near_duplicate_statement_merges():
+def test_similar_wording_is_not_enough_for_destructive_merge():
     existing = [
         _atom(
             "dental-health",
@@ -68,8 +68,47 @@ def test_near_duplicate_statement_merges():
         statement="老张补牙很多，担心很快就要根管",
         active_atoms=existing,
     )
-    assert key == "dental-health"
-    assert note == "merged_into:dental-health"
+    assert key == "teeth-worry"
+    assert note is None
+
+
+def test_exact_same_kind_fact_can_still_deduplicate():
+    key, note = resolve_write_key(key="tea-copy", kind=AtomKind.person, statement="Alice likes tea.",
+        active_atoms=[_atom("alice-tea", "Alice likes tea.", AtomKind.person)])
+    assert key == "alice-tea"
+    assert note == "merged_into:alice-tea"
+
+
+def test_third_party_nickname_is_not_primary_user_name():
+    key, note = resolve_write_key(key="caroline-nickname", kind=AtomKind.person,
+        statement="Caroline is called C.", active_atoms=[])
+    assert key == "caroline-nickname"
+    assert note is None
+
+
+def test_equal_short_summary_does_not_erase_different_detail_or_date():
+    from datetime import date
+    existing = _atom("old-visit", "Alice visited Paris.", AtomKind.event)
+    existing.detail = "Visited her brother."
+    existing.happened_on = date(2023, 5, 8)
+    op, note = apply_canonical_to_op({"op": "upsert", "kind": "event", "key": "new-visit",
+        "statement": "Alice visited Paris.", "detail": "Visited a colleague.", "happened_on": "2024-05-08"}, [existing])
+    assert op["key"] == "new-visit"
+    assert note is None
+
+
+def test_parallel_preferences_are_retained(client, fake_llm):
+    import json
+    uid = client.post("/spaces", json={"owner_id": "preferences", "subject_id": "test"}).json()["uid"]
+    source = client.post(f"/spaces/{uid}/sources", json={"kind": "turn", "content": "Alice likes red tea and green tea."}).json()["id"]
+    fake_llm.responses = [json.dumps({"operations": [
+        {"op": "upsert", "kind": "person", "key": "alice-red-tea", "statement": "Alice likes red tea.", "source_ids": [source]},
+        {"op": "upsert", "kind": "person", "key": "alice-green-tea", "statement": "Alice likes green tea.", "source_ids": [source]},
+    ]})]
+    assert client.post(f"/spaces/{uid}/consolidate", json={}).json()["status"] == "succeeded"
+    atoms = client.get(f"/spaces/{uid}/atoms").json()
+    assert atoms["count"] == 2
+    assert {atom["key"] for atom in atoms["results"]} == {"alice-red-tea", "alice-green-tea"}
 
 
 def test_apply_canonical_updates_op():

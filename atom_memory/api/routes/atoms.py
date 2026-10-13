@@ -174,11 +174,14 @@ def expand_atoms(
                 src = session.get(Source, ev["source_id"])
                 if src is None:
                     continue
+                from ...recall.sources import search_source_excerpts
+                matching = search_source_excerpts([src], atom.statement, 1, _EXPAND_EVIDENCE_MAX)
                 excerpts.append(
                     {
                         "source_id": src.id,
                         "kind": src.kind.value,
-                        "excerpt": truncate_source(src.content, _EXPAND_EVIDENCE_MAX),
+                        "excerpt": matching[0]["excerpt"] if matching else truncate_source(src.content, _EXPAND_EVIDENCE_MAX),
+                        "match_status": "lexical_match" if matching else "unmatched_excerpt",
                     }
                 )
                 if len(excerpts) >= 3:

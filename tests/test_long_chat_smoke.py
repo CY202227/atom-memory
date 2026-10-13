@@ -132,7 +132,7 @@ def test_long_chat_facts_survive_noise_rounds(client, fake_llm):
     # 不应因噪声暴涨
     assert len(index) <= 5
 
-    # 近重复再写一次健康 → 应并入 dental-health
+    # 模型读过旧事实后显式复用 key，更新同一健康事实。
     s4 = _ingest(
         client,
         uid,
@@ -147,7 +147,7 @@ def test_long_chat_facts_survive_noise_rounds(client, fake_llm):
                     {
                         "op": "upsert",
                         "kind": "person",
-                        "key": "teeth-worry-again",
+                        "key": "dental-health",
                         "statement": "老张补牙很多，担心很快就要根管",
                         "detail": "仍关注牙齿",
                         "change_reason": "再次提及",

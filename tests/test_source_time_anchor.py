@@ -23,3 +23,9 @@ def test_multiple_different_anchors_are_ambiguous():
 
 def test_negated_relative_time_is_not_derived():
     assert derive_time_facts(None, "not last year and not next month", source_anchor=date(2023, 5, 8)) == []
+
+
+def test_processing_year_does_not_override_historical_source_year():
+    from atom_memory.consolidation.engine import resolve_happened_on
+    assert source_time_anchor("[session_time] 2023年5月8日") == date(2023, 5, 8)
+    assert resolve_happened_on("2026-05-07", source_texts="[session_time] 2023年5月8日\n昨天参加活动", existing=None, today=date(2026, 10, 13)) is None
