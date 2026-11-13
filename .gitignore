@@ -226,3 +226,11 @@ reference/
 
 # Downloaded public evaluation corpora
 data/public-eval/
+docs/evaluation/locomo-evidence-400-2026-10-26.json
+docs/evaluation/locomo-evidence-400-2026-10-26.txt
+docs/evaluation/locomo-evidence-1600-k5-2026-10-26.json
+docs/evaluation/locomo-evidence-1600-k5-2026-10-26.txt
+docs/evaluation/performance-2026-10-26.json
+docs/evaluation/performance-2026-10-26.md
+docs/evaluation/README.md
+docs/evaluation/regression-2026-10-26.txt
